@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 2 · From Analysis to Reply — KAMCO Copilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#00081C; --card:#0B1833; --card-2:#10203F;
+  --ink:#F3F6FC; --ink-dim:#9FB2D4; --ink-faint:#6F83A8;
+  --deep:#0B2350; --maroon:#0A3A80; --mid:#004AA3; --crimson:#2F74D6; --rose:#6F9CE8;
+  --line:rgba(255,255,255,.07); --line-2:rgba(255,255,255,.13);
+  --f:'Manrope',system-ui,sans-serif; --mono:'Space Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--base);color:var(--ink);font-family:var(--f);
+  -webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+
+/* top bar */
+.topbar{position:relative;z-index:5;padding:26px 0 0}
+.back{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;color:var(--ink-dim);
+  transition:color .15s,transform .15s}
+.back:hover{color:var(--ink)}
+.back .ar{transition:transform .15s}.back:hover .ar{transform:translateX(-3px)}
+
+/* hero card */
+.hero-wrap{padding:22px 0 0}
+.d-hero{position:relative;border-radius:24px;overflow:hidden;padding:48px 46px 42px;
+  animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.h-d1{background:linear-gradient(135deg,#2F74D6 0%,#0B4A9E 100%)}
+.h-d2{background:linear-gradient(135deg,#0B4A9E 0%,#0B2350 100%)}
+.d-hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:46px 46px;
+  -webkit-mask:radial-gradient(120% 130% at 88% -10%,#000,transparent 70%);
+  mask:radial-gradient(120% 130% at 88% -10%,#000,transparent 70%)}
+.d-hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(80% 120% at 100% 0%,rgba(255,255,255,.10),transparent 55%)}
+.d-hero>*{position:relative;z-index:2}
+.d-hero-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:30px}
+.cat-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 13px;border-radius:999px;
+  background:rgba(0,0,0,.24);font-size:12.5px;font-weight:600;color:#fff;letter-spacing:.02em;backdrop-filter:blur(5px)}
+.cat-pill .dot{width:6px;height:6px;border-radius:50%;background:#fff;opacity:.92}
+.d-logos{display:flex;align-items:center;gap:12px;opacity:.96}
+.d-logos .coded-logo{height:18px;width:auto;display:block;filter:brightness(0) invert(1)}
+.d-logos .kibs-logo{height:30px;width:auto;display:block;filter:brightness(0) invert(1)}
+.d-logos .x{color:rgba(255,255,255,.6);font-size:13px}
+.d-hero h1{font-weight:800;letter-spacing:-.025em;line-height:1.03;font-size:clamp(34px,5.4vw,58px);color:#fff}
+.d-hero .lede{margin-top:16px;max-width:560px;font-size:clamp(14.5px,1.6vw,17px);line-height:1.6;color:rgba(255,255,255,.86)}
+.d-meta{display:flex;flex-wrap:wrap;gap:9px 26px;margin-top:26px;font-size:14px;font-weight:500;color:rgba(255,255,255,.9)}
+.d-meta span{display:inline-flex;align-items:center;gap:8px}
+.d-meta svg{opacity:.85;flex:none}
+
+/* two-column body */
+.d-grid{display:grid;grid-template-columns:1fr 360px;gap:22px;padding:34px 0 60px;align-items:start}
+@media (max-width:880px){.d-grid{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 26px}
+.panel + .panel{margin-top:20px}
+.panel h2{font-size:18px;font-weight:700;letter-spacing:-.01em}
+.panel h3{font-size:15.5px;font-weight:700;letter-spacing:-.005em}
+.panel .muted{margin-top:6px;font-size:13.5px;color:var(--ink-faint)}
+.panel .brief{margin-top:14px;font-size:15px;line-height:1.62;color:var(--ink-dim)}
+
+/* run of show */
+.ros{list-style:none;margin:22px 0 0;position:relative}
+.ros::before{content:"";position:absolute;left:15px;top:8px;bottom:8px;width:1.5px;background:var(--line-2)}
+.ros li{position:relative;display:flex;gap:18px;padding:0 0 22px 0}
+.ros li:last-child{padding-bottom:0}
+.ros .num{position:relative;z-index:2;flex:none;width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,var(--crimson),var(--maroon));box-shadow:0 0 0 4px var(--card)}
+.ros .brk{position:relative;z-index:2;flex:none;width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;background:var(--card-2);border:1px solid var(--line-2);
+  color:var(--ink-faint);box-shadow:0 0 0 4px var(--card)}
+.ros .rc{flex:1;padding-top:5px}
+.ros .rt{display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+.ros .rt b{font-size:14.5px;font-weight:600;color:var(--ink)}
+.ros .time{font-size:12px;font-weight:600;color:var(--ink-faint);font-variant-numeric:tabular-nums;flex:none}
+.ros .rd{margin-top:4px;font-size:13.5px;line-height:1.5;color:var(--ink-dim)}
+.ros li.is-brk .rt b{color:var(--ink-dim);font-weight:500}
+
+/* sidebar */
+.leave{list-style:none;margin:16px 0 0;display:flex;flex-direction:column;gap:13px}
+.leave li{display:flex;gap:11px;font-size:14px;line-height:1.45;color:var(--ink)}
+.leave svg{color:var(--crimson);flex:none;margin-top:1px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip2{display:inline-flex;padding:7px 12px;border-radius:999px;background:var(--card-2);
+  border:1px solid var(--line);font-size:12.5px;font-weight:500;color:var(--ink-dim)}
+
+/* slides CTA panel */
+.cta-panel{background:linear-gradient(150deg,rgba(47,116,214,.12),rgba(0,74,163,.06));
+  border-color:rgba(47,116,214,.3)}
+.cta-ico{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+  background:rgba(47,116,214,.16);color:var(--rose);margin-bottom:14px}
+.cta-panel p{margin-top:7px;font-size:13.5px;line-height:1.55;color:var(--ink-dim)}
+.slides-btn{margin-top:18px;display:flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px;border-radius:12px;color:#fff;font-size:14.5px;font-weight:600;
+  background:linear-gradient(135deg,var(--crimson),var(--maroon));
+  box-shadow:0 8px 26px rgba(47,116,214,.32);transition:transform .18s,box-shadow .18s}
+.slides-btn:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(47,116,214,.46)}
+.slides-btn .ar{transition:transform .18s}.slides-btn:hover .ar{transform:translateX(4px)}
+
+/* resources */
+.res-list{display:flex;flex-direction:column;margin-top:10px}
+.res{display:flex;align-items:center;gap:13px;padding:13px 4px;border-bottom:1px solid var(--line);
+  transition:padding .15s}
+.res:last-child{border-bottom:0}
+.res:hover{padding-left:8px}
+.res-ic{width:30px;height:30px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;
+  background:var(--card-2);border:1px solid var(--line);color:var(--rose)}
+.res-nm{flex:1;font-size:14px;font-weight:600;color:var(--ink)}
+.res-tag{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+.res svg.out{color:var(--ink-faint);flex:none}
+
+/* footer */
+.site-foot{position:relative;border-top:1px solid var(--line);padding:46px 0 40px}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px}
+.f-lockup{display:flex;align-items:center;gap:13px}
+.f-lockup .coded-logo{height:19px;width:auto;display:block}
+.f-lockup .kibs-logo{height:30px;width:auto;display:block}
+.f-lockup .x{color:var(--ink-faint);font-size:13px}
+.foot-row .copy{font-size:13px;color:var(--ink-faint)}
+
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.d-hero{animation:none}}
+
+/* font system aligned with landing + decks */
+.cat-pill,.d-meta,.muted,.res-tag,.copy,.ros .time,.kicker,.eyebrow{font-family:var(--mono)}
+.cat-pill,.res-tag{letter-spacing:.05em}
+</style>
+<style>.d-hero h1{max-width:900px}.res-list .res-tag{white-space:nowrap}</style></head>
+<body>
+<div class="wrap"><div class="topbar"><a class="back" href="index.html"><span class="ar">←</span> Back to the programme</a></div></div>
+<div class="wrap hero-wrap"><div class="d-hero h-d2"><div class="d-hero-top"><span class="cat-pill"><span class="dot"></span> Day 2 · Produce → Reply</span></div>
+<h1>From Analysis to Reply</h1><p class="lede">Turn yesterday's checked numbers into a one-page memo and a short deck, reply with the four checks, see an agent built — then complete one full request alone.</p>
+<div class="d-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M16 2.5v4M8 2.5v4M3 10h18"/></svg> Mon 12 Oct 2026</span><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5l3 2"/></svg> 09:00 – 16:00</span><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10.5c0 6.5-9 12.5-9 12.5s-9-6-9-12.5a9 9 0 0118 0z"/><circle cx="12" cy="10.5" r="3"/></svg> CODED Campus, Kuwait</span></div></div></div>
+<div class="wrap"><div class="d-grid"><div class="d-main">
+<section class="panel"><h2>Workshop brief</h2><p class="brief">Today covers the second half of the workflow. You will choose the right format for the reader, draft a memo in Word from your own checked numbers, build a deck in PowerPoint where every title is the message, and send a reply that passes four checks. After a short Agent Builder demo, you complete one full request alone — the graded project — then take the end MAP test and receive your certificate.</p></section>
+<section class="panel"><h2>Run of show</h2><p class="muted">50-minute sessions, 10-minute breaks, lunch 12:00 – 13:00.</p><ol class="ros">
+<li><span class="num">1</span><div class="rc"><div class="rt"><b>Session 1 — Memo or deck? Then Word</b><span class="time">09:00</span></div><div class="rd">Pick the format for the reader. Bottom line up front. Labs 1–2.</div></div></li>
+<li class="is-brk"><span class="brk"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13v5a5 5 0 01-5 5H9a5 5 0 01-5-5z"/><path d="M17 9h2a2.5 2.5 0 010 5h-2"/></svg></span><div class="rc"><div class="rt"><b>Break</b><span class="time">09:50</span></div></div></li>
+<li><span class="num">2</span><div class="rc"><div class="rt"><b>Session 2 — PowerPoint</b><span class="time">10:00</span></div><div class="rd">One slide, one message — built from your memo. Lab 3.</div></div></li>
+<li class="is-brk"><span class="brk"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13v5a5 5 0 01-5 5H9a5 5 0 01-5-5z"/><path d="M17 9h2a2.5 2.5 0 010 5h-2"/></svg></span><div class="rc"><div class="rt"><b>Break</b><span class="time">10:50</span></div></div></li>
+<li><span class="num">3</span><div class="rc"><div class="rt"><b>Session 3 — Reply and review</b><span class="time">11:00</span></div><div class="rd">Draft with Copilot, Coaching, and the four checks. Labs 4–5.</div></div></li>
+<li class="is-brk"><span class="brk"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13v5a5 5 0 01-5 5H9a5 5 0 01-5-5z"/><path d="M17 9h2a2.5 2.5 0 010 5h-2"/></svg></span><div class="rc"><div class="rt"><b>Lunch</b><span class="time">12:00</span></div></div></li>
+<li><span class="num">4</span><div class="rc"><div class="rt"><b>Session 4 — From manual to agent</b><span class="time">13:00</span></div><div class="rd">Copilot Agent Builder demo. Lab 6. Project briefing.</div></div></li>
+<li><span class="num">5</span><div class="rc"><div class="rt"><b>Project — graded</b><span class="time">13:30</span></div><div class="rd">A new request, alone: email → analysis → memo or deck → reply by 2:50 pm.</div></div></li>
+<li class="is-brk"><span class="brk"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13v5a5 5 0 01-5 5H9a5 5 0 01-5-5z"/><path d="M17 9h2a2.5 2.5 0 010 5h-2"/></svg></span><div class="rc"><div class="rt"><b>Break</b><span class="time">14:50</span></div></div></li>
+<li><span class="num">6</span><div class="rc"><div class="rt"><b>MAP test — see your progress</b><span class="time">15:00</span></div><div class="rd">30 minutes, alone.</div></div></li>
+<li><span class="num">7</span><div class="rc"><div class="rt"><b>Certificates & close</b><span class="time">15:30</span></div><div class="rd">Certificates by name, feedback survey, and the link to Program 3.</div></div></li>
+</ol></section></div>
+<aside class="d-side">
+<section class="panel"><h3>What you will be able to do</h3><ul class="leave"><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg><span>Choose a Word memo or a PowerPoint deck for the reader.</span></li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg><span>Draft a memo from your checked numbers, answer first.</span></li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg><span>Build a short deck where every title is the message.</span></li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg><span>Send a reply that passes the four checks.</span></li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg><span>Explain how an agent can take over a repeated step.</span></li></ul></section>
+<section class="panel"><h3>What we will cover</h3><div class="chips"><span class="chip2">Copilot in Word</span><span class="chip2">Bottom line up front</span><span class="chip2">Copilot in PowerPoint</span><span class="chip2">Message titles</span><span class="chip2">Draft with Copilot</span><span class="chip2">Coaching</span><span class="chip2">Four checks</span><span class="chip2">Agent Builder</span></div></section>
+<section class="panel cta-panel"><div class="cta-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><h3>Day 2 slides</h3><p>The full interactive deck — the stories, the live demos and the exact prompts, as run in the room.</p><a class="slides-btn" href="coded-kamco-day-2-deck.html"><span>Open the slides</span> <span class="ar">→</span></a></section>
+<section class="panel cta-panel"><div class="cta-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div><h3>Day 2 hands-on lab</h3><p>Six challenges — memo or deck, answer first, fixing a Copilot deck, checking an AI-drafted reply, naming the check, and building an agent. Capture each KAMCO{…} flag.</p><a class="slides-btn" href="coded-kamco-day-2-lab.html"><span>Open the lab</span> <span class="ar">→</span></a></section>
+<section class="panel cta-panel"><div class="cta-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z"/><path d="M14 3v6h6"/></svg></div><h3>Case files</h3><p>The Al-Murjan email thread, the 30 Sep custody export and the house view. Save them to your OneDrive before you start.</p><a class="slides-btn" href="case-files.html"><span>Open the case files</span> <span class="ar">→</span></a></section>
+<section class="panel"><h3>Resources &amp; links</h3><div class="res-list">
+<a class="res" href="coded-kamco-day-2-deck.html"><span class="res-ic"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1"/></svg></span><span class="res-nm">Day 2 slide deck</span><span class="res-tag">Slides</span><svg class="out" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+<a class="res" href="coded-kamco-day-2-lab.html"><span class="res-ic"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1"/></svg></span><span class="res-nm">Day 2 hands-on lab</span><span class="res-tag">Lab</span><svg class="out" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+<a class="res" href="case-files.html"><span class="res-ic"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1"/></svg></span><span class="res-nm">Case files — emails & Excel</span><span class="res-tag">Files</span><svg class="out" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+<a class="res" href="before-you-start.html"><span class="res-ic"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1"/></svg></span><span class="res-nm">Before you start — sign-in & backup</span><span class="res-tag">Setup</span><svg class="out" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+<a class="res" href="cheat-sheet.html"><span class="res-ic"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1"/></svg></span><span class="res-nm">Copilot cheat sheet</span><span class="res-tag">Reference</span><svg class="out" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+<a class="res" href="coded-kamco-day-1.html"><span class="res-ic"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1"/></svg></span><span class="res-nm">Day 1 · From Inbox to Insight</span><span class="res-tag">Day plan</span><svg class="out" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+<a class="res" href="index.html"><span class="res-ic"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1"/></svg></span><span class="res-nm">The programme</span><span class="res-tag">Overview</span><svg class="out" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+</div></section>
+</aside></div></div>
+<footer class="site-foot"><div class="wrap"><div class="foot-row"><span class="copy">AI at Work with Microsoft Copilot · CODED × KAMCO Invest</span><span class="copy">© 2026 CODED · Kuwait</span></div></div></footer>
+</body></html>

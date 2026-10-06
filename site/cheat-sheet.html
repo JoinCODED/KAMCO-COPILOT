@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Cheat Sheet · Copilot at Work — KAMCO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#00081C;--surf:#0D1A36;--surf2:#11244A;
+  --crimson:#2F74D6;--rose:#6F9CE8;--rose-lt:#A8C2F0;
+  --iso:#A8C2F0;--nist:#6FCFE4;--pci:#E9C46A;--danger:#FF6275;
+  --w:#fff;--w8:rgba(255,255,255,.84);--w7:rgba(255,255,255,.72);--w6:rgba(255,255,255,.6);--w5:rgba(255,255,255,.46);--w4:rgba(255,255,255,.32);--w1:rgba(255,255,255,.09);--w06:rgba(255,255,255,.055);
+  --line:rgba(255,255,255,.1);
+  --mf:'Manrope',system-ui,sans-serif;--mono:'Space Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;scroll-padding-top:104px}
+body{background:radial-gradient(900px 560px at 88% -10%,rgba(47,116,214,.1),transparent 62%),var(--base);color:var(--w);font-family:var(--mf);-webkit-font-smoothing:antialiased;line-height:1.55;padding-bottom:80px}
+.bar{position:sticky;top:0;z-index:30;background:rgba(0,8,28,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:920px;margin:0 auto;padding:15px 24px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.3px;font-size:16px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--crimson);box-shadow:0 0 10px var(--crimson)}
+.brand b{color:var(--rose-lt)}
+main{max-width:920px;margin:0 auto;padding:0 24px}
+
+.part{margin-top:42px}
+.part:first-child{margin-top:30px}
+.ph{font-size:12px;font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--rose-lt);font-weight:700;margin-bottom:7px}
+.pt{font-size:25px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+.psub{font-size:15px;color:var(--w6);margin-bottom:22px;max-width:620px}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.item{background:linear-gradient(180deg,var(--surf2),var(--surf));border:1px solid var(--w1);border-top:3px solid var(--ac);border-radius:16px;padding:20px 19px}
+.nm{font-size:19px;font-weight:800;letter-spacing:-.3px;color:var(--ac)}
+.st{font-size:13px;color:var(--w5);font-weight:600;margin-top:2px;margin-bottom:15px}
+.an{font-size:15px;color:var(--w8);line-height:1.5;margin-bottom:11px}
+.an b{color:#fff}
+.df{font-size:14px;color:var(--w6);line-height:1.55;margin-bottom:15px}
+.ex{font-size:13px;color:var(--w5);line-height:1.5;font-style:italic;margin-bottom:15px;padding-left:11px;border-left:2px solid var(--w1)}
+.tl{font-size:14.5px;color:var(--ac);font-weight:700;line-height:1.45;padding-top:13px;border-top:1px solid var(--w06)}
+.tl span{display:block;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--w5);margin-bottom:4px}
+
+.sum{margin-top:18px;font-size:15.5px;color:var(--w7);text-align:center;line-height:1.7;padding:15px 18px;background:var(--surf2);border:1px solid var(--w1);border-radius:13px}
+.sum .iso{color:var(--iso);font-weight:700}.sum .nist{color:var(--nist);font-weight:700}.sum .pci{color:var(--pci);font-weight:700}
+.sum b{color:#fff}
+
+.note{margin-top:16px;display:flex;gap:11px;align-items:flex-start;font-size:14.5px;color:var(--w7);line-height:1.55;padding:15px 18px;background:rgba(255,98,117,.07);border:1px solid rgba(255,98,117,.26);border-radius:13px}
+.note .ic{color:var(--danger);font-size:16px;flex:none;line-height:1.3}
+.note b{color:#fff}
+
+.foot{max-width:920px;margin:34px auto 0;padding:0 24px;font-size:12.5px;color:var(--w4)}
+
+@media(max-width:720px){.grid{grid-template-columns:1fr}.pt{font-size:22px}}
+</style>
+<style>.bar-in{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.backlink{font-weight:700;font-size:13px;color:var(--w6);background:var(--w06);border:1px solid var(--w1);border-radius:8px;padding:6px 11px;text-decoration:none}.grid.g4{grid-template-columns:repeat(4,1fr)}@media(max-width:900px){.grid.g4{grid-template-columns:1fr 1fr}}@media(max-width:560px){.grid.g4{grid-template-columns:1fr}}</style></head>
+<body>
+<div class="bar"><div class="bar-in"><a class="backlink" href="index.html" style="margin-right:10px">‹ Back</a><div class="brand"><span class="dot"></span>Cheat Sheet · <b>Copilot at Work</b></div></div></div>
+<main>
+<div class="part"><div class="ph">Part 1</div><div class="pt">Ask well</div><div class="psub">Three habits that turn a vague answer into a usable one.</div><div class="grid"><div class="item" style="--ac:var(--iso)"><div class="nm">CTFT</div><div class="st">The prompt recipe</div><div class="an">Like <b>briefing a junior analyst</b>.</div><div class="df">Context, Task, Format, Tone — four parts of every strong prompt.</div><div class="ex">“I manage Al-Murjan FO… summarise the 30 Sep export… five bullets in KWD… plain English for a CFO.”</div><div class="tl"><span>Tell</span>All four parts are there</div></div><div class="item" style="--ac:var(--nist)"><div class="nm">Iterate</div><div class="st">Refine, don't restart</div><div class="an">Like <b>a tailor's fitting</b>.</div><div class="df">Treat the first answer as a draft. Improve it in the same chat.</div><div class="ex">“Shorter. Breaches first. One decimal place.”</div><div class="tl"><span>Tell</span>Short follow-ups, same chat</div></div><div class="item" style="--ac:var(--pci)"><div class="nm">Source with /</div><div class="st">Point at the file</div><div class="an">Like <b>pointing at the right folder</b>.</div><div class="df">Type / to choose the exact file, email or meeting Copilot must use.</div><div class="ex">“Use /amfo-q3-custody-export.xlsx (30 Sep).”</div><div class="tl"><span>Tell</span>Every number has a named source</div></div></div><div class="sum"><span class="iso">CTFT</span> = the brief · <span class="nist">Iterate</span> = the fitting · <span class="pci">/</span> = the source<br><b>Copilot drafts. People decide.</b></div></div>
+<div class="part"><div class="ph">Part 2</div><div class="pt">One workflow, four apps</div><div class="psub">Request → Check → Produce → Reply.</div><div class="grid"><div class="item" style="--ac:var(--iso)"><div class="nm">Outlook</div><div class="st">Read the request</div><div class="an">Like <b>a chief of staff's one-pager</b>.</div><div class="df">Summarise the thread, then turn it into a checklist: deadline, deliverable, who to copy, what not to do.</div><div class="ex">“From this thread, list the final deadline, each deliverable and its format, who to copy, and any request I should not do.”</div><div class="tl"><span>Tell</span>The newest message wins</div></div><div class="item" style="--ac:var(--nist)"><div class="nm">Excel</div><div class="st">Clean, then count</div><div class="an">Like <b>a chef's preparation</b>.</div><div class="df">Remove duplicates, fix text numbers, fill missing prices, clean labels — then build the PivotTable.</div><div class="ex">“Highlight duplicate rows based on Holding ID.”</div><div class="tl"><span>Tell</span>Row count checked before and after</div></div><div class="item" style="--ac:var(--pci)"><div class="nm">Word & PowerPoint</div><div class="st">Answer first</div><div class="an">Like <b>a newspaper headline</b>.</div><div class="df">Memo when read alone; deck when presented. Bottom line first. Every slide title is the message.</div><div class="ex">“Change every slide title to one sentence that states the main message.”</div><div class="tl"><span>Tell</span>Titles alone tell the story</div></div></div><div class="sum"><span class="iso">Outlook</span> = the ask · <span class="nist">Excel</span> = the numbers · <span class="pci">Word / PowerPoint</span> = the answer<br><b>Feed Copilot numbers you have checked — do not let it re-calculate them.</b></div></div>
+<div class="part"><div class="ph">Part 3</div><div class="pt">The four checks — before every send</div><div class="psub">Like a pilot's checklist: every flight, every send.</div><div class="grid g4"><div class="item" style="--ac:var(--iso)"><div class="nm">Accuracy</div><div class="st">The numbers</div><div class="an">Like <b>matching receipts</b>.</div><div class="df">Every figure matches your analysis.</div><div class="ex">4.5% is not 5.4%.</div><div class="tl"><span>Tell</span>Each number traced to the file</div></div><div class="item" style="--ac:var(--nist)"><div class="nm">Confidentiality</div><div class="st">The people</div><div class="an">Like <b>a sealed envelope</b>.</div><div class="df">Only this client. Only the right recipients.</div><div class="ex">Never name another family.</div><div class="tl"><span>Tell</span>No other client, right list</div></div><div class="item" style="--ac:var(--pci)"><div class="nm">Tone</div><div class="st">The voice</div><div class="an">Like <b>answering in the guest's language</b>.</div><div class="df">Fits the reader. No promises of returns.</div><div class="ex">Remove “returns will stay strong”.</div><div class="tl"><span>Tell</span>No guarantee, no forecast</div></div><div class="item" style="--ac:var(--iso)"><div class="nm">Completeness</div><div class="st">Everything asked for</div><div class="an">Like <b>a packed suitcase</b>.</div><div class="df">All outputs, attachments, people copied, disclaimer if client-facing.</div><div class="ex">Memo and deck both attached.</div><div class="tl"><span>Tell</span>Nothing “to follow later”</div></div></div><div class="sum"><b>You sign the email — not Copilot.</b></div></div>
+<div class="part"><div class="note"><span class="ic">⚠</span><div><b>Agents:</b> an agent is only as good as its instructions. Give it one job, clear rules (“always use the newest message”), the right files — and test it before you share it.</div></div></div>
+</main>
+<div class="foot">AI at Work with Microsoft Copilot · CODED × KAMCO Invest — quick reference.</div>
+</body>
+</html>

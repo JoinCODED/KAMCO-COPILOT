@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Day 2 · Demos &amp; Lab Solutions — KAMCO Copilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#00081C;--surf:#0A1630;--surf2:#11244A;--raise:#16294A;
+  --crimson:#2F74D6;--rose:#6F9CE8;--rose-lt:#A8C2F0;--maroon:#0A3A80;--mid:#004AA3;
+  --green:#3DC873;--green-lt:#8FE6AE;--amber:#EAB94A;--amber-lt:#FFE0A3;
+  --w:#fff;--w8:rgba(255,255,255,.82);--w7:rgba(255,255,255,.7);--w6:rgba(255,255,255,.58);--w5:rgba(255,255,255,.46);--w4:rgba(255,255,255,.34);--w2:rgba(255,255,255,.16);--w1:rgba(255,255,255,.09);--w06:rgba(255,255,255,.06);
+  --line:rgba(255,255,255,.1);
+  --mf:'Manrope',system-ui,sans-serif;--mono:'Space Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;scroll-padding-top:118px}
+body{background:radial-gradient(1100px 640px at 85% -8%,rgba(47,116,214,.13),transparent 60%),var(--base);color:var(--w);font-family:var(--mf);-webkit-font-smoothing:antialiased;line-height:1.5;padding-bottom:80px}
+.bar{position:sticky;top:0;z-index:30;background:rgba(0,8,28,.86);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:840px;margin:0 auto;padding:14px 20px 0}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.3px;font-size:16px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--crimson);box-shadow:0 0 10px var(--crimson)}
+.brand b{color:var(--rose-lt)}
+.tabs{display:flex;gap:6px;margin-top:12px;overflow-x:auto;padding-bottom:11px;-webkit-overflow-scrolling:touch}
+.tab{flex:none;background:var(--w06);border:1px solid var(--w1);color:var(--w7);font-family:var(--mf);font-weight:700;font-size:13px;padding:9px 14px;border-radius:9px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.tab:active{background:var(--w1)}
+main{max-width:840px;margin:0 auto;padding:8px 20px}
+section{padding-top:30px}
+.sec-h{display:flex;align-items:baseline;gap:11px;margin-bottom:4px}
+.sec-h h2{font-size:24px;font-weight:800;letter-spacing:-.5px}
+.sec-h .c{font-family:var(--mono);font-size:12px;color:var(--w5)}
+.sec-sub{font-size:14px;color:var(--w6);margin-bottom:16px}
+
+.card{background:linear-gradient(180deg,var(--surf2),var(--surf));border:1px solid var(--w1);border-radius:16px;padding:18px 19px;margin-bottom:14px}
+.card.lab{border-left:3px solid var(--crimson)}
+.tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-lt);font-weight:700;margin-bottom:7px}
+.card h3{font-size:19px;font-weight:800;letter-spacing:-.3px;margin-bottom:3px}
+.card .meta{font-size:13px;color:var(--w5);font-family:var(--mono);margin-bottom:11px}
+.setup{font-size:15.5px;color:var(--w8);margin-bottom:6px}
+.setup b{color:var(--w)}
+.run{font-size:14px;color:var(--w6);margin-bottom:11px}
+.run .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--w4);margin-right:6px}
+.sol{background:rgba(61,200,115,.1);border:1px solid rgba(61,200,115,.4);border-radius:12px;padding:13px 15px;display:flex;gap:11px;align-items:flex-start}
+.sol .ar{color:var(--green);font-weight:800;font-size:17px;line-height:1.35;flex:none}
+.sol .txt{font-size:15.5px;line-height:1.5;font-weight:600;color:var(--green-lt)}
+.sol .txt b{color:#fff;font-weight:800}
+.sol ol{margin:2px 0 0 2px;padding-left:18px}
+.sol ol li{font-size:15px;line-height:1.5;color:var(--green-lt);margin-bottom:5px}
+.sol ol li b{color:#fff}
+
+.flag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:700;font-size:15px;color:var(--rose-lt);background:var(--base);border:1px dashed var(--w2);border-radius:9px;padding:8px 13px;margin-bottom:11px;cursor:pointer;word-break:break-all}
+.flag .k{color:var(--w4);font-size:10px;letter-spacing:.1em}
+.flag.copied{border-color:var(--green);color:var(--green-lt)}
+.solve{font-size:15px;color:var(--w8);line-height:1.55}
+.solve b{color:#fff}.solve .hl{color:var(--rose-lt);font-family:var(--mono);font-size:13.5px}
+
+.checks{background:linear-gradient(180deg,var(--surf2),var(--surf));border:1px solid var(--w1);border-radius:16px;overflow:hidden}
+.chk{display:flex;gap:14px;padding:14px 17px;border-bottom:1px solid var(--w1)}
+.chk:last-child{border-bottom:none}
+.chk .q{flex:1;font-size:15px;color:var(--w7)}
+.chk .a{flex:none;max-width:48%;font-size:15px;font-weight:700;color:var(--green-lt);text-align:right}
+.grp-lbl{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-lt);font-weight:700;margin:18px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--w1)}
+.instr-flags{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.instr-flags .f{font-family:var(--mono);font-size:13px;color:var(--rose-lt);background:var(--base);border:1px solid var(--w1);border-radius:8px;padding:7px 11px}
+.foot{max-width:840px;margin:32px auto 0;padding:0 20px;font-size:12.5px;color:var(--w4);line-height:1.6}
+</style>
+</head><body>
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span>Day&nbsp;2 · <b>Demos & Lab Solutions</b></div>
+  <div class="tabs"><a class="tab" href="#demos">▶ Demos</a><a class="tab" href="#checks">✓ Mini-checks</a><a class="tab" href="#lab">⚑ Trainee lab</a><a class="tab" href="#instr">🎬 Instructor lab</a></div>
+</div></div>
+<main>
+<section id="demos"><div class="sec-h"><h2>Demos you run live</h2><span class="c">6 in-deck</span></div><div class="sec-sub">The interactive and live-in-Copilot slides — what to run and the point to land.</div>
+<div class="card"><span class="tag">T1</span><h3>Give Copilot your numbers. Not its own.</h3><div class="sol"><span class="ar">→</span><div class="txt"><ol><li>Paste the Excel summary table into the prompt — Copilot does not re-calculate.</li><li>Reference the house view with /.</li><li>Read the bottom line out loud.</li></ol></div></div></div>
+<div class="card"><span class="tag">T2</span><h3>Four weak titles. Flip each one.</h3><div class="sol"><span class="ar">→</span><div class="txt"><ol><li>Flip each card. Read the back sides in order.</li><li>Point: the four titles alone tell the client story.</li></ol></div></div></div>
+<div class="card"><span class="tag">T2</span><h3>Four prompts. Five slides.</h3><div class="sol"><span class="ar">→</span><div class="txt"><ol><li>Run live with the Al-Murjan memo.</li><li>Show the titles view (Outline) after prompt 2.</li><li>Paste a real Excel chart on slide 3.</li></ol></div></div></div>
+<div class="card"><span class="tag">T3</span><h3>An AI-drafted reply. Four problems.</h3><div class="sol"><span class="ar">→</span><div class="txt"><ol><li>4 problems: 5.4% (is 4.5%), names Al-Murjan, promises returns, issuer table 'next week'.</li><li>2 correct sentences: the total value and Gulf Trade Bank 11.8%.</li></ol></div></div></div>
+<div class="card"><span class="tag">T3</span><h3>The reply to Faisal.</h3><div class="sol"><span class="ar">→</span><div class="txt"><ol><li>Attach the files first.</li><li>Run Draft, then Coaching.</li><li>Read the four checks out loud before Send.</li></ol></div></div></div>
+<div class="card"><span class="tag">T4</span><h3>The job description is the agent.</h3><div class="sol"><span class="ar">→</span><div class="txt"><ol><li>Paste the instructions; add the house view as knowledge.</li><li>Test with both threads.</li><li>Show one fix: tighten a rule and re-test.</li></ol></div></div></div>
+</section>
+<section id="checks"><div class="sec-h"><h2>Mini-check answers</h2><span class="c">"your call"</span></div><div class="sec-sub">The correct answer for every "your call" slide.</div><div class="checks"><div class="chk"><div class="q"><b>Slide 8</b> · The Investment Committee reads every paper at home the night before the meeting. Which format?</div><div class="a">A one-page Word memo</div></div><div class="chk"><div class="q"><b>Slide 12</b> · Copilot&#x27;s memo says “equity is within the mandate”. Your Excel table says 61.0%, maximum 55%. What do you do?</div><div class="a">Tell Copilot: “Equity is 61.0%, above the 55% maximum. Rewrite the allocation section.”</div></div><div class="chk"><div class="q"><b>Slide 23</b> · Slide 3 has the title “Allocation”, a chart without a source, and eight bullets. What do you fix first?</div><div class="a">Make the title the message, add the source, cut to three points</div></div><div class="chk"><div class="q"><b>Slide 34</b> · Copilot added: “We expect strong returns to continue next quarter.” Keep it?</div><div class="a">No — remove it. Never promise or imply future returns</div></div><div class="chk"><div class="q"><b>Slide 43</b> · Your agent says the Al-Murjan deadline is Wednesday. The newest message says Tuesday, 3:00 pm. What do you fix?</div><div class="a">The instructions: “Always use the newest message when instructions change.”</div></div></div></section>
+<section id="lab"><div class="sec-h"><h2>Trainee lab — solutions</h2><span class="c">6 challenges</span></div><div class="sec-sub">Flag format <span style="font-family:var(--mono);color:var(--rose-lt)">KAMCO{ }</span> — tap a flag to copy.</div>
+<div class="card lab"><span class="tag">01 · Word</span><h3>Memo or Deck?</h3><div class="flag" data-f="KAMCO{the_reader_picks_the_format}"><span class="k">FLAG</span>KAMCO{the_reader_picks_the_format}</div><div class="solve">Memo: IC papers, Compliance record, Faisal's one page. Deck: the family meeting, the town hall.</div></div>
+<div class="card lab"><span class="tag">02 · Word</span><h3>Answer First</h3><div class="flag" data-f="KAMCO{bottom_line_up_front}"><span class="k">FLAG</span>KAMCO{bottom_line_up_front}</div><div class="solve">Bottom line: value, change, breaches, recommendation. Evidence: performance and allocation. Risk: the Al-Noor Bank issuer breach. Action: trim equity / Al-Noor Bank; add fixed income.</div></div>
+<div class="card lab"><span class="tag">03 · PowerPoint</span><h3>Fix the Deck</h3><div class="flag" data-f="KAMCO{one_slide_one_message}"><span class="k">FLAG</span>KAMCO{one_slide_one_message}</div><div class="solve">Slide 2: a topic, not a message → write the message. Slide 3: add the source under the chart. Slide 4: cut nine bullets to three.</div></div>
+<div class="card lab"><span class="tag">04 · Outlook</span><h3>Check the Reply</h3><div class="flag" data-f="KAMCO{verify_before_you_send}"><span class="k">FLAG</span>KAMCO{verify_before_you_send}</div><div class="solve">Accuracy: “up 4.6%” — it is <b>2.46%</b>. Confidentiality: names another client (Al-Rumaithiya). Tone: promises Al-Noor Bank will rise. Completeness: the memo was due with the deck (Tue 3:00 pm).</div></div>
+<div class="card lab"><span class="tag">05 · Outlook</span><h3>Name the Check</h3><div class="flag" data-f="KAMCO{four_checks_every_time}"><span class="k">FLAG</span>KAMCO{four_checks_every_time}</div><div class="solve">Accuracy: 16.0% vs 61.0%. Confidentiality: wrong recipients. Tone: the guarantee; the one-line reply. Completeness: no disclaimer; no attachment.</div></div>
+<div class="card lab"><span class="tag">06 · Agents</span><h3>Build the Agent</h3><div class="flag" data-f="KAMCO{instructions_make_the_agent}"><span class="k">FLAG</span>KAMCO{instructions_make_the_agent}</div><div class="solve">Describe one clear job. Instruction: always use the newest message. Knowledge: the house view rules. Test → fix → re-test. Share with a small pilot group.</div></div>
+</section>
+<section id="instr"><div class="sec-h"><h2>Instructor demo lab</h2><span class="c">flags</span></div><div class="sec-sub">The parallel Al-Waha challenges you run on screen.</div><div class="instr-flags"><span class="f">KAMCO{who_reads_it_and_how}</span><span class="f">KAMCO{answer_then_evidence}</span><span class="f">KAMCO{titles_tell_the_story}</span><span class="f">KAMCO{you_sign_it_not_copilot}</span><span class="f">KAMCO{one_minute_before_send}</span><span class="f">KAMCO{test_before_you_trust}</span></div></section>
+</main>
+<div class="foot">Slide-by-slide talking points: coded-kamco-day-2-notes.html. Step-by-step lab solutions: coded-kamco-day-2-walkthrough.html.</div>
+<script>
+[].slice.call(document.querySelectorAll('.flag')).forEach(function(el){
+  el.addEventListener('click',function(){
+    var t=el.dataset.f;
+    function ok(){el.classList.add('copied');var k=el.querySelector('.k');var o=k.textContent;k.textContent='COPIED';setTimeout(function(){el.classList.remove('copied');k.textContent=o;},1100);}
+    try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,ok);return;}}catch(e){}
+    try{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);ok();}catch(e){}
+  });
+});
+</script>
+</body>
+</html>

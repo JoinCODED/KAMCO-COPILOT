@@ -1,0 +1,15 @@
+{
+  "name": "kamco-copilot-build",
+  "private": true,
+  "description": "Generator for the CODED x KAMCO Invest 'AI at Work with Microsoft Copilot' workshop site",
+  "scripts": {
+    "build": "bash build_all.sh",
+    "validate": "node validate.js"
+  },
+  "dependencies": {
+    "qrcode-generator": "^1.4.4"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
+}

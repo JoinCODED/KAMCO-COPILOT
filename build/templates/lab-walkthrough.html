@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Day 2 Lab · Step-by-Step Solutions — KIBS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#0A0507;--surf:#150A0D;--surf2:#1C0E12;--raise:#241019;
+  --crimson:#C8324A;--rose:#E0566E;--rose-lt:#EC8B9C;--maroon:#5D181A;--mid:#8B1E2A;
+  --green:#3DC873;--green-lt:#8FE6AE;--amber:#EAB94A;
+  --w:#fff;--w8:rgba(255,255,255,.82);--w7:rgba(255,255,255,.7);--w6:rgba(255,255,255,.58);--w5:rgba(255,255,255,.46);--w4:rgba(255,255,255,.34);--w2:rgba(255,255,255,.16);--w1:rgba(255,255,255,.09);--w06:rgba(255,255,255,.06);
+  --line:rgba(255,255,255,.1);
+  --mf:'Manrope',system-ui,sans-serif;--mono:'Space Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+body{background:radial-gradient(1100px 640px at 85% -8%,rgba(200,50,74,.13),transparent 60%),var(--base);color:var(--w);font-family:var(--mf);-webkit-font-smoothing:antialiased;line-height:1.5;padding-bottom:80px}
+.bar{position:sticky;top:0;z-index:30;background:rgba(10,5,7,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:860px;margin:0 auto;padding:14px 20px 0}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.3px;font-size:16px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--crimson);box-shadow:0 0 10px var(--crimson)}
+.brand b{color:var(--rose-lt)}
+.tabs{display:flex;gap:6px;margin-top:12px;overflow-x:auto;padding-bottom:11px;-webkit-overflow-scrolling:touch}
+.tab{flex:none;background:var(--w06);border:1px solid var(--w1);color:var(--w7);font-family:var(--mono);font-weight:700;font-size:12px;padding:8px 12px;border-radius:8px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.tab:active{background:var(--w1)}
+main{max-width:860px;margin:0 auto;padding:10px 20px}
+.intro{font-size:15px;color:var(--w6);padding:18px 0 6px;line-height:1.6}
+.intro b{color:var(--w8)}
+
+.card{background:linear-gradient(180deg,var(--surf2),var(--surf));border:1px solid var(--w1);border-left:3px solid var(--crimson);border-radius:16px;padding:20px 20px 18px;margin-top:18px}
+.ch-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px}
+.num{font-family:var(--mono);font-weight:700;font-size:13px;color:#fff;background:var(--crimson);border-radius:7px;padding:4px 9px}
+.cat{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-lt);font-weight:700}
+.pts{font-family:var(--mono);font-size:11px;color:var(--w5);margin-left:auto}
+.card h3{font-size:21px;font-weight:800;letter-spacing:-.4px;margin-bottom:5px}
+.scn{font-size:14.5px;color:var(--w6);margin-bottom:15px;line-height:1.55}
+
+ol.steps{list-style:none;counter-reset:s;margin:0}
+ol.steps>li{counter-increment:s;position:relative;padding-left:38px;margin-bottom:14px;font-size:15.5px;line-height:1.55;color:var(--w8)}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:var(--w06);border:1px solid var(--w2);color:var(--rose-lt);font-family:var(--mono);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+ol.steps>li b{color:#fff}
+.verdict{display:inline-block;font-weight:700;font-family:var(--mono);font-size:13px;padding:2px 9px;border-radius:6px;white-space:nowrap}
+.v-phish{color:var(--rose-lt);background:rgba(200,50,74,.16);border:1px solid rgba(200,50,74,.34)}
+.v-legit{color:var(--green-lt);background:rgba(61,200,115,.13);border:1px solid rgba(61,200,115,.34)}
+.v-pick{color:var(--green-lt);background:rgba(61,200,115,.12);border:1px solid rgba(61,200,115,.32)}
+.mono{font-family:var(--mono);font-size:13.5px;color:var(--rose-lt)}
+.email-row{display:block;font-size:14.5px;color:var(--w7);margin:2px 0 2px;padding-left:2px}
+.email-row .ef{color:var(--w);font-weight:700}
+.email-row .ed{font-family:var(--mono);font-size:12.5px;color:var(--w6)}
+
+.flag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:700;font-size:15px;color:var(--rose-lt);background:var(--base);border:1px dashed var(--w2);border-radius:9px;padding:9px 13px;margin-top:14px;cursor:pointer;word-break:break-all}
+.flag .k{color:var(--w4);font-size:10px;letter-spacing:.1em}
+.flag.copied{border-color:var(--green);color:var(--green-lt)}
+.point{margin-top:13px;background:rgba(255,255,255,.04);border:1px solid var(--w1);border-radius:12px;padding:12px 15px;display:flex;gap:11px;align-items:flex-start}
+.point .ic{color:var(--amber);font-size:15px;flex:none;line-height:1.4}
+.point .t{font-size:14.5px;line-height:1.5;color:var(--w8)}
+.point .t b{color:#fff}
+.foot{max-width:860px;margin:30px auto 0;padding:0 20px;font-size:12.5px;color:var(--w4);line-height:1.6}
+</style>
+</head>
+<body>
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span>Day&nbsp;2 Lab · <b>Step-by-Step Solutions</b></div>
+  <div class="tabs">
+    <a class="tab" href="#c1">01 Hash</a>
+    <a class="tab" href="#c2">02 Domino</a>
+    <a class="tab" href="#c3">03 Map</a>
+    <a class="tab" href="#c4">04 Gap</a>
+    <a class="tab" href="#c5">05 02:00</a>
+  </div>
+</div></div>
+
+<main>
+<div class="intro">The 5 challenges in the Day 2 trainee lab, solved step by step. Each ends in a <b>KIBS{ }</b> flag the trainee submits to capture it (tap a flag to copy). Verdicts and selections are highlighted.</div>
+
+<div class="card" id="c1">
+  <div class="ch-top"><span class="num">01</span><span class="cat">Crypto · Hashing</span><span class="pts">200 pts · Hard</span></div>
+  <h3>Crack the Hash</h3>
+  <div class="scn">A leaked table of <b>unsalted MD5</b> password hashes. Run a real dictionary attack and see which fall — and which survives.</div>
+  <ol class="steps">
+    <li>Launch the <b>dictionary attack</b> — the console hashes every wordlist entry and compares it to each leaked hash.</li>
+    <li>Three weak hashes fall in milliseconds: <span class="verdict v-pick">j.salim → password123</span>, <span class="verdict v-pick">a.fahad → Summer2024!</span>, <span class="verdict v-pick">m.yousef → qwerty</span>.</li>
+    <li>The fourth, <b>admin</b>, is a 28-character passphrase (<span class="mono">correct horse battery staple</span>) — not in any practical wordlist, so it <b>survives</b>.</li>
+    <li>3 cracked, 1 holds → flag reveals.</li>
+  </ol>
+  <div class="flag" data-f="KIBS{length_beats_complexity}"><span class="k">FLAG</span>KIBS{length_beats_complexity}</div>
+  <div class="point"><span class="ic">◆</span><span class="t">Length, not symbols, is what saved the rest. <b>A long passphrase beats a short "complex" password.</b></span></div>
+</div>
+
+<div class="card" id="c2">
+  <div class="ch-top"><span class="num">02</span><span class="cat">Crypto · Stuffing</span><span class="pts">150 pts · Moderate</span></div>
+  <h3>The Domino</h3>
+  <div class="scn">A shopping site this customer used was breached — exposing <span class="mono">rana@email.com / Rana2019!</span>. The attacker now tries that password everywhere. <b>At-risk = reuses the breached password AND has no MFA.</b></div>
+  <ol class="steps">
+    <li><span class="verdict v-phish">⚑ At risk</span> <b>Personal email</b> — reuses the password, no MFA.</li>
+    <li><span class="verdict v-phish">⚑ At risk</span> <b>Streaming service</b> — reuses the password, no MFA.</li>
+    <li><span class="verdict v-phish">⚑ At risk</span> <b>Social media</b> — reuses the password, no MFA.</li>
+    <li><span class="verdict v-legit">✓ Safe</span> <b>Online bank login</b> — reuses the password, but <b>MFA is on</b>.</li>
+    <li><span class="verdict v-legit">✓ Safe</span> <b>Work single sign-on</b> — a <b>unique</b> password.</li>
+    <li>Tick the <b>three at-risk</b> accounts → flag reveals.</li>
+  </ol>
+  <div class="flag" data-f="KIBS{reuse_is_a_skeleton_key}"><span class="k">FLAG</span>KIBS{reuse_is_a_skeleton_key}</div>
+  <div class="point"><span class="ic">◆</span><span class="t">Reuse is the skeleton key; <b>MFA breaks the chain.</b> Either a unique password or MFA would have saved the safe accounts.</span></div>
+</div>
+
+<div class="card" id="c3">
+  <div class="ch-top"><span class="num">03</span><span class="cat">Standards · Mapping</span><span class="pts">150 pts · Moderate</span></div>
+  <h3>Map the Control</h3>
+  <div class="scn">Auditors ask which standard each control belongs to. The secret: the big frameworks overlap far more than they differ. Two of these satisfy <b>all three</b> at once.</div>
+  <ol class="steps">
+    <li>"Encrypt cardholder data at rest and in transit" → <span class="verdict v-pick">PCI-DSS</span></li>
+    <li>"Maintain a certified, audited ISMS" → <span class="verdict v-pick">ISO 27001</span></li>
+    <li>"Organise security around Identify · Protect · Detect · Respond · Recover" → <span class="verdict v-pick">NIST CSF</span></li>
+    <li>"Enforce MFA on all administrative access" → <span class="verdict v-pick">All three</span></li>
+    <li>"Keep and actively monitor access logs for critical systems" → <span class="verdict v-pick">All three</span></li>
+    <li>Submit → flag reveals.</li>
+  </ol>
+  <div class="flag" data-f="KIBS{one_control_many_frameworks}"><span class="k">FLAG</span>KIBS{one_control_many_frameworks}</div>
+  <div class="point"><span class="ic">◆</span><span class="t">One good control satisfies many frameworks at once — <b>map once, satisfy many.</b></span></div>
+</div>
+
+<div class="card" id="c4">
+  <div class="ch-top"><span class="num">04</span><span class="cat">Policy · The Gap</span><span class="pts">200 pts · Hard</span></div>
+  <h3>Mind the Gap</h3>
+  <div class="scn">Classify each document as <b>Policy</b> (the what &amp; why), <b>Standard</b> (the measurable rule), or <b>Procedure</b> (the step-by-step how) — and mark the one item that is a <b>missing-procedure gap</b>.</div>
+  <ol class="steps">
+    <li>"We protect customer data and comply with all applicable regulation." → <span class="verdict v-pick">Policy</span></li>
+    <li>"Passwords must be at least 14 characters with MFA enabled." → <span class="verdict v-pick">Standard</span></li>
+    <li>"Step 1: open the console … Step 5: confirm and file the wipe certificate." → <span class="verdict v-pick">Procedure</span></li>
+    <li>"Decommissioned servers were sent to recycling, but no documented wipe procedure was ever performed." → <span class="verdict v-pick">Gap — missing</span></li>
+    <li>"All staff complete annual security-awareness training." → <span class="verdict v-pick">Policy</span></li>
+    <li>Submit → flag reveals.</li>
+  </ol>
+  <div class="flag" data-f="KIBS{a_policy_without_a_procedure}"><span class="k">FLAG</span>KIBS{a_policy_without_a_procedure}</div>
+  <div class="point"><span class="ic">◆</span><span class="t">Exactly the Morgan Stanley failure — the policy and standard existed; the procedure never ran. <b>A policy without a procedure is just a wish.</b></span></div>
+</div>
+
+<div class="card" id="c5">
+  <div class="ch-top"><span class="num">05</span><span class="cat">Incident Response</span><span class="pts">250 pts · Hard</span></div>
+  <h3>The 02:00 Call</h3>
+  <div class="scn">It's 2 a.m. A teller workstation is throwing ransom notes and files are encrypting across a shared drive. Run the incident — <b>the right call at each phase</b>; every wrong move makes it worse.</div>
+  <ol class="steps">
+    <li><b>02:00 · Detect</b> → <span class="verdict v-pick">Confirm scope in the SIEM</span>, verify it's a real, active event. <span style="color:var(--w5)">(Not reboot — triggers more encryption. Not wait — it spreads by the minute.)</span></li>
+    <li><b>02:08 · Contain</b> → <span class="verdict v-pick">Isolate the affected hosts</span> from the network (pull the cable / disable the port) <b>without powering them off</b>. <span style="color:var(--w5)">(Powering off destroys volatile evidence; never pay.)</span></li>
+    <li><b>03:30 · Eradicate</b> → <span class="verdict v-pick">Find the initial access, remove the malware, patch the vulnerability</span> before reconnecting. <span style="color:var(--w5)">(Don't just delete the note; don't restore onto an infected host.)</span></li>
+    <li><b>06:00 · Recover</b> → <span class="verdict v-pick">Restore from known-clean, offline backups</span> onto rebuilt systems, verify integrity before going live. <span style="color:var(--w5)">(A recent backup may already be infected.)</span></li>
+    <li><b>+1 week · Learn</b> → <span class="verdict v-pick">Post-incident review</span> — root cause, timeline, fix controls, retrain. <span style="color:var(--w5)">(Don't just close the ticket; don't keep it quiet.)</span></li>
+    <li>All five calls correct → flag reveals.</li>
+  </ol>
+  <div class="flag" data-f="KIBS{contain_before_you_clean}"><span class="k">FLAG</span>KIBS{contain_before_you_clean}</div>
+  <div class="point"><span class="ic">◆</span><span class="t">The order is everything: <b>contain before you clean</b>, and recover only from known-clean backups.</span></div>
+</div>
+</main>
+<div class="foot">This is the Day 2 trainee lab (kibs-day2-lab). The instructor demo lab runs parallel scenarios with the same lessons — its solutions are in the Day 2 instructor demo guide.</div>
+
+<script>
+[].slice.call(document.querySelectorAll('.flag')).forEach(function(el){
+  el.addEventListener('click',function(){
+    var t=el.dataset.f;
+    function ok(){el.classList.add('copied');var k=el.querySelector('.k');var o=k.textContent;k.textContent='COPIED';setTimeout(function(){el.classList.remove('copied');k.textContent=o;},1100);}
+    try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,ok);return;}}catch(e){}
+    try{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);ok();}catch(e){}
+  });
+});
+</script>
+</body>
+</html>

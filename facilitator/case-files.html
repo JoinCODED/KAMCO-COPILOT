@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case files — KAMCO Copilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#00081C; --card:#0B1833; --card-2:#10203F;
+  --ink:#F3F6FC; --ink-dim:#9FB2D4; --ink-faint:#6F83A8;
+  --deep:#0B2350; --maroon:#0A3A80; --mid:#004AA3; --crimson:#2F74D6; --rose:#6F9CE8;
+  --line:rgba(255,255,255,.07); --line-2:rgba(255,255,255,.13);
+  --f:'Manrope',system-ui,sans-serif; --mono:'Space Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--base);color:var(--ink);font-family:var(--f);
+  -webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+
+/* top bar */
+.topbar{position:relative;z-index:5;padding:26px 0 0}
+.back{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;color:var(--ink-dim);
+  transition:color .15s,transform .15s}
+.back:hover{color:var(--ink)}
+.back .ar{transition:transform .15s}.back:hover .ar{transform:translateX(-3px)}
+
+/* hero card */
+.hero-wrap{padding:22px 0 0}
+.d-hero{position:relative;border-radius:24px;overflow:hidden;padding:48px 46px 42px;
+  animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.h-d1{background:linear-gradient(135deg,#2F74D6 0%,#0B4A9E 100%)}
+.h-d2{background:linear-gradient(135deg,#0B4A9E 0%,#0B2350 100%)}
+.d-hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:46px 46px;
+  -webkit-mask:radial-gradient(120% 130% at 88% -10%,#000,transparent 70%);
+  mask:radial-gradient(120% 130% at 88% -10%,#000,transparent 70%)}
+.d-hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(80% 120% at 100% 0%,rgba(255,255,255,.10),transparent 55%)}
+.d-hero>*{position:relative;z-index:2}
+.d-hero-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:30px}
+.cat-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 13px;border-radius:999px;
+  background:rgba(0,0,0,.24);font-size:12.5px;font-weight:600;color:#fff;letter-spacing:.02em;backdrop-filter:blur(5px)}
+.cat-pill .dot{width:6px;height:6px;border-radius:50%;background:#fff;opacity:.92}
+.d-logos{display:flex;align-items:center;gap:12px;opacity:.96}
+.d-logos .coded-logo{height:18px;width:auto;display:block;filter:brightness(0) invert(1)}
+.d-logos .kibs-logo{height:30px;width:auto;display:block;filter:brightness(0) invert(1)}
+.d-logos .x{color:rgba(255,255,255,.6);font-size:13px}
+.d-hero h1{font-weight:800;letter-spacing:-.025em;line-height:1.03;font-size:clamp(34px,5.4vw,58px);color:#fff}
+.d-hero .lede{margin-top:16px;max-width:560px;font-size:clamp(14.5px,1.6vw,17px);line-height:1.6;color:rgba(255,255,255,.86)}
+.d-meta{display:flex;flex-wrap:wrap;gap:9px 26px;margin-top:26px;font-size:14px;font-weight:500;color:rgba(255,255,255,.9)}
+.d-meta span{display:inline-flex;align-items:center;gap:8px}
+.d-meta svg{opacity:.85;flex:none}
+
+/* two-column body */
+.d-grid{display:grid;grid-template-columns:1fr 360px;gap:22px;padding:34px 0 60px;align-items:start}
+@media (max-width:880px){.d-grid{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 26px}
+.panel + .panel{margin-top:20px}
+.panel h2{font-size:18px;font-weight:700;letter-spacing:-.01em}
+.panel h3{font-size:15.5px;font-weight:700;letter-spacing:-.005em}
+.panel .muted{margin-top:6px;font-size:13.5px;color:var(--ink-faint)}
+.panel .brief{margin-top:14px;font-size:15px;line-height:1.62;color:var(--ink-dim)}
+
+/* run of show */
+.ros{list-style:none;margin:22px 0 0;position:relative}
+.ros::before{content:"";position:absolute;left:15px;top:8px;bottom:8px;width:1.5px;background:var(--line-2)}
+.ros li{position:relative;display:flex;gap:18px;padding:0 0 22px 0}
+.ros li:last-child{padding-bottom:0}
+.ros .num{position:relative;z-index:2;flex:none;width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,var(--crimson),var(--maroon));box-shadow:0 0 0 4px var(--card)}
+.ros .brk{position:relative;z-index:2;flex:none;width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;background:var(--card-2);border:1px solid var(--line-2);
+  color:var(--ink-faint);box-shadow:0 0 0 4px var(--card)}
+.ros .rc{flex:1;padding-top:5px}
+.ros .rt{display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+.ros .rt b{font-size:14.5px;font-weight:600;color:var(--ink)}
+.ros .time{font-size:12px;font-weight:600;color:var(--ink-faint);font-variant-numeric:tabular-nums;flex:none}
+.ros .rd{margin-top:4px;font-size:13.5px;line-height:1.5;color:var(--ink-dim)}
+.ros li.is-brk .rt b{color:var(--ink-dim);font-weight:500}
+
+/* sidebar */
+.leave{list-style:none;margin:16px 0 0;display:flex;flex-direction:column;gap:13px}
+.leave li{display:flex;gap:11px;font-size:14px;line-height:1.45;color:var(--ink)}
+.leave svg{color:var(--crimson);flex:none;margin-top:1px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip2{display:inline-flex;padding:7px 12px;border-radius:999px;background:var(--card-2);
+  border:1px solid var(--line);font-size:12.5px;font-weight:500;color:var(--ink-dim)}
+
+/* slides CTA panel */
+.cta-panel{background:linear-gradient(150deg,rgba(47,116,214,.12),rgba(0,74,163,.06));
+  border-color:rgba(47,116,214,.3)}
+.cta-ico{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+  background:rgba(47,116,214,.16);color:var(--rose);margin-bottom:14px}
+.cta-panel p{margin-top:7px;font-size:13.5px;line-height:1.55;color:var(--ink-dim)}
+.slides-btn{margin-top:18px;display:flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px;border-radius:12px;color:#fff;font-size:14.5px;font-weight:600;
+  background:linear-gradient(135deg,var(--crimson),var(--maroon));
+  box-shadow:0 8px 26px rgba(47,116,214,.32);transition:transform .18s,box-shadow .18s}
+.slides-btn:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(47,116,214,.46)}
+.slides-btn .ar{transition:transform .18s}.slides-btn:hover .ar{transform:translateX(4px)}
+
+/* resources */
+.res-list{display:flex;flex-direction:column;margin-top:10px}
+.res{display:flex;align-items:center;gap:13px;padding:13px 4px;border-bottom:1px solid var(--line);
+  transition:padding .15s}
+.res:last-child{border-bottom:0}
+.res:hover{padding-left:8px}
+.res-ic{width:30px;height:30px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;
+  background:var(--card-2);border:1px solid var(--line);color:var(--rose)}
+.res-nm{flex:1;font-size:14px;font-weight:600;color:var(--ink)}
+.res-tag{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+.res svg.out{color:var(--ink-faint);flex:none}
+
+/* footer */
+.site-foot{position:relative;border-top:1px solid var(--line);padding:46px 0 40px}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px}
+.f-lockup{display:flex;align-items:center;gap:13px}
+.f-lockup .coded-logo{height:19px;width:auto;display:block}
+.f-lockup .kibs-logo{height:30px;width:auto;display:block}
+.f-lockup .x{color:var(--ink-faint);font-size:13px}
+.foot-row .copy{font-size:13px;color:var(--ink-faint)}
+
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.d-hero{animation:none}}
+
+/* font system aligned with landing + decks */
+.cat-pill,.d-meta,.muted,.res-tag,.copy,.ros .time,.kicker,.eyebrow{font-family:var(--mono)}
+.cat-pill,.res-tag{letter-spacing:.05em}
+</style>
+<style>.mailtxt{white-space:pre-wrap;font-size:14px;line-height:1.65;color:var(--ink-dim);background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:12px;padding:16px 18px;max-height:520px;overflow:auto}.steps2{margin:12px 0 0 20px;color:var(--ink-dim);line-height:1.7;font-size:14.5px}.steps2 b{color:var(--ink)}.panel p{color:var(--ink-dim);line-height:1.6;font-size:14.5px;margin-top:8px}.panel p b{color:var(--ink)}.one-col{max-width:880px;margin:0 auto}</style></head>
+<body>
+<div class="wrap"><div class="topbar"><a class="back" href="index.html"><span class="ar">←</span> Back to the programme</a></div></div>
+<div class="wrap hero-wrap"><div class="d-hero h-d1"><div class="d-hero-top"><span class="cat-pill"><span class="dot"></span> Case files · Al-Murjan Family Office</span></div><h1>The Al-Murjan request</h1><p class="lede">Everything you need for the Day 1 and Day 2 exercises. Save the files to your OneDrive first — Copilot in Excel, Word and PowerPoint works on files saved there.</p></div></div>
+<div class="wrap"><div class="one-col">
+<section class="panel"><h2>1 · The email thread</h2><p>Your instructor sends this thread to your KAMCO inbox at the start of Day 1. If it does not arrive, open the .eml file below, or read it here and paste it into Copilot Chat.</p><div class="mailtxt">Subject: RE: FW: Al-Murjan FO - Q3 review pack
+Attachment: amfo-q3-custody-export.xlsx
+
+From: Faisal Al-Mutairi (Managing Director, Wealth Management)
+Sent: Sun 11 Oct 2026, 08:12
+To: You
+
+Hi,
+
+Small change - see Khalid&#x27;s note below. The client has moved the meeting to Wednesday 14 Oct at 11:00, so I need the pack from you by Tuesday 13 Oct, 3:00 pm, not Wednesday.
+
+Use the custody export attached (30 Sep). Do not use the June factsheet - those numbers are out of date.
+
+Please keep it to a 5-slide deck for the client and a one-page memo for me. Copy Noura in Compliance before anything goes to the client.
+
+Thanks,
+Faisal
+
+----------------------------------------
+
+From: Khalid Al-Murjan (CFO, Al-Murjan Family Office)
+Sent: Sat 10 Oct 2026, 19:40
+To: Faisal Al-Mutairi
+
+Dear Faisal,
+
+Apologies - I need to move our review to Wednesday 14 Oct, 11:00, same place.
+
+The family is asking two things in particular: how much of the portfolio now sits with Al-Noor Bank after its strong quarter, and whether we are still inside the mandate on equities.
+
+Also, could you send last quarter&#x27;s report for the Al-Rumaithiya family account, so we can see your reporting format?
+
+Best regards,
+Khalid
+
+----------------------------------------
+
+From: Faisal Al-Mutairi (Managing Director, Wealth Management)
+Sent: Thu 8 Oct 2026, 10:05
+To: You
+
+Hi,
+
+Please prepare the Q3 review pack for Al-Murjan Family Office for the client meeting on Thursday 15 Oct. I need:
+
+1) Portfolio value at 30 Sep and the Q3 change (KWD and %)
+2) Allocation against the mandate - flag anything outside the range
+3) Single-issuer check against the 10% limit
+4) Top 3 and bottom 3 contributors for the quarter
+
+Send me the pack by Wednesday 14 Oct.
+
+Faisal</div></section>
+<section class="panel"><h2>2 · Files to download</h2><div class="res-list"><a class="res" href="amfo-q3-custody-export.xlsx" download><span class="res-ic"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1"/></svg></span><span class="res-nm">Al-Murjan custody export · 30 Sep 2026 (Excel)</span><span class="res-tag">Excel</span><svg class="out" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a><a class="res" href="01-amfo-q3-review-request.eml" download><span class="res-ic"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1"/></svg></span><span class="res-nm">The email thread (.eml, opens in Outlook)</span><span class="res-tag">Email</span><svg class="out" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a><a class="res" href="house-view-q4-2026.docx" download><span class="res-ic"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1"/></svg></span><span class="res-nm">Investment House View · Q4 2026 (Word)</span><span class="res-tag">Word</span><svg class="out" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div></section>
+<section class="panel"><h2>3 · How to set up the Excel file</h2><ol class="steps2"><li>Save <b>amfo-q3-custody-export.xlsx</b> to your <b>OneDrive</b> and open it in Excel. Turn <b>AutoSave</b> on.</li><li>Delete rows 1–3 above the headers. Click inside the data and press <b>Ctrl+T</b> to make it a table.</li><li>Open Copilot in Excel and follow the prompts from the deck. Check the row count after every step.</li><li>Keep the file. You need it on Day 2 for the memo, the deck and the reply.</li></ol></section>
+<section class="panel"><h2>Good to know</h2><p>All clients, people, companies and prices are <b>fictional</b>, created for this training. The project files for Day 2 arrive by email at 13:30.</p></section>
+</div></div>
+<footer class="site-foot"><div class="wrap"><div class="foot-row"><span class="copy">AI at Work with Microsoft Copilot · CODED × KAMCO Invest</span><span class="copy">All client data is fictional</span></div></div></footer></body></html>

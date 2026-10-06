@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Day 2 Lab · Step-by-Step Solutions — KAMCO Copilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#00081C;--surf:#0A1630;--surf2:#11244A;--raise:#16294A;
+  --crimson:#2F74D6;--rose:#6F9CE8;--rose-lt:#A8C2F0;--maroon:#0A3A80;--mid:#004AA3;
+  --green:#3DC873;--green-lt:#8FE6AE;--amber:#EAB94A;
+  --w:#fff;--w8:rgba(255,255,255,.82);--w7:rgba(255,255,255,.7);--w6:rgba(255,255,255,.58);--w5:rgba(255,255,255,.46);--w4:rgba(255,255,255,.34);--w2:rgba(255,255,255,.16);--w1:rgba(255,255,255,.09);--w06:rgba(255,255,255,.06);
+  --line:rgba(255,255,255,.1);
+  --mf:'Manrope',system-ui,sans-serif;--mono:'Space Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+body{background:radial-gradient(1100px 640px at 85% -8%,rgba(47,116,214,.13),transparent 60%),var(--base);color:var(--w);font-family:var(--mf);-webkit-font-smoothing:antialiased;line-height:1.5;padding-bottom:80px}
+.bar{position:sticky;top:0;z-index:30;background:rgba(0,8,28,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:860px;margin:0 auto;padding:14px 20px 0}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.3px;font-size:16px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--crimson);box-shadow:0 0 10px var(--crimson)}
+.brand b{color:var(--rose-lt)}
+.tabs{display:flex;gap:6px;margin-top:12px;overflow-x:auto;padding-bottom:11px;-webkit-overflow-scrolling:touch}
+.tab{flex:none;background:var(--w06);border:1px solid var(--w1);color:var(--w7);font-family:var(--mono);font-weight:700;font-size:12px;padding:8px 12px;border-radius:8px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.tab:active{background:var(--w1)}
+main{max-width:860px;margin:0 auto;padding:10px 20px}
+.intro{font-size:15px;color:var(--w6);padding:18px 0 6px;line-height:1.6}
+.intro b{color:var(--w8)}
+
+.card{background:linear-gradient(180deg,var(--surf2),var(--surf));border:1px solid var(--w1);border-left:3px solid var(--crimson);border-radius:16px;padding:20px 20px 18px;margin-top:18px}
+.ch-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px}
+.num{font-family:var(--mono);font-weight:700;font-size:13px;color:#fff;background:var(--crimson);border-radius:7px;padding:4px 9px}
+.cat{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-lt);font-weight:700}
+.pts{font-family:var(--mono);font-size:11px;color:var(--w5);margin-left:auto}
+.card h3{font-size:21px;font-weight:800;letter-spacing:-.4px;margin-bottom:5px}
+.scn{font-size:14.5px;color:var(--w6);margin-bottom:15px;line-height:1.55}
+
+ol.steps{list-style:none;counter-reset:s;margin:0}
+ol.steps>li{counter-increment:s;position:relative;padding-left:38px;margin-bottom:14px;font-size:15.5px;line-height:1.55;color:var(--w8)}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:var(--w06);border:1px solid var(--w2);color:var(--rose-lt);font-family:var(--mono);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+ol.steps>li b{color:#fff}
+.verdict{display:inline-block;font-weight:700;font-family:var(--mono);font-size:13px;padding:2px 9px;border-radius:6px;white-space:nowrap}
+.v-phish{color:var(--rose-lt);background:rgba(47,116,214,.16);border:1px solid rgba(47,116,214,.34)}
+.v-legit{color:var(--green-lt);background:rgba(61,200,115,.13);border:1px solid rgba(61,200,115,.34)}
+.v-pick{color:var(--green-lt);background:rgba(61,200,115,.12);border:1px solid rgba(61,200,115,.32)}
+.mono{font-family:var(--mono);font-size:13.5px;color:var(--rose-lt)}
+.email-row{display:block;font-size:14.5px;color:var(--w7);margin:2px 0 2px;padding-left:2px}
+.email-row .ef{color:var(--w);font-weight:700}
+.email-row .ed{font-family:var(--mono);font-size:12.5px;color:var(--w6)}
+
+.flag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:700;font-size:15px;color:var(--rose-lt);background:var(--base);border:1px dashed var(--w2);border-radius:9px;padding:9px 13px;margin-top:14px;cursor:pointer;word-break:break-all}
+.flag .k{color:var(--w4);font-size:10px;letter-spacing:.1em}
+.flag.copied{border-color:var(--green);color:var(--green-lt)}
+.point{margin-top:13px;background:rgba(255,255,255,.04);border:1px solid var(--w1);border-radius:12px;padding:12px 15px;display:flex;gap:11px;align-items:flex-start}
+.point .ic{color:var(--amber);font-size:15px;flex:none;line-height:1.4}
+.point .t{font-size:14.5px;line-height:1.5;color:var(--w8)}
+.point .t b{color:#fff}
+.foot{max-width:860px;margin:30px auto 0;padding:0 20px;font-size:12.5px;color:var(--w4);line-height:1.6}
+</style>
+</head><body>
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span>Day&nbsp;2 Lab · <b>Step-by-Step Solutions</b></div>
+  <div class="tabs"><a class="tab" href="#c1">01 Memo</a><a class="tab" href="#c2">02 Answer</a><a class="tab" href="#c3">03 Fix</a><a class="tab" href="#c4">04 Check</a><a class="tab" href="#c5">05 Name</a><a class="tab" href="#c6">06 Build</a></div>
+</div></div>
+<main>
+<div class="intro">The 6 challenges in the Day 2 trainee lab, solved step by step. Each ends in a <b>KAMCO{ }</b> flag the trainee submits to capture it (tap a flag to copy).</div>
+<div class="card" id="c1"><div class="ch-top"><span class="num">01</span><span class="cat">Word</span><span class="pts">100 pts · Easy</span></div><h3>Memo or Deck?</h3><div class="scn">Five requests from KAMCO managers. Each reader needs a different format.</div><ol class="steps"><li>Memo: IC papers, Compliance record, Faisal's one page.</li><li>Deck: the family meeting, the town hall.</li><li>All correct → flag reveals.</li></ol><div class="flag" data-f="KAMCO{the_reader_picks_the_format}"><span class="k">FLAG</span>KAMCO{the_reader_picks_the_format}</div><div class="point"><span class="ic">◆</span><span class="t">The reader picks the format.</span></div><div class="scn" style="margin-top:12px"><b>⚡ Finished early:</b> In Word, ask Copilot to turn your Al-Murjan memo into a three-bullet “phone version” Faisal can read in 30 seconds.</div></div>
+<div class="card" id="c2"><div class="ch-top"><span class="num">02</span><span class="cat">Word</span><span class="pts">150 pts · Moderate</span></div><h3>Answer First</h3><div class="scn">You are drafting the Al-Murjan memo in Word with Copilot.</div><ol class="steps"><li>Bottom line: value, change, breaches, recommendation.</li><li>Evidence: performance and allocation.</li><li>Risk: the Al-Noor Bank issuer breach.</li><li>Action: trim equity / Al-Noor Bank; add fixed income.</li><li>All correct → flag reveals.</li></ol><div class="flag" data-f="KAMCO{bottom_line_up_front}"><span class="k">FLAG</span>KAMCO{bottom_line_up_front}</div><div class="point"><span class="ic">◆</span><span class="t">Bottom line up front.</span></div><div class="scn" style="margin-top:12px"><b>⚡ Finished early:</b> Ask Copilot in Word to rewrite your memo's bottom line in 25 words or fewer — without changing a single number. Check that it kept them all.</div></div>
+<div class="card" id="c3"><div class="ch-top"><span class="num">03</span><span class="cat">PowerPoint</span><span class="pts">150 pts · Moderate</span></div><h3>Fix the Deck</h3><div class="scn">Copilot built a 5-slide deck from your memo. Three things will lose the client.</div><ol class="steps"><li>Slide 2: a topic, not a message → write the message.</li><li>Slide 3: add the source under the chart.</li><li>Slide 4: cut nine bullets to three.</li><li>All correct → flag reveals.</li></ol><div class="flag" data-f="KAMCO{one_slide_one_message}"><span class="k">FLAG</span>KAMCO{one_slide_one_message}</div><div class="point"><span class="ic">◆</span><span class="t">One slide, one message — and show your source.</span></div><div class="scn" style="margin-top:12px"><b>⚡ Finished early:</b> Ask Copilot in PowerPoint to add an appendix slide with the full allocation table, and write speaker notes for slide 1 in Arabic.</div></div>
+<div class="card" id="c4"><div class="ch-top"><span class="num">04</span><span class="cat">Outlook</span><span class="pts">250 pts · Hard</span></div><h3>Check the Reply</h3><div class="scn">Copilot drafted your reply to Faisal. It took ten seconds. It has four problems.</div><ol class="steps"><li>Accuracy: “up 4.6%” — it is <b>2.46%</b>.</li><li>Confidentiality: names another client (Al-Rumaithiya).</li><li>Tone: promises Al-Noor Bank will rise.</li><li>Completeness: the memo was due with the deck (Tue 3:00 pm).</li><li>All correct → flag reveals.</li></ol><div class="flag" data-f="KAMCO{verify_before_you_send}"><span class="k">FLAG</span>KAMCO{verify_before_you_send}</div><div class="point"><span class="ic">◆</span><span class="t">Run the four checks before every send.</span></div><div class="scn" style="margin-top:12px"><b>⚡ Finished early:</b> Ask Copilot in Outlook to draft the client-facing version for Khalid — with the house-view disclaimer — then run the four checks on it yourself.</div></div>
+<div class="card" id="c5"><div class="ch-top"><span class="num">05</span><span class="cat">Outlook</span><span class="pts">150 pts · Moderate</span></div><h3>Name the Check</h3><div class="scn">Six problems found in KAMCO drafts last quarter.</div><ol class="steps"><li>Accuracy: 16.0% vs 61.0%.</li><li>Confidentiality: wrong recipients.</li><li>Tone: the guarantee; the one-line reply.</li><li>Completeness: no disclaimer; no attachment.</li><li>All correct → flag reveals.</li></ol><div class="flag" data-f="KAMCO{four_checks_every_time}"><span class="k">FLAG</span>KAMCO{four_checks_every_time}</div><div class="point"><span class="ic">◆</span><span class="t">Accuracy · Confidentiality · Tone · Completeness.</span></div><div class="scn" style="margin-top:12px"><b>⚡ Finished early:</b> Write your own reply with three planted errors (one per check) and swap with your neighbour. Who finds all three first?</div></div>
+<div class="card" id="c6"><div class="ch-top"><span class="num">06</span><span class="cat">Agents</span><span class="pts">200 pts · Moderate</span></div><h3>Build the Agent</h3><div class="scn">You will build a Request Triage Assistant in Copilot Agent Builder.</div><ol class="steps"><li>Describe one clear job.</li><li>Instruction: always use the newest message.</li><li>Knowledge: the house view rules.</li><li>Test → fix → re-test.</li><li>Share with a small pilot group.</li><li>All correct → flag reveals.</li></ol><div class="flag" data-f="KAMCO{instructions_make_the_agent}"><span class="k">FLAG</span>KAMCO{instructions_make_the_agent}</div><div class="point"><span class="ic">◆</span><span class="t">An agent is only as good as its instructions.</span></div><div class="scn" style="margin-top:12px"><b>⚡ Finished early:</b> If Agent Builder is on for you: add two starter prompts to your agent and one rule that makes it refuse to share another client's data. Test it with Khalid's request.</div></div>
+</main>
+<div class="foot">Day 2 trainee lab (coded-kamco-day-2-lab.html). The instructor demo lab runs the parallel Al-Waha scenario — see the instructor solutions page.</div>
+<script>
+[].slice.call(document.querySelectorAll('.flag')).forEach(function(el){
+  el.addEventListener('click',function(){
+    var t=el.dataset.f;
+    function ok(){el.classList.add('copied');var k=el.querySelector('.k');var o=k.textContent;k.textContent='COPIED';setTimeout(function(){el.classList.remove('copied');k.textContent=o;},1100);}
+    try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,ok);return;}}catch(e){}
+    try{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);ok();}catch(e){}
+  });
+});
+</script>
+</body>
+</html>

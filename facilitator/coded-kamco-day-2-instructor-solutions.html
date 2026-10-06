@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Day 2 Instructor Demo · Solutions — KAMCO Copilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#00081C;--surf:#0A1630;--surf2:#11244A;--raise:#16294A;
+  --crimson:#2F74D6;--rose:#6F9CE8;--rose-lt:#A8C2F0;--maroon:#0A3A80;--mid:#004AA3;
+  --green:#3DC873;--green-lt:#8FE6AE;--amber:#EAB94A;
+  --w:#fff;--w8:rgba(255,255,255,.82);--w7:rgba(255,255,255,.7);--w6:rgba(255,255,255,.58);--w5:rgba(255,255,255,.46);--w4:rgba(255,255,255,.34);--w2:rgba(255,255,255,.16);--w1:rgba(255,255,255,.09);--w06:rgba(255,255,255,.06);
+  --line:rgba(255,255,255,.1);
+  --mf:'Manrope',system-ui,sans-serif;--mono:'Space Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+body{background:radial-gradient(1100px 640px at 85% -8%,rgba(47,116,214,.13),transparent 60%),var(--base);color:var(--w);font-family:var(--mf);-webkit-font-smoothing:antialiased;line-height:1.5;padding-bottom:80px}
+.bar{position:sticky;top:0;z-index:30;background:rgba(0,8,28,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:860px;margin:0 auto;padding:14px 20px 0}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.3px;font-size:16px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--crimson);box-shadow:0 0 10px var(--crimson)}
+.brand b{color:var(--rose-lt)}
+.tag-demo{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--w5);border:1px solid var(--w1);border-radius:5px;padding:3px 7px;margin-left:4px}
+.tabs{display:flex;gap:6px;margin-top:12px;overflow-x:auto;padding-bottom:11px;-webkit-overflow-scrolling:touch}
+.tab{flex:none;background:var(--w06);border:1px solid var(--w1);color:var(--w7);font-family:var(--mono);font-weight:700;font-size:12px;padding:8px 12px;border-radius:8px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.tab:active{background:var(--w1)}
+main{max-width:860px;margin:0 auto;padding:10px 20px}
+.intro{font-size:15px;color:var(--w6);padding:18px 0 6px;line-height:1.6}
+.intro b{color:var(--w8)}
+
+.card{background:linear-gradient(180deg,var(--surf2),var(--surf));border:1px solid var(--w1);border-left:3px solid var(--crimson);border-radius:16px;padding:20px 20px 18px;margin-top:18px}
+.ch-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px}
+.num{font-family:var(--mono);font-weight:700;font-size:13px;color:#fff;background:var(--crimson);border-radius:7px;padding:4px 9px}
+.cat{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-lt);font-weight:700}
+.pts{font-family:var(--mono);font-size:11px;color:var(--w5);margin-left:auto}
+.card h3{font-size:21px;font-weight:800;letter-spacing:-.4px;margin-bottom:5px}
+.scn{font-size:14.5px;color:var(--w6);margin-bottom:14px;line-height:1.55}
+
+.say{background:rgba(47,116,214,.09);border:1px solid rgba(47,116,214,.28);border-radius:12px;padding:13px 15px;margin-bottom:16px;display:flex;gap:11px;align-items:flex-start}
+.say .ic{color:var(--rose-lt);font-size:15px;flex:none;line-height:1.4}
+.say .t{font-size:15px;line-height:1.5;color:var(--rose-lt);font-style:italic}
+.say .t .lbl{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--w5);margin-bottom:4px}
+
+ol.steps{list-style:none;counter-reset:s;margin:0}
+ol.steps>li{counter-increment:s;position:relative;padding-left:38px;margin-bottom:14px;font-size:15.5px;line-height:1.55;color:var(--w8)}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:var(--w06);border:1px solid var(--w2);color:var(--rose-lt);font-family:var(--mono);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+ol.steps>li b{color:#fff}
+code{font-family:var(--mono);font-size:13px;background:var(--base);border:1px solid var(--w1);border-radius:5px;padding:1px 6px;color:var(--rose-lt)}
+.verdict{display:inline-block;font-weight:700;font-family:var(--mono);font-size:13px;padding:2px 9px;border-radius:6px;white-space:nowrap}
+.v-phish{color:var(--rose-lt);background:rgba(47,116,214,.16);border:1px solid rgba(47,116,214,.34)}
+.v-legit{color:var(--green-lt);background:rgba(61,200,115,.13);border:1px solid rgba(61,200,115,.34)}
+.v-pick{color:var(--green-lt);background:rgba(61,200,115,.12);border:1px solid rgba(61,200,115,.32)}
+.mono{font-family:var(--mono);font-size:13.5px;color:var(--rose-lt)}
+.email-row{display:block;font-size:14.5px;color:var(--w7);margin:2px 0}
+.email-row .ef{color:var(--w);font-weight:700}
+.email-row .ed{font-family:var(--mono);font-size:12.5px;color:var(--w6)}
+
+.flag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:700;font-size:15px;color:var(--rose-lt);background:var(--base);border:1px dashed var(--w2);border-radius:9px;padding:9px 13px;margin-top:14px;cursor:pointer;word-break:break-all}
+.flag .k{color:var(--w4);font-size:10px;letter-spacing:.1em}
+.flag.copied{border-color:var(--green);color:var(--green-lt)}
+.point{margin-top:13px;background:rgba(234,185,74,.08);border:1px solid rgba(234,185,74,.28);border-radius:12px;padding:12px 15px;display:flex;gap:11px;align-items:flex-start}
+.point .ic{color:var(--amber);font-size:15px;flex:none;line-height:1.4}
+.point .t{font-size:14.5px;line-height:1.5;color:var(--w8)}
+.point .t .lbl{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:4px;font-weight:700}
+.point .t b{color:#fff}
+.foot{max-width:860px;margin:30px auto 0;padding:0 20px;font-size:12.5px;color:var(--w4);line-height:1.6}
+</style>
+</head><body>
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span>Day&nbsp;2 Instructor Demo · <b>Solutions</b><span class="tag-demo">facilitation guide</span></div>
+  <div class="tabs"><a class="tab" href="#c1">01 Memo</a><a class="tab" href="#c2">02 Answer</a><a class="tab" href="#c3">03 Fix</a><a class="tab" href="#c4">04 Check</a><a class="tab" href="#c5">05 Name</a><a class="tab" href="#c6">06 Build</a></div>
+</div></div>
+<main>
+<div class="intro">The 6 demos you run <b>on screen</b> with the Al-Waha scenario — each with the opening line, the steps and the point to land. These mirror the walkthrough inside the instructor lab.</div>
+<div class="card" id="c1"><div class="ch-top"><span class="num">01</span><span class="cat">Word</span><span class="pts">100 pts</span></div><h3>Memo or Deck?</h3><div class="scn">Five different requests.</div><div class="say"><span class="ic">▶</span><span class="t"><span class="lbl">Open by saying</span>“Before Copilot writes a word, decide the format.”</span></div><ol class="steps"><li>Ask: who reads it, how, what decision?</li><li>Sort all five.</li><li>Submit → flag.</li></ol><div class="flag" data-f="KAMCO{who_reads_it_and_how}"><span class="k">FLAG</span>KAMCO{who_reads_it_and_how}</div><div class="point"><span class="ic">◆</span><span class="t"><span class="lbl">Land this</span>The reader picks the format.</span></div></div>
+<div class="card" id="c2"><div class="ch-top"><span class="num">02</span><span class="cat">Word</span><span class="pts">150 pts</span></div><h3>Answer First</h3><div class="scn">Draft the Al-Waha memo live.</div><div class="say"><span class="ic">▶</span><span class="t"><span class="lbl">Open by saying</span>“I will write the bottom line before anything else.”</span></div><ol class="steps"><li>Paste the Al-Waha summary table into the Word prompt.</li><li>Reference /house-view-q4-2026.docx.</li><li>Choose the answers aloud.</li></ol><div class="flag" data-f="KAMCO{answer_then_evidence}"><span class="k">FLAG</span>KAMCO{answer_then_evidence}</div><div class="point"><span class="ic">◆</span><span class="t"><span class="lbl">Land this</span>Answer first.</span></div></div>
+<div class="card" id="c3"><div class="ch-top"><span class="num">03</span><span class="cat">PowerPoint</span><span class="pts">150 pts</span></div><h3>Fix the Deck</h3><div class="scn">A Copilot deck for Al-Waha with three problems.</div><div class="say"><span class="ic">▶</span><span class="t"><span class="lbl">Open by saying</span>“Read only the titles. Do they tell the story?”</span></div><ol class="steps"><li>Click slide 2's title — a topic.</li><li>Click slide 3's chart — no source.</li><li>Click slide 4 — eleven bullets.</li><li>Submit → flag.</li></ol><div class="flag" data-f="KAMCO{titles_tell_the_story}"><span class="k">FLAG</span>KAMCO{titles_tell_the_story}</div><div class="point"><span class="ic">◆</span><span class="t"><span class="lbl">Land this</span>Titles tell the story.</span></div></div>
+<div class="card" id="c4"><div class="ch-top"><span class="num">04</span><span class="cat">Outlook</span><span class="pts">250 pts</span></div><h3>Check the Reply</h3><div class="scn">The Al-Waha reply to Reem.</div><div class="say"><span class="ic">▶</span><span class="t"><span class="lbl">Open by saying</span>“Copilot wrote this in ten seconds. Let us spend one minute checking it.”</span></div><ol class="steps"><li>Accuracy: 5.4% → it is 4.5%, below 5%.</li><li>Confidentiality: Al-Murjan named.</li><li>Tone: promise of returns.</li><li>Completeness: issuer table missing.</li></ol><div class="flag" data-f="KAMCO{you_sign_it_not_copilot}"><span class="k">FLAG</span>KAMCO{you_sign_it_not_copilot}</div><div class="point"><span class="ic">◆</span><span class="t"><span class="lbl">Land this</span>You sign it, not Copilot.</span></div></div>
+<div class="card" id="c5"><div class="ch-top"><span class="num">05</span><span class="cat">Outlook</span><span class="pts">150 pts</span></div><h3>Name the Check</h3><div class="scn">Five more problems.</div><div class="say"><span class="ic">▶</span><span class="t"><span class="lbl">Open by saying</span>“Name the check that would have caught it.”</span></div><ol class="steps"><li>Match each item.</li><li>Submit → flag.</li></ol><div class="flag" data-f="KAMCO{one_minute_before_send}"><span class="k">FLAG</span>KAMCO{one_minute_before_send}</div><div class="point"><span class="ic">◆</span><span class="t"><span class="lbl">Land this</span>One minute before send.</span></div></div>
+<div class="card" id="c6"><div class="ch-top"><span class="num">06</span><span class="cat">Agents</span><span class="pts">200 pts</span></div><h3>Build the Agent</h3><div class="scn">Build a Mandate Check Assistant live.</div><div class="say"><span class="ic">▶</span><span class="t"><span class="lbl">Open by saying</span>“I will build it in Agent Builder now — watch the Instructions box.”</span></div><ol class="steps"><li>Copilot app → Agents → Create agent.</li><li>Describe; paste instructions; add the house view as knowledge.</li><li>Test with the Al-Waha allocation table; fix; re-test.</li></ol><div class="flag" data-f="KAMCO{test_before_you_trust}"><span class="k">FLAG</span>KAMCO{test_before_you_trust}</div><div class="point"><span class="ic">◆</span><span class="t"><span class="lbl">Land this</span>Test before you trust.</span></div></div>
+</main>
+<div class="foot">Run these before handing out the trainee lab. Trainee solutions: coded-kamco-day-2-walkthrough.html.</div>
+<script>
+[].slice.call(document.querySelectorAll('.flag')).forEach(function(el){
+  el.addEventListener('click',function(){
+    var t=el.dataset.f;
+    function ok(){el.classList.add('copied');var k=el.querySelector('.k');var o=k.textContent;k.textContent='COPIED';setTimeout(function(){el.classList.remove('copied');k.textContent=o;},1100);}
+    try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,ok);return;}}catch(e){}
+    try{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);ok();}catch(e){}
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Day 1 · Demos &amp; Lab Solutions — KAMCO Copilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#00081C;--surf:#0A1630;--surf2:#11244A;--raise:#16294A;
+  --crimson:#2F74D6;--rose:#6F9CE8;--rose-lt:#A8C2F0;--maroon:#0A3A80;--mid:#004AA3;
+  --green:#3DC873;--green-lt:#8FE6AE;--amber:#EAB94A;--amber-lt:#FFE0A3;
+  --w:#fff;--w8:rgba(255,255,255,.82);--w7:rgba(255,255,255,.7);--w6:rgba(255,255,255,.58);--w5:rgba(255,255,255,.46);--w4:rgba(255,255,255,.34);--w2:rgba(255,255,255,.16);--w1:rgba(255,255,255,.09);--w06:rgba(255,255,255,.06);
+  --line:rgba(255,255,255,.1);
+  --mf:'Manrope',system-ui,sans-serif;--mono:'Space Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;scroll-padding-top:118px}
+body{background:radial-gradient(1100px 640px at 85% -8%,rgba(47,116,214,.13),transparent 60%),var(--base);color:var(--w);font-family:var(--mf);-webkit-font-smoothing:antialiased;line-height:1.5;padding-bottom:80px}
+.bar{position:sticky;top:0;z-index:30;background:rgba(0,8,28,.86);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:840px;margin:0 auto;padding:14px 20px 0}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.3px;font-size:16px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--crimson);box-shadow:0 0 10px var(--crimson)}
+.brand b{color:var(--rose-lt)}
+.tabs{display:flex;gap:6px;margin-top:12px;overflow-x:auto;padding-bottom:11px;-webkit-overflow-scrolling:touch}
+.tab{flex:none;background:var(--w06);border:1px solid var(--w1);color:var(--w7);font-family:var(--mf);font-weight:700;font-size:13px;padding:9px 14px;border-radius:9px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.tab:active{background:var(--w1)}
+main{max-width:840px;margin:0 auto;padding:8px 20px}
+section{padding-top:30px}
+.sec-h{display:flex;align-items:baseline;gap:11px;margin-bottom:4px}
+.sec-h h2{font-size:24px;font-weight:800;letter-spacing:-.5px}
+.sec-h .c{font-family:var(--mono);font-size:12px;color:var(--w5)}
+.sec-sub{font-size:14px;color:var(--w6);margin-bottom:16px}
+
+.card{background:linear-gradient(180deg,var(--surf2),var(--surf));border:1px solid var(--w1);border-radius:16px;padding:18px 19px;margin-bottom:14px}
+.card.lab{border-left:3px solid var(--crimson)}
+.tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-lt);font-weight:700;margin-bottom:7px}
+.card h3{font-size:19px;font-weight:800;letter-spacing:-.3px;margin-bottom:3px}
+.card .meta{font-size:13px;color:var(--w5);font-family:var(--mono);margin-bottom:11px}
+.setup{font-size:15.5px;color:var(--w8);margin-bottom:6px}
+.setup b{color:var(--w)}
+.run{font-size:14px;color:var(--w6);margin-bottom:11px}
+.run .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--w4);margin-right:6px}
+.sol{background:rgba(61,200,115,.1);border:1px solid rgba(61,200,115,.4);border-radius:12px;padding:13px 15px;display:flex;gap:11px;align-items:flex-start}
+.sol .ar{color:var(--green);font-weight:800;font-size:17px;line-height:1.35;flex:none}
+.sol .txt{font-size:15.5px;line-height:1.5;font-weight:600;color:var(--green-lt)}
+.sol .txt b{color:#fff;font-weight:800}
+.sol ol{margin:2px 0 0 2px;padding-left:18px}
+.sol ol li{font-size:15px;line-height:1.5;color:var(--green-lt);margin-bottom:5px}
+.sol ol li b{color:#fff}
+
+.flag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:700;font-size:15px;color:var(--rose-lt);background:var(--base);border:1px dashed var(--w2);border-radius:9px;padding:8px 13px;margin-bottom:11px;cursor:pointer;word-break:break-all}
+.flag .k{color:var(--w4);font-size:10px;letter-spacing:.1em}
+.flag.copied{border-color:var(--green);color:var(--green-lt)}
+.solve{font-size:15px;color:var(--w8);line-height:1.55}
+.solve b{color:#fff}.solve .hl{color:var(--rose-lt);font-family:var(--mono);font-size:13.5px}
+
+.checks{background:linear-gradient(180deg,var(--surf2),var(--surf));border:1px solid var(--w1);border-radius:16px;overflow:hidden}
+.chk{display:flex;gap:14px;padding:14px 17px;border-bottom:1px solid var(--w1)}
+.chk:last-child{border-bottom:none}
+.chk .q{flex:1;font-size:15px;color:var(--w7)}
+.chk .a{flex:none;max-width:48%;font-size:15px;font-weight:700;color:var(--green-lt);text-align:right}
+.grp-lbl{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-lt);font-weight:700;margin:18px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--w1)}
+.instr-flags{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.instr-flags .f{font-family:var(--mono);font-size:13px;color:var(--rose-lt);background:var(--base);border:1px solid var(--w1);border-radius:8px;padding:7px 11px}
+.foot{max-width:840px;margin:32px auto 0;padding:0 20px;font-size:12.5px;color:var(--w4);line-height:1.6}
+</style>
+</head><body>
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span>Day&nbsp;1 · <b>Demos & Lab Solutions</b></div>
+  <div class="tabs"><a class="tab" href="#demos">▶ Demos</a><a class="tab" href="#checks">✓ Mini-checks</a><a class="tab" href="#lab">⚑ Trainee lab</a><a class="tab" href="#instr">🎬 Instructor lab</a></div>
+</div></div>
+<main>
+<section id="demos"><div class="sec-h"><h2>Demos you run live</h2><span class="c">7 in-deck</span></div><div class="sec-sub">The interactive and live-in-Copilot slides — what to run and the point to land.</div>
+<div class="card"><span class="tag">T1</span><h3>Same question. Two different worlds.</h3><div class="sol"><span class="ar">→</span><div class="txt"><ol><li>Toggle Work → Web. Same question, different source.</li><li>Work = KAMCO files you can access. Web = public internet.</li><li>For client work: Work mode, and check the source.</li></ol></div></div></div>
+<div class="card"><span class="tag">T3</span><h3>Five things matter. Two are traps.</h3><div class="sol"><span class="ar">→</span><div class="txt"><ol><li>Find the 5: memo only · Mon 12 Oct 1:00 pm · real estate first · 10% issuer limit · 30 Sep export.</li><li>Traps: '4-slide deck' and 'Thursday 15 Oct' are old.</li><li>Then click Summarise in Outlook live and compare.</li></ol></div></div></div>
+<div class="card"><span class="tag">T3</span><h3>Thread → checklist → holding reply.</h3><div class="sol"><span class="ar">→</span><div class="txt"><ol><li>Run prompt 1 on the Al-Waha thread.</li><li>Run prompt 2 with Draft with Copilot.</li><li>Show Coaching by Copilot on the draft.</li></ol></div></div></div>
+<div class="card"><span class="tag">T4</span><h3>Nine rows from the export. Four will hurt you.</h3><div class="sol"><span class="ar">→</span><div class="txt"><ol><li>Problems: text quantity (UST30), missing price (CVC), duplicate Bayan Telecom, duplicate Harbor.</li><li>Clean rows go grey when clicked.</li></ol></div></div></div>
+<div class="card"><span class="tag">T4</span><h3>Five prompts. Check after each one.</h3><div class="sol"><span class="ar">→</span><div class="txt"><ol><li>Run live on the Al-Waha file.</li><li>Before/after: 25 rows → 22 rows. Total KWD 4,237,020.</li><li>Ask Copilot to show each formula. Test one row by hand.</li></ol></div></div></div>
+<div class="card"><span class="tag">T5</span><h3>Inside the range — or not?</h3><div class="sol"><span class="ar">→</span><div class="txt"><ol><li>Click 'Check against the mandate'.</li><li>Real estate 4.5% < 5% minimum → breach.</li><li>Equity 54.4% inside but close to 55%.</li></ol></div></div></div>
+<div class="card"><span class="tag">T5</span><h3>Allocation, issuers, movers.</h3><div class="sol"><span class="ar">→</span><div class="txt"><ol><li>Run all three live.</li><li>Issuer: Gulf Trade Bank 11.75% — breach.</li><li>Top Atlas Tech (+20,401); bottom Gulf Trade Bank (-14,000).</li></ol></div></div></div>
+</section>
+<section id="checks"><div class="sec-h"><h2>Mini-check answers</h2><span class="c">"your call"</span></div><div class="sec-sub">The correct answer for every "your call" slide.</div><div class="checks"><div class="chk"><div class="q"><b>Slide 13</b> · Which one of these is not an LLM?</div><div class="a">The bank&#x27;s card-fraud detection model</div></div><div class="chk"><div class="q"><b>Slide 24</b> · Which of these is fine to use in Copilot with your KAMCO work account?</div><div class="a">The 30 Sep custody export for a client you manage</div></div><div class="chk"><div class="q"><b>Slide 43</b> · Copilot&#x27;s summary used the old June factsheet. What is your best next step?</div><div class="a">Reply: “Use only /awfo-q3-custody-export.xlsx (30 Sep). Redo the summary.”</div></div><div class="chk"><div class="q"><b>Slide 52</b> · Copilot&#x27;s summary says the deadline is “Thursday 15 Oct”. What happened?</div><div class="a">It picked up the old instruction. The newest message says Monday 12 Oct, 1:00 pm</div></div><div class="chk"><div class="q"><b>Slide 53</b> · A client asks you to send another family&#x27;s report “so we can see your format”. What do you do?</div><div class="a">Do not send it. Offer a blank sample of the format instead</div></div><div class="chk"><div class="q"><b>Slide 62</b> · Copilot says it “removed duplicates”. The rows drop from 25 to 21. You expected 22. What next?</div><div class="a">Ask which rows it removed, and compare the Holding IDs</div></div><div class="chk"><div class="q"><b>Slide 73</b> · Copilot says the Al-Waha Q3 return is 3.1%. Your table shows 1.29%. Which do you use?</div><div class="a">Ask Copilot for its formula, and test one row by hand</div></div></div></section>
+<section id="lab"><div class="sec-h"><h2>Trainee lab — solutions</h2><span class="c">7 challenges</span></div><div class="sec-sub">Flag format <span style="font-family:var(--mono);color:var(--rose-lt)">KAMCO{ }</span> — tap a flag to copy.</div>
+<div class="card lab"><span class="tag">01 · Safe use</span><h3>Safe or Not?</h3><div class="flag" data-f="KAMCO{share_only_what_the_task_needs}"><span class="k">FLAG</span>KAMCO{share_only_what_the_task_needs}</div><div class="solve"><span class="verdict v-pick">Fine</span> the custody export and the house view — your client, your task, work account. <span class="verdict v-pick">After removing personal data</span> the complaint email — the summary does not need the civil ID or phone number. <span class="verdict v-phish">Never</span> your password, and client data in a public chatbot.</div></div>
+<div class="card lab"><span class="tag">02 · Prompting</span><h3>Build the Brief</h3><div class="flag" data-f="KAMCO{context_task_format_tone}"><span class="k">FLAG</span>KAMCO{context_task_format_tone}</div><div class="solve">Context: who you are + the CFO meeting. Task: calculate value and Q3 change; flag mandate breaches (two task pieces). Format: a two-column table in KWD. Tone: plain English for a family CFO.</div></div>
+<div class="card lab"><span class="tag">03 · Outlook</span><h3>Summarise the Thread</h3><div class="flag" data-f="KAMCO{check_the_summary_against_the_thread}"><span class="k">FLAG</span>KAMCO{check_the_summary_against_the_thread}</div><div class="solve">Run <b>Summarise</b> on the thread in Outlook and read the newest message yourself. <span class="verdict v-phish">Wrong</span> “due Wednesday 14 Oct” — Faisal moved it to <b>Tuesday 13 Oct, 3:00 pm</b>. <span class="verdict v-phish">Wrong</span> “use the June factsheet” — Faisal said the opposite: use the <b>30 Sep custody export</b>. <span class="verdict v-phish">Wrong</span> “send the Al-Rumaithiya report” — another client's data never leaves. Decline politely. <span class="verdict v-legit">Correct</span> the deliverables, the new meeting time, Khalid's two questions, and copying Noura.</div></div>
+<div class="card lab"><span class="tag">04 · Outlook</span><h3>Read the Request</h3><div class="flag" data-f="KAMCO{the_newest_message_wins}"><span class="k">FLAG</span>KAMCO{the_newest_message_wins}</div><div class="solve">Run <b>Summarise</b> on the thread, then the checklist prompt. Deadline: <b>Tue 13 Oct, 3:00 pm</b> (newest message). Meeting: <b>Wed 14 Oct, 11:00</b>. Deliverables: <b>5-slide client deck + one-page memo</b>. Copy: <b>Noura in Compliance</b>. Decline: <b>the Al-Rumaithiya family report</b> — confidential to another client.</div></div>
+<div class="card lab"><span class="tag">05 · Excel</span><h3>Clean the Export</h3><div class="flag" data-f="KAMCO{clean_before_you_count}"><span class="k">FLAG</span>KAMCO{clean_before_you_count}</div><div class="solve">Raw export: <b>26</b> rows. Duplicates by Holding ID: <b>4</b> (Atlas Tech, Gulf Trade Bank, US Treasury 2030, Failaka Foods). After removal: <b>22</b> holdings. Missing prices: <b>NWH</b> and <b>GHR</b> — filled from Price_List.</div></div>
+<div class="card lab"><span class="tag">06 · Excel</span><h3>Value and Mandate</h3><div class="flag" data-f="KAMCO{check_the_mandate}"><span class="k">FLAG</span>KAMCO{check_the_mandate}</div><div class="solve">Total value at 30 Sep: <b>KWD 4,696,424</b> (with duplicates it would be KWD 5,785,022 — wrong). Q3 change: <b>KWD 112,674</b> = <b>2.46%</b>. Allocation: Equity <b>61.0%</b>, Fixed Income <b>22.8%</b>, Real Estate <b>8.3%</b>, Cash <b>7.9%</b>. Breach: <b>Equity</b> (max 55%).</div></div>
+<div class="card lab"><span class="tag">07 · Excel</span><h3>Issuers and Movers</h3><div class="flag" data-f="KAMCO{the_whole_issuer_counts}"><span class="k">FLAG</span>KAMCO{the_whole_issuer_counts}</div><div class="solve">Al-Noor Bank shares + sukuk = <b>12.21%</b> → above the 10% limit. Top 3: Al-Noor Bank (+38,640), Atlas Tech Corp (+32,955), Harbor Semiconductors (+31,447). Bottom 3: Sadaf Logistics (-24,300), Gulf Horizon REIT (-10,360), Northwind Health (-7,552).</div></div>
+</section>
+<section id="instr"><div class="sec-h"><h2>Instructor demo lab</h2><span class="c">flags</span></div><div class="sec-sub">The parallel Al-Waha challenges you run on screen.</div><div class="instr-flags"><span class="f">KAMCO{work_account_only}</span><span class="f">KAMCO{brief_it_like_a_colleague}</span><span class="f">KAMCO{a_summary_is_a_starting_point}</span><span class="f">KAMCO{read_the_latest_first}</span><span class="f">KAMCO{count_rows_before_and_after}</span><span class="f">KAMCO{inside_the_range_or_not}</span><span class="f">KAMCO{one_name_two_asset_classes}</span></div></section>
+</main>
+<div class="foot">Slide-by-slide talking points: coded-kamco-day-1-notes.html. Step-by-step lab solutions: coded-kamco-day-1-walkthrough.html.</div>
+<script>
+[].slice.call(document.querySelectorAll('.flag')).forEach(function(el){
+  el.addEventListener('click',function(){
+    var t=el.dataset.f;
+    function ok(){el.classList.add('copied');var k=el.querySelector('.k');var o=k.textContent;k.textContent='COPIED';setTimeout(function(){el.classList.remove('copied');k.textContent=o;},1100);}
+    try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,ok);return;}}catch(e){}
+    try{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);ok();}catch(e){}
+  });
+});
+</script>
+</body>
+</html>

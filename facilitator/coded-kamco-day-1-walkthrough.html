@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Day 1 Lab · Step-by-Step Solutions — KAMCO Copilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#00081C;--surf:#0A1630;--surf2:#11244A;--raise:#16294A;
+  --crimson:#2F74D6;--rose:#6F9CE8;--rose-lt:#A8C2F0;--maroon:#0A3A80;--mid:#004AA3;
+  --green:#3DC873;--green-lt:#8FE6AE;--amber:#EAB94A;
+  --w:#fff;--w8:rgba(255,255,255,.82);--w7:rgba(255,255,255,.7);--w6:rgba(255,255,255,.58);--w5:rgba(255,255,255,.46);--w4:rgba(255,255,255,.34);--w2:rgba(255,255,255,.16);--w1:rgba(255,255,255,.09);--w06:rgba(255,255,255,.06);
+  --line:rgba(255,255,255,.1);
+  --mf:'Manrope',system-ui,sans-serif;--mono:'Space Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+body{background:radial-gradient(1100px 640px at 85% -8%,rgba(47,116,214,.13),transparent 60%),var(--base);color:var(--w);font-family:var(--mf);-webkit-font-smoothing:antialiased;line-height:1.5;padding-bottom:80px}
+.bar{position:sticky;top:0;z-index:30;background:rgba(0,8,28,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:860px;margin:0 auto;padding:14px 20px 0}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.3px;font-size:16px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--crimson);box-shadow:0 0 10px var(--crimson)}
+.brand b{color:var(--rose-lt)}
+.tabs{display:flex;gap:6px;margin-top:12px;overflow-x:auto;padding-bottom:11px;-webkit-overflow-scrolling:touch}
+.tab{flex:none;background:var(--w06);border:1px solid var(--w1);color:var(--w7);font-family:var(--mono);font-weight:700;font-size:12px;padding:8px 12px;border-radius:8px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.tab:active{background:var(--w1)}
+main{max-width:860px;margin:0 auto;padding:10px 20px}
+.intro{font-size:15px;color:var(--w6);padding:18px 0 6px;line-height:1.6}
+.intro b{color:var(--w8)}
+
+.card{background:linear-gradient(180deg,var(--surf2),var(--surf));border:1px solid var(--w1);border-left:3px solid var(--crimson);border-radius:16px;padding:20px 20px 18px;margin-top:18px}
+.ch-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px}
+.num{font-family:var(--mono);font-weight:700;font-size:13px;color:#fff;background:var(--crimson);border-radius:7px;padding:4px 9px}
+.cat{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-lt);font-weight:700}
+.pts{font-family:var(--mono);font-size:11px;color:var(--w5);margin-left:auto}
+.card h3{font-size:21px;font-weight:800;letter-spacing:-.4px;margin-bottom:5px}
+.scn{font-size:14.5px;color:var(--w6);margin-bottom:15px;line-height:1.55}
+
+ol.steps{list-style:none;counter-reset:s;margin:0}
+ol.steps>li{counter-increment:s;position:relative;padding-left:38px;margin-bottom:14px;font-size:15.5px;line-height:1.55;color:var(--w8)}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:var(--w06);border:1px solid var(--w2);color:var(--rose-lt);font-family:var(--mono);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+ol.steps>li b{color:#fff}
+.verdict{display:inline-block;font-weight:700;font-family:var(--mono);font-size:13px;padding:2px 9px;border-radius:6px;white-space:nowrap}
+.v-phish{color:var(--rose-lt);background:rgba(47,116,214,.16);border:1px solid rgba(47,116,214,.34)}
+.v-legit{color:var(--green-lt);background:rgba(61,200,115,.13);border:1px solid rgba(61,200,115,.34)}
+.v-pick{color:var(--green-lt);background:rgba(61,200,115,.12);border:1px solid rgba(61,200,115,.32)}
+.mono{font-family:var(--mono);font-size:13.5px;color:var(--rose-lt)}
+.email-row{display:block;font-size:14.5px;color:var(--w7);margin:2px 0 2px;padding-left:2px}
+.email-row .ef{color:var(--w);font-weight:700}
+.email-row .ed{font-family:var(--mono);font-size:12.5px;color:var(--w6)}
+
+.flag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:700;font-size:15px;color:var(--rose-lt);background:var(--base);border:1px dashed var(--w2);border-radius:9px;padding:9px 13px;margin-top:14px;cursor:pointer;word-break:break-all}
+.flag .k{color:var(--w4);font-size:10px;letter-spacing:.1em}
+.flag.copied{border-color:var(--green);color:var(--green-lt)}
+.point{margin-top:13px;background:rgba(255,255,255,.04);border:1px solid var(--w1);border-radius:12px;padding:12px 15px;display:flex;gap:11px;align-items:flex-start}
+.point .ic{color:var(--amber);font-size:15px;flex:none;line-height:1.4}
+.point .t{font-size:14.5px;line-height:1.5;color:var(--w8)}
+.point .t b{color:#fff}
+.foot{max-width:860px;margin:30px auto 0;padding:0 20px;font-size:12.5px;color:var(--w4);line-height:1.6}
+</style>
+</head><body>
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span>Day&nbsp;1 Lab · <b>Step-by-Step Solutions</b></div>
+  <div class="tabs"><a class="tab" href="#c1">01 Safe</a><a class="tab" href="#c2">02 Build</a><a class="tab" href="#c3">03 Summarise</a><a class="tab" href="#c4">04 Read</a><a class="tab" href="#c5">05 Clean</a><a class="tab" href="#c6">06 Value</a><a class="tab" href="#c7">07 Issuers</a></div>
+</div></div>
+<main>
+<div class="intro">The 7 challenges in the Day 1 trainee lab, solved step by step. Each ends in a <b>KAMCO{ }</b> flag the trainee submits to capture it (tap a flag to copy).</div>
+<div class="card" id="c1"><div class="ch-top"><span class="num">01</span><span class="cat">Safe use</span><span class="pts">100 pts · Easy</span></div><h3>Safe or Not?</h3><div class="scn">Before you open any client file, decide what may go into Copilot — and where.</div><ol class="steps"><li><span class="verdict v-pick">Fine</span> the custody export and the house view — your client, your task, work account.</li><li><span class="verdict v-pick">After removing personal data</span> the complaint email — the summary does not need the civil ID or phone number.</li><li><span class="verdict v-phish">Never</span> your password, and client data in a public chatbot.</li><li>All correct → flag reveals.</li></ol><div class="flag" data-f="KAMCO{share_only_what_the_task_needs}"><span class="k">FLAG</span>KAMCO{share_only_what_the_task_needs}</div><div class="point"><span class="ic">◆</span><span class="t">Even inside a safe tool, share only what the task needs.</span></div><div class="scn" style="margin-top:12px"><b>⚡ Finished early:</b> In Copilot Chat (work account), ask: “What should staff at an investment firm never paste into an AI tool? Give five examples.” Compare with your answers. Did it miss anything — or add something you disagree with?</div></div>
+<div class="card" id="c2"><div class="ch-top"><span class="num">02</span><span class="cat">Prompting</span><span class="pts">100 pts · Easy</span></div><h3>Build the Brief</h3><div class="scn">Faisal's colleague wrote a strong prompt for the Al-Murjan pack. Pull it apart to see why it works.</div><ol class="steps"><li>Context: who you are + the CFO meeting.</li><li>Task: calculate value and Q3 change; flag mandate breaches (two task pieces).</li><li>Format: a two-column table in KWD.</li><li>Tone: plain English for a family CFO.</li><li>All correct → flag reveals.</li></ol><div class="flag" data-f="KAMCO{context_task_format_tone}"><span class="k">FLAG</span>KAMCO{context_task_format_tone}</div><div class="point"><span class="ic">◆</span><span class="t">A prompt can have more than one task line — but every strong prompt has all four parts.</span></div><div class="scn" style="margin-top:12px"><b>⚡ Finished early:</b> Rewrite the same prompt for a different reader: the Al-Murjan summary for the family's 25-year-old son who is new to investing. Change only the <b>Context</b> and <b>Tone</b>, run both in Copilot Chat and compare.</div></div>
+<div class="card" id="c3"><div class="ch-top"><span class="num">03</span><span class="cat">Outlook</span><span class="pts">150 pts · Moderate</span></div><h3>Summarise the Thread</h3><div class="scn">Faisal's thread has three messages, and the instructions changed twice. Copilot's summary looks tidy — but summaries can mix old and new instructions.</div><ol class="steps"><li>Run <b>Summarise</b> on the thread in Outlook and read the newest message yourself.</li><li><span class="verdict v-phish">Wrong</span> “due Wednesday 14 Oct” — Faisal moved it to <b>Tuesday 13 Oct, 3:00 pm</b>.</li><li><span class="verdict v-phish">Wrong</span> “use the June factsheet” — Faisal said the opposite: use the <b>30 Sep custody export</b>.</li><li><span class="verdict v-phish">Wrong</span> “send the Al-Rumaithiya report” — another client's data never leaves. Decline politely.</li><li><span class="verdict v-legit">Correct</span> the deliverables, the new meeting time, Khalid's two questions, and copying Noura.</li><li>All correct → flag reveals.</li></ol><div class="flag" data-f="KAMCO{check_the_summary_against_the_thread}"><span class="k">FLAG</span>KAMCO{check_the_summary_against_the_thread}</div><div class="point"><span class="ic">◆</span><span class="t">A summary is a starting point. Check it against the newest message before you act.</span></div><div class="scn" style="margin-top:12px"><b>⚡ Finished early:</b> In Outlook, ask Copilot: “Draft a polite reply to Khalid. Decline to share another family's report and offer a blank sample of our format instead.” Then run <b>Coaching by Copilot</b> on the draft.</div></div>
+<div class="card" id="c4"><div class="ch-top"><span class="num">04</span><span class="cat">Outlook</span><span class="pts">200 pts · Moderate</span></div><h3>Read the Request</h3><div class="scn">Faisal's thread has three messages. The instructions changed twice.</div><ol class="steps"><li>Run <b>Summarise</b> on the thread, then the checklist prompt.</li><li>Deadline: <b>Tue 13 Oct, 3:00 pm</b> (newest message). Meeting: <b>Wed 14 Oct, 11:00</b>.</li><li>Deliverables: <b>5-slide client deck + one-page memo</b>. Copy: <b>Noura in Compliance</b>.</li><li>Decline: <b>the Al-Rumaithiya family report</b> — confidential to another client.</li><li>All correct → flag reveals.</li></ol><div class="flag" data-f="KAMCO{the_newest_message_wins}"><span class="k">FLAG</span>KAMCO{the_newest_message_wins}</div><div class="point"><span class="ic">◆</span><span class="t">The newest message wins — and some requests must be declined, politely.</span></div><div class="scn" style="margin-top:12px"><b>⚡ Finished early:</b> Ask Copilot to turn the thread into a timed to-do list for Sunday and Monday, working back from the Tuesday 3:00 pm deadline. Is the plan realistic?</div></div>
+<div class="card" id="c5"><div class="ch-top"><span class="num">05</span><span class="cat">Excel</span><span class="pts">200 pts · Moderate</span></div><h3>Clean the Export</h3><div class="scn">The Al-Murjan custody export has duplicates, numbers stored as text, missing prices and messy labels.</div><ol class="steps"><li>Raw export: <b>26</b> rows.</li><li>Duplicates by Holding ID: <b>4</b> (Atlas Tech, Gulf Trade Bank, US Treasury 2030, Failaka Foods).</li><li>After removal: <b>22</b> holdings.</li><li>Missing prices: <b>NWH</b> and <b>GHR</b> — filled from Price_List.</li><li>All correct → flag reveals.</li></ol><div class="flag" data-f="KAMCO{clean_before_you_count}"><span class="k">FLAG</span>KAMCO{clean_before_you_count}</div><div class="point"><span class="ic">◆</span><span class="t">Check the row count before and after every cleaning step.</span></div><div class="scn" style="margin-top:12px"><b>⚡ Finished early:</b> Ask Copilot in Excel: “Which columns still have inconsistent values?” Then fix the <b>Price Date</b> column so every value is a real date.</div></div>
+<div class="card" id="c6"><div class="ch-top"><span class="num">06</span><span class="cat">Excel</span><span class="pts">250 pts · Hard</span></div><h3>Value and Mandate</h3><div class="scn">Faisal's first two questions: what is the portfolio worth, and are we inside the mandate?</div><ol class="steps"><li>Total value at 30 Sep: <b>KWD 4,696,424</b> (with duplicates it would be KWD 5,785,022 — wrong).</li><li>Q3 change: <b>KWD 112,674</b> = <b>2.46%</b>.</li><li>Allocation: Equity <b>61.0%</b>, Fixed Income <b>22.8%</b>, Real Estate <b>8.3%</b>, Cash <b>7.9%</b>.</li><li>Breach: <b>Equity</b> (max 55%).</li><li>All correct → flag reveals.</li></ol><div class="flag" data-f="KAMCO{check_the_mandate}"><span class="k">FLAG</span>KAMCO{check_the_mandate}</div><div class="point"><span class="ic">◆</span><span class="t">A total is only right if the rows under it are clean.</span></div><div class="scn" style="margin-top:12px"><b>⚡ Finished early:</b> Add a column that shows how far each asset class is from its mandate minimum or maximum, in percentage points. Then ask Copilot to chart allocation against target.</div></div>
+<div class="card" id="c7"><div class="ch-top"><span class="num">07</span><span class="cat">Excel</span><span class="pts">250 pts · Hard</span></div><h3>Issuers and Movers</h3><div class="scn">Khalid asked how much of the portfolio sits with Al-Noor Bank. Faisal wants the top and bottom contributors.</div><ol class="steps"><li>Al-Noor Bank shares + sukuk = <b>12.21%</b> → above the 10% limit.</li><li>Top 3: Al-Noor Bank (+38,640), Atlas Tech Corp (+32,955), Harbor Semiconductors (+31,447).</li><li>Bottom 3: Sadaf Logistics (-24,300), Gulf Horizon REIT (-10,360), Northwind Health (-7,552).</li><li>All correct → flag reveals.</li></ol><div class="flag" data-f="KAMCO{the_whole_issuer_counts}"><span class="k">FLAG</span>KAMCO{the_whole_issuer_counts}</div><div class="point"><span class="ic">◆</span><span class="t">The issuer limit counts the whole issuer — shares and bonds together.</span></div><div class="scn" style="margin-top:12px"><b>⚡ Finished early:</b> Ask Copilot: “How much of Al-Noor Bank (in KWD) would we need to sell to bring it back to 10% of the portfolio?” Check its maths by hand — you should get about KWD 104,000.</div></div>
+</main>
+<div class="foot">Day 1 trainee lab (coded-kamco-day-1-lab.html). The instructor demo lab runs the parallel Al-Waha scenario — see the instructor solutions page.</div>
+<script>
+[].slice.call(document.querySelectorAll('.flag')).forEach(function(el){
+  el.addEventListener('click',function(){
+    var t=el.dataset.f;
+    function ok(){el.classList.add('copied');var k=el.querySelector('.k');var o=k.textContent;k.textContent='COPIED';setTimeout(function(){el.classList.remove('copied');k.textContent=o;},1100);}
+    try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,ok);return;}}catch(e){}
+    try{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);ok();}catch(e){}
+  });
+});
+</script>
+</body>
+</html>

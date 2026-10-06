@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Day 1 · Presenter Notes — KAMCO Copilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#00081C;--surf:#0A1630;--surf2:#11244A;--raise:#16294A;
+  --crimson:#2F74D6;--rose:#6F9CE8;--rose-lt:#A8C2F0;--maroon:#0A3A80;--mid:#004AA3;
+  --green:#3DC873;--green-lt:#8FE6AE;--amber:#EAB94A;
+  --w:#fff;--w8:rgba(255,255,255,.82);--w7:rgba(255,255,255,.7);--w6:rgba(255,255,255,.58);--w5:rgba(255,255,255,.46);--w4:rgba(255,255,255,.34);--w2:rgba(255,255,255,.16);--w1:rgba(255,255,255,.09);--w06:rgba(255,255,255,.06);
+  --line:rgba(255,255,255,.1);
+  --mf:'Manrope',system-ui,sans-serif;--mono:'Space Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:radial-gradient(1200px 700px at 80% -10%,rgba(47,116,214,.13),transparent 60%),var(--base);color:var(--w);font-family:var(--mf);overflow:hidden;-webkit-font-smoothing:antialiased;user-select:none}
+.wrap{height:100dvh;display:flex;flex-direction:column;max-width:860px;margin:0 auto;padding:max(14px,env(safe-area-inset-top)) 18px max(14px,env(safe-area-inset-bottom))}
+
+/* top bar */
+.top{display:flex;align-items:center;gap:12px;flex:none}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.3px;font-size:15px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--crimson);box-shadow:0 0 10px var(--crimson)}
+.brand b{color:var(--rose-lt);font-weight:800}
+.top-r{margin-left:auto;display:flex;align-items:center;gap:10px}
+.pos{font-family:var(--mono);font-size:13px;color:var(--w6)}
+.pos b{color:var(--w);font-weight:700}
+.jumpbtn{background:var(--w06);border:1px solid var(--w1);color:var(--w8);font-family:var(--mf);font-weight:700;font-size:13px;padding:8px 12px;border-radius:9px;cursor:pointer}
+.jumpbtn:active{background:var(--w1)}
+.prail{height:3px;background:var(--w06);border-radius:3px;margin-top:11px;overflow:hidden;flex:none}
+.prail .fill{height:100%;background:linear-gradient(90deg,var(--maroon),var(--crimson),var(--rose));border-radius:3px;transition:width .2s}
+
+/* card */
+.stage{flex:1;display:flex;min-height:0;position:relative}
+.card{flex:1;display:flex;flex-direction:column;min-height:0;padding:22px 4px 6px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.chip{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-lt);background:rgba(47,116,214,.12);border:1px solid rgba(47,116,214,.3);padding:6px 11px;border-radius:20px;font-weight:700}
+.kind{align-self:flex-start;margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;padding:4px 0}
+.k-story{color:var(--rose)}.k-analogy{color:var(--amber)}.k-term,.k-phase{color:var(--w7)}.k-check,.k-demo{color:var(--green-lt)}.k-case{color:var(--amber)}.k-pause{color:var(--w5)}.k-open,.k-close{color:var(--rose)}
+h1{font-size:clamp(27px,5.4vw,40px);font-weight:800;letter-spacing:-1px;line-height:1.08;margin:7px 0 4px}
+.term-badge{display:inline-block;margin:10px 0 2px;font-family:var(--mono);font-weight:700;font-size:clamp(20px,4vw,28px);letter-spacing:1px;color:var(--w);background:linear-gradient(180deg,var(--surf2),var(--surf));border:1px solid var(--w2);border-left:3px solid var(--crimson);padding:9px 16px;border-radius:10px}
+ul{list-style:none;margin:18px 0 6px}
+li{position:relative;padding-left:26px;margin:0 0 15px;font-size:clamp(17px,3.2vw,21px);line-height:1.5;color:var(--w8)}
+li::before{content:"";position:absolute;left:4px;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--crimson)}
+li b{color:var(--w);font-weight:700}
+.say{margin:8px 0 6px;background:rgba(61,200,115,.1);border:1px solid rgba(61,200,115,.4);border-radius:13px;padding:15px 17px;display:flex;gap:12px;align-items:flex-start}
+.say .ar{color:var(--green);font-weight:800;font-size:20px;line-height:1.3;flex:none}
+.say .txt{font-size:clamp(17px,3.3vw,22px);line-height:1.45;font-weight:700;color:var(--green-lt)}
+.say.muted{background:rgba(255,255,255,.04);border-color:var(--w1)}
+.say.muted .ar{color:var(--rose-lt)}.say.muted .txt{color:var(--w8);font-weight:600}
+.spacer{flex:1;min-height:14px}
+
+/* tap zones */
+.zone{position:absolute;top:0;bottom:0;width:38%;z-index:3}
+.zone.l{left:0}.zone.r{right:0;width:62%}
+
+/* footer nav */
+.foot{flex:none;display:flex;align-items:center;gap:12px;padding-top:10px;border-top:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--w06);border:1px solid var(--w1);color:var(--w);width:52px;height:48px;border-radius:13px;font-size:22px;cursor:pointer;flex:none}
+.nav:active{background:var(--w1)}
+.nav.disabled{opacity:.3;pointer-events:none}
+.next-hint{flex:1;min-width:0;font-size:13px;color:var(--w5);line-height:1.3}
+.next-hint .nl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--w4);display:block;margin-bottom:2px}
+.next-hint .nt{color:var(--w8);font-weight:700;font-size:15px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* jump overlay */
+.ov{position:fixed;inset:0;z-index:20;background:rgba(0,8,28,.82);backdrop-filter:blur(8px);display:none;flex-direction:column;padding:max(16px,env(safe-area-inset-top)) 0 max(16px,env(safe-area-inset-bottom))}
+.ov.on{display:flex}
+.ov-h{display:flex;align-items:center;gap:12px;padding:6px 20px 14px;max-width:860px;margin:0 auto;width:100%}
+.ov-h h3{font-size:20px;font-weight:800}
+.ov-close{margin-left:auto;background:var(--w06);border:1px solid var(--w1);color:var(--w8);width:40px;height:40px;border-radius:10px;font-size:20px;cursor:pointer}
+.ov-list{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;max-width:860px;margin:0 auto;width:100%;padding:0 20px}
+.ov-grp{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-lt);font-weight:700;margin:18px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--w1)}
+.ov-row{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;cursor:pointer}
+.ov-row:active,.ov-row.cur{background:var(--w06)}
+.ov-row.cur{border:1px solid rgba(47,116,214,.4)}
+.ov-n{font-family:var(--mono);font-size:12px;color:var(--w5);width:30px;flex:none}
+.ov-t{font-size:15px;color:var(--w8);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ov-row.cur .ov-t{color:var(--w)}
+.ov-k{margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--w4);flex:none}
+
+.hintbar{flex:none;text-align:center;font-size:11px;color:var(--w4);padding-top:8px}
+@media (min-width:760px){ .hintbar{padding-top:10px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="dot"></span>Day&nbsp;1 · <b>Presenter Notes</b></div>
+    <div class="top-r">
+      <span class="pos"><b id="pn">1</b>/<span id="pt">80</span></span>
+      <button class="jumpbtn" id="jumpBtn">☰ Jump</button>
+    </div>
+  </div>
+  <div class="prail"><div class="fill" id="fill"></div></div>
+
+  <div class="stage">
+    <div class="card" id="card"></div>
+    <div class="zone l" id="zoneL"></div>
+    <div class="zone r" id="zoneR"></div>
+  </div>
+
+  <div class="foot">
+    <button class="nav" id="prev">‹</button>
+    <div class="next-hint"><span class="nl">Next</span><span class="nt" id="nextT">—</span></div>
+    <button class="nav" id="next">›</button>
+  </div>
+  <div class="hintbar">tap right → next · tap left → back · ← → arrow keys · swipe</div>
+</div>
+
+<div class="ov" id="ov">
+  <div class="ov-h"><h3>Jump to a slide</h3><button class="ov-close" id="ovClose">✕</button></div>
+  <div class="ov-list" id="ovList"></div>
+</div>
+
+<script>
+const TOPICS={"open": "Opening", "t1": "Block 1 · AI, LLMs & Copilot", "t2": "Block 2 · Prompting with CTFT", "t3": "Block 3 · Read the request in Outlook", "t4": "Block 4 · Excel: clean the data", "t5": "Block 5 · Excel: find the story", "close": "Hands-on, recap & close"};
+const KIND={"open": "Open", "story": "Story", "analogy": "Analogy", "term": "The term", "check": "Your call", "demo": "Live demo", "case": "Real case", "pause": "Pause", "close": "Wrap"};
+const S=[
+{
+"t": "open",
+"k": "open",
+"h": "Cover — Day 1",
+"b": [
+"Day 1 · From Inbox to Insight. One investment request, followed from the first email to a clean, checked analysis in Excel."
+],
+"say": "Welcome everyone. Two days, one real piece of work: a client request, from the email to the reply."
+},
+{
+"t": "open",
+"k": "open",
+"h": "The MAP test.",
+"b": [
+"Start the 30-minute timer. Trainees scan the QR code or open the link.",
+"If the QR is empty: paste the MAP link under it once — the deck remembers it on this laptop."
+],
+"say": "Start the timer. While they work, walk the room and check who cannot sign in to Copilot — hand out backup accounts."
+},
+{
+"t": "open",
+"k": "demo",
+"h": "Hook — A request lands at 08:12 on a Sunday.",
+"b": [
+"Hold your answer. By tomorrow afternoon you will do this whole job with Copilot — and check every number."
+],
+"say": "Ask for a show of hands first, then click the most common answer."
+},
+{
+"t": "open",
+"k": "demo",
+"h": "What is one task that eats your week?",
+"b": [
+"Name, department — and one task that takes far too much of your time. We pin every answer on the wall and come back to it at the end of the day.",
+"Type each answer the room calls out, press Enter. Click × to remove one."
+],
+"say": "Go round the room quickly. Type each task as people say it. Keep it to one line each."
+},
+{
+"t": "open",
+"k": "open",
+"h": "Outcomes",
+"b": [
+"Explain what AI and large language models are — and what they cannot do.",
+"Use Copilot safely with client data, with your work account.",
+"Write prompts with Context, Task, Format and Tone for investment work.",
+"Find the real deadline and deliverable in a long Outlook thread.",
+"Clean a custody export in Excel, check it against the mandate, and explain every number."
+]
+},
+{
+"t": "open",
+"k": "open",
+"h": "Can you reach Copilot?",
+"b": [
+"Do this now — before we start the first block.",
+"Open copilot.cloud.microsoft (or m365copilot.com).",
+"Sign in with your KAMCO work account — never a personal one.",
+"Type Hello and press Enter. An answer back? You are ready.",
+"Stuck? Raise your hand — we have backup accounts."
+],
+"say": "Ali walks the room. Anyone without Copilot gets a backup account now."
+},
+{
+"t": "open",
+"k": "open",
+"h": "Three things you are allowed to do.",
+"b": [
+"<b>Experiment out loud</b> — Try things, break things, say what happened. Wrong answers teach the room.",
+"<b>Nothing real goes in</b> — Only the training files. No real client names, numbers or documents.",
+"<b>Park the big questions</b> — Big policy or strategy questions go on the parking board. We answer them before the close."
+]
+},
+{
+"t": "t1",
+"k": "demo",
+"h": "In one line: what is Artificial Intelligence?",
+"b": [
+"No wrong answers. Call it out — we pin it, then compare with the definition.",
+"Type each answer the room calls out, press Enter. Click × to remove one."
+],
+"say": "Collect 5–6 answers. Do not correct anyone yet — the next slide does that."
+},
+{
+"t": "t1",
+"k": "term",
+"h": "So what is AI?",
+"b": [
+"Software that learns patterns from examples — and uses them to predict, sort, recommend or create — instead of only following rules a person wrote.",
+"<b>Predict</b> — What is likely next — a price move, a late payment, the next word.",
+"<b>Classify</b> — Which bucket — fraud or normal, urgent or not, equity or bond.",
+"<b>Recommend</b> — What fits — a product, a film, a portfolio for a risk profile.",
+"<b>Create</b> — New text, images or code — this is generative AI."
+],
+"say": "Compare with the wall: who was closest? The key word is 'learns'."
+},
+{
+"t": "t1",
+"k": "story",
+"h": "You already use AI every day.",
+"b": [
+"<b>Card fraud alerts</b> — Your bank flags an unusual payment in seconds.",
+"<b>Credit scoring</b> — A model predicts the chance a loan is repaid.",
+"<b>Robo-advisers & trading</b> — Models suggest portfolios or execute trades by rules learned from data.",
+"<b>Recommendations</b> — Netflix, Spotify and Amazon suggest what you will like.",
+"<b>Maps & arrival times</b> — Google Maps predicts traffic and your arrival time.",
+"<b>Spam filters</b> — Outlook decides which emails are junk.",
+"None of these write anything. They predict, classify or recommend. Writing is one kind of AI — the newest."
+]
+},
+{
+"t": "t1",
+"k": "term",
+"h": "Every LLM is AI. Not every AI is an LLM.",
+"b": [
+"<b>Artificial intelligence</b> — the whole field — machines doing tasks that need human-like judgement",
+"<b>Machine learning</b> — learns from data instead of fixed rules — e.g. fraud detection",
+"<b>Deep learning</b> — large neural networks — e.g. face recognition",
+"<b>Generative AI</b> — creates new content — text, images, audio",
+"<b>Large language models</b> — generative AI for language — ChatGPT, Claude, Gemini, the engine in Copilot",
+"An LLM is a specialist inside a big family. Your bank's fraud model is AI — but it cannot write an email."
+],
+"say": "Fact: this is correct. LLMs are a type of generative AI, built with deep learning, which is part of machine learning, which is part of AI."
+},
+{
+"t": "t1",
+"k": "term",
+"h": "And what is an LLM?",
+"b": [
+"Large Language Model — a pattern machine trained on huge amounts of text. It writes by predicting the next piece of text.",
+"<b>Read almost everything</b> — Books, websites, code — billions of pages of text.",
+"<b>Predicts the next piece</b> — It does not look facts up. It continues the pattern.",
+"<b>Frozen at training</b> — It knows nothing after its training date — and nothing about your clients.",
+"Examples: GPT (OpenAI · ChatGPT) · Claude (Anthropic) · Gemini (Google) · Llama (Meta). Microsoft 365 Copilot is built on models like these."
+]
+},
+{
+"t": "t1",
+"k": "check",
+"h": "Your call — Which one of these is not an LLM?",
+"b": [
+"Answer: <b>The bank's card-fraud detection model</b>",
+"Right. It is AI — machine learning — but it classifies payments. It does not read or write language."
+]
+},
+{
+"t": "t1",
+"k": "demo",
+"h": "Shout the next word.",
+"b": [
+"Read the sentence; the room shouts the next word; then reveal.",
+"The Q3 report is due on … <b>Thursday</b>",
+"Please find the memo … <b>attached</b>",
+"Past performance is not a guide to future … <b>returns</b>",
+"That reflex — guessing the most likely next word — is the whole engine."
+]
+},
+{
+"t": "t1",
+"k": "term",
+"h": "It remembers the patterns — not the pages.",
+"b": [
+"<b>Reads billions of sentences</b> — It learns which words tend to follow which.",
+"<b>Fluent about the world</b> — Grammar, finance terms, writing styles — all patterns.",
+"<b>Knows nothing about your client</b> — Until you give it the file, it can only guess.",
+"Fluent about the world. Knows nothing about Al-Murjan — until you attach the export."
+]
+},
+{
+"t": "t1",
+"k": "demo",
+"h": "One piece at a time.",
+"b": [
+"Ask: “Summarise the Al-Waha portfolio's Q3.” Watch the answer appear piece by piece — each one the most likely next piece.",
+"Click to build the answer one token at a time. The number is how likely each piece was.",
+"Each piece is a token — about ¾ of a word. Your prompt steers every pick."
+]
+},
+{
+"t": "t1",
+"k": "term",
+"h": "Fluent ≠ correct.",
+"b": [
+"Ask about a number it has never seen — with no file attached:",
+"“The Gulf Horizon REIT paid a dividend yield of 6.2% in Q3, above its five-year average.”",
+"A gap gets filled with a confident guess — a hallucination. No source, no trust."
+]
+},
+{
+"t": "t1",
+"k": "case",
+"h": "Real case — Mata v. Avianca · New York · 2023",
+"b": [
+"Two lawyers filed a court brief written with ChatGPT. It cited six court decisions that did not exist. The judge fined them and their firm US$5,000.",
+"6 — Invented court cases",
+"$5,000 — Fine",
+"2023 — Year",
+"Confirm figures before quoting."
+]
+},
+{
+"t": "t1",
+"k": "story",
+"h": "Block 1 · Bridge",
+"b": [
+"That's the engine: patterns, tokens, the odd confident guess.",
+"Now Microsoft wires it into your apps — and points it at your own work. That's Copilot."
+]
+},
+{
+"t": "t1",
+"k": "term",
+"h": "The same engine — wired into your work.",
+"b": [
+"<b>Microsoft 365 apps</b> — Outlook, Excel, Word, PowerPoint, Teams — where you already work.",
+"<b>Microsoft Graph</b> — Your emails, files, meetings and chats — only what you can already open.",
+"<b>Large language model</b> — The engine that reads and writes.",
+"Press Enter → Copilot gathers your context → the LLM writes → it checks → you get the answer. You own the output."
+]
+},
+{
+"t": "t1",
+"k": "analogy",
+"h": "Analogy — A brilliant new intern — with a badge.",
+"b": [
+"It has read almost everything and works very fast. Its badge opens only the doors yours opens. It needs a clear brief — and your sign-off before anything leaves the building."
+]
+},
+{
+"t": "t1",
+"k": "demo",
+"h": "Live demo — Same question. Two different worlds.",
+"b": [
+"Toggle Work → Web. Same question, different source.",
+"Work = KAMCO files you can access. Web = public internet.",
+"For client work: Work mode, and check the source."
+],
+"say": "Run it live in Copilot Chat too if the connection is good."
+},
+{
+"t": "t1",
+"k": "term",
+"h": "Same kind of engine — very different walls.",
+"b": [
+"Inside · Copilot with your KAMCO account: Your prompts and files stay inside KAMCO's Microsoft 365 boundary, with enterprise data protection.",
+"Outside · a personal or public chatbot: No KAMCO protection. You do not control where client data goes. Client data never goes here.",
+"Grounded — Answers from your work content when you ask it to.",
+"Respects permissions — Sees only what you can already open.",
+"Protected — Your prompts and data are not used to train the AI models."
+]
+},
+{
+"t": "t1",
+"k": "check",
+"h": "Your call — Which of these is fine to use in Copilot with your KAMCO work account?",
+"b": [
+"Answer: <b>The 30 Sep custody export for a client you manage</b>",
+"Right. Your client, your work file, inside KAMCO's boundary — and the task needs it."
+]
+},
+{
+"t": "t1",
+"k": "case",
+"h": "Real case — Samsung · 2023",
+"b": [
+"Weeks after engineers were allowed to use a public chatbot, staff pasted confidential source code and meeting notes into it. Samsung then banned public generative AI tools on company devices.",
+"3 — Reported leaks",
+"20 — Days after access",
+"May — 2023 · ban announced",
+"Confirm figures before quoting."
+]
+},
+{
+"t": "t1",
+"k": "demo",
+"h": "Feel the engine — then sort what's safe.",
+"b": [
+"E1.1 · Feel the engine (5 min) — In Copilot Chat, with no file: “What was Al-Murjan Family Office's Q3 return?” Did it guess, or say it does not know?",
+"Lab 1 · Safe or Not? (5 min) — Sort five items: fine in work Copilot, fine after removing personal data, or never.",
+"Success: One confident guess caught. Five items sorted. KAMCO{…} flag captured."
+]
+},
+{
+"t": "t1",
+"k": "pause",
+"h": "Pause — three questions",
+"b": [
+"Take three questions. Park long ones for the break."
+]
+},
+{
+"t": "t1",
+"k": "pause",
+"h": "Break · 10 min",
+"b": [
+"The timer starts when this slide opens. Back at 10:30.",
+"Next: Prompting with CTFT"
+]
+},
+{
+"t": "t2",
+"k": "demo",
+"h": "Describe it — no questions allowed.",
+"b": [
+"One volunteer describes a shape. Everyone else draws it blind. No questions.",
+"Show the shape to the volunteer only (open this slide on your laptop first), then reveal to the room.",
+"Vague instructions, vague results. Copilot is the same — except you can keep talking."
+]
+},
+{
+"t": "t2",
+"k": "term",
+"h": "CTFT — four ingredients.",
+"b": [
+"<b>Context</b> — The situation — who you are, who it is for.",
+"<b>Task</b> — What to do — one strong verb.",
+"<b>Format</b> — The shape — length, bullets, table.",
+"<b>Tone</b> — The voice — formal, warm, plain.",
+"A weak answer = a missing ingredient."
+]
+},
+{
+"t": "t2",
+"k": "term",
+"h": "CTFT 1 of 4 — Context",
+"b": [
+"Copilot knows the world — not your situation.",
+"Weak: Summarise this portfolio.",
+"Strong: I am the relationship manager for Al-Waha Family Office. The family meets us this week and is worried about property."
+]
+},
+{
+"t": "t2",
+"k": "term",
+"h": "CTFT 2 of 4 — Task",
+"b": [
+"Name the action.",
+"Weak: Help me with this file.",
+"Strong: Using /awfo-q3-custody-export.xlsx, check real estate against the mandate and list any breach.",
+"One main task per prompt."
+]
+},
+{
+"t": "t2",
+"k": "term",
+"h": "CTFT 3 of 4 — Format",
+"b": [
+"Say nothing, and Copilot picks for you.",
+"Weak: Write something for Reem.",
+"Strong: Five bullet points with KWD figures, then one sentence on next steps. Under 120 words."
+]
+},
+{
+"t": "t2",
+"k": "term",
+"h": "CTFT 4 of 4 — Tone",
+"b": [
+"Same facts, different feel.",
+"Weak: Write an email.",
+"Strong: Calm and reassuring, but honest about any breach. Plain English for a family CFO."
+]
+},
+{
+"t": "t2",
+"k": "term",
+"h": "What · why · which · how.",
+"b": [
+"<b>What?</b> — ≈ Task",
+"<b>Why? Who?</b> — ≈ Context",
+"<b>Which files?</b> — Type / to point at a file, email or meeting.",
+"<b>How?</b> — ≈ Format + Tone",
+"Same recipe, new labels. The extra: Source — name the file every time a number matters."
+]
+},
+{
+"t": "t2",
+"k": "demo",
+"h": "From zero to hero.",
+"b": [
+"One weak prompt. Four rounds. Watch it get visibly better — run each round in Copilot Chat with us.",
+"Scenario: a long-standing client is upset that a REIT in his portfolio fell 5% in Q3.",
+"Round 0 is mush. Round 4 is sendable."
+]
+},
+{
+"t": "t2",
+"k": "demo",
+"h": "Watch it be generic.",
+"b": [
+"Run this — together.",
+"Run it in Copilot Chat. Quality: 8% — mush."
+]
+},
+{
+"t": "t2",
+"k": "demo",
+"h": "Give it the situation.",
+"b": [
+"Add the highlighted part and run it again.",
+"Run it in Copilot Chat. Quality: 32% — no task, so it guesses."
+]
+},
+{
+"t": "t2",
+"k": "demo",
+"h": "Say what to do.",
+"b": [
+"Add the highlighted part and run it again.",
+"Run it in Copilot Chat. Quality: 55% — right content, wrong shape."
+]
+},
+{
+"t": "t2",
+"k": "demo",
+"h": "Shape it.",
+"b": [
+"Add the highlighted part and run it again.",
+"Run it in Copilot Chat. Quality: 76% — usable."
+]
+},
+{
+"t": "t2",
+"k": "demo",
+"h": "Set the voice — and the limits.",
+"b": [
+"Add the highlighted part and run it again.",
+"Run it in Copilot Chat. Quality: 95% — sendable."
+]
+},
+{
+"t": "t2",
+"k": "close",
+"h": "Nobody nails it in one shot — that's the method.",
+"b": [
+"<b>Iterate, don't restart</b> — Short follow-ups in the same chat: “shorter” · “warmer” · “in Arabic” · “KWD only”.",
+"<b>Name the source</b> — “Use /awfo-q3-custody-export.xlsx” beats “use the latest numbers”.",
+"<b>Check before you use</b> — Every number traced back to the file."
+]
+},
+{
+"t": "t2",
+"k": "check",
+"h": "Your call — Copilot's summary used the old June factsheet. What is your best next step?",
+"b": [
+"Answer: <b>Reply: “Use only /awfo-q3-custody-export.xlsx (30 Sep). Redo the summary.”</b>",
+"Right. Iterate in the same chat and name the exact source."
+]
+},
+{
+"t": "t2",
+"k": "case",
+"h": "Real case — Morgan Stanley Wealth Management · 2023–24",
+"b": [
+"Morgan Stanley gave its financial advisers an AI assistant that answers from the firm's own research library. Reported adoption reached about 98% of advisor teams. The value came from good sources and clear questions.",
+"100k — Research documents, approx.",
+"2023 — Year launched",
+"98% — Advisor teams using it",
+"Confirm figures before quoting."
+]
+},
+{
+"t": "t2",
+"k": "demo",
+"h": "Build the brief — then build your own.",
+"b": [
+"Lab 2 · Build the Brief (5 min) — Label each part of a strong Al-Murjan prompt as Context, Task, Format or Tone.",
+"E1.4 · Your own prompt (10 min) — Pick a task from this morning's wall. Write a CTFT prompt for it and run it in Copilot Chat — training files only.",
+"Success: A prompt you will reuse, saved. Best one = Prompt of the Day."
+]
+},
+{
+"t": "t2",
+"k": "pause",
+"h": "Pause — three questions",
+"b": [
+"Take three questions. Park long ones for the break."
+]
+},
+{
+"t": "t2",
+"k": "pause",
+"h": "Break · 10 min",
+"b": [
+"The timer starts when this slide opens. Back at 11:30.",
+"Next: Read the request in Outlook"
+]
+},
+{
+"t": "t3",
+"k": "story",
+"h": "Story — The buried deadline",
+"b": [
+"The first email says Thursday. Two emails later, the client moves the meeting and the deadline becomes Monday, 1:00 pm. You read the first email only. You deliver on Thursday. The meeting already happened.",
+"Land it: The real ask is often in the newest message."
+]
+},
+{
+"t": "t3",
+"k": "term",
+"h": "Term — Summarise (Outlook)",
+"b": [
+"<b>SUMMARISE (OUTLOOK)</b> — At the top of an email thread in Outlook, click Summarise. Copilot reads every message and lists the key points, with links back to the source message.",
+"Like a chief of staff's one-pager, it gives you the whole thread fast… → but you still open the newest message to check what changed."
+]
+},
+{
+"t": "t3",
+"k": "demo",
+"h": "Live demo — Five things matter. Two are traps.",
+"b": [
+"Find the 5: memo only · Mon 12 Oct 1:00 pm · real estate first · 10% issuer limit · 30 Sep export.",
+"Traps: '4-slide deck' and 'Thursday 15 Oct' are old.",
+"Then click Summarise in Outlook live and compare."
+]
+},
+{
+"t": "t3",
+"k": "demo",
+"h": "Live demo — Thread → checklist → holding reply.",
+"b": [
+"Run prompt 1 on the Al-Waha thread.",
+"Run prompt 2 with Draft with Copilot.",
+"Show Coaching by Copilot on the draft."
+]
+},
+{
+"t": "t3",
+"k": "check",
+"h": "Your call — Copilot's summary says the deadline is “Thursday 15 Oct”. What happened?",
+"b": [
+"Answer: <b>It picked up the old instruction. The newest message says Monday 12 Oct, 1:00 pm</b>",
+"Right. Always check dates against the newest message before you plan your day."
+]
+},
+{
+"t": "t3",
+"k": "check",
+"h": "Your call — A client asks you to send another family's report “so we can see your format”. What do you do?",
+"b": [
+"Answer: <b>Do not send it. Offer a blank sample of the format instead</b>",
+"Right. Another client's data never leaves. A blank sample shows the format safely."
+]
+},
+{
+"t": "t3",
+"k": "demo",
+"h": "Your inbox — the Al-Murjan thread.",
+"b": [
+"Lab 3 · Summarise the Thread (5 min) — Click Summarise on Faisal's thread, then find the three wrong points in a Copilot summary.",
+"Lab 4 · Read the Request (10 min) — Summarise Faisal's thread in Outlook, then answer: deadline, meeting, deliverables, who to copy, what to decline.",
+"Success: The real deadline found. One request politely declined."
+]
+},
+{
+"t": "t3",
+"k": "pause",
+"h": "Lunch · 60 min",
+"b": [
+"The timer starts when this slide opens. Back at 13:00.",
+"Next: Excel · clean the data"
+]
+},
+{
+"t": "t4",
+"k": "story",
+"h": "One sentence: the best thing Copilot did for you this morning.",
+"b": [
+"Two or three voices — then straight in."
+]
+},
+{
+"t": "t4",
+"k": "story",
+"h": "Story — The double-counted bond",
+"b": [
+"The Al-Waha custody export lists three holdings twice. Nobody notices. The total comes out at KWD 4,906,465. The real value is KWD 4,237,020. The family sees a portfolio 16% bigger than it is.",
+"Land it: Clean first. Count second."
+]
+},
+{
+"t": "t4",
+"k": "term",
+"h": "Term — Data Cleaning",
+"b": [
+"<b>DATA CLEANING</b> — Removing duplicates, turning text into numbers, filling missing values from a trusted source, and making labels consistent — before any formula or total.",
+"Like a chef's preparation before service, it happens first… → a total is only as good as the rows under it."
+]
+},
+{
+"t": "t4",
+"k": "demo",
+"h": "Live demo — Nine rows from the export. Four will hurt you.",
+"b": [
+"Problems: text quantity (UST30), missing price (CVC), duplicate Bayan Telecom, duplicate Harbor.",
+"Clean rows go grey when clicked."
+]
+},
+{
+"t": "t4",
+"k": "term",
+"h": "Term — Copilot In Excel",
+"b": [
+"<b>COPILOT IN EXCEL</b> — Works on files saved in OneDrive or SharePoint with AutoSave on, and works best when the data is a table (Ctrl+T). It can highlight, sort, filter, add formula columns and explain its formulas.",
+"Like a colleague tidying your file, it works fast… → and you check what it changed.",
+"Before: delete the title rows above the headers, then Ctrl+T."
+]
+},
+{
+"t": "t4",
+"k": "demo",
+"h": "Live demo — Five prompts. Check after each one.",
+"b": [
+"Run live on the Al-Waha file.",
+"Before/after: 25 rows → 22 rows. Total KWD 4,237,020.",
+"Ask Copilot to show each formula. Test one row by hand."
+]
+},
+{
+"t": "t4",
+"k": "check",
+"h": "Your call — Copilot says it “removed duplicates”. The rows drop from 25 to 21. You expected 22. What next?",
+"b": [
+"Answer: <b>Ask which rows it removed, and compare the Holding IDs</b>",
+"Right. Check what changed. A real holding may have been removed because it looked similar."
+]
+},
+{
+"t": "t4",
+"k": "case",
+"h": "Real case — Reinhart & Rogoff · 2010–2013",
+"b": [
+"An influential paper on government debt and growth used an Excel range that left out five countries. A graduate student found it in 2013. With the error fixed, the headline result changed sharply.",
+"5 — Countries left out",
+"90% — Debt threshold in the paper",
+"2013 — Error found",
+"Confirm figures before quoting."
+]
+},
+{
+"t": "t4",
+"k": "demo",
+"h": "Clean the Al-Murjan export.",
+"b": [
+"Lab 5 · Clean the Export (15 min) — Same five prompts on your file. Then enter: raw rows, duplicates removed, holdings left, missing prices.",
+"Success: Row count checked before and after. Flag captured."
+]
+},
+{
+"t": "t4",
+"k": "pause",
+"h": "Pause — three questions",
+"b": [
+"Take three questions. Park long ones for the break."
+]
+},
+{
+"t": "t4",
+"k": "pause",
+"h": "Break · 10 min",
+"b": [
+"The timer starts when this slide opens. Back at 14:00.",
+"Next: Excel · find the story"
+]
+},
+{
+"t": "t5",
+"k": "story",
+"h": "Block 5 · Find the story",
+"b": [
+"The family CFO does not want 22 rows.",
+"He asks one question: “Are we still inside the mandate?” Your analysis must answer it in one line — and prove it."
+]
+},
+{
+"t": "t5",
+"k": "term",
+"h": "Term — Pivottable",
+"b": [
+"<b>PIVOTTABLE</b> — A summary that groups rows by a category — like asset class or issuer — and totals them. Copilot can build one from a prompt.",
+"Like an X-ray instead of a photo album, it shows the shape… → allocation by asset class, in seconds."
+]
+},
+{
+"t": "t5",
+"k": "demo",
+"h": "Live demo — Inside the range — or not?",
+"b": [
+"Click 'Check against the mandate'.",
+"Real estate 4.5% < 5% minimum → breach.",
+"Equity 54.4% inside but close to 55%."
+]
+},
+{
+"t": "t5",
+"k": "term",
+"h": "Term — Mandate Check",
+"b": [
+"<b>MANDATE CHECK</b> — Compare each asset-class weight with its minimum and maximum. Then add up every holding from the same issuer — shares and bonds together — and compare with the 10% limit.",
+"Like a bridge's weight limit, it counts the whole truck… → equity and bonds from one name count together."
+]
+},
+{
+"t": "t5",
+"k": "demo",
+"h": "Live demo — Allocation, issuers, movers.",
+"b": [
+"Run all three live.",
+"Issuer: Gulf Trade Bank 11.75% — breach.",
+"Top Atlas Tech (+20,401); bottom Gulf Trade Bank (-14,000)."
+]
+},
+{
+"t": "t5",
+"k": "check",
+"h": "It summarises beautifully — and still misses a piece.",
+"b": [
+"Copilot says: “Meridian Energy is 2.6% of the Al-Waha portfolio — well inside the issuer limit.”",
+"Reality: 2.6% is the shares only. Add the Meridian Energy 5.1% 2032 bond: 8.0% of the portfolio. Still inside 10% — but now you know why.",
+"Ask: “Show me which rows you added up.” Then check them yourself."
+]
+},
+{
+"t": "t5",
+"k": "check",
+"h": "Your call — Copilot says the Al-Waha Q3 return is 3.1%. Your table shows 1.29%. Which do you use?",
+"b": [
+"Answer: <b>Ask Copilot for its formula, and test one row by hand</b>",
+"Right. Often it used the wrong column or kept the duplicates. You can only send a number you can explain."
+]
+},
+{
+"t": "t5",
+"k": "case",
+"h": "Real case — JPMorgan “London Whale” · 2012",
+"b": [
+"A risk model built in spreadsheets had manual copy-paste steps and a formula error that understated risk. The trading losses reached about US$6.2 billion. JPMorgan's own review named the spreadsheet process.",
+"$6.2B — Trading losses",
+"2012 — Year",
+"Excel — Where the error lived",
+"Confirm figures before quoting."
+]
+},
+{
+"t": "t5",
+"k": "demo",
+"h": "Value, mandate, issuers.",
+"b": [
+"Lab 6 · Value and Mandate (10 min) — Total value, Q3 change, equity weight — and which asset class is outside its range.",
+"Lab 7 · Issuers and Movers (10 min) — Largest issuer and its weight; top and bottom contributors.",
+"Success: Every number explained. Two flags captured."
+]
+},
+{
+"t": "t5",
+"k": "pause",
+"h": "Pause — three questions",
+"b": [
+"Take three questions. Park long ones for the break."
+]
+},
+{
+"t": "t5",
+"k": "pause",
+"h": "Break · 10 min",
+"b": [
+"The timer starts when this slide opens. Back at 15:00.",
+"Next: Hands-on · the Al-Murjan request, alone"
+]
+},
+{
+"t": "close",
+"k": "demo",
+"h": "Your turn: Al-Murjan, alone.",
+"b": [
+"You have the thread and the 30 Sep export. Take the request from the email to a clean, checked analysis.",
+"Finish the Day 1 lab challenges you have not cleared yet.",
+"In your Excel file: value at 30 Sep, Q3 change, allocation vs mandate, issuer check, top 3 and bottom 3.",
+"Ask Copilot to write three findings in one line each — then check every number against your table.",
+"Save your file in OneDrive. You need it tomorrow.",
+"Finished early? Draft the three findings as a 60-word holding reply to Faisal in Outlook — and run Coaching by Copilot on it."
+],
+"say": "Evidence for the evaluation. Watch for: cleaning before counting, checking formulas, and the confidentiality trap in Khalid's email."
+},
+{
+"t": "close",
+"k": "close",
+"h": "Look at the wall.",
+"b": [
+"Which of these tasks could Copilot help with now — and how?",
+"Prompt of the Day — steal it.",
+"One line each: “The one thing I will use tomorrow is…”"
+]
+},
+{
+"t": "close",
+"k": "close",
+"h": "Wrap — Request → Check.",
+"b": [
+"You found the real ask in a messy thread, cleaned a custody export, and checked a portfolio against its mandate — with every number explained. Tomorrow: Word, PowerPoint and the reply."
+]
+}
+];
+
+const card=document.getElementById('card');
+let i=0;
+try{const sv=parseInt(localStorage.getItem('kamco_d1_notes'));if(sv>=0&&sv<S.length)i=sv;}catch(e){}
+document.getElementById('pt').textContent=S.length;
+
+function esc(s){return s;}
+function render(){
+  const s=S[i];
+  let html='<span class="chip">'+TOPICS[s.t]+'</span>';
+  html+='<div class="kind k-'+s.k+'">'+(KIND[s.k]||'')+'</div>';
+  html+='<h1>'+s.h+'</h1>';
+  if(s.term)html+='<div class="term-badge">'+s.term+'</div>';
+  html+='<ul>'+s.b.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';
+  if(s.say)html+='<div class="say"><span class="ar">→</span><span class="txt">'+s.say+'</span></div>';
+  if(s.sayMuted)html+='<div class="say muted"><span class="ar">·</span><span class="txt">'+s.sayMuted+'</span></div>';
+  if(s.note)html+='<div class="say muted"><span class="ar">☕</span><span class="txt">'+s.note+'</span></div>';
+  html+='<div class="spacer"></div>';
+  card.innerHTML=html;card.scrollTop=0;
+  document.getElementById('pn').textContent=i+1;
+  document.getElementById('fill').style.width=((i+1)/S.length*100)+'%';
+  document.getElementById('prev').classList.toggle('disabled',i===0);
+  document.getElementById('next').classList.toggle('disabled',i===S.length-1);
+  const nx=document.getElementById('nextT');
+  nx.textContent=i<S.length-1?(S[i+1].h):'— end —';
+  try{localStorage.setItem('kamco_d1_notes',i);}catch(e){}
+}
+function go(d){const n=i+d;if(n<0||n>=S.length)return;i=n;render();}
+
+document.getElementById('next').onclick=function(){go(1);};
+document.getElementById('prev').onclick=function(){go(-1);};
+document.getElementById('zoneR').onclick=function(){go(1);};
+document.getElementById('zoneL').onclick=function(){go(-1);};
+document.addEventListener('keydown',function(e){
+  if(document.getElementById('ov').classList.contains('on')){if(e.key==='Escape')closeOv();return;}
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){go(1);e.preventDefault();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){go(-1);e.preventDefault();}
+  else if(e.key==='Home'){i=0;render();}else if(e.key==='End'){i=S.length-1;render();}
+});
+// swipe
+let sx=0,sy=0;
+document.querySelector('.stage').addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+document.querySelector('.stage').addEventListener('touchend',function(e){
+  const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
+  if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.5){go(dx<0?1:-1);}
+},{passive:true});
+
+// jump overlay
+const ov=document.getElementById('ov'),ovList=document.getElementById('ovList');
+function buildOv(){
+  let html='',last='';
+  S.forEach(function(s,n){
+    if(s.t!==last){html+='<div class="ov-grp">'+TOPICS[s.t]+'</div>';last=s.t;}
+    html+='<div class="ov-row'+(n===i?' cur':'')+'" data-n="'+n+'"><span class="ov-n">'+(n+1)+'</span><span class="ov-t">'+s.h+'</span><span class="ov-k">'+(KIND[s.k]||'')+'</span></div>';
+  });
+  ovList.innerHTML=html;
+  [].slice.call(ovList.querySelectorAll('.ov-row')).forEach(function(r){r.onclick=function(){i=+r.dataset.n;render();closeOv();};});
+}
+function openOv(){buildOv();ov.classList.add('on');const c=ovList.querySelector('.ov-row.cur');if(c&&c.scrollIntoView)try{c.scrollIntoView({block:'center'});}catch(e){}}
+function closeOv(){ov.classList.remove('on');}
+document.getElementById('jumpBtn').onclick=openOv;
+document.getElementById('ovClose').onclick=closeOv;
+ov.addEventListener('click',function(e){if(e.target===ov)closeOv();});
+
+render();
+</script>
+</body>
+</html>

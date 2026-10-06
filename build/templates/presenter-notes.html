@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Day 2 · Presenter Notes — KIBS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#0A0507;--surf:#150A0D;--surf2:#1C0E12;--raise:#241019;
+  --crimson:#C8324A;--rose:#E0566E;--rose-lt:#EC8B9C;--maroon:#5D181A;--mid:#8B1E2A;
+  --green:#3DC873;--green-lt:#8FE6AE;--amber:#EAB94A;
+  --w:#fff;--w8:rgba(255,255,255,.82);--w7:rgba(255,255,255,.7);--w6:rgba(255,255,255,.58);--w5:rgba(255,255,255,.46);--w4:rgba(255,255,255,.34);--w2:rgba(255,255,255,.16);--w1:rgba(255,255,255,.09);--w06:rgba(255,255,255,.06);
+  --line:rgba(255,255,255,.1);
+  --mf:'Manrope',system-ui,sans-serif;--mono:'Space Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:radial-gradient(1200px 700px at 80% -10%,rgba(200,50,74,.13),transparent 60%),var(--base);color:var(--w);font-family:var(--mf);overflow:hidden;-webkit-font-smoothing:antialiased;user-select:none}
+.wrap{height:100dvh;display:flex;flex-direction:column;max-width:860px;margin:0 auto;padding:max(14px,env(safe-area-inset-top)) 18px max(14px,env(safe-area-inset-bottom))}
+
+/* top bar */
+.top{display:flex;align-items:center;gap:12px;flex:none}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.3px;font-size:15px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--crimson);box-shadow:0 0 10px var(--crimson)}
+.brand b{color:var(--rose-lt);font-weight:800}
+.top-r{margin-left:auto;display:flex;align-items:center;gap:10px}
+.pos{font-family:var(--mono);font-size:13px;color:var(--w6)}
+.pos b{color:var(--w);font-weight:700}
+.jumpbtn{background:var(--w06);border:1px solid var(--w1);color:var(--w8);font-family:var(--mf);font-weight:700;font-size:13px;padding:8px 12px;border-radius:9px;cursor:pointer}
+.jumpbtn:active{background:var(--w1)}
+.prail{height:3px;background:var(--w06);border-radius:3px;margin-top:11px;overflow:hidden;flex:none}
+.prail .fill{height:100%;background:linear-gradient(90deg,var(--maroon),var(--crimson),var(--rose));border-radius:3px;transition:width .2s}
+
+/* card */
+.stage{flex:1;display:flex;min-height:0;position:relative}
+.card{flex:1;display:flex;flex-direction:column;min-height:0;padding:22px 4px 6px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.chip{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-lt);background:rgba(200,50,74,.12);border:1px solid rgba(200,50,74,.3);padding:6px 11px;border-radius:20px;font-weight:700}
+.kind{align-self:flex-start;margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;padding:4px 0}
+.k-story{color:var(--rose)}.k-analogy{color:var(--amber)}.k-term,.k-phase{color:var(--w7)}.k-check,.k-demo{color:var(--green-lt)}.k-case{color:var(--amber)}.k-pause{color:var(--w5)}.k-open,.k-close{color:var(--rose)}
+h1{font-size:clamp(27px,5.4vw,40px);font-weight:800;letter-spacing:-1px;line-height:1.08;margin:7px 0 4px}
+.term-badge{display:inline-block;margin:10px 0 2px;font-family:var(--mono);font-weight:700;font-size:clamp(20px,4vw,28px);letter-spacing:1px;color:var(--w);background:linear-gradient(180deg,var(--surf2),var(--surf));border:1px solid var(--w2);border-left:3px solid var(--crimson);padding:9px 16px;border-radius:10px}
+ul{list-style:none;margin:18px 0 6px}
+li{position:relative;padding-left:26px;margin:0 0 15px;font-size:clamp(17px,3.2vw,21px);line-height:1.5;color:var(--w8)}
+li::before{content:"";position:absolute;left:4px;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--crimson)}
+li b{color:var(--w);font-weight:700}
+.say{margin:8px 0 6px;background:rgba(61,200,115,.1);border:1px solid rgba(61,200,115,.4);border-radius:13px;padding:15px 17px;display:flex;gap:12px;align-items:flex-start}
+.say .ar{color:var(--green);font-weight:800;font-size:20px;line-height:1.3;flex:none}
+.say .txt{font-size:clamp(17px,3.3vw,22px);line-height:1.45;font-weight:700;color:var(--green-lt)}
+.say.muted{background:rgba(255,255,255,.04);border-color:var(--w1)}
+.say.muted .ar{color:var(--rose-lt)}.say.muted .txt{color:var(--w8);font-weight:600}
+.spacer{flex:1;min-height:14px}
+
+/* tap zones */
+.zone{position:absolute;top:0;bottom:0;width:38%;z-index:3}
+.zone.l{left:0}.zone.r{right:0;width:62%}
+
+/* footer nav */
+.foot{flex:none;display:flex;align-items:center;gap:12px;padding-top:10px;border-top:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--w06);border:1px solid var(--w1);color:var(--w);width:52px;height:48px;border-radius:13px;font-size:22px;cursor:pointer;flex:none}
+.nav:active{background:var(--w1)}
+.nav.disabled{opacity:.3;pointer-events:none}
+.next-hint{flex:1;min-width:0;font-size:13px;color:var(--w5);line-height:1.3}
+.next-hint .nl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--w4);display:block;margin-bottom:2px}
+.next-hint .nt{color:var(--w8);font-weight:700;font-size:15px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* jump overlay */
+.ov{position:fixed;inset:0;z-index:20;background:rgba(8,5,7,.82);backdrop-filter:blur(8px);display:none;flex-direction:column;padding:max(16px,env(safe-area-inset-top)) 0 max(16px,env(safe-area-inset-bottom))}
+.ov.on{display:flex}
+.ov-h{display:flex;align-items:center;gap:12px;padding:6px 20px 14px;max-width:860px;margin:0 auto;width:100%}
+.ov-h h3{font-size:20px;font-weight:800}
+.ov-close{margin-left:auto;background:var(--w06);border:1px solid var(--w1);color:var(--w8);width:40px;height:40px;border-radius:10px;font-size:20px;cursor:pointer}
+.ov-list{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;max-width:860px;margin:0 auto;width:100%;padding:0 20px}
+.ov-grp{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-lt);font-weight:700;margin:18px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--w1)}
+.ov-row{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;cursor:pointer}
+.ov-row:active,.ov-row.cur{background:var(--w06)}
+.ov-row.cur{border:1px solid rgba(200,50,74,.4)}
+.ov-n{font-family:var(--mono);font-size:12px;color:var(--w5);width:30px;flex:none}
+.ov-t{font-size:15px;color:var(--w8);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ov-row.cur .ov-t{color:var(--w)}
+.ov-k{margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--w4);flex:none}
+
+.hintbar{flex:none;text-align:center;font-size:11px;color:var(--w4);padding-top:8px}
+@media (min-width:760px){ .hintbar{padding-top:10px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="dot"></span>Day&nbsp;2 · <b>Presenter Notes</b></div>
+    <div class="top-r">
+      <span class="pos"><b id="pn">1</b>/<span id="pt">77</span></span>
+      <button class="jumpbtn" id="jumpBtn">☰ Jump</button>
+    </div>
+  </div>
+  <div class="prail"><div class="fill" id="fill"></div></div>
+
+  <div class="stage">
+    <div class="card" id="card"></div>
+    <div class="zone l" id="zoneL"></div>
+    <div class="zone r" id="zoneR"></div>
+  </div>
+
+  <div class="foot">
+    <button class="nav" id="prev">‹</button>
+    <div class="next-hint"><span class="nl">Next</span><span class="nt" id="nextT">—</span></div>
+    <button class="nav" id="next">›</button>
+  </div>
+  <div class="hintbar">tap right → next · tap left → back · ← → arrow keys · swipe</div>
+</div>
+
+<div class="ov" id="ov">
+  <div class="ov-h"><h3>Jump to a slide</h3><button class="ov-close" id="ovClose">✕</button></div>
+  <div class="ov-list" id="ovList"></div>
+</div>
+
+<script>
+const TOPICS={open:'Opening',t1:'Topic 1 · Passwords & Authentication',t2:'Topic 2 · Standards & Controls',t3:'Topic 3 · Policies, Standards & Procedures',t4:'Topic 4 · Incident Response',close:'Close'};
+const KIND={open:'Open',story:'Story',analogy:'Analogy',term:'The term',check:'Your call',demo:'Live demo',phase:'IR phase',case:'Real case',pause:'Pause',close:'Wrap'};
+const S=[
+{t:'open',k:'open',h:'Cover',b:['Day 2: <b>recognise → control → respond</b>.','"Yesterday we named the threats. Today we beat them."']},
+{t:'open',k:'demo',h:'Hook — "How long would your password last?"',b:['Type a password you\u2019d actually use — watch it crack in real time.','Let them feel it: short + common = instant.'],sayMuted:'Today we make it uncrackable, then prove it.'},
+{t:'open',k:'open',h:'Outcomes — what they\u2019ll walk out able to do',b:['Judge whether a password or control is actually strong — and say why.','Map one control to ISO 27001, NIST and PCI-DSS at once.','Read a policy critically enough to catch a dangerous gap.','Run a live incident: Detect → Contain → Eradicate → Recover → Learn.']},
+{t:'open',k:'story',h:'Road — the shape of Day 2',b:['Same rhythm as Day 1: story → image → term → something you do.','<b>1</b> Passwords & how they fall · <b>2</b> Standards & controls · <b>3</b> Policies that work · <b>4</b> Incident response (capstone).','From one password to a full incident at 2am.']},
+/* T1 */
+{t:'t1',k:'story',h:'Story — a leaked list',b:['An employee reuses one password at work and on a shopping site.','The shopping site is breached. Months later that password opens the bank\u2019s VPN.','The bank was never hacked — the password was just reused.'],say:'Most break-ins don\u2019t pick the lock. They already have the key.'},
+{t:'t1',k:'analogy',h:'Every key on the ring',b:['A thief tries each key in the lock, one after another.','With enough time one turns — unless there are simply too many.']},
+{t:'t1',k:'term',term:'BRUTE FORCE',h:'Try every combination',b:['Automated, millions of guesses a second.','Beaten by too many keys → <b>length</b> multiplies the ring. Long beats clever.']},
+{t:'t1',k:'check',h:'Which takes longer to brute-force?',b:['A 16-char phrase of plain words, or an 8-char mix like K7$x!9Lp?'],say:'The 16-character phrase of plain words — length adds keys fastest.'},
+{t:'t1',k:'analogy',h:'Start with the obvious keys',b:['A smart thief tries the spare-under-the-mat first: "1234", the dog\u2019s name.','Most locks open on the predictable guess.']},
+{t:'t1',k:'term',term:'DICTIONARY ATTACK',h:'Try the common ones first',b:['A list of common passwords and known patterns — far faster than brute force.','It targets predictability → "Summer2023!" falls first.']},
+{t:'t1',k:'check',h:'Why try "Summer2023!" before "x9#mK2vQ"?',b:[],say:'It\u2019s a common pattern — top of the wordlist. (Not length, not the symbol.)'},
+{t:'t1',k:'analogy',h:'One key, every door',b:['Someone copies the one key you use for house, office and car.','Steal it from any door, and they try it on all of them.']},
+{t:'t1',k:'term',term:'CREDENTIAL STUFFING',h:'Leaked here, tried everywhere',b:['Passwords leaked from one site, fired automatically at many others.','Reuse is the flaw → unique passwords break the chain.','This is exactly how the opening story\u2019s bank got hit.']},
+{t:'t1',k:'check',h:'Reuse one strong password; a shop you use is breached. Bank safe?',b:[],say:'No — the leaked password gets tried at the bank. Strength doesn\u2019t matter once it\u2019s leaked.'},
+{t:'t1',k:'analogy',h:'The one-way blender',b:['Blend a fruit into a smoothie — you can\u2019t get the fruit back.','A bank should store your password blended, never whole.']},
+{t:'t1',k:'term',term:'HASHING',h:'Store it one-way',b:['A one-way scrambled version, so even the bank never holds the real one.','But weak hashing blends badly — and can be reversed.']},
+{t:'t1',k:'demo',h:'Demo — crack the hash',b:['A leaked password stored as a weak, unsalted MD5.','Launch the dictionary attack — the recovered password is the point.'],say:'Weak + unsalted = reversed in seconds. Long, unique + MFA do the rest.'},
+{t:'t1',k:'pause',h:'Pause — 3 questions',b:['What\u2019s unclear, or what would you push back on?']},
+{t:'t1',k:'case',h:'Real case — LinkedIn, 2012',b:['117M password hashes stolen — weakly hashed and unsalted.','Most cracked within days, then fuelled credential-stuffing for years.'],note:'Confirm figures before quoting.'},
+/* T2 */
+{t:'t2',k:'story',h:'Story — the audit',b:['A regulator asks one question: "Prove you\u2019re secure."','"We have firewalls" isn\u2019t an answer.','You need a recognised framework, evidence it\u2019s followed, and an independent check.'],say:'"Trust us" isn\u2019t a control. A standard is.'},
+{t:'t2',k:'analogy',h:'The kitchen hygiene certificate',b:['It doesn\u2019t promise no one gets sick.','It certifies the kitchen runs a proper system — and an inspector verified it.']},
+{t:'t2',k:'term',term:'ISO 27001',h:'The security management system',b:['The international standard for an audited Information Security Management System.','It certifies the system — not a promise you\u2019re unhackable.']},
+{t:'t2',k:'check',h:'"ISO 27001 certified" — what does it actually tell you?',b:[],say:'It runs an audited security management system. (Not "can\u2019t be hacked", not a firewall product.)'},
+{t:'t2',k:'analogy',h:'The five-step safety checklist',b:['Know your risks, prevent, spot trouble, react, recover.','A simple, repeatable five-beat rhythm anyone can follow under pressure.']},
+{t:'t2',k:'term',term:'NIST CSF',h:'Five functions',b:['Organises all of security into: Identify, Protect, Detect, Respond, Recover.','A shared map for the whole programme.']},
+{t:'t2',k:'check',h:'The five NIST CSF functions?',b:[],say:'Identify · Protect · Detect · Respond · Recover.'},
+{t:'t2',k:'analogy',h:'The rules for handling cash',b:['A casino has extra, non-negotiable rules for anyone touching money.','Cameras, counts, sealed drawers — specific rules for the most sensitive thing.']},
+{t:'t2',k:'term',term:'PCI DSS',h:'Rules for card data',b:['Mandatory, prescriptive rules specifically for handling payment-card data.','Card data gets its own regime.'],sayMuted:'Payoff: most good controls satisfy all three standards at once.'},
+{t:'t2',k:'demo',h:'Demo — map the control',b:['Tap a control — guess which standards it satisfies, watch the columns light up.','Most cover more than one (MFA, encryption, access reviews, pen testing, IR plan).'],say:'One control, many boxes — most cover all three.'},
+{t:'t2',k:'pause',h:'Pause — 3 questions',b:['What\u2019s unclear, or what would you push back on?']},
+{t:'t2',k:'case',h:'Real case — Capital One, 2019',b:['100M+ customer records exposed through one cloud misconfiguration.','A gap a mapped, audited control set is designed to catch; ~$80M penalty followed.'],note:'Confirm figures before quoting.'},
+/* T3 */
+{t:'t3',k:'story',h:'Story — the clean policy',b:['A beautiful access-control policy — approved, signed, filed.','Buried in clause 6: leaver access is reviewed once a year.','A resigned employee keeps live access for eleven months.'],say:'A policy that hides a hole protects no one.'},
+{t:'t3',k:'analogy',h:'The constitution',b:['Sets the principles — what we stand for, what must always be true.','It doesn\u2019t tell you which form to fill in — it tells you the rule everything obeys.']},
+{t:'t3',k:'term',term:'POLICY',h:'The high-level rule',b:['What must be true, and why. Short, stable, approved at the top.','The "what," never the "how."']},
+{t:'t3',k:'check',h:'Which is a policy statement?',b:[],say:'"Access to customer data must be restricted to authorised staff." (Principle, not a click-path or a number.)'},
+{t:'t3',k:'analogy',h:'The building code',b:['"Buildings must be safe" is the principle.','The code makes it measurable: walls this thick, exits this wide. Now it can be checked.']},
+{t:'t3',k:'term',term:'STANDARD',h:'The measurable rule',b:['The specific requirement that makes a policy enforceable — "14 characters, MFA on."','It turns a principle into a check.']},
+{t:'t3',k:'check',h:'"Passwords must be strong" — what makes it enforceable?',b:[],say:'A standard: \u226514 chars, MFA required, no reuse.'},
+{t:'t3',k:'analogy',h:'The recipe',b:['Anyone can follow a good recipe and get the same dish.','Exact steps, in order — no judgement required.']},
+{t:'t3',k:'term',term:'PROCEDURE',h:'The step-by-step how',b:['Exact instructions for the person actually doing the task.','Policy → standard → procedure: principle, made measurable, made doable.']},
+{t:'t3',k:'check',h:'Who most needs the procedure written down?',b:[],say:'The person performing the task.'},
+{t:'t3',k:'analogy',h:'The unlocked back door',b:['Front alarmed, safe bolted, policy framed — and one back door quietly unlocked.','The whole defence is only as strong as the line everyone skimmed.']},
+{t:'t3',k:'term',term:'POLICY GAP',h:'The clause that undoes the rest',b:['A weak or outdated clause that quietly undoes everything else.','Reading policies critically is the skill.']},
+{t:'t3',k:'demo',h:'Demo — find the gaps',b:['A real-looking access-control policy; five lines are quietly dangerous.','Tap each, then the reveal confirms why.'],say:'5 gaps: shared admin account · same-day access on email · leaver review once/year · verbal exceptions · stale 30-day rotation.'},
+{t:'t3',k:'pause',h:'Pause — 3 questions',b:['What\u2019s unclear, or what would you push back on?']},
+{t:'t3',k:'case',h:'Real case — Morgan Stanley',b:['Old data-centre kit retired without a followed wipe procedure.','Devices with customer data left the building intact.','The policy wasn\u2019t the problem; the missing procedure was.'],note:'Confirm the figure before quoting.'},
+/* T4 */
+{t:'t4',k:'story',h:'Story — 02:00',b:['Your phone rings. Ransomware is spreading across the network right now.','Every choice in the next ten minutes either contains it or makes it worse.','No policy document open — just you and a sequence you know or you don\u2019t.'],say:'Everything so far was recognising the threat. This is surviving it.'},
+{t:'t4',k:'phase',term:'DETECT',h:'The smoke alarm',b:['Notice something is wrong — and confirm it\u2019s real — as fast as possible.','The earlier the alarm, the less it burns. Dwell time is the enemy.']},
+{t:'t4',k:'phase',term:'CONTAIN',h:'Close the fire doors',b:['Stop the spread first — isolate affected systems — before you fix anything.','You don\u2019t repair a room while the fire\u2019s still spreading. Isolate, then work.']},
+{t:'t4',k:'phase',term:'ERADICATE',h:'Put the fire fully out',b:['Remove the attacker and their foothold completely — every backdoor.','A fire that\u2019s "mostly out" reignites. Miss one foothold and they\u2019re back.']},
+{t:'t4',k:'phase',term:'RECOVER',h:'Rebuild and reopen',b:['Restore from clean backups and return to normal — verifying nothing dirty returns.','Reopen too early on a bad backup and you reopen the breach. Verify clean, then go live.']},
+{t:'t4',k:'phase',term:'LEARN',h:'The incident review',b:['Find what let it in and fix it — so the same incident can\u2019t happen twice.','An incident you don\u2019t learn from, you\u2019ve simply scheduled again.'],sayMuted:'Detect · Contain · Eradicate · Recover · Learn — now run all five, live.'},
+{t:'t4',k:'pause',h:'Pause — 3 questions',b:['What\u2019s unclear, or what would you push back on?']},
+{t:'t4',k:'demo',h:'Capstone — the 02:00 call',b:['Run all five phases live, fully scored — the assessment artifact.','Make the right call at each phase; every wrong move makes it worse.'],say:'Order is everything: contain before you clean; recover only from clean, offline backups.'},
+{t:'close',k:'close',h:'Close — two days, one job',b:['Recognise → Control → Respond.','Name a threat by behaviour, prove a control against a standard, read a policy critically, run an incident without making it worse.'],say:'From the first opened file to the 2am call — that\u2019s the whole arc.'}
+];
+
+const card=document.getElementById('card');
+let i=0;
+try{const sv=parseInt(localStorage.getItem('kibs_d2_notes'));if(sv>=0&&sv<S.length)i=sv;}catch(e){}
+document.getElementById('pt').textContent=S.length;
+
+function esc(s){return s;}
+function render(){
+  const s=S[i];
+  let html='<span class="chip">'+TOPICS[s.t]+'</span>';
+  html+='<div class="kind k-'+s.k+'">'+(KIND[s.k]||'')+'</div>';
+  html+='<h1>'+s.h+'</h1>';
+  if(s.term)html+='<div class="term-badge">'+s.term+'</div>';
+  html+='<ul>'+s.b.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';
+  if(s.say)html+='<div class="say"><span class="ar">→</span><span class="txt">'+s.say+'</span></div>';
+  if(s.sayMuted)html+='<div class="say muted"><span class="ar">·</span><span class="txt">'+s.sayMuted+'</span></div>';
+  if(s.note)html+='<div class="say muted"><span class="ar">☕</span><span class="txt">'+s.note+'</span></div>';
+  html+='<div class="spacer"></div>';
+  card.innerHTML=html;card.scrollTop=0;
+  document.getElementById('pn').textContent=i+1;
+  document.getElementById('fill').style.width=((i+1)/S.length*100)+'%';
+  document.getElementById('prev').classList.toggle('disabled',i===0);
+  document.getElementById('next').classList.toggle('disabled',i===S.length-1);
+  const nx=document.getElementById('nextT');
+  nx.textContent=i<S.length-1?(S[i+1].h):'— end —';
+  try{localStorage.setItem('kibs_d2_notes',i);}catch(e){}
+}
+function go(d){const n=i+d;if(n<0||n>=S.length)return;i=n;render();}
+
+document.getElementById('next').onclick=function(){go(1);};
+document.getElementById('prev').onclick=function(){go(-1);};
+document.getElementById('zoneR').onclick=function(){go(1);};
+document.getElementById('zoneL').onclick=function(){go(-1);};
+document.addEventListener('keydown',function(e){
+  if(document.getElementById('ov').classList.contains('on')){if(e.key==='Escape')closeOv();return;}
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){go(1);e.preventDefault();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){go(-1);e.preventDefault();}
+  else if(e.key==='Home'){i=0;render();}else if(e.key==='End'){i=S.length-1;render();}
+});
+// swipe
+let sx=0,sy=0;
+document.querySelector('.stage').addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+document.querySelector('.stage').addEventListener('touchend',function(e){
+  const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
+  if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.5){go(dx<0?1:-1);}
+},{passive:true});
+
+// jump overlay
+const ov=document.getElementById('ov'),ovList=document.getElementById('ovList');
+function buildOv(){
+  let html='',last='';
+  S.forEach(function(s,n){
+    if(s.t!==last){html+='<div class="ov-grp">'+TOPICS[s.t]+'</div>';last=s.t;}
+    html+='<div class="ov-row'+(n===i?' cur':'')+'" data-n="'+n+'"><span class="ov-n">'+(n+1)+'</span><span class="ov-t">'+s.h+'</span><span class="ov-k">'+(KIND[s.k]||'')+'</span></div>';
+  });
+  ovList.innerHTML=html;
+  [].slice.call(ovList.querySelectorAll('.ov-row')).forEach(function(r){r.onclick=function(){i=+r.dataset.n;render();closeOv();};});
+}
+function openOv(){buildOv();ov.classList.add('on');const c=ovList.querySelector('.ov-row.cur');if(c&&c.scrollIntoView)try{c.scrollIntoView({block:'center'});}catch(e){}}
+function closeOv(){ov.classList.remove('on');}
+document.getElementById('jumpBtn').onclick=openOv;
+document.getElementById('ovClose').onclick=closeOv;
+ov.addEventListener('click',function(e){if(e.target===ov)closeOv();});
+
+render();
+</script>
+</body>
+</html>

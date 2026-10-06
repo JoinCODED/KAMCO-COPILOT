@@ -1,0 +1,23 @@
+{
+  "title": "AI at Work with Microsoft Copilot",
+  "code": "KAMCO",
+  "audience": "client",
+  "branding": {"mode": "coded", "partner_name": "KAMCO Invest (text only)"},
+  "deliverables": {"landing": true, "day_pages": true, "decks": true, "trainee_labs": true, "instructor_labs": true, "presenter_notes": true,
+    "answer_key": true, "lab_walkthrough": true, "instructor_solutions": true, "cheat_sheet": true, "practice_quiz": false, "exam": false,
+    "facilitator_kit": true, "workshop_index": true, "map_tests": "pending - supplied separately"},
+  "days": [
+    {"n": 1, "title": "From Inbox to Insight", "date": "2026-10-11", "topics": ["Copilot, honestly", "Prompting for investment work", "Read the request in Outlook", "Excel: clean the data", "Excel: find the story"], "lab_challenges": 7},
+    {"n": 2, "title": "From Analysis to Reply", "date": "2026-10-12", "topics": ["Memo or deck? Then Word", "PowerPoint", "Reply and review", "From manual to agent"], "lab_challenges": 6, "project": "graded, versions A/B"}
+  ],
+  "scenarios": {"teaching": "Al-Murjan Family Office", "instructor": "Al-Waha Family Office", "project_A": "Al-Bayan Holding (Word memo)", "project_B": "Dar Al-Sanad Trust (PowerPoint deck)", "data": "fictional"},
+  "deploy": {"host": "TBD", "day_page_filename": "coded-kamco-day-<n>.html"},
+  "library": {
+    "source_row": "https://app.notion.com/p/3ef021af4a1881b3aa75cd0528eddd20",
+    "instructor": "Aya", "type": ["Client Custom"], "used_for": ["KAMCO Invest"],
+    "topics": ["Microsoft Copilot", "Data Analysis", "Prompting", "Agentic AI"],
+    "website": null, "github_repo": null,
+    "outline_page": "https://app.notion.com/p/3b3021af4a18815b9ba6f10c0214810e",
+    "last_delivered": "2026-10-12", "duration": "2 days, 9 AM-4 PM"
+  }
+}

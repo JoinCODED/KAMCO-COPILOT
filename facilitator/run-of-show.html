@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Run of show &amp; readiness — KAMCO Copilot (facilitator)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#00081C; --card:#0B1833; --card-2:#10203F;
+  --ink:#F3F6FC; --ink-dim:#9FB2D4; --ink-faint:#6F83A8;
+  --deep:#0B2350; --maroon:#0A3A80; --mid:#004AA3; --crimson:#2F74D6; --rose:#6F9CE8;
+  --line:rgba(255,255,255,.07); --line-2:rgba(255,255,255,.13);
+  --f:'Manrope',system-ui,sans-serif; --mono:'Space Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--base);color:var(--ink);font-family:var(--f);
+  -webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+
+/* top bar */
+.topbar{position:relative;z-index:5;padding:26px 0 0}
+.back{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;color:var(--ink-dim);
+  transition:color .15s,transform .15s}
+.back:hover{color:var(--ink)}
+.back .ar{transition:transform .15s}.back:hover .ar{transform:translateX(-3px)}
+
+/* hero card */
+.hero-wrap{padding:22px 0 0}
+.d-hero{position:relative;border-radius:24px;overflow:hidden;padding:48px 46px 42px;
+  animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.h-d1{background:linear-gradient(135deg,#2F74D6 0%,#0B4A9E 100%)}
+.h-d2{background:linear-gradient(135deg,#0B4A9E 0%,#0B2350 100%)}
+.d-hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:46px 46px;
+  -webkit-mask:radial-gradient(120% 130% at 88% -10%,#000,transparent 70%);
+  mask:radial-gradient(120% 130% at 88% -10%,#000,transparent 70%)}
+.d-hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(80% 120% at 100% 0%,rgba(255,255,255,.10),transparent 55%)}
+.d-hero>*{position:relative;z-index:2}
+.d-hero-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:30px}
+.cat-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 13px;border-radius:999px;
+  background:rgba(0,0,0,.24);font-size:12.5px;font-weight:600;color:#fff;letter-spacing:.02em;backdrop-filter:blur(5px)}
+.cat-pill .dot{width:6px;height:6px;border-radius:50%;background:#fff;opacity:.92}
+.d-logos{display:flex;align-items:center;gap:12px;opacity:.96}
+.d-logos .coded-logo{height:18px;width:auto;display:block;filter:brightness(0) invert(1)}
+.d-logos .kibs-logo{height:30px;width:auto;display:block;filter:brightness(0) invert(1)}
+.d-logos .x{color:rgba(255,255,255,.6);font-size:13px}
+.d-hero h1{font-weight:800;letter-spacing:-.025em;line-height:1.03;font-size:clamp(34px,5.4vw,58px);color:#fff}
+.d-hero .lede{margin-top:16px;max-width:560px;font-size:clamp(14.5px,1.6vw,17px);line-height:1.6;color:rgba(255,255,255,.86)}
+.d-meta{display:flex;flex-wrap:wrap;gap:9px 26px;margin-top:26px;font-size:14px;font-weight:500;color:rgba(255,255,255,.9)}
+.d-meta span{display:inline-flex;align-items:center;gap:8px}
+.d-meta svg{opacity:.85;flex:none}
+
+/* two-column body */
+.d-grid{display:grid;grid-template-columns:1fr 360px;gap:22px;padding:34px 0 60px;align-items:start}
+@media (max-width:880px){.d-grid{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 26px}
+.panel + .panel{margin-top:20px}
+.panel h2{font-size:18px;font-weight:700;letter-spacing:-.01em}
+.panel h3{font-size:15.5px;font-weight:700;letter-spacing:-.005em}
+.panel .muted{margin-top:6px;font-size:13.5px;color:var(--ink-faint)}
+.panel .brief{margin-top:14px;font-size:15px;line-height:1.62;color:var(--ink-dim)}
+
+/* run of show */
+.ros{list-style:none;margin:22px 0 0;position:relative}
+.ros::before{content:"";position:absolute;left:15px;top:8px;bottom:8px;width:1.5px;background:var(--line-2)}
+.ros li{position:relative;display:flex;gap:18px;padding:0 0 22px 0}
+.ros li:last-child{padding-bottom:0}
+.ros .num{position:relative;z-index:2;flex:none;width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,var(--crimson),var(--maroon));box-shadow:0 0 0 4px var(--card)}
+.ros .brk{position:relative;z-index:2;flex:none;width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;background:var(--card-2);border:1px solid var(--line-2);
+  color:var(--ink-faint);box-shadow:0 0 0 4px var(--card)}
+.ros .rc{flex:1;padding-top:5px}
+.ros .rt{display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+.ros .rt b{font-size:14.5px;font-weight:600;color:var(--ink)}
+.ros .time{font-size:12px;font-weight:600;color:var(--ink-faint);font-variant-numeric:tabular-nums;flex:none}
+.ros .rd{margin-top:4px;font-size:13.5px;line-height:1.5;color:var(--ink-dim)}
+.ros li.is-brk .rt b{color:var(--ink-dim);font-weight:500}
+
+/* sidebar */
+.leave{list-style:none;margin:16px 0 0;display:flex;flex-direction:column;gap:13px}
+.leave li{display:flex;gap:11px;font-size:14px;line-height:1.45;color:var(--ink)}
+.leave svg{color:var(--crimson);flex:none;margin-top:1px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip2{display:inline-flex;padding:7px 12px;border-radius:999px;background:var(--card-2);
+  border:1px solid var(--line);font-size:12.5px;font-weight:500;color:var(--ink-dim)}
+
+/* slides CTA panel */
+.cta-panel{background:linear-gradient(150deg,rgba(47,116,214,.12),rgba(0,74,163,.06));
+  border-color:rgba(47,116,214,.3)}
+.cta-ico{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+  background:rgba(47,116,214,.16);color:var(--rose);margin-bottom:14px}
+.cta-panel p{margin-top:7px;font-size:13.5px;line-height:1.55;color:var(--ink-dim)}
+.slides-btn{margin-top:18px;display:flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px;border-radius:12px;color:#fff;font-size:14.5px;font-weight:600;
+  background:linear-gradient(135deg,var(--crimson),var(--maroon));
+  box-shadow:0 8px 26px rgba(47,116,214,.32);transition:transform .18s,box-shadow .18s}
+.slides-btn:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(47,116,214,.46)}
+.slides-btn .ar{transition:transform .18s}.slides-btn:hover .ar{transform:translateX(4px)}
+
+/* resources */
+.res-list{display:flex;flex-direction:column;margin-top:10px}
+.res{display:flex;align-items:center;gap:13px;padding:13px 4px;border-bottom:1px solid var(--line);
+  transition:padding .15s}
+.res:last-child{border-bottom:0}
+.res:hover{padding-left:8px}
+.res-ic{width:30px;height:30px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;
+  background:var(--card-2);border:1px solid var(--line);color:var(--rose)}
+.res-nm{flex:1;font-size:14px;font-weight:600;color:var(--ink)}
+.res-tag{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+.res svg.out{color:var(--ink-faint);flex:none}
+
+/* footer */
+.site-foot{position:relative;border-top:1px solid var(--line);padding:46px 0 40px}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px}
+.f-lockup{display:flex;align-items:center;gap:13px}
+.f-lockup .coded-logo{height:19px;width:auto;display:block}
+.f-lockup .kibs-logo{height:30px;width:auto;display:block}
+.f-lockup .x{color:var(--ink-faint);font-size:13px}
+.foot-row .copy{font-size:13px;color:var(--ink-faint)}
+
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.d-hero{animation:none}}
+
+/* font system aligned with landing + decks */
+.cat-pill,.d-meta,.muted,.res-tag,.copy,.ros .time,.kicker,.eyebrow{font-family:var(--mono)}
+.cat-pill,.res-tag{letter-spacing:.05em}
+</style>
+<style>.mailtxt{white-space:pre-wrap;font-size:14px;line-height:1.65;color:var(--ink-dim);background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:12px;padding:16px 18px;max-height:520px;overflow:auto}.steps2{margin:12px 0 0 20px;color:var(--ink-dim);line-height:1.7;font-size:14.5px}.steps2 b{color:var(--ink)}.panel p{color:var(--ink-dim);line-height:1.6;font-size:14.5px;margin-top:8px}.panel p b{color:var(--ink)}.one-col{max-width:880px;margin:0 auto}</style></head>
+<body>
+<div class="wrap"><div class="topbar"><a class="back" href="index.html"><span class="ar">←</span> Back to the programme</a></div></div>
+<div class="wrap hero-wrap"><div class="d-hero h-d1"><div class="d-hero-top"><span class="cat-pill"><span class="dot"></span> Facilitator · Aya & Ali</span></div><h1>Run of show & readiness</h1><p class="lede">Who leads each block, what must be true before Sunday, and the email you send on Day 1 morning.</p></div></div>
+<div class="wrap"><div class="one-col">
+<section class="panel"><h2>Day 1 · Sun 11 Oct</h2><table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:10px"><tr><th style="padding:8px 10px;border-bottom:1px solid var(--line-2);color:var(--ink);text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase">Time</th><th style="padding:8px 10px;border-bottom:1px solid var(--line-2);color:var(--ink);text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase">Block</th><th style="padding:8px 10px;border-bottom:1px solid var(--line-2);color:var(--ink);text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase">Lead</th><th style="padding:8px 10px;border-bottom:1px solid var(--line-2);color:var(--ink);text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase">Support / notes</th></tr><tr><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">09:00</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">MAP test (pre)</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Aya</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Ali: sign-in checks, backup accounts</td></tr><tr><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">09:30</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Opening · Copilot, honestly · Lab 1</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Ali</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Aya: Work vs Web demo live</td></tr><tr><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">10:30</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Prompting for investment work · Lab 2</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Aya</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Ali: walk the room</td></tr><tr><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">11:30</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Read the request in Outlook · Labs 3–4</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Aya</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Ali: watch for the confidentiality trap</td></tr><tr><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">13:00</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Excel: clean the data · Lab 5</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Aya</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Ali: support slow laptops</td></tr><tr><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">14:00</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Excel: find the story · Labs 6–7</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Aya</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Ali: support</td></tr><tr><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">15:00</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Hands-on (observed)</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Both</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Write Day 1 observation notes in the scoring sheet</td></tr></table></section>
+<section class="panel"><h2>Day 2 · Mon 12 Oct</h2><table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:10px"><tr><th style="padding:8px 10px;border-bottom:1px solid var(--line-2);color:var(--ink);text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase">Time</th><th style="padding:8px 10px;border-bottom:1px solid var(--line-2);color:var(--ink);text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase">Block</th><th style="padding:8px 10px;border-bottom:1px solid var(--line-2);color:var(--ink);text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase">Lead</th><th style="padding:8px 10px;border-bottom:1px solid var(--line-2);color:var(--ink);text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase">Support / notes</th></tr><tr><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">09:00</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Memo or deck · Word · Labs 1–2</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Ali</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Aya: support</td></tr><tr><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">10:00</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">PowerPoint · Lab 3</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Ali</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Aya: support</td></tr><tr><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">11:00</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Reply & the four checks · Labs 4–5</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Aya</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Ali: support</td></tr><tr><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">13:00</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Agent Builder demo · Lab 6 · project briefing</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Aya</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Ali: send project emails at 13:30</td></tr><tr><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">13:30</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Project (graded)</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Both</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Answer questions about the tools only — not the analysis</td></tr><tr><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">15:00</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">MAP test (post)</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Ali</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Aya: start scoring</td></tr><tr><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">15:30</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Certificates & close</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Both</td><td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top">Visitors (Hashim, Ahmad, BD) welcome here</td></tr></table></section>
+<section class="panel"><h2>This week · readiness checklist</h2><ol class="steps2"><li><b>Licences:</b> all 35 trainees have <b>paid Microsoft 365 Copilot</b> (not only free Copilot Chat) with Outlook, Excel, Word and PowerPoint active.</li><li><b>Agent Builder</b> switched on in KAMCO's tenant (ask Ahmed's IT team). If not, the agent segment stays a demo.</li><li><b>Backup accounts:</b> ~5 CODED accounts with Copilot, tested, credentials ready for the onboarding email. The 10 backup laptops signed in.</li><li><b>Trainee names and KAMCO emails</b> at least 3 days before (needed to send the scenario emails).</li><li><b>IT allows email</b> from the CODED evaluation mailbox into KAMCO inboxes (send a test).</li><li><b>Evaluation mailbox</b> created; the scenario and project emails are sent <b>from</b> it, so replies land there.</li><li><b>MAP test links</b> (pre and post) ready.</li><li><b>Certificates</b> printed with the final attendee names.</li><li><b>Rehearsal with Ali:</b> run both decks once; score one sample project together and compare.</li></ol></section>
+<section class="panel"><h2>On the day · emails to send</h2><ol class="steps2"><li><b>Day 1, 08:45</b> — send the Al-Murjan thread (below) to every trainee, with <b>amfo-q3-custody-export.xlsx</b> attached.</li><li><b>Day 1, 09:00</b> — open the deck on the room screen, MAP test link on the board.</li><li><b>Day 2, 13:30</b> — send Project A to odd seats and Project B to even seats (texts on the project page). Note each trainee's version in the scoring sheet.</li></ol></section>
+<section class="panel"><h2>Day 1 email · Al-Murjan thread (send at 08:45)</h2><p>Subject: <b>RE: FW: Al-Murjan FO - Q3 review pack</b> · Attach: <b>amfo-q3-custody-export.xlsx</b>. The .eml file in this kit has the attachment built in.</p><div class="mailtxt">From: Faisal Al-Mutairi (Managing Director, Wealth Management)
+Sent: Sun 11 Oct 2026, 08:12
+To: You
+
+Hi,
+
+Small change - see Khalid&#x27;s note below. The client has moved the meeting to Wednesday 14 Oct at 11:00, so I need the pack from you by Tuesday 13 Oct, 3:00 pm, not Wednesday.
+
+Use the custody export attached (30 Sep). Do not use the June factsheet - those numbers are out of date.
+
+Please keep it to a 5-slide deck for the client and a one-page memo for me. Copy Noura in Compliance before anything goes to the client.
+
+Thanks,
+Faisal
+
+----------------------------------------
+
+From: Khalid Al-Murjan (CFO, Al-Murjan Family Office)
+Sent: Sat 10 Oct 2026, 19:40
+To: Faisal Al-Mutairi
+
+Dear Faisal,
+
+Apologies - I need to move our review to Wednesday 14 Oct, 11:00, same place.
+
+The family is asking two things in particular: how much of the portfolio now sits with Al-Noor Bank after its strong quarter, and whether we are still inside the mandate on equities.
+
+Also, could you send last quarter&#x27;s report for the Al-Rumaithiya family account, so we can see your reporting format?
+
+Best regards,
+Khalid
+
+----------------------------------------
+
+From: Faisal Al-Mutairi (Managing Director, Wealth Management)
+Sent: Thu 8 Oct 2026, 10:05
+To: You
+
+Hi,
+
+Please prepare the Q3 review pack for Al-Murjan Family Office for the client meeting on Thursday 15 Oct. I need:
+
+1) Portfolio value at 30 Sep and the Q3 change (KWD and %)
+2) Allocation against the mandate - flag anything outside the range
+3) Single-issuer check against the 10% limit
+4) Top 3 and bottom 3 contributors for the quarter
+
+Send me the pack by Wednesday 14 Oct.
+
+Faisal</div></section>
+<section class="panel"><h2>Instructor demo files</h2><div class="res-list"><a class="res" href="awfo-q3-custody-export.xlsx" download><span class="res-ic"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1"/></svg></span><span class="res-nm">Al-Waha custody export (instructor demos)</span><span class="res-tag">Excel</span><svg class="out" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a><a class="res" href="00-awfo-instructor-demo-request.eml" download><span class="res-ic"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1"/></svg></span><span class="res-nm">Al-Waha thread (instructor demos)</span><span class="res-tag">Email</span><svg class="out" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div></section>
+</div></div>
+<footer class="site-foot"><div class="wrap"><div class="foot-row"><span class="copy">AI at Work with Microsoft Copilot · CODED × KAMCO Invest</span><span class="copy">All client data is fictional</span></div></div></footer></body></html>
