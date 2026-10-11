@@ -45,7 +45,7 @@ DAYS = {
          ("Recap & close", "15:50", "Back to the ice-breaker wall. Save your file in OneDrive — you need it tomorrow.")],
     leave=["Use Copilot safely with client data, with your work account.", "Write prompts with Context, Task, Format and Tone.", "Find the real deadline and deliverable in a long thread.", "Clean a custody export and check it against a mandate.", "Explain every number you produce."],
     chips=["What is AI?", "LLMs", "Copilot Chat", "Work vs Web", "CTFT prompts", "Outlook Summarise", "Excel cleaning", "PivotTables", "Mandate check", "Issuer limit"],
-    lab="Seven challenges on the Al-Murjan request — safe use, prompting, summarising the thread, reading the request, cleaning the export, and the mandate and issuer checks. Capture each KAMCO{…} flag."),
+    lab="Nine tasks, in the order of the day: first contact, your time audit, safe or not, from zero to hero, build your own prompt, tame the thread, and three Excel tasks on the Al-Murjan export. Each has a Stretch and a Boss challenge for early finishers."),
  2: dict(title="From Analysis to Reply", cat="Day 2 · Produce → Reply", date="Mon 12 Oct 2026",
     lede="Turn yesterday's checked numbers into a one-page memo and a short deck, reply with the four checks, see an agent built — then complete one full request alone.",
     brief="Today covers the second half of the workflow. You will choose the right format for the reader, draft a memo in Word from your own checked numbers, build a deck in PowerPoint where every title is the message, and send a reply that passes four checks. After a short Agent Builder demo, you complete one full request alone — the graded project — then take the end MAP test and receive your certificate.",

@@ -147,10 +147,11 @@ add(case(1, "Three leaks in <span class=\"hl\">twenty days.</span>", 3, "", 0, "
          "Weeks after engineers were allowed to use a public chatbot, staff pasted <b>confidential source code and meeting notes</b> into it. Samsung then <b>banned public generative AI tools</b> on company devices.",
          [(3, "", 0, "Reported leaks"), (20, "", 0, "Days after access"), ("May", "", 0, "2023 · ban announced")],
          "Next: hands-on →", sid="t1case2"))
-add(lab_intro("b1lab", "t1", "Hands-on · 10 min", "Feel the engine — <span class=\"hl\">then sort what's safe.</span>",
-              [("E1.1", "Feel the engine", "In Copilot Chat, with no file: “What was Al-Murjan Family Office's Q3 return?” Did it guess, or say it does not know?", "5 min"),
-               ("Lab 1", "Safe or Not?", "Sort five items: fine in work Copilot, fine after removing personal data, or never.", "5 min")],
-              "One confident guess caught. Five items sorted. <b>KAMCO{…}</b> flag captured.", LAB + "#d1-safe", extra="Ask Copilot Chat what staff at an investment firm should never paste into an AI tool — compare with your sorting."))
+add(lab_intro("b1lab", "t1", "Hands-on · 15 min", "First contact — <span class=\"hl\">then sort what's safe.</span>",
+              [("E1.1", "First contact", "Pick a starter, replace the [brackets], run it in Copilot Chat. Would you use the result?", "5 min"),
+               ("E1.2", "Your time audit", "Three tasks that drain your week — tagged Generate, Condense, Find or Transform, with hours.", "5 min"),
+               ("E1.3", "Safe or not?", "Five items: fine in work Copilot, fine after removing personal data, or never.", "5 min")],
+              "One result you would use. Three tasks audited. Five items sorted.", LAB + "#E1.1", extra="Every task in the lab has a <b>Stretch</b> and a <b>Boss</b> challenge — keep going."))
 add(pause(1))
 add(break_slide("break1", "t1", 10, "10:30", "Prompting with CTFT"))
 
@@ -203,10 +204,10 @@ add(check(2, 4, "Copilot's summary used the old June factsheet. What is your bes
 add(case(2, "Grounded in the firm's <span class=\"hl\">own research.</span>", 98, "%", 0, "Morgan Stanley Wealth Management · 2023–24",
          "Morgan Stanley gave its financial advisers an AI assistant that answers from the firm's <b>own research library</b>. Reported adoption reached about <b>98% of advisor teams</b>. The value came from <b>good sources and clear questions</b>.",
          [("100k", "", 0, "Research documents, approx."), (2023, "", 0, "Year launched"), (98, "%", 0, "Advisor teams using it")], "Next: hands-on →"))
-add(lab_intro("b2lab", "t2", "Hands-on · 15 min", "Build the brief — <span class=\"hl\">then build your own.</span>",
-              [("Lab 2", "Build the Brief", "Label each part of a strong Al-Murjan prompt as Context, Task, Format or Tone.", "5 min"),
-               ("E1.4", "Your own prompt", "Pick a task from this morning's wall. Write a CTFT prompt for it and run it in Copilot Chat — training files only.", "10 min")],
-              "A prompt you will reuse, saved. Best one = <b>Prompt of the Day</b>.", LAB + "#d1-ctft", extra="Rewrite your prompt for a different reader — change only Context and Tone — and compare the two answers."))
+add(lab_intro("b2lab", "t2", "Hands-on · 20 min", "From zero to hero — <span class=\"hl\">then build your own.</span>",
+              [("E1.4", "From zero to hero", "One weak client email, four rounds. Add one CTFT ingredient each round and rate the result 1–5.", "10 min"),
+               ("E1.5", "Build your own prompt", "Pick a task from your time audit. Build a CTFT prompt in the builder and run it in Copilot Chat.", "10 min")],
+              "Five ratings, one prompt you will reuse. Best one = <b>Prompt of the Day</b>.", LAB + "#E1.4", extra="Fill the Example field in the builder and run it again — one example changes the structure and voice."))
 add(pause(2))
 add(break_slide("break2", "t2", 10, "11:30", "Read the request in Outlook"))
 
@@ -242,10 +243,9 @@ add(check(3, 4, "A client asks you to send another family's report “so we can 
           [("Send it — they are a client too", False, "That shares one client's private data with another. Never."),
            ("Send it with the names removed", False, "Holdings and values can still identify a family. Do not share another client's report."),
            ("Do not send it. Offer a blank sample of the format instead", True, "Right. Another client's data never leaves. A blank sample shows the format safely.")]))
-add(lab_intro("b3lab", "t3", "Hands-on · 15 min", "Your inbox — <span class=\"hl\">the Al-Murjan thread.</span>",
-              [("Lab 3", "Summarise the Thread", "Click Summarise on Faisal's thread, then find the three wrong points in a Copilot summary.", "5 min"),
-               ("Lab 4", "Read the Request", "Summarise Faisal's thread in Outlook, then answer: deadline, meeting, deliverables, who to copy, what to decline.", "10 min")],
-              "The real deadline found. One request politely declined.", LAB + "#d1-summary", extra="Ask Copilot to draft a polite reply to Khalid declining the other family's report — then run Coaching by Copilot on it."))
+add(lab_intro("b3lab", "t3", "Hands-on · 15 min", "Tame the thread — <span class=\"hl\">then reply.</span>",
+              [("E1.6", "Tame the thread — then reply", "Summarise Faisal's thread, find the real deadline and asks, draft the reply, check it before sending.", "15 min")],
+              "The newest deadline found. One request politely declined. A reply you would send.", LAB + "#E1.6", extra="Ask Copilot what the client will ask about on Wednesday that the thread does not cover."))
 add(break_slide("break3", "t3", 60, "13:00", "Excel · clean the data", label="Lunch · 60 min"))
 
 # ===================== BLOCK 4 · EXCEL CLEAN =====================
@@ -288,8 +288,8 @@ add(case(4, "One spreadsheet range. <span class=\"hl\">A global debate.</span>",
          "An influential paper on government debt and growth used an Excel range that <b>left out five countries</b>. A graduate student found it in 2013. With the error fixed, the headline result <b>changed sharply</b>.",
          [(5, "", 0, "Countries left out"), (90, "%", 0, "Debt threshold in the paper"), (2013, "", 0, "Error found")], "Next: hands-on →"))
 add(lab_intro("b4lab", "t4", "Hands-on · 15 min", "Clean the <span class=\"hl\">Al-Murjan export.</span>",
-              [("Lab 5", "Clean the Export", "Same five prompts on your file. Then enter: raw rows, duplicates removed, holdings left, missing prices.", "15 min")],
-              "Row count checked before and after. Flag captured.", LAB + "#d1-clean", extra="Ask Copilot which columns still have inconsistent values, then make every Price Date a real date."))
+              [("E1.7", "Clean the export", "Same five prompts on your file. Record raw rows, duplicates removed, holdings left, missing prices.", "15 min")],
+              "Row count checked before and after every step.", LAB + "#E1.7", extra="Ask Copilot which columns still have inconsistent values, then make every Price Date a real date."))
 add(pause(4))
 add(break_slide("break4", "t4", 10, "14:00", "Excel · find the story"))
 
@@ -328,16 +328,16 @@ add(case(5, "A copy-paste error inside <span class=\"hl\">a risk model.</span>",
          "A risk model built in spreadsheets had manual copy-paste steps and a formula error that <b>understated risk</b>. The trading losses reached about <b>US$6.2 billion</b>. JPMorgan's own review named the spreadsheet process.",
          [("$6.2B", "", 0, "Trading losses"), (2012, "", 0, "Year"), ("Excel", "", 0, "Where the error lived")], "Next: hands-on →"))
 add(lab_intro("b5lab", "t5", "Hands-on · 20 min", "Value, mandate, <span class=\"hl\">issuers.</span>",
-              [("Lab 6", "Value and Mandate", "Total value, Q3 change, equity weight — and which asset class is outside its range.", "10 min"),
-               ("Lab 7", "Issuers and Movers", "Largest issuer and its weight; top and bottom contributors.", "10 min")],
-              "Every number explained. Two flags captured.", LAB + "#d1-value", extra="Ask Copilot how much Al-Noor Bank must be sold to get back to 10% — and check its maths by hand."))
+              [("E1.8", "Value and mandate", "Total value, Q3 change, equity weight — and which asset class is outside its range.", "10 min"),
+               ("E1.9", "Issuers and movers", "Largest issuer and its weight; top and bottom contributors.", "10 min")],
+              "Every number explained — and checked against your tables.", LAB + "#E1.8", extra="Ask Copilot how much Al-Noor Bank must be sold to get back to 10% — and check its maths by hand."))
 add(pause(5))
 add(break_slide("break5", "t5", 10, "15:00", "Hands-on · the Al-Murjan request, alone"))
 
 # ===================== HANDS-ON · RECAP · CLOSE =====================
 add(standby("hands", "Hands-on · 50 minutes", "Your turn: <span class=\"hl\">Al-Murjan, alone.</span>",
             "You have the thread and the 30 Sep export. Take the request from the email to a clean, checked analysis.",
-            ["Finish the <b>Day 1 lab</b> challenges you have not cleared yet.",
+            ["Finish the <b>Day 1 lab</b> tasks you have not marked done — then try the Stretch and Boss challenges.",
              "In your Excel file: value at 30 Sep, Q3 change, allocation vs mandate, issuer check, top 3 and bottom 3.",
              "Ask Copilot to write <b>three findings</b> in one line each — then check every number against your table.",
              "<b>Save your file in OneDrive.</b> You need it tomorrow.",

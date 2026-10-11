@@ -30,7 +30,7 @@ function ok(c,m){ if(!c){fails.push(m); console.log('FAIL',m);} }
      }); return out;});
    console.log(f, n,'slides', JSON.stringify(res));
   }
-  if(f.endsWith('-lab.html')){
+  if(f.endsWith('-lab.html') && f!=='coded-kamco-day-1-lab.html'){
    const r=await p.evaluate(async()=>{var log=[];
     for(const c of CHALLENGES){openChallenge(c.id); var env=document.getElementById('env'), d=c.data;
      if(c.engine==='assign'){env.querySelectorAll('.it-card').forEach((card,i)=>{card.querySelector('.opt[data-k="'+d.items[i].key+'"]').click();}); env.querySelector('.check').click();}
