@@ -57,10 +57,6 @@ add(outcomes(1, ["Explain what AI and large language models are — and what the
 add(standby("setup", "Setup check · 3 minutes", "Can you reach <span class=\"hl\">Copilot?</span>", "Do this now — before we start the first block.",
             ["Open <b>copilot.cloud.microsoft</b> (or m365copilot.com).", "Sign in with your <b>KAMCO work account</b> — never a personal one.", "Type <b>Hello</b> and press Enter. An answer back? You are ready.", "Stuck? Raise your hand — we have backup accounts."],
             None, say="Ali walks the room. Anyone without Copilot gets a backup account now."))
-add(cards_slide("rules", "open", "open", "Ground rules · three freedoms", "Three things you are <span class=\"hl\">allowed</span> to do.", None,
-                [dict(i="🧪", t="Experiment out loud", d="Try things, break things, say what happened. Wrong answers teach the room."),
-                 dict(i="🛡️", t="Nothing real goes in", d="Only the <b>training files</b>. No real client names, numbers or documents."),
-                 dict(i="🅿️", t="Park the big questions", d="Big policy or strategy questions go on the parking board. We answer them before the close.")], cols=3))
 
 # ===================== BLOCK 1 · AI → LLM → COPILOT =====================
 add(wall_slide("b1ask", "Block 1 · What is AI?", "In one line: what is <span class=\"hl\">Artificial Intelligence?</span>",

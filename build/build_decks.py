@@ -1,6 +1,10 @@
 import json, re, os, importlib
 import deckkit, deckkit2
-deckkit2.install({"pre": "", "post": ""})
+deckkit2.install({
+    "pre": "https://portal.joincoded.com/sv/kamco-copilot-map-test-pre-day-1",
+    "post": "https://portal.joincoded.com/sv/kamco-copilot-map-test-post-day-2",
+    "sat": "https://portal.joincoded.com/sv/kamco-copilot-end-of-program-satisfaction-survey",
+})
 
 EX = deckkit.EX
 OUTP = "out/site"; OUTF = "out/facilitator"

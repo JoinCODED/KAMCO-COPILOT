@@ -100,8 +100,9 @@ CSS = r"""<style>/* ===== block-structure components ===== */
 .vfy .real{display:none;margin-top:14px;background:rgba(200,50,74,.08);border:1px solid rgba(200,50,74,.34);border-radius:14px;padding:16px 20px;font-size:clamp(16px,1.5vw,21px);color:var(--w8)}.vfy .real b{color:var(--rose-lt)}
 .vfy.open .real{display:block}
 .drawbox{display:flex;gap:30px;align-items:center;margin-top:18px;flex-wrap:wrap}
-.drawbox .shape{width:300px;height:220px;border:2px dashed var(--w2);border-radius:16px;display:flex;align-items:center;justify-content:center;color:var(--w4);font-size:60px}
+.drawbox .shape{width:340px;height:286px;padding:10px;border:2px dashed var(--w2);border-radius:16px;display:flex;align-items:center;justify-content:center;color:var(--w4);font-size:60px}
 .drawbox .shape svg{display:none;width:100%;height:100%}.drawbox.open .shape svg{display:block}.drawbox.open .shape .qm{display:none}
+.drawbox svg.dr *{fill:none;stroke:var(--w6);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.drawbox svg.dr .acc{stroke:var(--rose)}.drawbox svg.dr [fill=currentColor]{fill:var(--w6);stroke:none}
 @media(max-width:900px){.wvs,.ws{grid-template-columns:1fr}.labx .lx{grid-template-columns:60px 1fr}.labx .lm{grid-column:2;text-align:left}}
 </style>"""
 
@@ -120,7 +121,7 @@ function qrGet(k){try{var v=localStorage.getItem('kamco_qr_'+k);if(v)return v;}c
 function qrDraw(box){var k=box.dataset.k,u=qrGet(k),q=box.querySelector('.qr'),a=box.querySelector('.qr-link'),set=box.querySelector('.qr-set'),ed=box.querySelector('.qr-edit');
   if(u){try{var qr=qrcode(0,'M');qr.addData(u);qr.make();q.innerHTML=qr.createSvgTag({cellSize:4,margin:0,scalable:true});q.classList.remove('empty');}catch(err){q.textContent='Link too long for a QR code';}
     a.href=u;a.style.display='';set.style.display='none';ed.style.display='';}
-  else{q.innerHTML='Paste the MAP test link below — the QR code appears here.';q.classList.add('empty');a.style.display='none';set.style.display='';ed.style.display='none';}}
+  else{q.innerHTML='Paste the survey link below — the QR code appears here.';q.classList.add('empty');a.style.display='none';set.style.display='';ed.style.display='none';}}
 document.addEventListener('click',function(e){var s=e.target.closest('.qr-set button');if(s){e.stopPropagation();var box=s.closest('.qrbox'),v=box.querySelector('.qr-set input').value.trim();if(!v)return;try{localStorage.setItem('kamco_qr_'+box.dataset.k,v);}catch(er){QR_URLS[box.dataset.k]=v;}qrDraw(box);return;}
   var ed=e.target.closest('.qr-edit');if(ed){e.stopPropagation();var bx=ed.closest('.qrbox');bx.querySelector('.qr-set').style.display='';bx.querySelector('.qr-set input').value=qrGet(bx.dataset.k);}});
 document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.closest&&e.target.closest('.qr-set')){var b=e.target.closest('.qr-set').querySelector('button');b.click();}});
@@ -180,16 +181,16 @@ def page(title, back, slides):
 
 
 # ---------------- slide builders ----------------
-def map_slide(sid, eyebrow, title_html, minutes, k, t="open", say=None):
+def map_slide(sid, eyebrow, title_html, minutes, k, t="open", say=None, label="Open the MAP test ↗", bullets=None):
     h = f'''<div class="slide" id="{sid}" data-auto="0">{BG2}<div class="slide-pad center" style="justify-content:center;align-items:center;text-align:center">
   <div class="topic-eyebrow b in">{eyebrow}</div>
   <h2 class="topic-title b in">{title_html}</h2>
   <div class="map-row b in">
     <div class="tmr" data-sec="{minutes*60}"><div class="tmr-clock">{minutes}:00</div><div class="tmr-ctl"><button class="main" data-act="start">Start</button><button data-act="add" data-d="120">+2 min</button><button data-act="reset">Reset</button></div></div>
-    <div class="qrbox" data-k="{k}"><div class="qr empty"></div><a class="qr-link" target="_blank" rel="noopener">Open the MAP test ↗</a><div class="qr-set"><input placeholder="Paste the MAP test link"><button>Set</button></div><button class="qr-edit">change link</button></div>
+    <div class="qrbox" data-k="{k}"><div class="qr empty"></div><a class="qr-link" target="_blank" rel="noopener">{label}</a><div class="qr-set"><input placeholder="Paste the survey link"><button>Set</button></div><button class="qr-edit">change link</button></div>
   </div>
 </div></div>'''
-    return h, note(t, "open", strip(title_html), ["Start the 30-minute timer. Trainees scan the QR code or open the link.", "If the QR is empty: paste the MAP link under it once — the deck remembers it on this laptop."], say)
+    return h, note(t, "open", strip(title_html), bullets or ["Start the %d-minute timer. Trainees scan the QR code or open the link." % minutes, "If the QR is empty: paste the link under it once — the deck remembers it on this laptop."], say)
 
 
 def wall_slide(sid, eyebrow, title_html, sub, placeholder, k, t="open", say=None):
@@ -360,9 +361,32 @@ def compare_slide(sid, t, eyebrow, title_html, left, right, cards, say=None):
 
 
 def draw_slide(sid, t, eyebrow, title_html, lead, lesson, say=None):
-    shape = ('<svg viewBox="0 0 300 220"><rect x="40" y="110" width="90" height="70" fill="none" stroke="var(--rose)" stroke-width="4"/>'
-             '<circle cx="210" cy="80" r="44" fill="none" stroke="var(--rose)" stroke-width="4"/><path d="M130 145 L210 124" stroke="var(--w6)" stroke-width="4"/>'
-             '<path d="M150 40 l20 30 h-40z" fill="none" stroke="var(--w6)" stroke-width="4"/></svg>')
+    shape = '''<svg class="dr" viewBox="0 0 560 470" xmlns="http://www.w3.org/2000/svg">
+  <circle class="acc" cx="215" cy="20" r="8"></circle><line class="acc" x1="215" y1="28" x2="215" y2="58"></line>
+  <path d="M152 72 L196 72 L170 32 Z"></path><path d="M234 72 L278 72 L260 32 Z"></path>
+  <rect x="148" y="70" width="134" height="104" rx="16"></rect>
+  <line class="acc" x1="172" y1="100" x2="192" y2="120"></line><line class="acc" x1="192" y1="100" x2="172" y2="120"></line>
+  <circle cx="248" cy="110" r="14"></circle><circle cx="248" cy="113" r="5" fill="currentColor" stroke="none"></circle>
+  <path d="M186 146 L200 136 L214 146 L228 136 L242 146"></path>
+  <line x1="120" y1="120" x2="146" y2="126"></line><line x1="118" y1="136" x2="146" y2="136"></line>
+  <line x1="310" y1="120" x2="284" y2="126"></line><line x1="312" y1="136" x2="284" y2="136"></line>
+  <line x1="215" y1="174" x2="215" y2="196"></line>
+  <rect x="160" y="196" width="110" height="96" rx="18"></rect>
+  <rect x="182" y="216" width="66" height="40" rx="6"></rect>
+  <circle cx="196" cy="236" r="4"></circle><circle cx="215" cy="236" r="4"></circle><circle cx="234" cy="236" r="4"></circle>
+  <path d="M160 220 L112 250 L98 284"></path>
+  <path d="M270 214 L330 172 L384 152"></path>
+  <ellipse class="acc" cx="432" cy="70" rx="38" ry="46"></ellipse>
+  <path class="acc" d="M424 114 L440 114 L432 126 Z"></path>
+  <path class="acc" d="M432 126 Q412 146 386 150"></path>
+  <path d="M270 268 C 322 268 332 226 300 218 C 278 213 276 240 296 246"></path>
+  <line x1="215" y1="292" x2="215" y2="330"></line>
+  <circle cx="215" cy="386" r="56"></circle><circle cx="215" cy="386" r="8"></circle>
+  <line x1="215" y1="330" x2="215" y2="378"></line><line x1="215" y1="394" x2="215" y2="442"></line>
+  <line x1="167" y1="358" x2="263" y2="414"></line><line x1="167" y1="414" x2="263" y2="358"></line>
+  <rect x="152" y="396" width="26" height="10" rx="3"></rect><rect x="252" y="358" width="26" height="10" rx="3"></rect>
+  <path d="M196 292 L172 396"></path><path d="M240 292 L258 360"></path>
+</svg>'''
     h = f'''<div class="slide" id="{sid}" data-auto="0">{BG2}<div class="slide-pad">
   <div class="topic-eyebrow b in">{eyebrow}</div>
   <h2 class="demo-h sm b in">{title_html}</h2>

@@ -49,7 +49,7 @@ def run_of_show():
               "<b>Trainee names and KAMCO emails</b> at least 3 days before (needed to send the scenario emails).",
               "<b>IT allows email</b> from the CODED evaluation mailbox into KAMCO inboxes (send a test).",
               "<b>Evaluation mailbox</b> created; the scenario and project emails are sent <b>from</b> it, so replies land there.",
-              "<b>MAP test links</b> (pre and post) ready.",
+              "<b>Survey links</b> built into the decks: MAP pre (Day 1), MAP post and satisfaction survey (Day 2).",
               "<b>Certificates</b> printed with the final attendee names.",
               "<b>Rehearsal with Ali:</b> run both decks once; score one sample project together and compare."]
     morning = ["<b>Day 1, 08:45</b> — send the Al-Murjan thread (below) to every trainee, with <b>amfo-q3-custody-export.xlsx</b> attached.",

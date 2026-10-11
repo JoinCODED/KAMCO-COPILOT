@@ -229,9 +229,12 @@ add(standby("project", "Project · graded · 80 minutes", "One request. <span cl
             "13:30 – 14:50 · break when you need it", extra=rub, t="t4", k="demo",
             say="Graded on the five criteria shown. Replies arrive in the evaluation inbox with a timestamp. No help from neighbours — help from Copilot is the point."))
 add(map_slide("mapend", "Before we close · 15:00", "MAP test — <span class=\"hl\">see your progress.</span>", 30, "post", t="close"))
+add(map_slide("survey", "Before certificates · 5 minutes", "How did we do? <span class=\"hl\">Tell us.</span>", 5, "sat", t="close",
+              label="Open the survey ↗",
+              bullets=["End-of-program satisfaction survey. Start the 5-minute timer; trainees scan the QR code or open the link.", "Certificates follow once the room is done."]))
 add(standby("cert", "15:30 · certificates", "Well done. <span class=\"hl\">Certificates.</span>",
             "Two days, one real job — from a request in your inbox to a reply you can stand behind.",
-            ["Certificates are handed out by name.", "Evaluation results for <b>AI in Investments (Program 3)</b> follow from KAMCO and CODED.", "Please complete the short feedback survey before you leave."],
+            ["Certificates are handed out by name.", "Evaluation results for <b>AI in Investments (Program 3)</b> follow from KAMCO and CODED.", "Thank you for completing the satisfaction survey."],
             None, t="close"))
 add(close("Two days, one job", "Request → Check → Produce → <span class=\"hl\">Reply.</span>",
           "You can now find the real ask, check the numbers, build the right output and send a reply that passes the four checks — with Copilot doing the heavy lifting and <b>you doing the judging</b>.",
