@@ -12,6 +12,7 @@ python3 build_pages.py >/dev/null
 python3 deck2_mcim.py
 python3 build_facil.py >/dev/null
 python3 build_capstone_key.py
+python3 gen_instructor_agent.py
 python3 build_index.py
 RECALC="${RECALC:-/mnt/skills/public/xlsx/scripts/recalc.py}"
 [ -f "$RECALC" ] && python3 "$RECALC" out/facilitator/kamco-p2-scoring-sheet.xlsx 60 | grep status || echo "recalc skipped (open the xlsx in Excel to compute formulas)"
