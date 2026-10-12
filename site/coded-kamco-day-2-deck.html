@@ -837,7 +837,7 @@ html:has(.deck-nav),html:has(.deck-nav) body{background:#00081c}
 <div class="road">
 <div class="road-row go b" data-goto="s-w-story"><span class="rn">01</span><div><div class="rt">Word</div><div class="rd">09:00</div></div></div>
 <div class="road-row go b" data-goto="s-p-story"><span class="rn">02</span><div><div class="rt">PowerPoint</div><div class="rd">10:00</div></div></div>
-<div class="road-row go b" data-goto="s-g-hook"><span class="rn">03</span><div><div class="rt">Prompt libraries + Agents</div><div class="rd">11:00</div></div></div>
+<div class="road-row go b" data-goto="s-g-hook"><span class="rn">03</span><div><div class="rt">Scheduled prompts, libraries + agents</div><div class="rd">11:00</div></div></div>
 <div class="road-row go b" data-goto="s-o-reply"><span class="rn">04</span><div><div class="rt">The reply, then your capstone</div><div class="rd">13:00</div></div></div>
 <div class="road-row go b" data-goto="s-map-post"><span class="rn">05</span><div><div class="rt">MAP test · survey · certificates</div><div class="rd">15:00</div></div></div>
 </div>
@@ -854,15 +854,6 @@ html:has(.deck-nav),html:has(.deck-nav) body{background:#00081c}
 <div class="bgcard good"><div class="bgk">PowerPoint · deck</div><div class="bgp">You <b>present it to a room</b> — a client, trustees, a board. People see one idea at a time, and you do the talking.</div><div class="bgn">One slide, one message.</div></div>
 </div>
 <p class="body-l b">Not sure? Read the request again — <b>who is the reader, and will you be in the room?</b></p>
-</div>
-</div>
-
-<div class="slide" id="s-fmt-check">
-<div class="bg-grid"></div><div class="blob b1"></div>
-<div class="slide-pad">
-<span class="eyebrow b">Quick Check</span>
-<h2 class="demo-h b">Khalid, the client's CFO, meets you on Wednesday to walk through Q3. <span class="hl">Memo or deck?</span></h2>
-<div class="qc-card b"><div class="qc-k">Ask the room</div><p>A <b>deck</b> — you present it in the room. And the one-page <b>memo</b> goes to Faisal, who reads it alone before the meeting. Same numbers, two readers, two formats.</p></div>
 </div>
 </div>
 
@@ -1093,17 +1084,51 @@ html:has(.deck-nav),html:has(.deck-nav) body{background:#00081c}
 </div>
 
 <div class="slide" id="s-g-hook">
-  <div class="bg-grid"></div><div class="blob b1"></div>
-  <div class="slide-pad">
-    <span class="eyebrow b">Block 3 · Prompt Library</span>
-    <h2 class="demo-h b">You've written about ten prompts in two days. Microsoft has published thousands. <span class="hl">Why start from zero?</span></h2>
-  </div>
+<div class="bg-grid"></div><div class="blob b1"></div>
+<div class="slide-pad">
+<span class="eyebrow b">Block 3 · Prompts That Work For You</span>
+<h2 class="demo-h b">You've written about ten prompts in two days. Some you need every week. Some Microsoft already wrote. Some only you know. <span class="hl">Stop retyping them.</span></h2>
+<div class="viz-flow">
+<div class="vf-step b"><span class="vf-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="vf-t">Schedule</span><span class="vf-d">it runs before you arrive</span></div>
+<span class="vf-arrow b">→</span>
+<div class="vf-step b"><span class="vf-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span><span class="vf-t">Gallery</span><span class="vf-d">Microsoft's ready-made prompts</span></div>
+<span class="vf-arrow b">→</span>
+<div class="vf-step b"><span class="vf-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="vf-t">Your library</span><span class="vf-d">the ones that work for you, in Word</span></div>
+</div>
+</div>
+</div>
+
+<div class="slide" id="s-sch-what">
+<div class="bg-grid"></div><div class="blob b1"></div>
+<div class="slide-pad">
+<span class="eyebrow b">1 · Scheduled Prompts</span>
+<h2 class="term-h b">Copilot does the Sunday reading <span class="hl">before you arrive.</span></h2>
+<div class="bgcompare b">
+<div class="bgcard bad"><div class="bgk">Every Sunday, by hand</div><div class="bgp">Open Outlook. Scroll 60 emails. Find the client asks, the deadlines, what Compliance wants.</div><div class="bgn">30 minutes before your first coffee.</div></div>
+<div class="bgcard good"><div class="bgk">Scheduled · Sunday 7:30</div><div class="bgp"><span class="sg-ctx">I look after family-office clients.</span> <span class="sg-task">Summarise the emails I received since Thursday from clients and from Compliance.</span> <span class="sg-fmt">A table: who, the ask, the deadline — urgent first.</span> <span class="sg-tone">Short and plain.</span></div><div class="bgn">Waiting in Copilot — and in your inbox — at 7:30.</div></div>
+</div>
+</div>
+</div>
+
+<div class="slide" id="s-sch-how">
+<div class="bg-grid"></div><div class="blob b1"></div>
+<div class="slide-pad">
+<span class="eyebrow b">Scheduled Prompts · How</span>
+<h2 class="term-h b">Four steps. <span class="hl">Up to ten schedules.</span></h2>
+<ol class="steps-n">
+<li class="b"><span><b>Run the prompt once</b> in Copilot Chat — microsoft365.com/chat, Teams or Outlook.<small>Make sure the answer is what you want first.</small></span></li>
+<li class="b"><span>Hover over your prompt → <b>Schedule this prompt</b>.</span></li>
+<li class="b"><span>Choose <b>when</b> it runs, <b>how many times</b>, and turn on the <b>email notification</b>. Save.</span></li>
+<li class="b"><span>Results appear in your chat list on the left.<small>Manage them: <b>…</b> → <b>Scheduled prompts</b> → Run now · Turn off · Delete.</small></span></li>
+</ol>
+<p class="body-l b">Good to schedule: a <b>repeat</b> question about <b>new</b> information. Not a one-off.</p>
+</div>
 </div>
 
 <div class="slide" id="s-g-what">
   <div class="bg-grid"></div><div class="blob b1"></div><div class="blob b2"></div>
   <div class="slide-pad">
-    <span class="eyebrow b">Your Prompt Library · In Copilot: “Prompt Gallery”</span>
+    <span class="eyebrow b">2 · The Prompt Gallery · Microsoft's Library</span>
     <h2 class="term-h b">Ready-made prompts — <span class="hl">find, save, share.</span></h2>
     <div class="sys3">
       <div class="sys s1 b"><div class="sn">Where</div><h3>In Copilot</h3><p>The … menu under the chat box. Also in Word, Excel, PowerPoint.</p></div>
@@ -1128,7 +1153,7 @@ html:has(.deck-nav),html:has(.deck-nav) body{background:#00081c}
 <div class="slide" id="s-g-word">
 <div class="bg-grid"></div><div class="blob b1"></div>
 <div class="slide-pad">
-<span class="eyebrow b">Your Own Library · In Word</span>
+<span class="eyebrow b">3 · Your Own Library · In Word</span>
 <h2 class="term-h b">The prompts that work for you — <span class="hl">in one Word file.</span></h2>
 <div class="keys">
 <div class="key b"><div class="k-ic">📄</div><div><div class="k-t">One file in your OneDrive</div><div class="k-d">My Prompt Library.docx — a table, one row per tested prompt.</div></div></div>
@@ -1142,13 +1167,14 @@ html:has(.deck-nav),html:has(.deck-nav) body{background:#00081c}
 <div class="slide" id="s-g-lab">
 <div class="bg-grid"></div><div class="blob b1"></div>
 <div class="slide-pad">
-<span class="eyebrow b">Hands-On · 15 min</span>
-<h2 class="demo-h b">Borrow from Microsoft. <span class="hl">Build your own.</span></h2>
+<span class="eyebrow b">Hands-On · 20 min</span>
+<h2 class="demo-h b">Schedule one. Borrow one. <span class="hl">Keep your own.</span></h2>
 <div class="tasks">
-<div class="task b"><span class="tk-id">E2.4</span><span class="tk-t">Library hunt<small>Prompt Gallery: find three for your role, adapt one with CTFT, run it, save it</small></span><span class="tk-m">8 min</span></div>
-<div class="task b"><span class="tk-id">E2.5</span><span class="tk-t">Your prompt library in Word<small>Download the template, add your three best prompts from Day 1 and today, reuse one with /</small></span><span class="tk-m">7 min</span></div>
+<div class="task b"><span class="tk-id">E2.4</span><span class="tk-t">Schedule a prompt<small>A weekly prompt that runs on Sunday morning — run it once, schedule it, test with Run now</small></span><span class="tk-m">5 min</span></div>
+<div class="task b"><span class="tk-id">E2.5</span><span class="tk-t">Library hunt<small>Prompt Gallery: find three for your role, adapt one with CTFT, run it, save it</small></span><span class="tk-m">8 min</span></div>
+<div class="task b"><span class="tk-id">E2.6</span><span class="tk-t">Your prompt library in Word<small>Download the template, add your three best prompts, reuse one with /</small></span><span class="tk-m">7 min</span></div>
 </div>
-<p class="done-line b"><b>Done:</b> one Gallery prompt adapted and saved · a Word library with at least three of your own.</p>
+<p class="done-line b"><b>Done:</b> one scheduled prompt · one Gallery prompt adapted and saved · a Word library with three of your own.</p>
 <a class="labcta b" href="coded-kamco-day-2-lab.html#E2.4" target="_blank" rel="noopener">Open E2.4 →</a>
 </div>
 </div>
@@ -1192,14 +1218,14 @@ html:has(.deck-nav),html:has(.deck-nav) body{background:#00081c}
 <div class="slide" id="s-a-lab1">
 <div class="bg-grid"></div><div class="blob b1"></div>
 <div class="slide-pad">
-<span class="eyebrow b">Hands-On · E2.6 · 10 min</span>
+<span class="eyebrow b">Hands-On · E2.7 · 10 min</span>
 <h2 class="demo-h b">Use a built-in agent — <span class="hl">and check its numbers.</span></h2>
 <div class="tasks">
 <div class="task b"><span class="tk-id">1</span><span class="tk-t">Analyst<small>Give it the Al-Murjan export. Ask for allocation against the mandate and the issuer check. Compare with your Day 1 answers.</small></span><span class="tk-m">6 min</span></div>
 <div class="task b"><span class="tk-id">2</span><span class="tk-t">Prompt Coach<small>Paste one prompt from your Word library. Take one suggestion — then save the better version.</small></span><span class="tk-m">4 min</span></div>
 </div>
 <p class="done-line b"><b>Done:</b> one agent answer checked against numbers you trust · one prompt improved.</p>
-<a class="labcta b" href="coded-kamco-day-2-lab.html#E2.6" target="_blank" rel="noopener">Open E2.6 →</a>
+<a class="labcta b" href="coded-kamco-day-2-lab.html#E2.7" target="_blank" rel="noopener">Open E2.7 →</a>
 </div>
 </div>
 
@@ -1246,7 +1272,7 @@ html:has(.deck-nav),html:has(.deck-nav) body{background:#00081c}
 <div class="slide" id="s-a-lab">
 <div class="bg-grid"></div><div class="blob b1"></div>
 <div class="slide-pad">
-<span class="eyebrow b">Hands-On · E2.7 · 20 min</span>
+<span class="eyebrow b">Hands-On · E2.8 · 20 min</span>
 <h2 class="demo-h b">Build the Request Triage Assistant. <span class="hl">Then try to break it.</span></h2>
 <div class="tasks">
 <div class="task b"><span class="tk-id">1</span><span class="tk-t">Build<small>Describe it in the chat. Add the house view as knowledge. Web search off.</small></span><span class="tk-m">6 min</span></div>
@@ -1254,7 +1280,7 @@ html:has(.deck-nav),html:has(.deck-nav) body{background:#00081c}
 <div class="task b"><span class="tk-id">3</span><span class="tk-t">Fix<small>Change one instruction. Test again.</small></span><span class="tk-m">4 min</span></div>
 </div>
 <p class="done-line b"><b>Done:</b> six tests noted — and one instruction fixed.</p>
-<a class="labcta b" href="coded-kamco-day-2-lab.html#E2.7" target="_blank" rel="noopener">Open E2.7 →</a>
+<a class="labcta b" href="coded-kamco-day-2-lab.html#E2.8" target="_blank" rel="noopener">Open E2.8 →</a>
 </div>
 </div>
 
@@ -1370,7 +1396,7 @@ html:has(.deck-nav),html:has(.deck-nav) body{background:#00081c}
 <div class="tc t3 b"><div class="tn">Operations</div><div class="tw">Q3 settlement review</div><ul><li>107 trades, fails, counterparties</li><li>On-time rate vs the 98% target</li><li>Brief for the COO, deck for the Committee</li></ul></div>
 <div class="tc t4 b"><div class="tn">Investment Research</div><div class="tw">Wafra Logistics · initiation</div><ul><li>Financials, peers, share price</li><li>Peer-multiple valuation and a view</li><li>Brief and deck for the Committee</li></ul></div>
 </div>
-<p class="body-l b">Everything is in the lab: the email thread, the workbook, the house view. <b>Lab → E2.10 → pick your field.</b></p>
+<p class="body-l b">Everything is in the lab: the email thread, the workbook, the house view. <b>Lab → E2.9 → pick your field.</b></p>
 </div>
 </div>
 
@@ -1407,7 +1433,7 @@ html:has(.deck-nav),html:has(.deck-nav) body{background:#00081c}
 </div>
 </div>
 <p class="done-line b"><b>Pace:</b> by 13:55 your numbers are done · by 14:35 the brief and the deck · by 14:50 the reply is sent. <b>Finished early?</b> Do the Stretch and Boss in your field.</p>
-<a class="labcta b" href="coded-kamco-day-2-lab.html#E2.8" target="_blank" rel="noopener">Open the capstone →</a>
+<a class="labcta b" href="coded-kamco-day-2-lab.html#E2.9" target="_blank" rel="noopener">Open the capstone →</a>
 </div>
 </div>
 

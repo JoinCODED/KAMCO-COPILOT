@@ -105,7 +105,7 @@ add(slide("s-road", '''<span class="eyebrow b">The Road Today</span>
 <div class="road">
 <div class="road-row go b" data-goto="s-w-story"><span class="rn">01</span><div><div class="rt">Word</div><div class="rd">09:00</div></div></div>
 <div class="road-row go b" data-goto="s-p-story"><span class="rn">02</span><div><div class="rt">PowerPoint</div><div class="rd">10:00</div></div></div>
-<div class="road-row go b" data-goto="s-g-hook"><span class="rn">03</span><div><div class="rt">Prompt libraries + Agents</div><div class="rd">11:00</div></div></div>
+<div class="road-row go b" data-goto="s-g-hook"><span class="rn">03</span><div><div class="rt">Scheduled prompts, libraries + agents</div><div class="rd">11:00</div></div></div>
 <div class="road-row go b" data-goto="s-o-reply"><span class="rn">04</span><div><div class="rt">The reply, then your capstone</div><div class="rd">13:00</div></div></div>
 <div class="road-row go b" data-goto="s-map-post"><span class="rn">05</span><div><div class="rt">MAP test · survey · certificates</div><div class="rd">15:00</div></div></div>
 </div>'''))
@@ -118,9 +118,6 @@ add(slide("s-fmt", """<span class="eyebrow b">Block 1 · First, Pick The Format<
 <div class="bgcard good"><div class="bgk">PowerPoint · deck</div><div class="bgp">You <b>present it to a room</b> — a client, trustees, a board. People see one idea at a time, and you do the talking.</div><div class="bgn">One slide, one message.</div></div>
 </div>
 <p class="body-l b">Not sure? Read the request again — <b>who is the reader, and will you be in the room?</b></p>""", bg=BG1))
-add(slide("s-fmt-check", """<span class="eyebrow b">Quick Check</span>
-<h2 class="demo-h b">Khalid, the client's CFO, meets you on Wednesday to walk through Q3. <span class="hl">Memo or deck?</span></h2>
-<div class="qc-card b"><div class="qc-k">Ask the room</div><p>A <b>deck</b> — you present it in the room. And the one-page <b>memo</b> goes to Faisal, who reads it alone before the meeting. Same numbers, two readers, two formats.</p></div>""", bg=BG1))
 add(src("s-w-story",
         ('8:40. Your manager wants one page by 10 — from a pile of notes.', '8:40. Faisal wants a one-page memo by 10 — from your meeting notes.')))
 add(src("s-w-analogy"))
@@ -172,15 +169,36 @@ add(pause("s-q-ppt", "PowerPoint", "the break"))
 add(brk("s-brk-2", 10, "11:00 AM", "Prompt Library + Agents"))
 
 # ============================== BLOCK 3 · PROMPT LIBRARY + AGENTS ==============================
-add(src("s-g-hook",
-        ('Block 1 · Prompt Library', 'Block 3 · Prompt Library'),
-        ("You've written about ten prompts in three days.", "You've written about ten prompts in two days.")))
-add(src("s-g-what"))
+add(slide("s-g-hook", """<span class="eyebrow b">Block 3 · Prompts That Work For You</span>
+<h2 class="demo-h b">You've written about ten prompts in two days. Some you need every week. Some Microsoft already wrote. Some only you know. <span class="hl">Stop retyping them.</span></h2>
+<div class="viz-flow">
+<div class="vf-step b"><span class="vf-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="vf-t">Schedule</span><span class="vf-d">it runs before you arrive</span></div>
+<span class="vf-arrow b">→</span>
+<div class="vf-step b"><span class="vf-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span><span class="vf-t">Gallery</span><span class="vf-d">Microsoft's ready-made prompts</span></div>
+<span class="vf-arrow b">→</span>
+<div class="vf-step b"><span class="vf-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="vf-t">Your library</span><span class="vf-d">the ones that work for you, in Word</span></div>
+</div>""", bg=BG1))
+add(slide("s-sch-what", """<span class="eyebrow b">1 · Scheduled Prompts</span>
+<h2 class="term-h b">Copilot does the Sunday reading <span class="hl">before you arrive.</span></h2>
+<div class="bgcompare b">
+<div class="bgcard bad"><div class="bgk">Every Sunday, by hand</div><div class="bgp">Open Outlook. Scroll 60 emails. Find the client asks, the deadlines, what Compliance wants.</div><div class="bgn">30 minutes before your first coffee.</div></div>
+<div class="bgcard good"><div class="bgk">Scheduled · Sunday 7:30</div><div class="bgp"><span class="sg-ctx">I look after family-office clients.</span> <span class="sg-task">Summarise the emails I received since Thursday from clients and from Compliance.</span> <span class="sg-fmt">A table: who, the ask, the deadline — urgent first.</span> <span class="sg-tone">Short and plain.</span></div><div class="bgn">Waiting in Copilot — and in your inbox — at 7:30.</div></div>
+</div>""", bg=BG1))
+add(slide("s-sch-how", """<span class="eyebrow b">Scheduled Prompts · How</span>
+<h2 class="term-h b">Four steps. <span class="hl">Up to ten schedules.</span></h2>
+<ol class="steps-n">
+<li class="b"><span><b>Run the prompt once</b> in Copilot Chat — microsoft365.com/chat, Teams or Outlook.<small>Make sure the answer is what you want first.</small></span></li>
+<li class="b"><span>Hover over your prompt → <b>Schedule this prompt</b>.</span></li>
+<li class="b"><span>Choose <b>when</b> it runs, <b>how many times</b>, and turn on the <b>email notification</b>. Save.</span></li>
+<li class="b"><span>Results appear in your chat list on the left.<small>Manage them: <b>…</b> → <b>Scheduled prompts</b> → Run now · Turn off · Delete.</small></span></li>
+</ol>
+<p class="body-l b">Good to schedule: a <b>repeat</b> question about <b>new</b> information. Not a one-off.</p>""", bg=BG1))
+add(src("s-g-what", ('<span class="eyebrow b">Your Prompt Library · In Copilot: “Prompt Gallery”</span>', '<span class="eyebrow b">2 · The Prompt Gallery · Microsoft\'s Library</span>')))
 add(src("s-g-adapt",
         ('<span class="sg-ctx">I\'m back after three days off and I manage the wholesale team.</span>',
          '<span class="sg-ctx">I\'m back after three days off and I look after twelve family-office clients.</span>'),
         ('A table: action, who asked, deadline — urgent first.', 'A table: action, client, who asked, deadline — urgent first.')))
-add(slide("s-g-word", '''<span class="eyebrow b">Your Own Library · In Word</span>
+add(slide("s-g-word", '''<span class="eyebrow b">3 · Your Own Library · In Word</span>
 <h2 class="term-h b">The prompts that work for you — <span class="hl">in one Word file.</span></h2>
 <div class="keys">
 <div class="key b"><div class="k-ic">📄</div><div><div class="k-t">One file in your OneDrive</div><div class="k-d">My Prompt Library.docx — a table, one row per tested prompt.</div></div></div>
@@ -188,11 +206,12 @@ add(slide("s-g-word", '''<span class="eyebrow b">Your Own Library · In Word</sp
 <div class="key b"><div class="k-ic">↩️</div><div><div class="k-t">Reuse it from Copilot</div><div class="k-d">Type <span class="kbdc">/</span> and pick the file: “From /My Prompt Library, run my mandate check.”</div></div></div>
 </div>
 <p class="body-l b">The Gallery is Microsoft's library. <b>This one is yours.</b></p>''', bg=BG1))
-add(slide("s-g-lab", f'''<span class="eyebrow b">Hands-On · 15 min</span>
-<h2 class="demo-h b">Borrow from Microsoft. <span class="hl">Build your own.</span></h2>
-{tasks([("E2.4", "Library hunt", "Prompt Gallery: find three for your role, adapt one with CTFT, run it, save it", "8 min"),
-        ("E2.5", "Your prompt library in Word", "Download the template, add your three best prompts from Day 1 and today, reuse one with /", "7 min")])}
-<p class="done-line b"><b>Done:</b> one Gallery prompt adapted and saved · a Word library with at least three of your own.</p>
+add(slide("s-g-lab", f'''<span class="eyebrow b">Hands-On · 20 min</span>
+<h2 class="demo-h b">Schedule one. Borrow one. <span class="hl">Keep your own.</span></h2>
+{tasks([("E2.4", "Schedule a prompt", "A weekly prompt that runs on Sunday morning — run it once, schedule it, test with Run now", "5 min"),
+        ("E2.5", "Library hunt", "Prompt Gallery: find three for your role, adapt one with CTFT, run it, save it", "8 min"),
+        ("E2.6", "Your prompt library in Word", "Download the template, add your three best prompts, reuse one with /", "7 min")])}
+<p class="done-line b"><b>Done:</b> one scheduled prompt · one Gallery prompt adapted and saved · a Word library with three of your own.</p>
 {labcta("E2.4")}''', bg=BG1))
 add(src("s-a-hook",
         ('Block 2 · Agent Builder', 'Block 3 · Agents'),
@@ -207,12 +226,12 @@ add(slide("s-a-builtin", '''<span class="eyebrow b">Agents Built By Microsoft</s
 <div class="sys s3 b"><div class="sn">Prompt Coach</div><h3>Better prompts</h3><p>Shows you how to structure a prompt. Find it under <b>All agents</b>.</p></div>
 </div>
 <p class="body-l b">Copilot app → <b>Agents</b> in the left panel. Not there? Your IT team may not have switched it on.</p>''', bg=BG1))
-add(slide("s-a-lab1", f'''<span class="eyebrow b">Hands-On · E2.6 · 10 min</span>
+add(slide("s-a-lab1", f'''<span class="eyebrow b">Hands-On · E2.7 · 10 min</span>
 <h2 class="demo-h b">Use a built-in agent — <span class="hl">and check its numbers.</span></h2>
 {tasks([("1", "Analyst", "Give it the Al-Murjan export. Ask for allocation against the mandate and the issuer check. Compare with your Day 1 answers.", "6 min"),
         ("2", "Prompt Coach", "Paste one prompt from your Word library. Take one suggestion — then save the better version.", "4 min")])}
 <p class="done-line b"><b>Done:</b> one agent answer checked against numbers you trust · one prompt improved.</p>
-{labcta("E2.6")}''', bg=BG1))
+{labcta("E2.7")}''', bg=BG1))
 add(src("s-a-how", ('Five steps to <span class="hl">your first agent.</span>', 'Now build <span class="hl">your own.</span> Five steps.')))
 add(slide("s-a-instr", '''<span class="eyebrow b">Instructions = CTFT</span>
 <h2 class="demo-h b">Instructions are a prompt <span class="hl">that never goes away.</span></h2>
@@ -221,13 +240,13 @@ add(slide("s-a-instr", '''<span class="eyebrow b">Instructions = CTFT</span>
 <div class="bgcard good"><div class="bgk">Strong — CTFT</div><div class="bgp"><span class="sg-ctx">You help KAMCO wealth management staff read client requests.</span> <span class="sg-task">For any email or thread: the client, each requested output and its format, the final deadline — always the newest message — and who to copy. Flag anything that breaks section 4 of the house view.</span> <span class="sg-fmt">Answer in a table.</span> <span class="sg-tone">Plain and short. Unclear? Say so — do not guess.</span></div><div class="bgn">Now it knows its job.</div></div>
 </div>''', bg=BG1))
 add(src("s-a-know"))
-add(slide("s-a-lab", f'''<span class="eyebrow b">Hands-On · E2.7 · 20 min</span>
+add(slide("s-a-lab", f'''<span class="eyebrow b">Hands-On · E2.8 · 20 min</span>
 <h2 class="demo-h b">Build the Request Triage Assistant. <span class="hl">Then try to break it.</span></h2>
 {tasks([("1", "Build", "Describe it in the chat. Add the house view as knowledge. Web search off.", "6 min"),
         ("2", "Test six ways", "Al-Murjan thread · another client's data · a promise of returns · not in the files · a vague request · fix and retest", "10 min"),
         ("3", "Fix", "Change one instruction. Test again.", "4 min")])}
 <p class="done-line b"><b>Done:</b> six tests noted — and one instruction fixed.</p>
-{labcta("E2.7")}''', bg=BG1))
+{labcta("E2.8")}''', bg=BG1))
 add(src("s-a-check"))
 add(pause("s-q-agent", "agents", "lunch"))
 add(brk("s-brk-3", 60, "1:00 PM", "The reply in Outlook — then your capstone", label="Lunch · 60 min"))
@@ -277,7 +296,7 @@ add(slide("s-c-fields", """<span class="eyebrow b">Capstone · Pick Your Field</
 <div class="tc t3 b"><div class="tn">Operations</div><div class="tw">Q3 settlement review</div><ul><li>107 trades, fails, counterparties</li><li>On-time rate vs the 98% target</li><li>Brief for the COO, deck for the Committee</li></ul></div>
 <div class="tc t4 b"><div class="tn">Investment Research</div><div class="tw">Wafra Logistics · initiation</div><ul><li>Financials, peers, share price</li><li>Peer-multiple valuation and a view</li><li>Brief and deck for the Committee</li></ul></div>
 </div>
-<p class="body-l b">Everything is in the lab: the email thread, the workbook, the house view. <b>Lab → E2.10 → pick your field.</b></p>""", bg=BG1))
+<p class="body-l b">Everything is in the lab: the email thread, the workbook, the house view. <b>Lab → E2.9 → pick your field.</b></p>""", bg=BG1))
 add(slide("s-c-rubric", """<span class="eyebrow b">How It's Scored · /100 · Pass / Does not pass</span>
 <h2 class="term-h b">Five criteria. <span class="hl">Help from Copilot is the point.</span></h2>
 <div class="checks">
@@ -302,7 +321,7 @@ add(slide("s-c-go", f'''<span class="eyebrow b">Capstone · 100 minutes</span>
 </div>
 </div>
 <p class="done-line b"><b>Pace:</b> by 13:55 your numbers are done · by 14:35 the brief and the deck · by 14:50 the reply is sent. <b>Finished early?</b> Do the Stretch and Boss in your field.</p>
-{labcta("E2.8", "Open the capstone →")}'''))
+{labcta("E2.9", "Open the capstone →")}'''))
 add(slide("s-present", """<span class="eyebrow b">14:50 · Present Your Workflow · 2 Minutes Each</span>
 <h2 class="term-h b">Show your partner <span class="hl">the whole journey.</span></h2>
 <div class="maptest-row b">

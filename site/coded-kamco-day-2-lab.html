@@ -677,10 +677,53 @@ window.LAB = {
   },
   {
    "id": "E2.4",
-   "app": "Prompt Library",
+   "app": "Scheduled prompts",
+   "title": "Schedule a prompt",
+   "minutes": "5 min",
+   "block": "Block 3 · Prompts",
+   "scenario": "Some questions you ask every week: <i>what came in from clients, what does Compliance need, which meetings need a pack?</i> Schedule the prompt once and Copilot runs it for you — the answer is waiting when you arrive.",
+   "steps": [
+    "Open Copilot Chat (<a href=\"https://copilot.cloud.microsoft/\" target=\"_blank\" rel=\"noopener\">copilot.cloud.microsoft</a> → Chat, or the Copilot icon in Teams or Outlook).",
+    "Pick one prompt below (or write your own with CTFT). Run it <b>once</b> and check the answer is what you want.",
+    "Hover over your prompt and select <b>Schedule this prompt</b>. Choose <b>when</b> it runs (for example Sunday 7:30), <b>how many times</b>, and turn on the <b>email notification</b>. Select <b>Save</b>.",
+    "Test it: select <b>…</b> (Copilot chats and more) → <b>Scheduled prompts</b> → <b>Run now</b>. The result appears in your chat list on the left.",
+    "Not needed after today? Turn it off or delete it from the same page — you can have up to ten."
+   ],
+   "prompts": [
+    {
+     "label": "Sunday 7:30 · the week's inbox",
+     "text": "I look after family-office clients at an investment company. Summarise the emails I received since Thursday from clients and from Compliance. A table: who, the ask, the deadline — urgent first. Short and plain."
+    },
+    {
+     "label": "Thursday 14:00 · next week's meetings",
+     "text": "List my client meetings next week. For each one: the client, the date and time, the last email thread with them, and any open action I owe them. A table, earliest first."
+    },
+    {
+     "label": "Daily 8:00 · market headlines",
+     "text": "Give me five headlines from the last 24 hours on GCC banks, GCC real estate and oil prices, with a one-line 'why it matters' for each and the source link. No predictions."
+    }
+   ],
+   "fallback": "No <b>Schedule this prompt</b> option? Your administrator may have turned off connected experiences — that is normal. Save the prompt in your Word prompt library (E2.6) and run it by hand each week instead.",
+   "findings": [
+    {
+     "label": "Your scheduled prompt — when it runs and how many times",
+     "hint": "e.g. Sundays 7:30, 4 runs"
+    },
+    {
+     "label": "What did Run now give you?",
+     "hint": ""
+    }
+   ],
+   "expect": "One prompt scheduled on a repeat question about new information — and tested once with <b>Run now</b>.",
+   "stretch": "Schedule a second prompt for Thursday afternoon that prepares you for next week. What would you want to read before the weekend?",
+   "boss": "Make a scheduled prompt that checks for a risk, not just a summary: for example, any client email this week that mentions a deadline, a complaint or a request for another client's information."
+  },
+  {
+   "id": "E2.5",
+   "app": "Prompt Gallery",
    "title": "Library hunt",
    "minutes": "10 min",
-   "block": "Block 3 · Prompt libraries",
+   "block": "Block 3 · Prompts",
    "scenario": "Your prompt library is already built in: Copilot calls it the <b>Prompt Gallery</b>. Microsoft publishes thousands of ready-made prompts there. Find three for your role, adapt one with CTFT, run it, and save it.",
    "launch": {
     "href": "https://adoption.microsoft.com/en-us/copilot/prompt-gallery/",
@@ -705,15 +748,15 @@ window.LAB = {
     }
    ],
    "expect": "Three library prompts found, one adapted with CTFT, tested, and saved in Copilot.",
-   "stretch": "<b>Schedule</b> your prompt to run every Sunday morning (hover over the prompt in the chat → <b>Schedule this prompt</b>). What would you want waiting for you at the start of every week?",
+   "stretch": "Share your adapted prompt with a colleague in the room. Did it work for their job without changes — or did they need to change the Context?",
    "boss": "Find a library prompt for Excel or PowerPoint that would have saved you time yesterday. Adapt it for the Al-Murjan pack."
   },
   {
-   "id": "E2.5",
+   "id": "E2.6",
    "app": "Word",
    "title": "Your prompt library in Word",
    "minutes": "7 min",
-   "block": "Block 3 · Prompt libraries",
+   "block": "Block 3 · Prompts",
    "scenario": "The Gallery is Microsoft's library. Now build <b>yours</b>: one Word file in your OneDrive with the prompts that worked for you on Day 1 and today. Next week, you reuse them in seconds — Copilot can read the file when you type <kbd>/</kbd>.",
    "files": [
     {
@@ -744,7 +787,7 @@ window.LAB = {
    "boss": "Ask Copilot in Word: <i>“Which of these prompts are missing a Format or a Tone? Suggest one line to add to each.”</i> Accept only the suggestions you agree with."
   },
   {
-   "id": "E2.6",
+   "id": "E2.7",
    "app": "Built-in agents",
    "title": "Use a built-in agent",
    "minutes": "10 min",
@@ -794,7 +837,7 @@ window.LAB = {
    "boss": "Open <b>Researcher</b>. Ask for a one-page brief on what drove GCC bank shares in Q3 2026, with sources. Pick one claim and open its source. Does the source say what Researcher says?"
   },
   {
-   "id": "E2.7",
+   "id": "E2.8",
    "app": "Agent Builder",
    "title": "Build the Request Triage Assistant",
    "minutes": "25 min",
@@ -899,7 +942,7 @@ window.LAB = {
    "boss": "Write one test that would fool your agent. Then change the Instructions so it can't."
   },
   {
-   "id": "E2.8",
+   "id": "E2.9",
    "app": "Capstone",
    "title": "Capstone — your field, start to finish",
    "minutes": "13:10 – 14:50 · 100 min",
@@ -1457,7 +1500,7 @@ window.LAB = {
    "expect": "Scored out of 100 — pass or does not pass: <b>30</b> workflow completeness (all seven steps, reply sent by 2:50 pm) · <b>25</b> data analysis accuracy (no major errors) · <b>20</b> deliverable quality (brief, deck and charts answer the request) · <b>15</b> AI review &amp; judgement (accuracy, confidentiality, tone, completeness — your “What I corrected” line) · <b>10</b> prompt quality (your three best prompts)."
   },
   {
-   "id": "E2.9",
+   "id": "E2.10",
    "app": "Wrap up",
    "title": "MAP test, survey — and take it home",
    "minutes": "15:00 · 15:30",

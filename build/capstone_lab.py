@@ -126,7 +126,7 @@ def capstone_task(cap):
             promptSteps=steps,
             stretch=sp["stretch"], boss=sp["boss"])
     return dict(
-        id="E2.8", app="Capstone", title="Capstone — your field, start to finish", minutes="13:10 – 14:50 · 100 min", block="Capstone · graded",
+        id="E2.9", app="Capstone", title="Capstone — your field, start to finish", minutes="13:10 – 14:50 · 100 min", block="Capstone · graded",
         scenario="", roles=roles,
         steps=["<b>Pick your field</b> with the buttons above: Wealth Management, Asset Management, Operations or Investment Research.",
                "Work <b>alone</b>, in order, through the seven steps below. Help from Copilot is the point — help from neighbours is not.",
