@@ -680,7 +680,7 @@ window.LAB = {
    "app": "Prompt Library",
    "title": "Library hunt",
    "minutes": "10 min",
-   "block": "Block 3 · Prompt Library",
+   "block": "Block 3 · Prompt libraries",
    "scenario": "Your prompt library is already built in: Copilot calls it the <b>Prompt Gallery</b>. Microsoft publishes thousands of ready-made prompts there. Find three for your role, adapt one with CTFT, run it, and save it.",
    "launch": {
     "href": "https://adoption.microsoft.com/en-us/copilot/prompt-gallery/",
@@ -710,6 +710,91 @@ window.LAB = {
   },
   {
    "id": "E2.5",
+   "app": "Word",
+   "title": "Your prompt library in Word",
+   "minutes": "7 min",
+   "block": "Block 3 · Prompt libraries",
+   "scenario": "The Gallery is Microsoft's library. Now build <b>yours</b>: one Word file in your OneDrive with the prompts that worked for you on Day 1 and today. Next week, you reuse them in seconds — Copilot can read the file when you type <kbd>/</kbd>.",
+   "files": [
+    {
+     "label": "my-prompt-library.docx · template with five KAMCO prompts",
+     "href": "my-prompt-library.docx",
+     "note": "Download it, then save it to your <b>OneDrive</b> as <b>My Prompt Library</b>. Copilot can only point at files it can reach."
+    }
+   ],
+   "steps": [
+    "Download the template (above) and save it to your OneDrive as <b>My Prompt Library</b>. Open it in Word.",
+    "Add <b>three prompts of your own</b> that worked on Day 1 or today — from the lab, your E2.4 prompt, or your own job. One row each: name, app, when you use it, the prompt, tested?",
+    "Make each prompt reusable: put <b>[brackets]</b> where the details change, and remove client names and numbers.",
+    "<b>Reuse it:</b> open Copilot Chat, type <kbd>/</kbd>, pick <b>My Prompt Library</b>, and run the prompt below."
+   ],
+   "prompt": "From /My Prompt Library, find my prompt for [the task you need now]. Show it to me with the [brackets] filled in for this case: [describe the case]. Then run it.",
+   "findings": [
+    {
+     "label": "The three prompts you added (names)",
+     "hint": ""
+    },
+    {
+     "label": "Did Copilot find and reuse the right one?",
+     "hint": "yes / no — what happened"
+    }
+   ],
+   "expect": "A Word file in your OneDrive with at least eight tested prompts — five from the template and three of your own — and one reused from Copilot with <kbd>/</kbd>.",
+   "stretch": "In Word, ask Copilot: <i>“Group these prompts by app and add a one-line ‘when to use it’ for any row that is missing one.”</i> Check it didn't change the prompts themselves.",
+   "boss": "Ask Copilot in Word: <i>“Which of these prompts are missing a Format or a Tone? Suggest one line to add to each.”</i> Accept only the suggestions you agree with."
+  },
+  {
+   "id": "E2.6",
+   "app": "Built-in agents",
+   "title": "Use a built-in agent",
+   "minutes": "10 min",
+   "block": "Block 3 · Agents",
+   "scenario": "Microsoft ships agents that are ready to use. <b>Analyst</b> turns raw data into findings and charts. <b>Prompt Coach</b> helps you structure prompts. Use both — and check Analyst's numbers against the answers you already trust from Day 1.",
+   "files": [
+    {
+     "label": "amfo-q3-custody-export.xlsx · Al-Murjan custody export (30 Sep)",
+     "href": "amfo-q3-custody-export.xlsx",
+     "note": "The same raw export you cleaned on Day 1. Save it to your <b>OneDrive</b>."
+    }
+   ],
+   "steps": [
+    "Open the Copilot app (<a href=\"https://copilot.cloud.microsoft/\" target=\"_blank\" rel=\"noopener\">copilot.cloud.microsoft</a>). In the left panel, select <b>Agents</b> → <b>Analyst</b>.",
+    "Attach the Al-Murjan export (<b>+</b> → upload, or type <kbd>/</kbd> and pick it from OneDrive). Run prompt 1 below. Watch it show its working.",
+    "Compare its answers with your Day 1 numbers. Write down any difference — and why it happened.",
+    "Now open <b>All agents</b> → <b>Prompt Coach</b> (add it if you need to). Paste one prompt from your Word library and run prompt 2. Take one suggestion and save the better version in your library."
+   ],
+   "prompts": [
+    {
+     "label": "1 · Analyst",
+     "text": "This is a custody export for a family office client. Remove duplicate holdings by Holding ID, fill any missing 30 Sep prices from the Price_List sheet, and convert USD to KWD at 0.3065. Then give me: total value at 30 Sep in KWD, the weight of each asset class against the Mandate sheet, and any single issuer above 10% of the portfolio (shares and bonds together). Show your working."
+    },
+    {
+     "label": "2 · Prompt Coach",
+     "text": "Here is a prompt I use at work. Tell me what is missing using Context, Task, Format and Tone, and give me one improved version: [paste a prompt from your library]"
+    }
+   ],
+   "fallback": "No <b>Agents</b> in your left panel? Your administrator may not have switched them on — that is normal. Run prompt 1 in Copilot Chat with the file attached instead, and compare in the same way.",
+   "findings": [
+    {
+     "label": "Analyst's total and equity weight",
+     "hint": "KWD · %"
+    },
+    {
+     "label": "Any difference from your Day 1 answer — and why",
+     "hint": ""
+    },
+    {
+     "label": "The Prompt Coach suggestion you kept",
+     "hint": ""
+    }
+   ],
+   "reveal": "Day 1 answers: total <b>KWD 4,696,424</b> · Equity <b>61.0%</b> (above the 55% maximum) · <b>Al-Noor Bank 12.21%</b> (shares + sukuk, above 10%). If Analyst's total is about <b>KWD 5.79 million</b>, it kept the duplicates. If Al-Noor Bank shows below 10%, it counted the shares only.",
+   "expect": "One agent answer checked against numbers you trust — and one prompt in your library made better.",
+   "stretch": "Ask Analyst for a chart of allocation against the mandate range. Would you put it in a client deck as it is?",
+   "boss": "Open <b>Researcher</b>. Ask for a one-page brief on what drove GCC bank shares in Q3 2026, with sources. Pick one claim and open its source. Does the source say what Researcher says?"
+  },
+  {
+   "id": "E2.7",
    "app": "Agent Builder",
    "title": "Build the Request Triage Assistant",
    "minutes": "25 min",
@@ -814,7 +899,7 @@ window.LAB = {
    "boss": "Write one test that would fool your agent. Then change the Instructions so it can't."
   },
   {
-   "id": "E2.6",
+   "id": "E2.8",
    "app": "Safe use",
    "title": "Classify + redact",
    "minutes": "8 min",
@@ -856,7 +941,7 @@ window.LAB = {
    "boss": "Items 4 and 6 are Restricted and NEVER send. Item 2 is Restricted but can be redacted. Write the one rule that tells them apart."
   },
   {
-   "id": "E2.7",
+   "id": "E2.9",
    "app": "Safe use",
    "title": "Judgment calls",
    "minutes": "7 min",
@@ -890,7 +975,7 @@ window.LAB = {
    "boss": "Take the request your pair disagreed on. Write the one rule that would have made the call obvious."
   },
   {
-   "id": "E2.8",
+   "id": "E2.10",
    "app": "Graded project",
    "title": "One request — alone",
    "minutes": "13:30 – 14:50",
@@ -916,7 +1001,7 @@ window.LAB = {
    "stretch": "Finished early? Build the other format too — A → a 3-slide deck, B → a one-page memo. Not graded, great practice."
   },
   {
-   "id": "E2.9",
+   "id": "E2.11",
    "app": "Wrap up",
    "title": "MAP test, survey — and take it home",
    "minutes": "15:00 · 15:30",

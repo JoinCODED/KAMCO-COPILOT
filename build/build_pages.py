@@ -51,14 +51,14 @@ DAYS = {
     brief="Today Copilot works inside Word and PowerPoint: notes become a memo, the house view becomes a client deck. You then find and adapt ready-made prompts in the Prompt Gallery, build a Request Triage Assistant agent and test it, and practise safe use — data tiers, redaction and judgment calls. After lunch you complete one full request alone — the graded project — then take the end MAP test, fill in the survey and receive your certificate.",
     ros=[("Block 1 — Word", "09:00", "Draft, rewrite, ground in the house view, check. Lab E2.1."), ("brk", "09:50", "Break"),
          ("Block 2 — PowerPoint", "10:00", "Create a deck from a file, add a slide, check it. Labs E2.2–E2.3."), ("brk", "10:50", "Break"),
-         ("Block 3 — Prompt Library + Agents", "11:00", "The Prompt Gallery, then build and test an agent. Labs E2.4–E2.5."), ("brk", "12:00", "Lunch"),
-         ("Block 4 — Safe use with AI", "13:00", "Data tiers, redaction, human in the loop. Labs E2.6–E2.7."),
+         ("Block 3 — Prompt libraries + Agents", "11:00", "The Prompt Gallery and your own library in Word; a built-in agent, then build your own. Labs E2.4–E2.7."), ("brk", "12:00", "Lunch"),
+         ("Block 4 — Safe use with AI", "13:00", "Data tiers, redaction, human in the loop. Labs E2.8–E2.9."),
          ("Project — graded", "13:30", "A new request, alone: email → analysis → memo or deck → reply by 2:50 pm."), ("brk", "14:50", "Break"),
          ("MAP test — see your progress", "15:00", "30 minutes, alone. <a href='https://portal.joincoded.com/sv/kamco-copilot-map-test-post-day-2' target='_blank' rel='noopener'>Open the MAP test ↗</a>"),
          ("Certificates & close", "15:30", "<a href='https://portal.joincoded.com/sv/kamco-copilot-end-of-program-satisfaction-survey' target='_blank' rel='noopener'>Satisfaction survey ↗</a>, then certificates by name and the link to Program 3.")],
-    leave=["Turn notes into a memo in Word — and ground it in a file.", "Create a client deck from a document in PowerPoint, and check it.", "Find, adapt and save prompts from the Prompt Gallery.", "Build, test and fix a simple agent.", "Classify data into four tiers and redact before you paste."],
+    leave=["Turn notes into a memo in Word — and ground it in a file.", "Create a client deck from a document in PowerPoint, and check it.", "Find and adapt Gallery prompts — and keep your own library in Word.", "Use a built-in agent, then build, test and fix your own.", "Classify data into four tiers and redact before you paste."],
     chips=["Copilot in Word", "Copilot in PowerPoint", "Prompt Gallery", "Agent Builder", "Data tiers", "Redaction", "Human in the loop", "Graded project"],
-    lab="Nine tasks: notes to memo, house view to deck, message titles, library hunt, build an agent, classify and redact, judgment calls, the graded project brief, and the MAP test and survey. Each has a Stretch or Boss challenge for early finishers."),
+    lab="Eleven tasks: notes to memo, house view to deck, message titles, the Prompt Gallery, your own prompt library in Word, a built-in agent, build your own agent, classify and redact, judgment calls, the graded project brief, and the MAP test and survey. Each has a Stretch or Boss challenge for early finishers."),
 }
 
 
@@ -162,7 +162,7 @@ def case_files():
         [("1 · The email thread", "<p>Your instructor sends this thread to your KAMCO inbox at the start of Day 1. If it does not arrive, open the .eml file below, or read it here and paste it into Copilot Chat.</p>"
           f'<div class="mailtxt">{H.escape("Subject: " + MURJAN_THREAD["subject"] + chr(10) + "Attachment: " + MURJAN_THREAD["attach"] + chr(10) + chr(10) + thread_text(MURJAN_THREAD))}</div>'),
          ("2 · Files to download", '<div class="res-list">' + res(m["file"], "Al-Murjan custody export · 30 Sep 2026 (Excel)", "Excel") + res("01-amfo-q3-review-request.eml", "The email thread (.eml, opens in Outlook)", "Email")
-          + res("house-view-q4-2026.docx", "Investment House View · Q4 2026 (Word)", "Word") + "</div>"),
+          + res("house-view-q4-2026.docx", "Investment House View · Q4 2026 (Word)", "Word") + res("my-prompt-library.docx", "My Prompt Library · template (Word)", "Word") + "</div>"),
          ("3 · How to set up the Excel file", '<ol class="steps2"><li>Save <b>' + m["file"] + '</b> to your <b>OneDrive</b> and open it in Excel. Turn <b>AutoSave</b> on.</li><li>Delete rows 1–3 above the headers. Click inside the data and press <b>Ctrl+T</b> to make it a table.</li><li>Open Copilot in Excel and follow the prompts from the deck. Check the row count after every step.</li><li>Keep the file. You need it on Day 2 for the memo, the deck and the reply.</li></ol>'),
          ("Good to know", "<p>All clients, people, companies and prices are <b>fictional</b>, created for this training. The project files for Day 2 arrive by email at 13:30.</p>")])
 
@@ -218,6 +218,6 @@ if __name__ == "__main__":
     open(os.path.join(OUTP, "case-files.html"), "w").write(case_files())
     open(os.path.join(OUTP, "before-you-start.html"), "w").write(before_you_start())
     open(os.path.join(OUTP, "cheat-sheet.html"), "w").write(cheat())
-    for f in [A["murjan"]["file"], "01-amfo-q3-review-request.eml", "house-view-q4-2026.docx"]:
+    for f in [A["murjan"]["file"], "01-amfo-q3-review-request.eml", "house-view-q4-2026.docx", "my-prompt-library.docx"]:
         shutil.copy("out/files/" + f, OUTP)
     print(sorted(os.listdir(OUTP)))

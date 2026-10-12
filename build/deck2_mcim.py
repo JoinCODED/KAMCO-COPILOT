@@ -105,7 +105,7 @@ add(slide("s-road", '''<span class="eyebrow b">The Road Today</span>
 <div class="road">
 <div class="road-row go b" data-goto="s-w-story"><span class="rn">01</span><div><div class="rt">Word</div><div class="rd">09:00</div></div></div>
 <div class="road-row go b" data-goto="s-p-story"><span class="rn">02</span><div><div class="rt">PowerPoint</div><div class="rd">10:00</div></div></div>
-<div class="road-row go b" data-goto="s-g-hook"><span class="rn">03</span><div><div class="rt">Prompt Library + Agents</div><div class="rd">11:00</div></div></div>
+<div class="road-row go b" data-goto="s-g-hook"><span class="rn">03</span><div><div class="rt">Prompt libraries + Agents</div><div class="rd">11:00</div></div></div>
 <div class="road-row go b" data-goto="s-r-hook"><span class="rn">04</span><div><div class="rt">Safe use with AI</div><div class="rd">13:00</div></div></div>
 <div class="road-row go b" data-goto="s-c-brief"><span class="rn">05</span><div><div class="rt">Graded project</div><div class="rd">13:30</div></div></div>
 <div class="road-row go b" data-goto="s-map-post"><span class="rn">06</span><div><div class="rt">MAP test · survey · certificates</div><div class="rd">15:00</div></div></div>
@@ -171,20 +171,40 @@ add(src("s-g-adapt",
         ('<span class="sg-ctx">I\'m back after three days off and I manage the wholesale team.</span>',
          '<span class="sg-ctx">I\'m back after three days off and I look after twelve family-office clients.</span>'),
         ('A table: action, who asked, deadline — urgent first.', 'A table: action, client, who asked, deadline — urgent first.')))
-add(slide("s-g-lab", f'''<span class="eyebrow b">Hands-On · E2.4 Library Hunt · 10 min</span>
-<h2 class="demo-h b">Find three. Adapt one. <span class="hl">Save it.</span></h2>
-<ol class="steps-n">
-<li class="b"><span>Open the Prompt Gallery. Filter by <b>your role</b> and one app.</span></li>
-<li class="b"><span>Pick three prompts you'd use. Adapt one with CTFT and run it.</span></li>
-<li class="b"><span>Save it to <b>Your prompts</b> in Copilot.</span></li>
-</ol>
+add(slide("s-g-word", '''<span class="eyebrow b">Your Own Library · In Word</span>
+<h2 class="term-h b">The prompts that work for you — <span class="hl">in one Word file.</span></h2>
+<div class="keys">
+<div class="key b"><div class="k-ic">📄</div><div><div class="k-t">One file in your OneDrive</div><div class="k-d">My Prompt Library.docx — a table, one row per tested prompt.</div></div></div>
+<div class="key b"><div class="k-ic">🧩</div><div><div class="k-t">Name · app · when · the CTFT prompt</div><div class="k-d">[Brackets] where details change. No client names or numbers.</div></div></div>
+<div class="key b"><div class="k-ic">↩️</div><div><div class="k-t">Reuse it from Copilot</div><div class="k-d">Type <span class="kbdc">/</span> and pick the file: “From /My Prompt Library, run my mandate check.”</div></div></div>
+</div>
+<p class="body-l b">The Gallery is Microsoft's library. <b>This one is yours.</b></p>''', bg=BG1))
+add(slide("s-g-lab", f'''<span class="eyebrow b">Hands-On · 15 min</span>
+<h2 class="demo-h b">Borrow from Microsoft. <span class="hl">Build your own.</span></h2>
+{tasks([("E2.4", "Library hunt", "Prompt Gallery: find three for your role, adapt one with CTFT, run it, save it", "8 min"),
+        ("E2.5", "Your prompt library in Word", "Download the template, add your three best prompts from Day 1 and today, reuse one with /", "7 min")])}
+<p class="done-line b"><b>Done:</b> one Gallery prompt adapted and saved · a Word library with at least three of your own.</p>
 {labcta("E2.4")}''', bg=BG1))
 add(src("s-a-hook",
-        ('Block 2 · Agent Builder', 'Block 3 · Agent Builder'),
+        ('Block 2 · Agent Builder', 'Block 3 · Agents'),
         ('Every time, you paste the same context: who you are, which file, what format.',
          'Every Sunday, Faisal\'s team reads forty client requests: the client, the ask, the deadline, the risks. Same steps every week.')))
 add(src("s-a-what"))
-add(src("s-a-how"))
+add(slide("s-a-builtin", '''<span class="eyebrow b">Agents Built By Microsoft</span>
+<h2 class="term-h b">Some agents are <span class="hl">ready to use.</span></h2>
+<div class="sys3">
+<div class="sys s1 b"><div class="sn">Analyst</div><h3>Data → insight</h3><p>Turns raw data into findings and charts — and shows its working.</p></div>
+<div class="sys s2 b"><div class="sn">Researcher</div><h3>Deep research</h3><p>Gathers and summarises from your work files and the web, with sources.</p></div>
+<div class="sys s3 b"><div class="sn">Prompt Coach</div><h3>Better prompts</h3><p>Shows you how to structure a prompt. Find it under <b>All agents</b>.</p></div>
+</div>
+<p class="body-l b">Copilot app → <b>Agents</b> in the left panel. Not there? Your IT team may not have switched it on.</p>''', bg=BG1))
+add(slide("s-a-lab1", f'''<span class="eyebrow b">Hands-On · E2.6 · 10 min</span>
+<h2 class="demo-h b">Use a built-in agent — <span class="hl">and check its numbers.</span></h2>
+{tasks([("1", "Analyst", "Give it the Al-Murjan export. Ask for allocation against the mandate and the issuer check. Compare with your Day 1 answers.", "6 min"),
+        ("2", "Prompt Coach", "Paste one prompt from your Word library. Take one suggestion — then save the better version.", "4 min")])}
+<p class="done-line b"><b>Done:</b> one agent answer checked against numbers you trust · one prompt improved.</p>
+{labcta("E2.6")}''', bg=BG1))
+add(src("s-a-how", ('Five steps to <span class="hl">your first agent.</span>', 'Now build <span class="hl">your own.</span> Five steps.')))
 add(slide("s-a-instr", '''<span class="eyebrow b">Instructions = CTFT</span>
 <h2 class="demo-h b">Instructions are a prompt <span class="hl">that never goes away.</span></h2>
 <div class="bgcompare b">
@@ -192,13 +212,13 @@ add(slide("s-a-instr", '''<span class="eyebrow b">Instructions = CTFT</span>
 <div class="bgcard good"><div class="bgk">Strong — CTFT</div><div class="bgp"><span class="sg-ctx">You help KAMCO wealth management staff read client requests.</span> <span class="sg-task">For any email or thread: the client, each requested output and its format, the final deadline — always the newest message — and who to copy. Flag anything that breaks section 4 of the house view.</span> <span class="sg-fmt">Answer in a table.</span> <span class="sg-tone">Plain and short. Unclear? Say so — do not guess.</span></div><div class="bgn">Now it knows its job.</div></div>
 </div>''', bg=BG1))
 add(src("s-a-know"))
-add(slide("s-a-lab", f'''<span class="eyebrow b">Hands-On · E2.5 · 25 min</span>
+add(slide("s-a-lab", f'''<span class="eyebrow b">Hands-On · E2.7 · 20 min</span>
 <h2 class="demo-h b">Build the Request Triage Assistant. <span class="hl">Then try to break it.</span></h2>
-{tasks([("1", "Build", "Describe it in the chat. Add the house view as knowledge. Web search off.", "8 min"),
-        ("2", "Test six ways", "Al-Murjan thread · a changed deadline · another client's data · a promise of returns · not in the files · a vague request", "12 min"),
-        ("3", "Fix", "Change one instruction. Test again.", "5 min")])}
+{tasks([("1", "Build", "Describe it in the chat. Add the house view as knowledge. Web search off.", "6 min"),
+        ("2", "Test six ways", "Al-Murjan thread · another client's data · a promise of returns · not in the files · a vague request · fix and retest", "10 min"),
+        ("3", "Fix", "Change one instruction. Test again.", "4 min")])}
 <p class="done-line b"><b>Done:</b> six tests noted — and one instruction fixed.</p>
-{labcta("E2.5")}''', bg=BG1))
+{labcta("E2.7")}''', bg=BG1))
 add(src("s-a-check"))
 add(pause("s-q-agent", "agents", "lunch"))
 add(brk("s-brk-3", 60, "1:00 PM", "Safe use with AI", label="Lunch · 60 min"))
@@ -239,10 +259,10 @@ add(slide("s-r-tierquiz", '''<span class="eyebrow b">Which Tier?</span>
 add(src("s-r-checklist"))
 add(slide("s-r-lab", f'''<span class="eyebrow b">Hands-On · 15 min</span>
 <h2 class="demo-h b">Classify it. Redact it. <span class="hl">Argue the close ones.</span></h2>
-{tasks([("E2.6", "Classify + Redact", "Six items from a KAMCO week: pick the tier, pick the action, redact", "8 min"),
-        ("E2.7", "Judgment calls", "Four requests from colleagues, in pairs — then compare", "7 min")])}
+{tasks([("E2.8", "Classify + Redact", "Six items from a KAMCO week: pick the tier, pick the action, redact", "8 min"),
+        ("E2.9", "Judgment calls", "Four requests from colleagues, in pairs — then compare", "7 min")])}
 <p class="done-line b"><b>Done:</b> 6 items tiered and handled · 4 calls made · answers compared.</p>
-{labcta("E2.6", "Open E2.6 →")}''', bg=BG1))
+{labcta("E2.8", "Open E2.8 →")}''', bg=BG1))
 add(slide("s-r-check", '''<span class="eyebrow b">Quick Check</span>
 <h2 class="demo-h b">Copilot drafts a list of clients who “should” be offered the new fund. <span class="hl">Send it to the team?</span></h2>
 <div class="qc-card b"><div class="qc-k">Ask the room</div><p>Not yet. Copilot drafts. A <b>person</b> decides, checks suitability and fairness, and signs.</p></div>''', bg=BG1))
@@ -285,7 +305,7 @@ add(slide("s-c-go", f'''<span class="eyebrow b">Graded Project · 80 minutes</sp
 </div>
 </div>
 <p class="done-line b"><b>Finished early?</b> Build the other format too — A → a 3-slide deck, B → a one-page memo. Not graded, great practice.</p>
-{labcta("E2.8", "Open the project brief →")}'''))
+{labcta("E2.10", "Open the project brief →")}'''))
 add(brk("s-brk-4", 10, "3:00 PM", "The MAP test"))
 
 # ============================== MAP · SURVEY · CERTIFICATES · CLOSE ==============================
