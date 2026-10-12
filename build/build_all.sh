@@ -3,7 +3,7 @@ cd "$(dirname "$0")"
 [ -d node_modules/qrcode-generator ] || npm install --silent
 rm -rf out/site out/facilitator out/all
 mkdir -p out/site out/facilitator
-python3 gen_files.py >/dev/null && python3 gen_docs.py >/dev/null && python3 gen_promptlib.py >/dev/null && python3 gen_capstone.py >/dev/null
+python3 gen_files.py >/dev/null && python3 gen_docs.py >/dev/null && python3 gen_promptlib.py >/dev/null && python3 gen_capstone.py >/dev/null && python3 gen_agentdocs.py >/dev/null
 python3 build_decks.py
 python3 build_labs.py
 python3 tasklab_day1.py

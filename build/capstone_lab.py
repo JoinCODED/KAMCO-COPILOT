@@ -1,7 +1,7 @@
 """Capstone task (E2.10) for the Day 2 lab: pick a field; seven steps from email to reply."""
 import json
 
-FIELDS = {"wm": "Wealth Management", "am": "Asset Management", "ops": "Operations", "rs": "Investment Research"}
+FIELDS = {"wm": "Wealth Management", "am": "Asset Management", "rs": "Investment Research", "ops": "Operations", "fin": "Finance", "hr": "Human Resources", "lc": "Legal & Compliance"}
 HV = {"label": "house-view-q4-2026.docx · number format, client rules and the standard disclaimer", "href": "house-view-q4-2026.docx",
       "note": "<b>Grounding file</b> for the brief and the deck: section 4 (rules for client communication) and section 5 (disclaimer)."}
 
@@ -82,6 +82,63 @@ SPEC = {
    boss="Ask Copilot for the strongest argument <b>against</b> your view. Add one line to your brief that answers it."),
 }
 
+SPEC["fin"] = dict(
+   scenario="You are a <b>Finance analyst</b>. The CFO needs the Q3 budget vs actual review for the Management Committee — tomorrow at 8:00. One department head is asking you to move costs between quarters.",
+   xlsx=("fin-q3-budget-vs-actual.xlsx", "Ledger export and budget — Actuals_Q3, Budget_Q3, Policy"),
+   clean=["Highlight duplicate rows in Actuals_Q3 based on Reference. Remove them and tell me how many lines are left.",
+          "Add a column Department (clean) that maps every spelling to one name — for example Wealth Mgmt and WEALTH MANAGEMENT both become Wealth Management; Ops becomes Operations; Information Technology becomes IT.",
+          "Make every value in Amount KWD a real number — some are stored as text with a comma."],
+   analyse=["Create a PivotTable of Amount KWD by Department (clean). Next to it, bring in the budget for each department from Budget_Q3 (sum of its categories). Add Variance KWD = Actual − Budget and Variance % = Actual ÷ Budget − 1.",
+            "Following the Policy sheet, which departments are more than 10% AND more than KWD 5,000 over budget?",
+            "Show the top 3 vendors by total spend, and total spend by month (Jul, Aug, Sep)."],
+   findings=[("Total actual vs budget (KWD and %)", ""), ("Most over budget — department and %", ""), ("Departments that must explain", ""), ("Top vendor", ""), ("Highest spending month", "")],
+   chart="Create a clustered column chart of budget vs actual by department, and a line chart of monthly spend. Give each chart a title that says the message, for example “IT and Wealth Management drove the overspend”.",
+   brief_to="Reem Al-Fulaij, Chief Financial Officer",
+   deck_for="the Management Committee (lead with the total variance; name the departments that must explain)",
+   brief_sections="Bottom line: total variance in one line · Budget vs actual table by department · Who must explain, and why · Where the money went (top vendors, monthly trend) · Actions for Q4",
+   deck_slides="1 The message in one line · 2 Total budget vs actual · 3 By department (your column chart) · 4 Who must explain · 5 Spend over the quarter (your line chart) · 6 Actions for Q4",
+   decline="Talal asked Finance to move KWD 20,000 of September costs into Q4. Your reply must decline: costs stay in the quarter they were incurred.",
+   stretch="Ask Copilot: <i>“If IT's early licence renewals of about KWD 20,000 are a timing difference, what would IT's variance be without them?”</i> Present it as a note, not as a change to the numbers.",
+   boss="Draft the two-line question the CFO should ask each department that must explain. Make it neutral — no blame.")
+SPEC["hr"] = dict(
+   scenario="You are an <b>HR analyst</b>. The HR Director needs the Q3 people review for the Management Committee — tomorrow at 9:00. A manager wants something the survey rules don't allow.",
+   xlsx=("hr-q3-people-pack.xlsx", "People pack — Headcount_Q3, Engagement_Q3, Policy"),
+   clean=["Highlight duplicate rows in Headcount_Q3 based on Employee ID. Remove them and tell me how many employees are left.",
+          "Add a column Department (clean) that maps every spelling to one name — Ops becomes Operations, Wealth Mgmt becomes Wealth Management, HR and Admin becomes HR & Admin.",
+          "Make every value in Leave date a real date — some are stored as text. Leave it blank for people who have not left."],
+   analyse=["How many employees were there at the start of Q3, how many left in Q3, and what is the attrition rate (leavers ÷ headcount at the start, as in the Policy sheet)? Then show the same by Department (clean).",
+            "Count leavers by Exit reason and show the top 3.",
+            "Average Training hours Q3 by department, compared with the 10-hour target. Which departments are below target?",
+            "From Engagement_Q3, which department has the lowest engagement score? Put attrition, training and engagement side by side by department."],
+   findings=[("Headcount, leavers and attrition %", ""), ("Department with the highest attrition", ""), ("Top exit reason", ""), ("Departments below the training target", ""), ("Lowest engagement", "")],
+   chart="Create a bar chart of attrition % by department, and a bar chart of engagement score by department. Give each chart a title that says the message.",
+   brief_to="Abeer Al-Khaled, HR Director",
+   deck_for="the Management Committee (employee IDs only — no names; survey results at department level only)",
+   brief_sections="Bottom line: attrition in one line · People numbers by department · Why people leave · Training vs target · Engagement · The department to act on first, and how",
+   deck_slides="1 The message in one line · 2 Attrition by department (your chart) · 3 Why people leave · 4 Training vs target · 5 Engagement (your chart) · 6 Where to act first",
+   decline="Nasser asked for named individual survey answers. Your reply must decline: the survey is anonymous. Offer department-level results and an action plan instead.",
+   stretch="Ask Copilot: <i>“Which department has the same pattern as Operations on two of the three measures?”</i> Add one line to the brief if it matters.",
+   boss="Draft a short note to Nasser that declines the named answers kindly and proposes three practical next steps for his team.")
+SPEC["lc"] = dict(
+   scenario="You are a <b>Compliance analyst</b>. The Chief Compliance Officer needs the Q3 complaints review for the Board Audit & Risk Committee — tomorrow at 8:30. Sales wants client details it should not have.",
+   xlsx=("lc-q3-complaints-log.xlsx", "Complaints log — Complaints_Q3, Policy"),
+   clean=["Highlight duplicate rows based on Complaint ID. Remove them and tell me how many complaints are left.",
+          "Add a column Category (clean) that maps every label to one of: Statement delay, Fees & charges, Advice suitability, Service & communication, Transfer delay.",
+          "Make every value in Date acknowledged a real date — some are stored as text in dd/mm/yyyy."],
+   analyse=["Count complaints by Category (clean) and by Channel.",
+            "Add a column Business days to acknowledge (Friday and Saturday are closed). What % were acknowledged within 2 business days?",
+            "For closed complaints, add Days to resolve = Date resolved − Date received. What % were resolved within 15 days? Then list every open complaint received more than 15 days before 30 Sep 2026 — ID, category and days open.",
+            "Total compensation paid on closed complaints."],
+   findings=[("Complaints in Q3 and the largest category", ""), ("% acknowledged within 2 business days", ""), ("% of closed resolved within 15 days", ""), ("Overdue open complaints (IDs)", ""), ("Compensation paid (KWD)", "")],
+   chart="Create a bar chart of complaints by category, and a chart comparing the two on-time rates with the standard. Give each chart a title that says the message.",
+   brief_to="Hanan Al-Sabah, Chief Compliance Officer",
+   deck_for="the Board Audit & Risk Committee (complaint IDs only — never client details)",
+   brief_sections="Bottom line: do we meet the standard? · Complaints by category and channel · Acknowledge and resolve rates · Overdue complaints (IDs) · Root causes · Actions",
+   deck_slides="1 The message in one line · 2 What clients complain about (your chart) · 3 Are we on time? (your chart) · 4 Overdue — escalate now · 5 Root causes · 6 Actions",
+   decline="Fawaz asked for the names and phone numbers of clients who complained about fees, for a sales call. Your reply must decline: client details stay inside Compliance.",
+   stretch="Ask Copilot: <i>“Which category takes longest to resolve on average?”</i> Is it the same as the largest category?",
+   boss="Write the one-paragraph root-cause note the Committee will ask for on statement delays — what you know from the data, and what you would still need to find out.")
+
 
 def capstone_task(cap):
     roles = {}
@@ -128,7 +185,7 @@ def capstone_task(cap):
     return dict(
         id="E2.9", app="Capstone", title="Capstone — your field, start to finish", minutes="13:10 – 14:50 · 100 min", block="Capstone · graded",
         scenario="", roles=roles,
-        steps=["<b>Pick your field</b> with the buttons above: Wealth Management, Asset Management, Operations or Investment Research.",
+        steps=["<b>Pick your field</b> with the buttons above — seven desks, from Wealth Management to Human Resources.",
                "Work <b>alone</b>, in order, through the seven steps below. Help from Copilot is the point — help from neighbours is not.",
                "Each step has a goal. Write your own CTFT prompt first; tap <b>Reveal a suggested prompt</b> only if you are stuck.",
                "By <b>2:50 pm</b>, reply to the evaluation mailbox (the address is on the board) with the subject <b>Capstone · [your field] · [your name]</b> and <b>both files attached</b>: the executive brief (Word) and the deck (PowerPoint).",

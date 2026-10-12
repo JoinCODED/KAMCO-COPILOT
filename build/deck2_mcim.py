@@ -241,11 +241,12 @@ add(slide("s-a-instr", '''<span class="eyebrow b">Instructions = CTFT</span>
 </div>''', bg=BG1))
 add(src("s-a-know"))
 add(slide("s-a-lab", f'''<span class="eyebrow b">Hands-On · E2.8 · 20 min</span>
-<h2 class="demo-h b">Build the Request Triage Assistant. <span class="hl">Then try to break it.</span></h2>
-{tasks([("1", "Build", "Describe it in the chat. Add the house view as knowledge. Web search off.", "6 min"),
-        ("2", "Test six ways", "Al-Murjan thread · another client's data · a promise of returns · not in the files · a vague request · fix and retest", "10 min"),
-        ("3", "Fix", "Change one instruction. Test again.", "4 min")])}
-<p class="done-line b"><b>Done:</b> six tests noted — and one instruction fixed.</p>
+<h2 class="demo-h b">Build an agent for <span class="hl">your field.</span> Then try to break it.</h2>
+{tasks([("WM", "Request Triage Assistant", "Wealth Management · reads client requests against the house view", ""),
+        ("AM · RS", "Fund Rules · Research Rules", "Asset Management · Investment Research", ""),
+        ("OPS · FIN", "Operations Procedures · Expense Policy", "Operations · Finance", ""),
+        ("HR · LC", "HR Policy Helper · Compliance Checker", "Human Resources · Legal &amp; Compliance", "")])}
+<p class="done-line b"><b>Build</b> 6 min · <b>test six ways</b> 10 min · <b>fix</b> 4 min. Pick your field in the lab — each has its own knowledge file and tests.</p>
 {labcta("E2.8")}''', bg=BG1))
 add(src("s-a-check"))
 add(pause("s-q-agent", "agents", "lunch"))
@@ -288,14 +289,15 @@ add(slide("s-c-brief", """<span class="eyebrow b">Capstone · Graded · 13:10 �
 <div class="road-row b"><span class="rn">06</span><div><div class="rt">The deck · PowerPoint</div><div class="rd">Six slides created from your brief. 18 min</div></div></div>
 <div class="road-row b"><span class="rn">07</span><div><div class="rt">Check and reply · Outlook</div><div class="rd">Accuracy, confidentiality, tone, completeness. Both files by 2:50 pm. End with “What I corrected: …” 13 min</div></div></div>
 </div>"""))
-add(slide("s-c-fields", """<span class="eyebrow b">Capstone · Pick Your Field</span>
-<h2 class="term-h b">Four desks. <span class="hl">Pick the one closest to your job.</span></h2>
-<div class="tier4">
-<div class="tc t1 b"><div class="tn">Wealth Management</div><div class="tw">Al-Bayan Holding · Q3 review</div><ul><li>Custody export, mandate, issuer limit</li><li>Brief for the Investment Committee</li><li>Client deck — with the disclaimer</li></ul></div>
-<div class="tc t2 b"><div class="tn">Asset Management</div><div class="tw">Gulf Opportunities Fund · Q3</div><ul><li>Monthly returns, holdings, flows</li><li>Fund vs benchmark, fund rules</li><li>Brief for the CIO, deck for the board</li></ul></div>
-<div class="tc t3 b"><div class="tn">Operations</div><div class="tw">Q3 settlement review</div><ul><li>107 trades, fails, counterparties</li><li>On-time rate vs the 98% target</li><li>Brief for the COO, deck for the Committee</li></ul></div>
-<div class="tc t4 b"><div class="tn">Investment Research</div><div class="tw">Wafra Logistics · initiation</div><ul><li>Financials, peers, share price</li><li>Peer-multiple valuation and a view</li><li>Brief and deck for the Committee</li></ul></div>
-</div>
+add(slide("s-c-fields", f"""<span class="eyebrow b">Capstone · Pick Your Field</span>
+<h2 class="term-h b">Seven desks. <span class="hl">Pick the one closest to your job.</span></h2>
+{tasks([("WM", "Wealth Management", "Al-Bayan Holding Q3 review · brief for the Investment Committee, client deck", ""),
+        ("AM", "Asset Management", "Gulf Opportunities Fund Q3 · fund vs benchmark, fund rules, flows", ""),
+        ("RS", "Investment Research", "Wafra Logistics initiation · peer valuation and a view", ""),
+        ("OPS", "Operations", "Q3 settlement review · on-time rate, fails, escalations", ""),
+        ("FIN", "Finance", "Q3 budget vs actual · variances and who must explain", ""),
+        ("HR", "Human Resources", "Q3 people review · attrition, exit reasons, training, engagement", ""),
+        ("LC", "Legal &amp; Compliance", "Q3 complaints review · on-time standards, overdue cases", "")])}
 <p class="body-l b">Everything is in the lab: the email thread, the workbook, the house view. <b>Lab → E2.9 → pick your field.</b></p>""", bg=BG1))
 add(slide("s-c-rubric", """<span class="eyebrow b">How It's Scored · /100 · Pass / Does not pass</span>
 <h2 class="term-h b">Five criteria. <span class="hl">Help from Copilot is the point.</span></h2>

@@ -52,7 +52,7 @@ DAYS = {
     ros=[("Block 1 — Memo or deck? Then Word", "09:00", "Pick the format for the reader. Draft, rewrite, ground in the house view, check. Lab E2.1."), ("brk", "09:50", "Break"),
          ("Block 2 — PowerPoint", "10:00", "Create a deck from a file, add a slide, check it. Labs E2.2–E2.3."), ("brk", "10:50", "Break"),
          ("Block 3 — Prompts + Agents", "11:00", "Scheduled prompts, the Prompt Gallery and your own library in Word; a built-in agent, then build your own. Labs E2.4–E2.8."), ("brk", "12:00", "Lunch"),
-         ("Reply + capstone — graded", "13:00", "The reply and Coaching by Copilot in Outlook. Then pick your field — Wealth Management, Asset Management, Operations or Investment Research. Email → clean → analyse → chart → executive brief → deck → reply by 2:50 pm. Lab E2.9."),
+         ("Reply + capstone — graded", "13:00", "The reply and Coaching by Copilot in Outlook. Then pick your field — Wealth Management, Asset Management, Investment Research, Operations, Finance, HR or Legal & Compliance. Email → clean → analyse → chart → executive brief → deck → reply by 2:50 pm. Lab E2.9."),
          ("Present your workflow", "14:50", "Two minutes each, in pairs: the request, one number and one chart, what you corrected."),
          ("MAP test — see your progress", "15:00", "30 minutes, alone. <a href='https://portal.joincoded.com/sv/kamco-copilot-map-test-post-day-2' target='_blank' rel='noopener'>Open the MAP test ↗</a>"),
          ("Certificates & close", "15:30", "<a href='https://portal.joincoded.com/sv/kamco-copilot-end-of-program-satisfaction-survey' target='_blank' rel='noopener'>Satisfaction survey ↗</a>, then certificates by name and the link to Program 3.")],
@@ -218,6 +218,6 @@ if __name__ == "__main__":
     open(os.path.join(OUTP, "case-files.html"), "w").write(case_files())
     open(os.path.join(OUTP, "before-you-start.html"), "w").write(before_you_start())
     open(os.path.join(OUTP, "cheat-sheet.html"), "w").write(cheat())
-    for f in [A["murjan"]["file"], "01-amfo-q3-review-request.eml", "house-view-q4-2026.docx", "my-prompt-library.docx", "abh-q3-custody-export.xlsx", "kgof-q3-fund-pack.xlsx", "ops-q3-settlement-blotter.xlsx", "wafra-logistics-research-pack.xlsx"] + ["capstone-%s-request.eml" % k for k in ("wm", "am", "ops", "rs")]:
+    for f in [A["murjan"]["file"], "01-amfo-q3-review-request.eml", "house-view-q4-2026.docx", "my-prompt-library.docx", "abh-q3-custody-export.xlsx", "kgof-q3-fund-pack.xlsx", "ops-q3-settlement-blotter.xlsx", "wafra-logistics-research-pack.xlsx", "fin-q3-budget-vs-actual.xlsx", "hr-q3-people-pack.xlsx", "lc-q3-complaints-log.xlsx", "kamco-hr-policies-2026.docx", "kamco-hr-handbook-2024.docx", "kamco-expenses-policy.docx", "kamco-compliance-rules.docx", "kamco-ops-procedures.docx", "kgof-fund-rules.docx", "kamco-research-guidelines.docx"] + ["capstone-%s-request.eml" % k for k in ("wm", "am", "ops", "rs", "fin", "hr", "lc")]:
         shutil.copy("out/files/" + f, OUTP)
     print(sorted(os.listdir(OUTP)))

@@ -7,7 +7,7 @@ table{width:100%;border-collapse:collapse}td{border-top:1px solid var(--line);pa
 nav a{color:var(--blue);margin-right:14px}pre{white-space:pre-wrap;background:#06183a;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:13px;color:var(--dim)}
 .rub td:first-child{width:12%;color:var(--amber);font-weight:700}</style></head><body><main>
 <h1>Capstone · reference answers</h1><p class='sub'>Facilitator only — do not share. Lab task E2.9, 13:10 – 14:50. Pair presentations 14:50 – 15:00. Trainees pick a field; each reply should carry an executive brief (Word) and a 6-slide deck (PowerPoint) by 2:50 pm, subject “Capstone · [field] · [name]”.</p>
-<nav><a href='#wm'>Wealth Management</a><a href='#am'>Asset Management</a><a href='#ops'>Operations</a><a href='#rs'>Investment Research</a></nav>
+<nav><a href='#wm'>Wealth Management</a><a href='#am'>Asset Management</a><a href='#rs'>Investment Research</a><a href='#ops'>Operations</a><a href='#fin'>Finance</a><a href='#hr'>Human Resources</a><a href='#lc'>Legal & Compliance</a></nav>
 <div class='card rub'><div class='k'>Rubric · /100 · from the Program 2 outline · Pass / Does not pass</div><table><tr><td>30</td><td><b>Workflow completeness</b> — read the email, analysed the data, produced the brief and the deck, sent the reply by 2:50 pm. Pass: all steps attempted and submitted</td></tr><tr><td>25</td><td><b>Data analysis accuracy</b> — Copilot output reviewed and corrected; numbers match the reference within rounding (traps below). Pass: no major data errors</td></tr><tr><td>20</td><td><b>Deliverable quality</b> — brief (one page, bottom line first), deck (six slides, message titles) and charts are clear, professional and answer the request. Pass: presentation-ready</td></tr><tr><td>15</td><td><b>AI review & judgement</b> — accuracy, confidentiality (the declined ask), tone, completeness; a real “What I corrected” line. Pass: at least one correction or verification noted</td></tr><tr><td>10</td><td><b>Prompt quality</b> — the three prompts pasted at the end of the reply are specific, with context, task, format and tone. Pass: not generic</td></tr></table></div>
 <h2 id='wm'>Wealth Management</h2>
 <div class='card'><div class='k'>The request</div><table><tr><td>Deadline</td><td>Today, 2:50 pm (moved from Wednesday)</td></tr><tr><td>Deliverables</td><td>1-page Word brief (internal, no disclaimer) + 6-slide client deck (with disclaimer) + at least one allocation chart</td></tr><tr><td>Decline</td><td>Fahad&#x27;s request for the Al-Murjan portfolio results — another client&#x27;s data</td></tr><tr><td>Brief for</td><td>Huda Al-Enezi for the Investment Committee (internal — no client disclaimer)</td></tr><tr><td>Deck for</td><td>Yousef Al-Kandari to use with the client (client-facing — add the standard disclaimer, never another client&#x27;s data)</td></tr></table></div>
@@ -106,53 +106,6 @@ Cover: fund vs benchmark - year to date and Q3; best and worst month against the
 
 Thanks,
 Dalal</pre></details>
-<h2 id='ops'>Operations</h2>
-<div class='card'><div class='k'>The request</div><table><tr><td>Deadline</td><td>Today, 2:50 pm (moved from Wednesday)</td></tr><tr><td>Deliverables</td><td>1-page Word brief + 6-slide Committee deck with a counterparty chart and a monthly on-time chart</td></tr><tr><td>Decline</td><td>Sharing internal counterparty scores with Riyadh Capital Markets — and no client names in the Committee pack</td></tr><tr><td>Brief for</td><td>Mishari Al-Ghanim, Chief Operating Officer</td></tr><tr><td>Deck for</td><td>the Operations Committee (trade IDs and counterparties only — no client names)</td></tr></table></div>
-<div class='card'><div class='k'>Reference numbers</div><table><tr><td>Data issues</td><td>3 duplicate trade rows · counterparty name variants (Gulf Brokerage ×3 spellings, Riyadh Capital ×2) · some settle dates stored as text</td></tr><tr><td>Unique trades</td><td>107 (raw rows 110)</td></tr><tr><td>On time</td><td>94 of 107 = 87.9% — below the 98% target</td></tr><tr><td>Settled late</td><td>10 trades · KWD 3,837,000 · average 2.3 days late</td></tr><tr><td>Open fails</td><td>TRD-26074 (Riyadh Capital Markets, 28 days), TRD-26094 (Atlantic Prime Brokers, 10 days), TRD-26054 (Gulf Brokerage Co., 44 days)</td></tr><tr><td>Escalate (open &gt; 5 days)</td><td>TRD-26074 · Riyadh Capital Markets · 28 days · KWD 525,000, TRD-26094 · Atlantic Prime Brokers · 10 days · KWD 68,000, TRD-26054 · Gulf Brokerage Co. · 44 days · KWD 536,000</td></tr><tr><td>Late or failed by counterparty</td><td>Riyadh Capital Markets 5 · Atlantic Prime Brokers 4 · Gulf Brokerage Co. 3 · Emirates Trading House 1</td></tr><tr><td>Counterparty review (3+)</td><td>Riyadh Capital Markets, Atlantic Prime Brokers, Gulf Brokerage Co.</td></tr><tr><td>On-time by month</td><td>Jul 30/37 = 81.1% · Aug 33/38 = 86.8% · Sep 31/32 = 96.9%</td></tr></table></div>
-<div class='card'><div class='k'>A good recommendation</div><p>Escalate the open fails over 5 days today; put Riyadh Capital Markets and Atlantic Prime Brokers on counterparty review; target the root cause (SSI and pre-matching) before Q4.</p></div>
-<details class='card'><summary>Email thread · RE: Q3 settlement review - Operations Committee</summary><pre>From: Mishari Al-Ghanim (Chief Operating Officer)
-Sent: Mon 12 Oct 2026, 13:15
-To: You
-
-Hi,
-
-The Operations Committee is now tomorrow at 8:30, so please send your files today by 2:50 pm.
-
-Two files:
-1) A one-page executive brief in Word for me.
-2) A 6-slide PowerPoint for the Committee, with a chart of late and failed trades by counterparty and the on-time rate by month.
-
-Lead with whether we met the 98% target, and list every trade I need to escalate.
-
-Thanks,
-Mishari
-
-----------------------------------------
-
-From: Noura Al-Rashidi (Compliance)
-Sent: Sun 11 Oct 2026, 10:30
-To: Mishari Al-Ghanim
-
-Mishari,
-
-Reminder for anything that goes to the Committee: no client names - trade IDs and counterparties only. Also, Riyadh Capital Markets asked for a copy of our internal counterparty scores; please do not share them outside KAMCO.
-
-Noura
-
-----------------------------------------
-
-From: Mishari Al-Ghanim (Chief Operating Officer)
-Sent: Tue 6 Oct 2026, 14:00
-To: You
-
-Hi,
-
-Please review Q3 settlement performance for the Operations Committee on Wednesday 14 Oct. The blotter export is attached.
-
-Cover: the on-time settlement rate against our 98% target, late and failed trades by counterparty, the average delay, the value of trades that settled late, and the open fails we must escalate.
-
-Thanks,
-Mishari</pre></details>
 <h2 id='rs'>Investment Research</h2>
 <div class='card'><div class='k'>The request</div><table><tr><td>Deadline</td><td>Today, 2:50 pm (moved from Thursday)</td></tr><tr><td>Deliverables</td><td>1-page Word brief with the view and a valuation table + 6-slide Committee deck with a revenue/margin chart and a price chart</td></tr><tr><td>Decline</td><td>Sara&#x27;s request to share the valuation before the Committee, to pass to a client — research must not leak to Corporate Finance or clients</td></tr><tr><td>Brief for</td><td>Ahmad Al-Hamad, Head of Research (internal — Investment Committee use only)</td></tr><tr><td>Deck for</td><td>the Investment Committee (no price targets or promises; the valuation table on one slide)</td></tr></table></div>
 <div class='card'><div class='k'>Reference numbers</div><table><tr><td>Data issues</td><td>FY2024 EBITDA stored as text · one peer with &#x27;n/a&#x27; EV/EBITDA · Emirates Logistics Group listed twice · H1 2026 is six months — do not compare with full years</td></tr><tr><td>Revenue CAGR FY2023–FY2025</td><td>13.3%</td></tr><tr><td>EBITDA margin</td><td>FY2023 21.0% · FY2024 21.5% · FY2025 22.5% · H1 2026 22.0%</td></tr><tr><td>Net debt FY2025</td><td>KWD 16,500k · net debt/EBITDA 1.39x</td></tr><tr><td>Peer median EV/EBITDA</td><td>9.0x (6 peers with a number, each counted once)</td></tr><tr><td>Enterprise value</td><td>KWD 107,100k</td></tr><tr><td>Equity value</td><td>KWD 90,600k</td></tr><tr><td>Value per share</td><td>KWD 0.503 vs price KWD 0.652 at 30 Sep</td></tr><tr><td>Upside</td><td>-22.8% → Unattractive</td></tr><tr><td>Share price</td><td>KWD 0.512 (Apr-2025) → KWD 0.652 (Sep-2026), 27.3%</td></tr></table></div>
@@ -200,4 +153,192 @@ Cover: revenue growth and EBITDA margin from FY2023 to FY2025 plus H1 2026, leve
 
 Thanks,
 Ahmad</pre></details>
+<h2 id='ops'>Operations</h2>
+<div class='card'><div class='k'>The request</div><table><tr><td>Deadline</td><td>Today, 2:50 pm (moved from Wednesday)</td></tr><tr><td>Deliverables</td><td>1-page Word brief + 6-slide Committee deck with a counterparty chart and a monthly on-time chart</td></tr><tr><td>Decline</td><td>Sharing internal counterparty scores with Riyadh Capital Markets — and no client names in the Committee pack</td></tr><tr><td>Brief for</td><td>Mishari Al-Ghanim, Chief Operating Officer</td></tr><tr><td>Deck for</td><td>the Operations Committee (trade IDs and counterparties only — no client names)</td></tr></table></div>
+<div class='card'><div class='k'>Reference numbers</div><table><tr><td>Data issues</td><td>3 duplicate trade rows · counterparty name variants (Gulf Brokerage ×3 spellings, Riyadh Capital ×2) · some settle dates stored as text</td></tr><tr><td>Unique trades</td><td>107 (raw rows 110)</td></tr><tr><td>On time</td><td>94 of 107 = 87.9% — below the 98% target</td></tr><tr><td>Settled late</td><td>10 trades · KWD 3,837,000 · average 2.3 days late</td></tr><tr><td>Open fails</td><td>TRD-26074 (Riyadh Capital Markets, 28 days), TRD-26094 (Atlantic Prime Brokers, 10 days), TRD-26054 (Gulf Brokerage Co., 44 days)</td></tr><tr><td>Escalate (open &gt; 5 days)</td><td>TRD-26074 · Riyadh Capital Markets · 28 days · KWD 525,000, TRD-26094 · Atlantic Prime Brokers · 10 days · KWD 68,000, TRD-26054 · Gulf Brokerage Co. · 44 days · KWD 536,000</td></tr><tr><td>Late or failed by counterparty</td><td>Riyadh Capital Markets 5 · Atlantic Prime Brokers 4 · Gulf Brokerage Co. 3 · Emirates Trading House 1</td></tr><tr><td>Counterparty review (3+)</td><td>Riyadh Capital Markets, Atlantic Prime Brokers, Gulf Brokerage Co.</td></tr><tr><td>On-time by month</td><td>Jul 30/37 = 81.1% · Aug 33/38 = 86.8% · Sep 31/32 = 96.9%</td></tr></table></div>
+<div class='card'><div class='k'>A good recommendation</div><p>Escalate the open fails over 5 days today; put Riyadh Capital Markets and Atlantic Prime Brokers on counterparty review; target the root cause (SSI and pre-matching) before Q4.</p></div>
+<details class='card'><summary>Email thread · RE: Q3 settlement review - Operations Committee</summary><pre>From: Mishari Al-Ghanim (Chief Operating Officer)
+Sent: Mon 12 Oct 2026, 13:15
+To: You
+
+Hi,
+
+The Operations Committee is now tomorrow at 8:30, so please send your files today by 2:50 pm.
+
+Two files:
+1) A one-page executive brief in Word for me.
+2) A 6-slide PowerPoint for the Committee, with a chart of late and failed trades by counterparty and the on-time rate by month.
+
+Lead with whether we met the 98% target, and list every trade I need to escalate.
+
+Thanks,
+Mishari
+
+----------------------------------------
+
+From: Noura Al-Rashidi (Compliance)
+Sent: Sun 11 Oct 2026, 10:30
+To: Mishari Al-Ghanim
+
+Mishari,
+
+Reminder for anything that goes to the Committee: no client names - trade IDs and counterparties only. Also, Riyadh Capital Markets asked for a copy of our internal counterparty scores; please do not share them outside KAMCO.
+
+Noura
+
+----------------------------------------
+
+From: Mishari Al-Ghanim (Chief Operating Officer)
+Sent: Tue 6 Oct 2026, 14:00
+To: You
+
+Hi,
+
+Please review Q3 settlement performance for the Operations Committee on Wednesday 14 Oct. The blotter export is attached.
+
+Cover: the on-time settlement rate against our 98% target, late and failed trades by counterparty, the average delay, the value of trades that settled late, and the open fails we must escalate.
+
+Thanks,
+Mishari</pre></details>
+<h2 id='fin'>Finance</h2>
+<div class='card'><div class='k'>The request</div><table><tr><td>Deadline</td><td>Today, 2:50 pm (moved from Thursday)</td></tr><tr><td>Deliverables</td><td>1-page Word brief + 6-slide Committee deck with budget vs actual by department and a monthly trend chart</td></tr><tr><td>Decline</td><td>Talal&#x27;s request to move KWD 20,000 of September costs into Q4 — costs stay in the quarter they were incurred</td></tr><tr><td>Brief for</td><td>Reem Al-Fulaij, Chief Financial Officer</td></tr><tr><td>Deck for</td><td>the Management Committee (lead with the total variance; name the departments that must explain)</td></tr></table></div>
+<div class='card'><div class='k'>Reference numbers</div><table><tr><td>Data issues</td><td>3 duplicate journal lines (same Reference) · department name variants (Wealth Mgmt, Ops, Information Technology…) · some amounts stored as text</td></tr><tr><td>Total actual vs budget</td><td>KWD 497,309 vs KWD 470,000 → +27,309 (+5.8%)</td></tr><tr><td>Variance by department</td><td>IT +29,124 (+20.8%) · Wealth Management +13,302 (+18.2%) · Operations +489 (+1.2%) · Research -1,580 (-2.9%) · Asset Management -4,123 (-4.5%) · Marketing -9,903 (-14.1%)</td></tr><tr><td>Must explain (&gt;10% and &gt;KWD 5,000)</td><td>Wealth Management, IT</td></tr><tr><td>Top 3 vendors</td><td>Oracle (training) (KWD 95,628), S&amp;P Data (training) (KWD 61,378), Refinitiv (training) (KWD 57,753)</td></tr><tr><td>Monthly spend</td><td>Jul KWD 167,577 · Aug KWD 221,015 · Sep KWD 108,717</td></tr></table></div>
+<div class='card'><div class='k'>A good recommendation</div><p>Ask Wealth Management and IT to explain their overspend to the CFO before Q4; keep every cost in Q3 as incurred; review the largest data and licence contracts before renewal.</p></div>
+<details class='card'><summary>Email thread · RE: Q3 budget vs actual - Management Committee</summary><pre>From: Reem Al-Fulaij (Chief Financial Officer)
+Sent: Mon 12 Oct 2026, 13:05
+To: You
+
+Hi,
+
+The Management Committee has moved to tomorrow at 8:00, so I need your files today by 2:50 pm.
+
+Two files:
+1) A one-page executive brief in Word for me.
+2) A 6-slide PowerPoint for the Committee, with a chart of budget vs actual by department and the monthly spend trend.
+
+Lead with the total variance, and list every department that must explain its overspend under our rules.
+
+Thanks,
+Reem
+
+----------------------------------------
+
+From: Talal Al-Roumi (Head of IT)
+Sent: Sun 11 Oct 2026, 17:20
+To: Reem Al-Fulaij
+
+Reem,
+
+IT is a bit over this quarter because the licence renewals came early. Can Finance move about KWD 20,000 of the September licence invoices into Q4 so we show on budget? We will be under in Q4 anyway.
+
+Talal
+
+----------------------------------------
+
+From: Reem Al-Fulaij (Chief Financial Officer)
+Sent: Wed 7 Oct 2026, 09:30
+To: You
+
+Hi,
+
+Please prepare the Q3 budget vs actual review for the Management Committee on Thursday 15 Oct. The ledger export and the approved budget are attached.
+
+Cover: total actual vs budget, variance by department (KWD and %), which departments must explain under the policy, the top 3 vendors by spend, and the monthly trend.
+
+Thanks,
+Reem</pre></details>
+<h2 id='hr'>Human Resources</h2>
+<div class='card'><div class='k'>The request</div><table><tr><td>Deadline</td><td>Today, 2:50 pm (moved from Wednesday)</td></tr><tr><td>Deliverables</td><td>1-page Word brief + 6-slide Committee deck with leavers by department and engagement by department</td></tr><tr><td>Decline</td><td>Nasser&#x27;s request for named individual survey answers — the survey is anonymous; offer department-level results and an action plan instead</td></tr><tr><td>Brief for</td><td>Abeer Al-Khaled, HR Director</td></tr><tr><td>Deck for</td><td>the Management Committee (employee IDs only — no names; survey results at department level only)</td></tr></table></div>
+<div class='card'><div class='k'>Reference numbers</div><table><tr><td>Data issues</td><td>3 duplicate employee rows · department name variants (Ops, Wealth Mgmt, HR and Admin) · half the leave dates stored as text</td></tr><tr><td>Headcount at start of Q3</td><td>214 (raw rows 217)</td></tr><tr><td>Leavers and attrition</td><td>15 leavers → 7.0% for the quarter</td></tr><tr><td>Attrition by department</td><td>Wealth Management 3/46 = 6.5% · Asset Management 1/28 = 3.6% · Investment Research 1/18 = 5.6% · Operations 6/52 = 11.5% · Finance 1/24 = 4.2% · IT 3/30 = 10.0% · HR &amp; Admin 0/16 = 0.0%</td></tr><tr><td>Top exit reasons</td><td>Better pay (5), Career growth (4), Workload (2)</td></tr><tr><td>Training vs 10-hour target</td><td>Wealth Management 11.5h · Asset Management 12.0h · Investment Research 14.0h · Operations 6.5h · Finance 9.0h · IT 13.0h · HR &amp; Admin 10.5h → below target: Operations, Finance</td></tr><tr><td>Engagement (1–5)</td><td>Wealth Management 3.9 · Asset Management 4.1 · Investment Research 4.2 · Operations 3.1 · Finance 3.8 · IT 3.6 · HR &amp; Admin 4.0 → lowest: Operations 3.1</td></tr></table></div>
+<div class='card'><div class='k'>A good recommendation</div><p>Operations first: highest attrition (6 of 52, 11.5%), lowest engagement (3.1) and lowest training (6.5h) — agree a department action plan on pay benchmarking and workload, using anonymous results only.</p></div>
+<details class='card'><summary>Email thread · RE: Q3 people review - Management Committee</summary><pre>From: Abeer Al-Khaled (HR Director)
+Sent: Mon 12 Oct 2026, 13:00
+To: You
+
+Hi,
+
+The Management Committee now meets tomorrow at 9:00, so please send your files today by 2:50 pm.
+
+Two files:
+1) A one-page executive brief in Word for me.
+2) A 6-slide PowerPoint for the Committee, with a chart of leavers by department and engagement by department.
+
+Lead with attrition, and say clearly which department needs action first. Employee IDs only - no names.
+
+Thanks,
+Abeer
+
+----------------------------------------
+
+From: Nasser Al-Ali (Head of Operations)
+Sent: Sun 11 Oct 2026, 19:05
+To: Abeer Al-Khaled
+
+Abeer,
+
+My team&#x27;s engagement score looks low. Can HR send me the individual survey answers from Operations - with names - so I can talk to the people who scored us low?
+
+Nasser
+
+----------------------------------------
+
+From: Abeer Al-Khaled (HR Director)
+Sent: Tue 6 Oct 2026, 10:10
+To: You
+
+Hi,
+
+Please prepare the Q3 people review for the Management Committee on Wednesday 14 Oct. The HR export is attached.
+
+Cover: headcount at the start of Q3, leavers and the attrition rate (overall and by department), the top exit reasons, training hours against the 10-hour target, and engagement by department.
+
+Thanks,
+Abeer</pre></details>
+<h2 id='lc'>Legal & Compliance</h2>
+<div class='card'><div class='k'>The request</div><table><tr><td>Deadline</td><td>Today, 2:50 pm (moved from Thursday)</td></tr><tr><td>Deliverables</td><td>1-page Word brief + 6-slide Committee deck with complaints by category and on-time rates</td></tr><tr><td>Decline</td><td>Fawaz&#x27;s request for complainants&#x27; names and phone numbers for a sales call — client details stay inside Compliance</td></tr><tr><td>Brief for</td><td>Hanan Al-Sabah, Chief Compliance Officer</td></tr><tr><td>Deck for</td><td>the Board Audit &amp; Risk Committee (complaint IDs only — never client details)</td></tr></table></div>
+<div class='card'><div class='k'>Reference numbers</div><table><tr><td>Data issues</td><td>2 duplicate complaint rows · category name variants (Late statement, Fees, Service) · some acknowledgement dates stored as text (dd/mm/yyyy)</td></tr><tr><td>Complaints in Q3</td><td>44 (raw rows 46)</td></tr><tr><td>By category</td><td>Statement delay 14 · Service &amp; communication 11 · Fees &amp; charges 9 · Transfer delay 6 · Advice suitability 4</td></tr><tr><td>Acknowledged within 2 business days</td><td>39 of 44 = 88.6%</td></tr><tr><td>Closed within 15 days</td><td>33 of 37 closed = 89.2%</td></tr><tr><td>Overdue open (&gt;15 days at 30 Sep)</td><td>CMP-701 (76 days, Statement delay), CMP-724 (59 days, Advice suitability), CMP-723 (40 days, Fees &amp; charges)</td></tr><tr><td>Compensation paid (closed)</td><td>KWD 1,275</td></tr></table></div>
+<div class='card'><div class='k'>A good recommendation</div><p>Escalate the overdue complaints to the CCO today; fix the root cause of statement delays (the largest category); keep client details inside Compliance — share themes with Sales, not names.</p></div>
+<details class='card'><summary>Email thread · RE: Q3 complaints review - Board Audit &amp; Risk Committee</summary><pre>From: Hanan Al-Sabah (Chief Compliance Officer)
+Sent: Mon 12 Oct 2026, 12:55
+To: You
+
+Hi,
+
+The Board Audit &amp; Risk Committee pre-meeting is now tomorrow at 8:30, so I need your files today by 2:50 pm.
+
+Two files:
+1) A one-page executive brief in Word for me.
+2) A 6-slide PowerPoint for the Committee, with a chart of complaints by category and the on-time rates against our standard.
+
+Lead with whether we meet the acknowledge and resolve standards, and list every overdue complaint by ID.
+
+Thanks,
+Hanan
+
+----------------------------------------
+
+From: Fawaz Al-Mulla (Head of Sales)
+Sent: Sun 11 Oct 2026, 16:40
+To: Hanan Al-Sabah
+
+Hanan,
+
+Can your team send my sales team the names and phone numbers of the clients who complained about fees? We would like to call them with a special offer before they leave.
+
+Fawaz
+
+----------------------------------------
+
+From: Hanan Al-Sabah (Chief Compliance Officer)
+Sent: Mon 5 Oct 2026, 11:00
+To: You
+
+Hi,
+
+Please prepare the Q3 complaints review for the Board Audit &amp; Risk Committee on Thursday 15 Oct. The complaints log is attached.
+
+Cover: number of complaints by category and channel, % acknowledged within 2 business days, % of closed complaints resolved within 15 days, open complaints that are overdue, and total compensation paid.
+
+Thanks,
+Hanan</pre></details>
 </main></body></html>

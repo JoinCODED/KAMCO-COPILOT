@@ -120,7 +120,7 @@ TASKS = [
       expect="One agent answer checked against numbers you trust — and one prompt in your library made better.",
       stretch="Ask Analyst for a chart of allocation against the mandate range. Would you put it in a client deck as it is?",
       boss="Open <b>Researcher</b>. Ask for a one-page brief on what drove GCC bank shares in Q3 2026, with sources. Pick one claim and open its source. Does the source say what Researcher says?"),
- dict(id="E2.8", app="Agent Builder", title="Build the Request Triage Assistant", minutes="25 min", block="Block 3 · Agents",
+ dict(id="E2.8", app="Agent Builder", title="Build the Request Triage Assistant", minutes="20 min", block="Block 3 · Agents",
       scenario="Every Sunday, Faisal's team reads forty client requests to find the client, the ask, the deadline and the risks. Build <b>Request Triage Assistant</b>: an agent that does the reading and flags what breaks KAMCO's client rules. Then test it six ways — each test should get a <b>different kind of answer</b>.",
       files=HV,
       briefs=[{"label": "Test material · the Al-Murjan thread", "text": THREAD}],
@@ -171,7 +171,8 @@ if __name__ == "__main__":
     import json
     from capstone_lab import capstone_task, patch_roles
     cap = json.load(open("out/capstone.json"))
-    TASKS = [capstone_task(cap) if t == "__CAPSTONE__" else t for t in TASKS]
+    from agent_lab import agent_task
+    TASKS = [capstone_task(cap) if t == "__CAPSTONE__" else (agent_task(t) if isinstance(t, dict) and t.get("id") == "E2.8" else t) for t in TASKS]
     build("out/site/coded-kamco-day-2-lab.html", back="coded-kamco-day-2.html", tasks=TASKS, day=2,
           chip="Day 2 · From Insight to Output", key="kamco_copilot_day2_tasks", site=SITE)
     fn = "out/site/coded-kamco-day-2-lab.html"

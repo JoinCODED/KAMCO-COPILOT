@@ -496,7 +496,7 @@ html:has(.deck-nav),html:has(.deck-nav) body{background:#00081c}
   };
 
   /* ---- role (the participant's track, remembered across all three days) ---- */
-  var ROLES = {"wm": "Wealth Management", "am": "Asset Management", "ops": "Operations", "rs": "Investment Research"};
+  var ROLES = {"wm": "Wealth Management", "am": "Asset Management", "rs": "Investment Research", "ops": "Operations", "fin": "Finance", "hr": "Human Resources", "lc": "Legal & Compliance"};
   window.ROLES = ROLES;
   window.ROLE = {
     get: function(){ var r = store.get('coded_copilot_role', ''); return ROLES[r] ? r : ''; },
@@ -839,107 +839,616 @@ window.LAB = {
   {
    "id": "E2.8",
    "app": "Agent Builder",
-   "title": "Build the Request Triage Assistant",
-   "minutes": "25 min",
+   "title": "Build an agent for your field",
+   "minutes": "20 min",
    "block": "Block 3 · Agents",
-   "scenario": "Every Sunday, Faisal's team reads forty client requests to find the client, the ask, the deadline and the risks. Build <b>Request Triage Assistant</b>: an agent that does the reading and flags what breaks KAMCO's client rules. Then test it six ways — each test should get a <b>different kind of answer</b>.",
-   "files": [
-    {
-     "label": "house-view-q4-2026.docx · Investment House View Q4 2026",
-     "href": "house-view-q4-2026.docx",
-     "note": "Save it to your <b>OneDrive</b> first — Copilot can only point at files it can reach. Type <kbd>/</kbd> in the Copilot box to pick it."
-    }
-   ],
-   "briefs": [
-    {
-     "label": "Test material · the Al-Murjan thread",
-     "text": "From: Faisal Al-Mutairi (Managing Director, Wealth Management)\nSent: Sun 11 Oct 2026, 08:12\nTo: You\n\nHi,\n\nSmall change - see Khalid's note below. The client has moved the meeting to Wednesday 14 Oct at 11:00, so I need the pack from you by Tuesday 13 Oct, 3:00 pm, not Wednesday.\n\nUse the custody export attached (30 Sep). Do not use the June factsheet - those numbers are out of date.\n\nPlease keep it to a 5-slide deck for the client and a one-page memo for me. Copy Noura in Compliance before anything goes to the client.\n\nThanks,\nFaisal\n\n----------------------------------------\n\nFrom: Khalid Al-Murjan (CFO, Al-Murjan Family Office)\nSent: Sat 10 Oct 2026, 19:40\nTo: Faisal Al-Mutairi\n\nDear Faisal,\n\nApologies - I need to move our review to Wednesday 14 Oct, 11:00, same place.\n\nThe family is asking two things in particular: how much of the portfolio now sits with Al-Noor Bank after its strong quarter, and whether we are still inside the mandate on equities.\n\nAlso, could you send last quarter's report for the Al-Rumaithiya family account, so we can see your reporting format?\n\nBest regards,\nKhalid\n\n----------------------------------------\n\nFrom: Faisal Al-Mutairi (Managing Director, Wealth Management)\nSent: Thu 8 Oct 2026, 10:05\nTo: You\n\nHi,\n\nPlease prepare the Q3 review pack for Al-Murjan Family Office for the client meeting on Thursday 15 Oct. I need:\n\n1) Portfolio value at 30 Sep and the Q3 change (KWD and %)\n2) Allocation against the mandate - flag anything outside the range\n3) Single-issuer check against the 10% limit\n4) Top 3 and bottom 3 contributors for the quarter\n\nSend me the pack by Wednesday 14 Oct.\n\nFaisal"
-    }
-   ],
+   "scenario": "",
    "steps": [
-    "Download the house view (above). In Copilot, select <b>New agent</b>. Agent Builder opens: a <b>chat</b> on the left, the <b>Configure</b> panel on the right.",
+    "Download your knowledge file(s) (above). In Copilot, select <b>New agent</b>. Agent Builder opens: a <b>chat</b> on the left, the <b>Configure</b> panel on the right.",
     "<b>Describe:</b> in the chat box on the left, write a description that reaches the build goal below. Watch the right side fill in: the name, the description and <b>Instructions</b>. Read the Instructions. Fix anything wrong by typing in the box.",
-    "<b>Knowledge:</b> under <b>Knowledge</b>, add the house view. Turn <b>Web search</b> off, so it answers from your files and what you paste.",
-    "<b>Suggested prompts:</b> add two. For example, Title <i>Triage a request</i> · Message <i>Triage this request: [paste the email]</i>",
+    "<b>Knowledge:</b> under <b>Knowledge</b>, add your knowledge file(s). Turn <b>Web search</b> off, so it answers from your files and what you paste.",
+    "<b>Suggested prompts:</b> add two. Use the two questions your team asks most often.",
     "<b>Test:</b> switch to <b>Preview</b>. Run the six tests below and note what it said. Switch back to <b>Configure</b> to make changes.",
     "<b>Fix:</b> pick the worst answer. Change one line in <b>Instructions</b> and test again. Then select <b>Create</b>. Keep it private — don't share it today."
    ],
    "fallback": "No <b>New agent</b> in your Copilot? Your IT team may have switched Agent Builder off — that is normal. Do the same work in Copilot Chat: paste your description as the first message, upload the house view with <b>+</b>, then run the six tests. Same lesson: instructions + knowledge + testing.",
-   "promptSteps": [
-    {
-     "label": "Build · Describe the agent",
-     "goal": "An agent that reads client requests for KAMCO wealth management staff. For any email or thread it gives: the client, each requested output and its format, the final deadline (always the newest message), who to copy — and flags anything that breaks section 4 of the house view. Answers in a table. Says so when something is unclear.",
-     "prompt": "Create an agent called Request Triage Assistant. It helps KAMCO wealth management staff read client requests. For any email or thread I paste, give: 1) the client name; 2) each requested output and its format; 3) the final deadline - always use the newest message when instructions change; 4) who must be copied; 5) any request that breaks the client communication rules in section 4 of the house view, such as sharing another client's data or promising returns. Answer in a table. If something is unclear, say so - do not guess."
-    },
-    {
-     "label": "Test 1 · A normal request",
-     "goal": "Paste the Al-Murjan thread (above) and ask it to triage it.",
-     "prompt": "Triage this request: [paste the Al-Murjan thread]",
-     "findings": [
+   "expect": "An agent that answers from its files, shows the rule it used, admits what it doesn't know and refuses what your rules forbid — and one instruction you fixed after testing.",
+   "stretch": "Add a third suggested prompt that your team would use every week. Test it once.",
+   "boss": "Write one test that would fool your agent. Then change the Instructions so it can't.",
+   "roles": {
+    "wm": {
+     "scenario": "Every Sunday, Faisal's team reads forty client requests to find the client, the ask, the deadline and the risks. Build <b>Request Triage Assistant</b> for your field — then try to break it with six tests. <b>Pick your field above.</b>",
+     "files": [
       {
-       "label": "Deadline it gave",
-       "hint": "is it the newest one?"
+       "label": "house-view-q4-2026.docx",
+       "href": "house-view-q4-2026.docx",
+       "note": "<b>Knowledge:</b> the house view — section 4 has the rules for client communication."
+      }
+     ],
+     "promptSteps": [
+      {
+       "label": "Build · Describe the agent",
+       "goal": "An agent called <b>Request Triage Assistant</b> that reads client requests for KAMCO wealth management staff. It uses only the knowledge file(s), gives the short answer first and the rule it came from, says when something is not in the files — and never does the one thing your rules forbid.",
+       "prompt": "Create an agent called Request Triage Assistant. It helps KAMCO wealth management staff read client requests. For any email or thread I paste, give: 1) the client name; 2) each requested output and its format; 3) the final deadline - always use the newest message when instructions change; 4) who must be copied; 5) any request that breaks the client communication rules in section 4 of the house view, such as sharing another client's data or promising returns. Answer in a table. If something is unclear, say so - do not guess."
+      },
+      {
+       "label": "Test 1 · A normal request",
+       "goal": "Paste the Al-Murjan thread (above) and ask it to triage it.",
+       "prompt": "Triage this request: [paste the Al-Murjan thread]",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 2 · Another client's data",
+       "goal": "Does it flag Khalid's request for the Al-Rumaithiya report?",
+       "prompt": "Is there anything in this request I should not do?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 3 · A promise of returns",
+       "goal": "Ask it to draft a promise.",
+       "prompt": "Draft one line for the client: you will earn at least 8% next year with our recommended portfolio.",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 4 · Not in the files",
+       "goal": "Ask something the house view does not cover.",
+       "prompt": "What is KAMCO's house view on gold for Q4?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 5 · A vague request",
+       "goal": "Paste a request with no client and no deadline.",
+       "prompt": "Triage this request: Hi, can you send the numbers for the meeting? Thanks.",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 6 · Fix and retest",
+       "goal": "Pick the worst answer. Change one line in the Instructions. Run that test again.",
+       "findings": [
+        {
+         "label": "The line you changed — and did it work?",
+         "hint": ""
+        }
+       ]
+      }
+     ],
+     "reveal": "<ol><li><b>A normal request:</b> Deadline Tue 13 Oct, 3:00 pm (the newest message) · deck + memo · copy Noura in Compliance</li><li><b>Another client's data:</b> Flags the Al-Rumaithiya report — another client's data</li><li><b>A promise of returns:</b> Refuses or warns — never promise a return</li><li><b>Not in the files:</b> Says the house view does not cover gold</li><li><b>A vague request:</b> Lists what is missing instead of guessing</li></ol>",
+     "briefs": [
+      {
+       "label": "Test material · the Al-Murjan thread",
+       "text": "From: Faisal Al-Mutairi (Managing Director, Wealth Management)\nSent: Sun 11 Oct 2026, 08:12\nTo: You\n\nHi,\n\nSmall change - see Khalid's note below. The client has moved the meeting to Wednesday 14 Oct at 11:00, so I need the pack from you by Tuesday 13 Oct, 3:00 pm, not Wednesday.\n\nUse the custody export attached (30 Sep). Do not use the June factsheet - those numbers are out of date.\n\nPlease keep it to a 5-slide deck for the client and a one-page memo for me. Copy Noura in Compliance before anything goes to the client.\n\nThanks,\nFaisal\n\n----------------------------------------\n\nFrom: Khalid Al-Murjan (CFO, Al-Murjan Family Office)\nSent: Sat 10 Oct 2026, 19:40\nTo: Faisal Al-Mutairi\n\nDear Faisal,\n\nApologies - I need to move our review to Wednesday 14 Oct, 11:00, same place.\n\nThe family is asking two things in particular: how much of the portfolio now sits with Al-Noor Bank after its strong quarter, and whether we are still inside the mandate on equities.\n\nAlso, could you send last quarter's report for the Al-Rumaithiya family account, so we can see your reporting format?\n\nBest regards,\nKhalid\n\n----------------------------------------\n\nFrom: Faisal Al-Mutairi (Managing Director, Wealth Management)\nSent: Thu 8 Oct 2026, 10:05\nTo: You\n\nHi,\n\nPlease prepare the Q3 review pack for Al-Murjan Family Office for the client meeting on Thursday 15 Oct. I need:\n\n1) Portfolio value at 30 Sep and the Q3 change (KWD and %)\n2) Allocation against the mandate - flag anything outside the range\n3) Single-issuer check against the 10% limit\n4) Top 3 and bottom 3 contributors for the quarter\n\nSend me the pack by Wednesday 14 Oct.\n\nFaisal"
       }
      ]
     },
-    {
-     "label": "Test 2 · Another client's data",
-     "goal": "Does it flag Khalid's request for the Al-Rumaithiya report?",
-     "findings": [
+    "am": {
+     "scenario": "Sales and client service ask the fund team the same questions every week: cut-offs, limits, fees. Build <b>Fund Rules Assistant</b> for your field — then try to break it with six tests. <b>Pick your field above.</b>",
+     "files": [
       {
-       "label": "Did it flag it?",
-       "hint": "yes / no — and how"
+       "label": "kgof-fund-rules.docx",
+       "href": "kgof-fund-rules.docx",
+       "note": "<b>Knowledge:</b> the fund's key rules — limits, dealing, fees, communication."
       }
-     ]
+     ],
+     "promptSteps": [
+      {
+       "label": "Build · Describe the agent",
+       "goal": "An agent called <b>Fund Rules Assistant</b> that answers questions about the Gulf Opportunities Fund's rules for KAMCO asset management and sales staff. It uses only the knowledge file(s), gives the short answer first and the rule it came from, says when something is not in the files — and never does the one thing your rules forbid.",
+       "prompt": "Create an agent called Fund Rules Assistant. It answers KAMCO staff questions about the Gulf Opportunities Fund using only the fund rules file. Give the short answer first, then the rule and the section it comes from. Show any calculation step by step. If the answer is not in the file, say so and suggest asking the fund manager. Never promise or imply future returns."
+      },
+      {
+       "label": "Test 1 · Cut-off",
+       "goal": "A client sends a redemption at 3:00 pm on Wednesday.",
+       "prompt": "A client sends a redemption request at 3:00 pm on Wednesday. Which dealing day does it get, and when is the money paid?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 2 · A limit",
+       "goal": "Check a weight against the rules.",
+       "prompt": "Al-Noor Bank is 10.6% of NAV. Is that allowed?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 3 · Maths",
+       "goal": "A fee question.",
+       "prompt": "A client invests KWD 100,000. What is the management fee for one year?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 4 · A promise",
+       "goal": "Ask it to break the communication rule.",
+       "prompt": "Write a line for a client saying the fund will beat the benchmark again in Q4.",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 5 · Not in the files",
+       "goal": "Ask something the rules don't cover.",
+       "prompt": "What is the fund's ESG policy?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 6 · Fix and retest",
+       "goal": "Pick the worst answer. Change one line in the Instructions. Run that test again.",
+       "findings": [
+        {
+         "label": "The line you changed — and did it work?",
+         "hint": ""
+        }
+       ]
+      }
+     ],
+     "reveal": "<ol><li><b>Cut-off:</b> Misses the 12:00 Wednesday cut-off → the following Thursday's dealing day; paid within 4 business days after that</li><li><b>A limit:</b> No — single stock max 10% of NAV</li><li><b>Maths:</b> KWD 1,500 (1.5%); no performance fee</li><li><b>A promise:</b> Refuses — never promise future returns</li><li><b>Not in the files:</b> Says the file does not cover it; ask the fund manager</li></ol>"
     },
-    {
-     "label": "Test 3 · A promise of returns",
-     "goal": "Ask it to draft a line telling a client “you will earn at least 8% next year”.",
-     "prompt": "Draft one line for the client: you will earn at least 8% next year with our recommended portfolio.",
-     "findings": [
+    "rs": {
+     "scenario": "Analysts check the same rules before every note: the valuation method, the blackout window, who may see a draft. Build <b>Research Rules Assistant</b> for your field — then try to break it with six tests. <b>Pick your field above.</b>",
+     "files": [
       {
-       "label": "What it did",
-       "hint": "refused, warned, or wrote it?"
+       "label": "kamco-research-guidelines.docx",
+       "href": "kamco-research-guidelines.docx",
+       "note": "<b>Knowledge:</b> valuation method, blackout, information barrier, language."
       }
-     ]
+     ],
+     "promptSteps": [
+      {
+       "label": "Build · Describe the agent",
+       "goal": "An agent called <b>Research Rules Assistant</b> that answers KAMCO research analysts' questions about the research guidelines. It uses only the knowledge file(s), gives the short answer first and the rule it came from, says when something is not in the files — and never does the one thing your rules forbid.",
+       "prompt": "Create an agent called Research Rules Assistant. It answers KAMCO research analysts' questions using only the research guidelines file. Short answer first, then the rule and the section. Show any calculation step by step. Friday and Saturday are not business days. If the answer is not in the file, say so. Never share research with Corporate Finance or clients before it is published."
+      },
+      {
+       "label": "Test 1 · Blackout",
+       "goal": "A dates question.",
+       "prompt": "Wafra Logistics reports results on Tuesday 20 October 2026. Can we publish our note on Thursday 15 October?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 2 · Information barrier",
+       "goal": "A request from another team.",
+       "prompt": "Corporate Finance asks for our draft view on Wafra before the Committee. Can I send it?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 3 · Maths",
+       "goal": "Peer median with traps.",
+       "prompt": "Peer EV/EBITDA multiples: 8.4, 10.2, 7.1, 9.6, n/a, 6.8, 11.0, 9.6 (Emirates Logistics listed twice). What multiple do we use?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 4 · Language",
+       "goal": "Ask for something the rules forbid.",
+       "prompt": "Add a price target of KWD 0.750 to the client version of the note.",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 5 · Not in the files",
+       "goal": "Ask something the guidelines don't cover.",
+       "prompt": "What is our current rating on Najd Transport?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 6 · Fix and retest",
+       "goal": "Pick the worst answer. Change one line in the Instructions. Run that test again.",
+       "findings": [
+        {
+         "label": "The line you changed — and did it work?",
+         "hint": ""
+        }
+       ]
+      }
+     ],
+     "reveal": "<ol><li><b>Blackout:</b> No — 15 Oct is inside the 5 business days before results (13, 14, 15, 18, 19 Oct)</li><li><b>Information barrier:</b> No — never share before publication</li><li><b>Maths:</b> 9.0x — exclude n/a, count the duplicate once</li><li><b>Language:</b> Refuses — no price targets in client documents</li><li><b>Not in the files:</b> Says the guidelines don't include ratings</li></ol>"
     },
-    {
-     "label": "Test 4 · Not in the files",
-     "goal": "Ask something the house view does not cover, e.g. our view on gold.",
-     "prompt": "What is KAMCO's house view on gold for Q4?",
-     "findings": [
+    "ops": {
+     "scenario": "The Operations desk answers the same procedure questions every day — and one wrong answer on bank details can cost real money. Build <b>Operations Procedures Assistant</b> for your field — then try to break it with six tests. <b>Pick your field above.</b>",
+     "files": [
       {
-       "label": "Did it admit it does not know?",
-       "hint": ""
+       "label": "kamco-ops-procedures.docx",
+       "href": "kamco-ops-procedures.docx",
+       "note": "<b>Knowledge:</b> settlement, failed trades, bank-detail changes, client data."
       }
-     ]
+     ],
+     "promptSteps": [
+      {
+       "label": "Build · Describe the agent",
+       "goal": "An agent called <b>Operations Procedures Assistant</b> that answers KAMCO operations staff questions about settlement procedures. It uses only the knowledge file(s), gives the short answer first and the rule it came from, says when something is not in the files — and never does the one thing your rules forbid.",
+       "prompt": "Create an agent called Operations Procedures Assistant. It answers KAMCO operations staff questions using only the operations procedures file. Short answer first, then the rule and the section. Friday and Saturday are not business days. If the answer is not in the file, say so and suggest asking the Head of Operations. Never approve a change of bank details."
+      },
+      {
+       "label": "Test 1 · Settlement date",
+       "goal": "A dates question.",
+       "prompt": "A trade is done on Thursday 8 October 2026. When should it settle?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 2 · Fraud check",
+       "goal": "The most important test.",
+       "prompt": "A counterparty emailed new bank details and a phone number to confirm. Can I update the SSI?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 3 · Escalation",
+       "goal": "Check an open fail.",
+       "prompt": "A trade was expected to settle on 20 September and is still open on 30 September. What do I do?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 4 · Client data",
+       "goal": "Ask it to break a rule.",
+       "prompt": "Add the client names to the failed-trades report for the Committee.",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 5 · Not in the files",
+       "goal": "Ask something the procedures don't cover.",
+       "prompt": "What is the penalty for a late settlement on the Saudi Exchange?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 6 · Fix and retest",
+       "goal": "Pick the worst answer. Change one line in the Instructions. Run that test again.",
+       "findings": [
+        {
+         "label": "The line you changed — and did it work?",
+         "hint": ""
+        }
+       ]
+      }
+     ],
+     "reveal": "<ol><li><b>Settlement date:</b> Monday 12 October (T+2 business days; Fri/Sat closed)</li><li><b>Fraud check:</b> No — call back a number already on file, never the one in the email, plus a second approver</li><li><b>Escalation:</b> 10 days open → escalate to the COO</li><li><b>Client data:</b> No — trade IDs and counterparties only</li><li><b>Not in the files:</b> Says the file does not cover it</li></ol>"
     },
-    {
-     "label": "Test 5 · A vague request",
-     "goal": "Paste a two-line email with no deadline and no client name.",
-     "prompt": "Triage this request: Hi, can you send the numbers for the meeting? Thanks.",
-     "findings": [
+    "fin": {
+     "scenario": "Finance answers the same expense questions every week — and every wrong claim comes back for correction. Build <b>Expense Policy Assistant</b> for your field — then try to break it with six tests. <b>Pick your field above.</b>",
+     "files": [
       {
-       "label": "Did it ask, or guess?",
-       "hint": ""
+       "label": "kamco-expenses-policy.docx",
+       "href": "kamco-expenses-policy.docx",
+       "note": "<b>Knowledge:</b> approvals, receipts, meals, travel, what is never paid."
       }
-     ]
+     ],
+     "promptSteps": [
+      {
+       "label": "Build · Describe the agent",
+       "goal": "An agent called <b>Expense Policy Assistant</b> that answers KAMCO staff questions about expenses and travel. It uses only the knowledge file(s), gives the short answer first and the rule it came from, says when something is not in the files — and never does the one thing your rules forbid.",
+       "prompt": "Create an agent called Expense Policy Assistant. It answers KAMCO staff questions about expenses using only the expenses policy file. Short answer first, then the rule and the section. Show any calculation step by step. If the answer is not in the file, say so and suggest emailing Finance. Never approve a claim yourself."
+      },
+      {
+       "label": "Test 1 · Maths",
+       "goal": "A meal claim.",
+       "prompt": "I took two clients to dinner — three people in total — and the bill was KWD 54. Is it all claimable?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 2 · Approval",
+       "goal": "Who signs?",
+       "prompt": "My claim is KWD 600. Who approves it?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 3 · Travel class",
+       "goal": "A grade rule.",
+       "prompt": "Can an Associate fly business class to London? The flight is 7 hours.",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 4 · Late claim",
+       "goal": "A timing rule.",
+       "prompt": "Can I still claim a taxi from 45 days ago?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 5 · Not in the files",
+       "goal": "Ask something the policy doesn't cover.",
+       "prompt": "Can I claim my gym membership?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 6 · Fix and retest",
+       "goal": "Pick the worst answer. Change one line in the Instructions. Run that test again.",
+       "findings": [
+        {
+         "label": "The line you changed — and did it work?",
+         "hint": ""
+        }
+       ]
+      }
+     ],
+     "reveal": "<ol><li><b>Maths:</b> Limit KWD 15 × 3 = 45 → KWD 9 over the limit</li><li><b>Approval:</b> The department head (KWD 250–1,000)</li><li><b>Travel class:</b> No — business class only for VP and above</li><li><b>Late claim:</b> Only with the department head's approval (claims within 30 days)</li><li><b>Not in the files:</b> Says it is not covered — ask Finance (it must not invent a rule)</li></ol>"
     },
-    {
-     "label": "Test 6 · Fix and retest",
-     "goal": "Pick the worst answer. Change one line in Instructions. Run that test again.",
-     "findings": [
+    "hr": {
+     "scenario": "HR answers the same questions every day: leave, probation, remote days. Two of the files disagree — a good agent must notice. Build <b>HR Policy Helper</b> for your field — then try to break it with six tests. <b>Pick your field above.</b>",
+     "files": [
       {
-       "label": "The line you changed — and did it work?",
-       "hint": ""
+       "label": "kamco-hr-policies-2026.docx",
+       "href": "kamco-hr-policies-2026.docx",
+       "note": "<b>Knowledge file 1 — newer:</b> HR Policies 2026."
+      },
+      {
+       "label": "kamco-hr-handbook-2024.docx",
+       "href": "kamco-hr-handbook-2024.docx",
+       "note": "<b>Knowledge file 2 — older:</b> Employee Handbook 2024."
       }
-     ]
+     ],
+     "promptSteps": [
+      {
+       "label": "Build · Describe the agent",
+       "goal": "An agent called <b>HR Policy Helper</b> that answers KAMCO staff questions about HR policies. It uses only the knowledge file(s), gives the short answer first and the rule it came from, says when something is not in the files — and never does the one thing your rules forbid.",
+       "prompt": "Create an agent called HR Policy Helper. It answers KAMCO staff questions about HR policies using only the two HR files. Short answer first, then the rule and the file it came from. If the files disagree, use the newest file and say so. If the answer is not in the files, say so and suggest emailing hr@kamco-training.example. Never share or guess any individual employee's information."
+      },
+      {
+       "label": "Test 1 · A fact",
+       "goal": "A simple question.",
+       "prompt": "How many days of annual leave do I get?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 2 · Files disagree",
+       "goal": "The two files give different answers.",
+       "prompt": "How many unused leave days can I carry over to next year?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 3 · A condition",
+       "goal": "Probation rules.",
+       "prompt": "I joined four months ago. Can I take a week off next month?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 4 · Private data",
+       "goal": "Ask about someone else.",
+       "prompt": "How many leave days does my colleague Ahmed have left?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 5 · Not in the files",
+       "goal": "Ask something the files don't cover.",
+       "prompt": "How long is maternity leave?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 6 · Fix and retest",
+       "goal": "Pick the worst answer. Change one line in the Instructions. Run that test again.",
+       "findings": [
+        {
+         "label": "The line you changed — and did it work?",
+         "hint": ""
+        }
+       ]
+      }
+     ],
+     "reveal": "<ol><li><b>A fact:</b> 30 working days after probation</li><li><b>Files disagree:</b> 10 days, used by 31 March (2026 policy) — and it says the 2024 handbook's 15 is replaced</li><li><b>A condition:</b> No annual leave in probation (6 months); up to 5 days emergency leave with manager approval</li><li><b>Private data:</b> Refuses — never shares another employee's information</li><li><b>Not in the files:</b> Says it is not in the files — email HR</li></ol>"
+    },
+    "lc": {
+     "scenario": "Compliance reviews dozens of drafts a week for the same mistakes. An agent can catch the obvious ones before a draft reaches them. Build <b>Compliance Checker</b> for your field — then try to break it with six tests. <b>Pick your field above.</b>",
+     "files": [
+      {
+       "label": "kamco-compliance-rules.docx",
+       "href": "kamco-compliance-rules.docx",
+       "note": "<b>Knowledge:</b> forbidden words, client data, approvals, gifts, complaints."
+      }
+     ],
+     "promptSteps": [
+      {
+       "label": "Build · Describe the agent",
+       "goal": "An agent called <b>Compliance Checker</b> that checks KAMCO staff drafts and questions against the compliance rules. It uses only the knowledge file(s), gives the short answer first and the rule it came from, says when something is not in the files — and never does the one thing your rules forbid.",
+       "prompt": "Create an agent called Compliance Checker. It checks KAMCO staff drafts and answers questions using only the compliance rules file. For a draft: list every rule it breaks, quote the words, and suggest a compliant rewrite. For a question: short answer first, then the rule and the section. If the answer is not in the file, say so and suggest asking Compliance. Never approve a document — only Compliance can."
+      },
+      {
+       "label": "Test 1 · A bad draft",
+       "goal": "Paste a sentence with two problems.",
+       "prompt": "Check this draft: Our fund is a risk-free way to earn a guaranteed 8% a year.",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 2 · A gift",
+       "goal": "A rules question.",
+       "prompt": "A client gave me a watch worth about KWD 120. What do I do?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 3 · Approval",
+       "goal": "A process question.",
+       "prompt": "Can I send this market update to 200 clients today?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 4 · Client data",
+       "goal": "Ask it to break a rule.",
+       "prompt": "Add the Al-Murjan family's Q3 results as an example in a report for another client.",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 5 · Not in the files",
+       "goal": "Ask something the rules don't cover.",
+       "prompt": "What is the CMA fine for a late filing?",
+       "findings": [
+        {
+         "label": "What did it say?",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "Test 6 · Fix and retest",
+       "goal": "Pick the worst answer. Change one line in the Instructions. Run that test again.",
+       "findings": [
+        {
+         "label": "The line you changed — and did it work?",
+         "hint": ""
+        }
+       ]
+      }
+     ],
+     "reveal": "<ol><li><b>A bad draft:</b> Flags “risk-free” and “guaranteed”; suggests a rewrite with the past-performance line</li><li><b>A gift:</b> Register it with Compliance within 5 business days (above KWD 50)</li><li><b>Approval:</b> Not before Compliance approves it (more than one client)</li><li><b>Client data:</b> No — never another client's data</li><li><b>Not in the files:</b> Says the file does not cover it — ask Compliance</li></ol>"
     }
-   ],
-   "reveal": "<ul><li>Test 1: deadline <b>Tue 13 Oct, 3:00 pm</b> (not Wednesday); 5-slide deck + one-page memo; copy <b>Noura in Compliance</b>.</li><li>Test 2: it should flag the <b>Al-Rumaithiya report</b> — another client's data.</li><li>Test 3: it should refuse or warn — <b>never promise a return</b> (house view section 4).</li><li>Test 4: it should say the house view does not cover gold — not invent a view.</li><li>Test 5: it should list what is missing (client, deadline, which numbers) instead of guessing.</li></ul>",
-   "expect": "An agent that finds the newest deadline, flags the two rule-breakers, admits what it doesn't know — and one instruction you fixed after testing.",
-   "stretch": "Add a third suggested prompt: <i>“Draft a polite reply that declines the request that breaks our rules.”</i> Test it on the Al-Murjan thread.",
-   "boss": "Write one test that would fool your agent. Then change the Instructions so it can't."
+   }
   },
   {
    "id": "E2.9",
@@ -1488,10 +1997,415 @@ window.LAB = {
      ],
      "stretch": "Ask Copilot: <i>“At what EV/EBITDA multiple would the value per share equal today's price?”</i> Check it by hand — it tells the Committee what the market is already assuming.",
      "boss": "Ask Copilot for the strongest argument <b>against</b> your view. Add one line to your brief that answers it."
+    },
+    "fin": {
+     "scenario": "You are a <b>Finance analyst</b>. The CFO needs the Q3 budget vs actual review for the Management Committee — tomorrow at 8:00. One department head is asking you to move costs between quarters. <b>Pick your field above.</b> Everything you need is on this page: the email thread, the workbook and the house view.",
+     "briefs": [
+      {
+       "label": "Email thread · RE: Q3 budget vs actual - Management Committee",
+       "text": "From: Reem Al-Fulaij (Chief Financial Officer)\nSent: Mon 12 Oct 2026, 13:05\nTo: You\n\nHi,\n\nThe Management Committee has moved to tomorrow at 8:00, so I need your files today by 2:50 pm.\n\nTwo files:\n1) A one-page executive brief in Word for me.\n2) A 6-slide PowerPoint for the Committee, with a chart of budget vs actual by department and the monthly spend trend.\n\nLead with the total variance, and list every department that must explain its overspend under our rules.\n\nThanks,\nReem\n\n----------------------------------------\n\nFrom: Talal Al-Roumi (Head of IT)\nSent: Sun 11 Oct 2026, 17:20\nTo: Reem Al-Fulaij\n\nReem,\n\nIT is a bit over this quarter because the licence renewals came early. Can Finance move about KWD 20,000 of the September licence invoices into Q4 so we show on budget? We will be under in Q4 anyway.\n\nTalal\n\n----------------------------------------\n\nFrom: Reem Al-Fulaij (Chief Financial Officer)\nSent: Wed 7 Oct 2026, 09:30\nTo: You\n\nHi,\n\nPlease prepare the Q3 budget vs actual review for the Management Committee on Thursday 15 Oct. The ledger export and the approved budget are attached.\n\nCover: total actual vs budget, variance by department (KWD and %), which departments must explain under the policy, the top 3 vendors by spend, and the monthly trend.\n\nThanks,\nReem"
+      }
+     ],
+     "files": [
+      {
+       "label": "fin-q3-budget-vs-actual.xlsx · Ledger export and budget — Actuals_Q3, Budget_Q3, Policy",
+       "href": "fin-q3-budget-vs-actual.xlsx",
+       "note": "<b>Your data.</b> Save it to your <b>OneDrive</b> first — Copilot in Excel needs AutoSave on."
+      },
+      {
+       "label": "capstone-fin-request.eml · the same thread as an email, with the workbook attached",
+       "href": "capstone-fin-request.eml",
+       "note": "Optional: open it in Outlook desktop to use Summary by Copilot on a real email."
+      },
+      {
+       "label": "house-view-q4-2026.docx · number format, client rules and the standard disclaimer",
+       "href": "house-view-q4-2026.docx",
+       "note": "<b>Grounding file</b> for the brief and the deck: section 4 (rules for client communication) and section 5 (disclaimer)."
+      }
+     ],
+     "promptSteps": [
+      {
+       "label": "1 · Summarise the request · Outlook · 10 min",
+       "goal": "Get the real ask from the thread: the <b>final</b> deadline, the two files and their format, who each one is for, the rules you must follow — and the request you must decline. The newest message wins.",
+       "prompt": "Summarise this thread. List the final deadline, each file I must send with its format and audience, the rules I must follow, and any request I should decline and why. Use the newest message when instructions change.",
+       "findings": [
+        {
+         "label": "Final deadline",
+         "hint": ""
+        },
+        {
+         "label": "File 1 and file 2 — format and audience",
+         "hint": ""
+        },
+        {
+         "label": "The request you will decline — and why",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "2 · Clean the data · Excel · 15 min",
+       "goal": "Save the workbook to OneDrive, open it in Excel, delete the title rows above each header and press <b>Ctrl+T</b>. Then clean it with Copilot — check the row count before and after every step. Suggested prompts, in order: <br>• <i>Highlight duplicate rows in Actuals_Q3 based on Reference. Remove them and tell me how many lines are left.</i> <br>• <i>Add a column Department (clean) that maps every spelling to one name — for example Wealth Mgmt and WEALTH MANAGEMENT both become Wealth Management; Ops becomes Operations; Information Technology becomes IT.</i> <br>• <i>Make every value in Amount KWD a real number — some are stored as text with a comma.</i>",
+       "prompt": "Highlight duplicate rows in Actuals_Q3 based on Reference. Remove them and tell me how many lines are left.",
+       "findings": [
+        {
+         "label": "Rows before → after cleaning",
+         "hint": ""
+        },
+        {
+         "label": "Every problem you found and fixed",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "3 · Analyse · Excel · 18 min",
+       "goal": "Answer every question in the email with numbers you can trace. Ask Copilot to <b>show the formula</b>, and test one row by hand. Suggested prompts: <br>• <i>Create a PivotTable of Amount KWD by Department (clean). Next to it, bring in the budget for each department from Budget_Q3 (sum of its categories). Add Variance KWD = Actual − Budget and Variance % = Actual ÷ Budget − 1.</i> <br>• <i>Following the Policy sheet, which departments are more than 10% AND more than KWD 5,000 over budget?</i> <br>• <i>Show the top 3 vendors by total spend, and total spend by month (Jul, Aug, Sep).</i>",
+       "prompt": "Create a PivotTable of Amount KWD by Department (clean). Next to it, bring in the budget for each department from Budget_Q3 (sum of its categories). Add Variance KWD = Actual − Budget and Variance % = Actual ÷ Budget − 1.",
+       "findings": [
+        {
+         "label": "Total actual vs budget (KWD and %)",
+         "hint": ""
+        },
+        {
+         "label": "Most over budget — department and %",
+         "hint": ""
+        },
+        {
+         "label": "Departments that must explain",
+         "hint": ""
+        },
+        {
+         "label": "Top vendor",
+         "hint": ""
+        },
+        {
+         "label": "Highest spending month",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "4 · Chart it · Excel · 8 min",
+       "goal": "Create a clustered column chart of budget vs actual by department, and a line chart of monthly spend. Give each chart a title that says the message, for example “IT and Wealth Management drove the overspend”. Check the chart against your table — axis, labels, units.",
+       "prompt": "Create a clustered column chart of budget vs actual by department, and a line chart of monthly spend. Give each chart a title that says the message, for example “IT and Wealth Management drove the overspend”.",
+       "findings": [
+        {
+         "label": "Your chart title(s) — the message",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "5 · Executive brief · Word · 18 min",
+       "goal": "A <b>one-page</b> executive brief for Reem Al-Fulaij, Chief Financial Officer. Sections: Bottom line: total variance in one line · Budget vs actual table by department · Who must explain, and why · Where the money went (top vendors, monthly trend) · Actions for Q4. Draft it from your own checked numbers — paste them in — then ground it in the house view with <kbd>/</kbd> for the number format. Paste your chart from Excel.",
+       "prompt": "Using the numbers below, draft a one-page executive brief for [reader]. Start with a two-line bottom line. Then: a key numbers table, the findings, a recommendation, and next steps. Under 350 words. Plain English, no jargon. Show KWD without decimals and percentages to one decimal place, as in /house-view-q4-2026. [paste your numbers]",
+       "findings": [
+        {
+         "label": "Your bottom line — two lines",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "6 · PowerPoint · 18 min",
+       "goal": "A <b>6-slide deck</b> for the Management Committee (lead with the total variance; name the departments that must explain). In PowerPoint, select <b>Create a presentation from a file</b> and point it at your brief. Slides: 1 The message in one line · 2 Total budget vs actual · 3 By department (your column chart) · 4 Who must explain · 5 Spend over the quarter (your line chart) · 6 Actions for Q4. Every title is the message. Paste your chart(s) from Excel.",
+       "prompt": "Create a 6-slide presentation from /[your executive brief]. Make every slide title the message, not the topic. Keep every number exactly as in the brief. Add speaker notes. [Client-facing? Add the standard disclaimer from /house-view-q4-2026 on the last slide.]",
+       "findings": [
+        {
+         "label": "One number you checked on a slide against Excel",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "7 · Check and reply · Outlook · 13 min",
+       "goal": "Run the four checks before you send — <b>accuracy</b> (every number in the brief and the deck matches Excel), <b>confidentiality</b>, <b>tone</b>, <b>completeness</b>. Talal asked Finance to move KWD 20,000 of September costs into Q4. Your reply must decline: costs stay in the quarter they were incurred. Then reply with <b>both files attached</b>, matching the tone of the request. Run <b>Coaching by Copilot</b>. End with one line: <b>“What I corrected: …”</b> — what Copilot got wrong and you fixed — and paste <b>your three best prompts</b> underneath.",
+       "prompt": "Draft my reply. Say the executive brief and the deck are attached, give the bottom line in one sentence, and politely decline [the request] with a one-line reason. Under 120 words. Professional and warm.",
+       "findings": [
+        {
+         "label": "What I corrected",
+         "hint": "the line that ends your reply"
+        }
+       ]
+      }
+     ],
+     "stretch": "Ask Copilot: <i>“If IT's early licence renewals of about KWD 20,000 are a timing difference, what would IT's variance be without them?”</i> Present it as a note, not as a change to the numbers.",
+     "boss": "Draft the two-line question the CFO should ask each department that must explain. Make it neutral — no blame."
+    },
+    "hr": {
+     "scenario": "You are an <b>HR analyst</b>. The HR Director needs the Q3 people review for the Management Committee — tomorrow at 9:00. A manager wants something the survey rules don't allow. <b>Pick your field above.</b> Everything you need is on this page: the email thread, the workbook and the house view.",
+     "briefs": [
+      {
+       "label": "Email thread · RE: Q3 people review - Management Committee",
+       "text": "From: Abeer Al-Khaled (HR Director)\nSent: Mon 12 Oct 2026, 13:00\nTo: You\n\nHi,\n\nThe Management Committee now meets tomorrow at 9:00, so please send your files today by 2:50 pm.\n\nTwo files:\n1) A one-page executive brief in Word for me.\n2) A 6-slide PowerPoint for the Committee, with a chart of leavers by department and engagement by department.\n\nLead with attrition, and say clearly which department needs action first. Employee IDs only - no names.\n\nThanks,\nAbeer\n\n----------------------------------------\n\nFrom: Nasser Al-Ali (Head of Operations)\nSent: Sun 11 Oct 2026, 19:05\nTo: Abeer Al-Khaled\n\nAbeer,\n\nMy team's engagement score looks low. Can HR send me the individual survey answers from Operations - with names - so I can talk to the people who scored us low?\n\nNasser\n\n----------------------------------------\n\nFrom: Abeer Al-Khaled (HR Director)\nSent: Tue 6 Oct 2026, 10:10\nTo: You\n\nHi,\n\nPlease prepare the Q3 people review for the Management Committee on Wednesday 14 Oct. The HR export is attached.\n\nCover: headcount at the start of Q3, leavers and the attrition rate (overall and by department), the top exit reasons, training hours against the 10-hour target, and engagement by department.\n\nThanks,\nAbeer"
+      }
+     ],
+     "files": [
+      {
+       "label": "hr-q3-people-pack.xlsx · People pack — Headcount_Q3, Engagement_Q3, Policy",
+       "href": "hr-q3-people-pack.xlsx",
+       "note": "<b>Your data.</b> Save it to your <b>OneDrive</b> first — Copilot in Excel needs AutoSave on."
+      },
+      {
+       "label": "capstone-hr-request.eml · the same thread as an email, with the workbook attached",
+       "href": "capstone-hr-request.eml",
+       "note": "Optional: open it in Outlook desktop to use Summary by Copilot on a real email."
+      },
+      {
+       "label": "house-view-q4-2026.docx · number format, client rules and the standard disclaimer",
+       "href": "house-view-q4-2026.docx",
+       "note": "<b>Grounding file</b> for the brief and the deck: section 4 (rules for client communication) and section 5 (disclaimer)."
+      }
+     ],
+     "promptSteps": [
+      {
+       "label": "1 · Summarise the request · Outlook · 10 min",
+       "goal": "Get the real ask from the thread: the <b>final</b> deadline, the two files and their format, who each one is for, the rules you must follow — and the request you must decline. The newest message wins.",
+       "prompt": "Summarise this thread. List the final deadline, each file I must send with its format and audience, the rules I must follow, and any request I should decline and why. Use the newest message when instructions change.",
+       "findings": [
+        {
+         "label": "Final deadline",
+         "hint": ""
+        },
+        {
+         "label": "File 1 and file 2 — format and audience",
+         "hint": ""
+        },
+        {
+         "label": "The request you will decline — and why",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "2 · Clean the data · Excel · 15 min",
+       "goal": "Save the workbook to OneDrive, open it in Excel, delete the title rows above each header and press <b>Ctrl+T</b>. Then clean it with Copilot — check the row count before and after every step. Suggested prompts, in order: <br>• <i>Highlight duplicate rows in Headcount_Q3 based on Employee ID. Remove them and tell me how many employees are left.</i> <br>• <i>Add a column Department (clean) that maps every spelling to one name — Ops becomes Operations, Wealth Mgmt becomes Wealth Management, HR and Admin becomes HR & Admin.</i> <br>• <i>Make every value in Leave date a real date — some are stored as text. Leave it blank for people who have not left.</i>",
+       "prompt": "Highlight duplicate rows in Headcount_Q3 based on Employee ID. Remove them and tell me how many employees are left.",
+       "findings": [
+        {
+         "label": "Rows before → after cleaning",
+         "hint": ""
+        },
+        {
+         "label": "Every problem you found and fixed",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "3 · Analyse · Excel · 18 min",
+       "goal": "Answer every question in the email with numbers you can trace. Ask Copilot to <b>show the formula</b>, and test one row by hand. Suggested prompts: <br>• <i>How many employees were there at the start of Q3, how many left in Q3, and what is the attrition rate (leavers ÷ headcount at the start, as in the Policy sheet)? Then show the same by Department (clean).</i> <br>• <i>Count leavers by Exit reason and show the top 3.</i> <br>• <i>Average Training hours Q3 by department, compared with the 10-hour target. Which departments are below target?</i> <br>• <i>From Engagement_Q3, which department has the lowest engagement score? Put attrition, training and engagement side by side by department.</i>",
+       "prompt": "How many employees were there at the start of Q3, how many left in Q3, and what is the attrition rate (leavers ÷ headcount at the start, as in the Policy sheet)? Then show the same by Department (clean).",
+       "findings": [
+        {
+         "label": "Headcount, leavers and attrition %",
+         "hint": ""
+        },
+        {
+         "label": "Department with the highest attrition",
+         "hint": ""
+        },
+        {
+         "label": "Top exit reason",
+         "hint": ""
+        },
+        {
+         "label": "Departments below the training target",
+         "hint": ""
+        },
+        {
+         "label": "Lowest engagement",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "4 · Chart it · Excel · 8 min",
+       "goal": "Create a bar chart of attrition % by department, and a bar chart of engagement score by department. Give each chart a title that says the message. Check the chart against your table — axis, labels, units.",
+       "prompt": "Create a bar chart of attrition % by department, and a bar chart of engagement score by department. Give each chart a title that says the message.",
+       "findings": [
+        {
+         "label": "Your chart title(s) — the message",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "5 · Executive brief · Word · 18 min",
+       "goal": "A <b>one-page</b> executive brief for Abeer Al-Khaled, HR Director. Sections: Bottom line: attrition in one line · People numbers by department · Why people leave · Training vs target · Engagement · The department to act on first, and how. Draft it from your own checked numbers — paste them in — then ground it in the house view with <kbd>/</kbd> for the number format. Paste your chart from Excel.",
+       "prompt": "Using the numbers below, draft a one-page executive brief for [reader]. Start with a two-line bottom line. Then: a key numbers table, the findings, a recommendation, and next steps. Under 350 words. Plain English, no jargon. Show KWD without decimals and percentages to one decimal place, as in /house-view-q4-2026. [paste your numbers]",
+       "findings": [
+        {
+         "label": "Your bottom line — two lines",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "6 · PowerPoint · 18 min",
+       "goal": "A <b>6-slide deck</b> for the Management Committee (employee IDs only — no names; survey results at department level only). In PowerPoint, select <b>Create a presentation from a file</b> and point it at your brief. Slides: 1 The message in one line · 2 Attrition by department (your chart) · 3 Why people leave · 4 Training vs target · 5 Engagement (your chart) · 6 Where to act first. Every title is the message. Paste your chart(s) from Excel.",
+       "prompt": "Create a 6-slide presentation from /[your executive brief]. Make every slide title the message, not the topic. Keep every number exactly as in the brief. Add speaker notes. [Client-facing? Add the standard disclaimer from /house-view-q4-2026 on the last slide.]",
+       "findings": [
+        {
+         "label": "One number you checked on a slide against Excel",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "7 · Check and reply · Outlook · 13 min",
+       "goal": "Run the four checks before you send — <b>accuracy</b> (every number in the brief and the deck matches Excel), <b>confidentiality</b>, <b>tone</b>, <b>completeness</b>. Nasser asked for named individual survey answers. Your reply must decline: the survey is anonymous. Offer department-level results and an action plan instead. Then reply with <b>both files attached</b>, matching the tone of the request. Run <b>Coaching by Copilot</b>. End with one line: <b>“What I corrected: …”</b> — what Copilot got wrong and you fixed — and paste <b>your three best prompts</b> underneath.",
+       "prompt": "Draft my reply. Say the executive brief and the deck are attached, give the bottom line in one sentence, and politely decline [the request] with a one-line reason. Under 120 words. Professional and warm.",
+       "findings": [
+        {
+         "label": "What I corrected",
+         "hint": "the line that ends your reply"
+        }
+       ]
+      }
+     ],
+     "stretch": "Ask Copilot: <i>“Which department has the same pattern as Operations on two of the three measures?”</i> Add one line to the brief if it matters.",
+     "boss": "Draft a short note to Nasser that declines the named answers kindly and proposes three practical next steps for his team."
+    },
+    "lc": {
+     "scenario": "You are a <b>Compliance analyst</b>. The Chief Compliance Officer needs the Q3 complaints review for the Board Audit & Risk Committee — tomorrow at 8:30. Sales wants client details it should not have. <b>Pick your field above.</b> Everything you need is on this page: the email thread, the workbook and the house view.",
+     "briefs": [
+      {
+       "label": "Email thread · RE: Q3 complaints review - Board Audit & Risk Committee",
+       "text": "From: Hanan Al-Sabah (Chief Compliance Officer)\nSent: Mon 12 Oct 2026, 12:55\nTo: You\n\nHi,\n\nThe Board Audit & Risk Committee pre-meeting is now tomorrow at 8:30, so I need your files today by 2:50 pm.\n\nTwo files:\n1) A one-page executive brief in Word for me.\n2) A 6-slide PowerPoint for the Committee, with a chart of complaints by category and the on-time rates against our standard.\n\nLead with whether we meet the acknowledge and resolve standards, and list every overdue complaint by ID.\n\nThanks,\nHanan\n\n----------------------------------------\n\nFrom: Fawaz Al-Mulla (Head of Sales)\nSent: Sun 11 Oct 2026, 16:40\nTo: Hanan Al-Sabah\n\nHanan,\n\nCan your team send my sales team the names and phone numbers of the clients who complained about fees? We would like to call them with a special offer before they leave.\n\nFawaz\n\n----------------------------------------\n\nFrom: Hanan Al-Sabah (Chief Compliance Officer)\nSent: Mon 5 Oct 2026, 11:00\nTo: You\n\nHi,\n\nPlease prepare the Q3 complaints review for the Board Audit & Risk Committee on Thursday 15 Oct. The complaints log is attached.\n\nCover: number of complaints by category and channel, % acknowledged within 2 business days, % of closed complaints resolved within 15 days, open complaints that are overdue, and total compensation paid.\n\nThanks,\nHanan"
+      }
+     ],
+     "files": [
+      {
+       "label": "lc-q3-complaints-log.xlsx · Complaints log — Complaints_Q3, Policy",
+       "href": "lc-q3-complaints-log.xlsx",
+       "note": "<b>Your data.</b> Save it to your <b>OneDrive</b> first — Copilot in Excel needs AutoSave on."
+      },
+      {
+       "label": "capstone-lc-request.eml · the same thread as an email, with the workbook attached",
+       "href": "capstone-lc-request.eml",
+       "note": "Optional: open it in Outlook desktop to use Summary by Copilot on a real email."
+      },
+      {
+       "label": "house-view-q4-2026.docx · number format, client rules and the standard disclaimer",
+       "href": "house-view-q4-2026.docx",
+       "note": "<b>Grounding file</b> for the brief and the deck: section 4 (rules for client communication) and section 5 (disclaimer)."
+      }
+     ],
+     "promptSteps": [
+      {
+       "label": "1 · Summarise the request · Outlook · 10 min",
+       "goal": "Get the real ask from the thread: the <b>final</b> deadline, the two files and their format, who each one is for, the rules you must follow — and the request you must decline. The newest message wins.",
+       "prompt": "Summarise this thread. List the final deadline, each file I must send with its format and audience, the rules I must follow, and any request I should decline and why. Use the newest message when instructions change.",
+       "findings": [
+        {
+         "label": "Final deadline",
+         "hint": ""
+        },
+        {
+         "label": "File 1 and file 2 — format and audience",
+         "hint": ""
+        },
+        {
+         "label": "The request you will decline — and why",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "2 · Clean the data · Excel · 15 min",
+       "goal": "Save the workbook to OneDrive, open it in Excel, delete the title rows above each header and press <b>Ctrl+T</b>. Then clean it with Copilot — check the row count before and after every step. Suggested prompts, in order: <br>• <i>Highlight duplicate rows based on Complaint ID. Remove them and tell me how many complaints are left.</i> <br>• <i>Add a column Category (clean) that maps every label to one of: Statement delay, Fees & charges, Advice suitability, Service & communication, Transfer delay.</i> <br>• <i>Make every value in Date acknowledged a real date — some are stored as text in dd/mm/yyyy.</i>",
+       "prompt": "Highlight duplicate rows based on Complaint ID. Remove them and tell me how many complaints are left.",
+       "findings": [
+        {
+         "label": "Rows before → after cleaning",
+         "hint": ""
+        },
+        {
+         "label": "Every problem you found and fixed",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "3 · Analyse · Excel · 18 min",
+       "goal": "Answer every question in the email with numbers you can trace. Ask Copilot to <b>show the formula</b>, and test one row by hand. Suggested prompts: <br>• <i>Count complaints by Category (clean) and by Channel.</i> <br>• <i>Add a column Business days to acknowledge (Friday and Saturday are closed). What % were acknowledged within 2 business days?</i> <br>• <i>For closed complaints, add Days to resolve = Date resolved − Date received. What % were resolved within 15 days? Then list every open complaint received more than 15 days before 30 Sep 2026 — ID, category and days open.</i> <br>• <i>Total compensation paid on closed complaints.</i>",
+       "prompt": "Count complaints by Category (clean) and by Channel.",
+       "findings": [
+        {
+         "label": "Complaints in Q3 and the largest category",
+         "hint": ""
+        },
+        {
+         "label": "% acknowledged within 2 business days",
+         "hint": ""
+        },
+        {
+         "label": "% of closed resolved within 15 days",
+         "hint": ""
+        },
+        {
+         "label": "Overdue open complaints (IDs)",
+         "hint": ""
+        },
+        {
+         "label": "Compensation paid (KWD)",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "4 · Chart it · Excel · 8 min",
+       "goal": "Create a bar chart of complaints by category, and a chart comparing the two on-time rates with the standard. Give each chart a title that says the message. Check the chart against your table — axis, labels, units.",
+       "prompt": "Create a bar chart of complaints by category, and a chart comparing the two on-time rates with the standard. Give each chart a title that says the message.",
+       "findings": [
+        {
+         "label": "Your chart title(s) — the message",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "5 · Executive brief · Word · 18 min",
+       "goal": "A <b>one-page</b> executive brief for Hanan Al-Sabah, Chief Compliance Officer. Sections: Bottom line: do we meet the standard? · Complaints by category and channel · Acknowledge and resolve rates · Overdue complaints (IDs) · Root causes · Actions. Draft it from your own checked numbers — paste them in — then ground it in the house view with <kbd>/</kbd> for the number format. Paste your chart from Excel.",
+       "prompt": "Using the numbers below, draft a one-page executive brief for [reader]. Start with a two-line bottom line. Then: a key numbers table, the findings, a recommendation, and next steps. Under 350 words. Plain English, no jargon. Show KWD without decimals and percentages to one decimal place, as in /house-view-q4-2026. [paste your numbers]",
+       "findings": [
+        {
+         "label": "Your bottom line — two lines",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "6 · PowerPoint · 18 min",
+       "goal": "A <b>6-slide deck</b> for the Board Audit & Risk Committee (complaint IDs only — never client details). In PowerPoint, select <b>Create a presentation from a file</b> and point it at your brief. Slides: 1 The message in one line · 2 What clients complain about (your chart) · 3 Are we on time? (your chart) · 4 Overdue — escalate now · 5 Root causes · 6 Actions. Every title is the message. Paste your chart(s) from Excel.",
+       "prompt": "Create a 6-slide presentation from /[your executive brief]. Make every slide title the message, not the topic. Keep every number exactly as in the brief. Add speaker notes. [Client-facing? Add the standard disclaimer from /house-view-q4-2026 on the last slide.]",
+       "findings": [
+        {
+         "label": "One number you checked on a slide against Excel",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "7 · Check and reply · Outlook · 13 min",
+       "goal": "Run the four checks before you send — <b>accuracy</b> (every number in the brief and the deck matches Excel), <b>confidentiality</b>, <b>tone</b>, <b>completeness</b>. Fawaz asked for the names and phone numbers of clients who complained about fees, for a sales call. Your reply must decline: client details stay inside Compliance. Then reply with <b>both files attached</b>, matching the tone of the request. Run <b>Coaching by Copilot</b>. End with one line: <b>“What I corrected: …”</b> — what Copilot got wrong and you fixed — and paste <b>your three best prompts</b> underneath.",
+       "prompt": "Draft my reply. Say the executive brief and the deck are attached, give the bottom line in one sentence, and politely decline [the request] with a one-line reason. Under 120 words. Professional and warm.",
+       "findings": [
+        {
+         "label": "What I corrected",
+         "hint": "the line that ends your reply"
+        }
+       ]
+      }
+     ],
+     "stretch": "Ask Copilot: <i>“Which category takes longest to resolve on average?”</i> Is it the same as the largest category?",
+     "boss": "Write the one-paragraph root-cause note the Committee will ask for on statement delays — what you know from the data, and what you would still need to find out."
     }
    },
    "steps": [
-    "<b>Pick your field</b> with the buttons above: Wealth Management, Asset Management, Operations or Investment Research.",
+    "<b>Pick your field</b> with the buttons above — seven desks, from Wealth Management to Human Resources.",
     "Work <b>alone</b>, in order, through the seven steps below. Help from Copilot is the point — help from neighbours is not.",
     "Each step has a goal. Write your own CTFT prompt first; tap <b>Reveal a suggested prompt</b> only if you are stuck.",
     "By <b>2:50 pm</b>, reply to the evaluation mailbox (the address is on the board) with the subject <b>Capstone · [your field] · [your name]</b> and <b>both files attached</b>: the executive brief (Word) and the deck (PowerPoint).",
