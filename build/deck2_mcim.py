@@ -106,11 +106,21 @@ add(slide("s-road", '''<span class="eyebrow b">The Road Today</span>
 <div class="road-row go b" data-goto="s-w-story"><span class="rn">01</span><div><div class="rt">Word</div><div class="rd">09:00</div></div></div>
 <div class="road-row go b" data-goto="s-p-story"><span class="rn">02</span><div><div class="rt">PowerPoint</div><div class="rd">10:00</div></div></div>
 <div class="road-row go b" data-goto="s-g-hook"><span class="rn">03</span><div><div class="rt">Prompt libraries + Agents</div><div class="rd">11:00</div></div></div>
-<div class="road-row go b" data-goto="s-c-brief"><span class="rn">04</span><div><div class="rt">Capstone · graded</div><div class="rd">13:00</div></div></div>
+<div class="road-row go b" data-goto="s-o-reply"><span class="rn">04</span><div><div class="rt">The reply, then your capstone</div><div class="rd">13:00</div></div></div>
 <div class="road-row go b" data-goto="s-map-post"><span class="rn">05</span><div><div class="rt">MAP test · survey · certificates</div><div class="rd">15:00</div></div></div>
 </div>'''))
 
 # ============================== BLOCK 1 · WORD ==============================
+add(slide("s-fmt", """<span class="eyebrow b">Block 1 · First, Pick The Format</span>
+<h2 class="demo-h b">Memo or deck? <span class="hl">The reader decides.</span></h2>
+<div class="bgcompare b">
+<div class="bgcard good"><div class="bgk">Word · report or memo</div><div class="bgp">The reader <b>reads it alone</b>, at a desk, and needs detail, reasons and numbers to check. An Investment Committee pack. A memo to your MD.</div><div class="bgn">One page, bottom line first.</div></div>
+<div class="bgcard good"><div class="bgk">PowerPoint · deck</div><div class="bgp">You <b>present it to a room</b> — a client, trustees, a board. People see one idea at a time, and you do the talking.</div><div class="bgn">One slide, one message.</div></div>
+</div>
+<p class="body-l b">Not sure? Read the request again — <b>who is the reader, and will you be in the room?</b></p>""", bg=BG1))
+add(slide("s-fmt-check", """<span class="eyebrow b">Quick Check</span>
+<h2 class="demo-h b">Khalid, the client's CFO, meets you on Wednesday to walk through Q3. <span class="hl">Memo or deck?</span></h2>
+<div class="qc-card b"><div class="qc-k">Ask the room</div><p>A <b>deck</b> — you present it in the room. And the one-page <b>memo</b> goes to Faisal, who reads it alone before the meeting. Same numbers, two readers, two formats.</p></div>""", bg=BG1))
 add(src("s-w-story",
         ('8:40. Your manager wants one page by 10 — from a pile of notes.', '8:40. Faisal wants a one-page memo by 10 — from your meeting notes.')))
 add(src("s-w-analogy"))
@@ -220,9 +230,25 @@ add(slide("s-a-lab", f'''<span class="eyebrow b">Hands-On · E2.7 · 20 min</spa
 {labcta("E2.7")}''', bg=BG1))
 add(src("s-a-check"))
 add(pause("s-q-agent", "agents", "lunch"))
-add(brk("s-brk-3", 60, "1:00 PM", "Your capstone", label="Lunch · 60 min"))
+add(brk("s-brk-3", 60, "1:00 PM", "The reply in Outlook — then your capstone", label="Lunch · 60 min"))
 
 # ============================== GRADED PROJECT ==============================
+add(slide("s-o-reply", """<span class="eyebrow b">After Lunch · The Reply · Outlook</span>
+<h2 class="demo-h b">The reply <span class="hl">matches the request.</span></h2>
+<div class="demo-card b">
+<div class="dc-k">Live demo · Copilot in Outlook · reply to Faisal's thread · tap to copy</div>
+<div class="prompt">Draft my reply to Faisal. Confirm the 5-slide deck and the one-page memo are attached, give the bottom line in one sentence, and say I copied Noura in Compliance. Match the tone of his email — short and direct. Under 100 words.</div>
+<div class="prompt" style="margin-top:10px">Add one polite line declining Khalid's request for the Al-Rumaithiya report, because it is another client's data. Offer a blank sample of our format instead.</div>
+</div>
+<p class="body-l b">Steer, don't retype: <b>“shorter”</b> → <b>“a little warmer”</b>. Then run Coaching before you send.</p>""", bg=BG1))
+add(slide("s-o-coach", """<span class="eyebrow b">Coaching By Copilot</span>
+<h2 class="term-h b">A second pair of eyes — <span class="hl">before you hit Send.</span></h2>
+<div class="keys">
+<div class="key b"><div class="k-ic">🎯</div><div><div class="k-t">Tone</div><div class="k-d">Too blunt, too soft, too long for an MD?</div></div></div>
+<div class="key b"><div class="k-ic">👤</div><div><div class="k-t">Reader sentiment</div><div class="k-d">How will Faisal — or the client — feel reading it?</div></div></div>
+<div class="key b"><div class="k-ic">🔎</div><div><div class="k-t">Clarity</div><div class="k-d">Is the ask, the answer and the next step obvious?</div></div></div>
+</div>
+<p class="body-l b">In Outlook: write the draft → select <b>Copilot</b> → <b>Coaching by Copilot</b>. You decide which suggestions to keep.</p>""", bg=BG1))
 add(slide("s-r-checklist", """<span class="eyebrow b">Checking The Work · Before You Hit Send</span>
 <h2 class="term-h b">Four checks, every time<span class="hl">.</span></h2>
 <div class="checks">
@@ -232,16 +258,16 @@ add(slide("s-r-checklist", """<span class="eyebrow b">Checking The Work · Befor
 <div class="check-row b"><div class="cbox"></div><div><div class="c-t">Completeness</div><div class="c-d">Every ask in the newest email answered. Both files attached.</div></div></div>
 </div>
 <p class="body-l b">You sign it. <b>You own it.</b></p>"""))
-add(slide("s-c-brief", """<span class="eyebrow b">Capstone · Graded · 13:00 – 14:50</span>
+add(slide("s-c-brief", """<span class="eyebrow b">Capstone · Graded · 13:10 – 14:50</span>
 <h2 class="term-h b">Your field. One request. <span class="hl">Start to finish — alone.</span></h2>
 <div class="road">
 <div class="road-row b"><span class="rn">01</span><div><div class="rt">Summarise the request · Outlook</div><div class="rd">Final deadline, two files, who they're for — and the ask you must decline. 10 min</div></div></div>
 <div class="road-row b"><span class="rn">02</span><div><div class="rt">Clean the data · Excel</div><div class="rd">Duplicates, text numbers, messy labels. Row count before and after. 15 min</div></div></div>
-<div class="road-row b"><span class="rn">03</span><div><div class="rt">Analyse · Excel</div><div class="rd">Answer every question in the email — show the formula. 20 min</div></div></div>
-<div class="road-row b"><span class="rn">04</span><div><div class="rt">Chart it · Excel</div><div class="rd">Titles that say the message. 10 min</div></div></div>
-<div class="road-row b"><span class="rn">05</span><div><div class="rt">Executive brief · Word</div><div class="rd">One page, bottom line first, grounded in the house view. 20 min</div></div></div>
-<div class="road-row b"><span class="rn">06</span><div><div class="rt">The deck · PowerPoint</div><div class="rd">Six slides created from your brief. 20 min</div></div></div>
-<div class="road-row b"><span class="rn">07</span><div><div class="rt">Check and reply · Outlook</div><div class="rd">Accuracy, confidentiality, tone, completeness. Both files by 2:50 pm. End with “What I corrected: …” 15 min</div></div></div>
+<div class="road-row b"><span class="rn">03</span><div><div class="rt">Analyse · Excel</div><div class="rd">Answer every question in the email — show the formula. 18 min</div></div></div>
+<div class="road-row b"><span class="rn">04</span><div><div class="rt">Chart it · Excel</div><div class="rd">Titles that say the message. 8 min</div></div></div>
+<div class="road-row b"><span class="rn">05</span><div><div class="rt">Executive brief · Word</div><div class="rd">One page, bottom line first, grounded in the house view. 18 min</div></div></div>
+<div class="road-row b"><span class="rn">06</span><div><div class="rt">The deck · PowerPoint</div><div class="rd">Six slides created from your brief. 18 min</div></div></div>
+<div class="road-row b"><span class="rn">07</span><div><div class="rt">Check and reply · Outlook</div><div class="rd">Accuracy, confidentiality, tone, completeness. Both files by 2:50 pm. End with “What I corrected: …” 13 min</div></div></div>
 </div>"""))
 add(slide("s-c-fields", """<span class="eyebrow b">Capstone · Pick Your Field</span>
 <h2 class="term-h b">Four desks. <span class="hl">Pick the one closest to your job.</span></h2>
@@ -252,33 +278,50 @@ add(slide("s-c-fields", """<span class="eyebrow b">Capstone · Pick Your Field</
 <div class="tc t4 b"><div class="tn">Investment Research</div><div class="tw">Wafra Logistics · initiation</div><ul><li>Financials, peers, share price</li><li>Peer-multiple valuation and a view</li><li>Brief and deck for the Committee</li></ul></div>
 </div>
 <p class="body-l b">Everything is in the lab: the email thread, the workbook, the house view. <b>Lab → E2.10 → pick your field.</b></p>""", bg=BG1))
-add(slide("s-c-rubric", """<span class="eyebrow b">How It's Scored · /100</span>
-<h2 class="term-h b">Six criteria. <span class="hl">Help from Copilot is the point.</span></h2>
+add(slide("s-c-rubric", """<span class="eyebrow b">How It's Scored · /100 · Pass / Does not pass</span>
+<h2 class="term-h b">Five criteria. <span class="hl">Help from Copilot is the point.</span></h2>
 <div class="checks">
-<div class="check-row b"><div class="cbox"></div><div><div class="c-t">15 · The request</div><div class="c-d">Final deadline, both files in the right format, the declined ask handled.</div></div></div>
-<div class="check-row b"><div class="cbox"></div><div><div class="c-t">25 · Accurate numbers</div><div class="c-d">Clean data, every answer traceable to a formula.</div></div></div>
-<div class="check-row b"><div class="cbox"></div><div><div class="c-t">10 · Charts</div><div class="c-d">The right chart, correct axes, a title that says the message.</div></div></div>
-<div class="check-row b"><div class="cbox"></div><div><div class="c-t">20 · Executive brief</div><div class="c-d">One page, bottom line first, house view rules followed.</div></div></div>
-<div class="check-row b"><div class="cbox"></div><div><div class="c-t">15 · PowerPoint</div><div class="c-d">Six slides, message titles, numbers that match the brief.</div></div></div>
-<div class="check-row b"><div class="cbox"></div><div><div class="c-t">15 · Review &amp; judgement</div><div class="c-d">On time, both files attached, and your “What I corrected” line.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">30 · Workflow completeness</div><div class="c-d">Read the email, analysed the data, produced the brief and the deck, sent the reply — all seven steps, by 2:50 pm.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">25 · Data analysis accuracy</div><div class="c-d">Copilot's output reviewed and corrected. No major data errors in the final files.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">20 · Deliverable quality</div><div class="c-d">Brief, deck and charts are clear, professional and answer the request.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">15 · AI review &amp; judgement</div><div class="c-d">Accuracy, confidentiality, tone, completeness — your “What I corrected” line.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">10 · Prompt quality</div><div class="c-d">Paste your three best prompts at the end of your reply — specific, with context, task, format and tone.</div></div></div>
 </div>
 <p class="body-l b">Work alone. Replies land in the evaluation mailbox with a timestamp.</p>"""))
-add(slide("s-c-go", f'''<span class="eyebrow b">Capstone · 110 minutes</span>
+add(slide("s-c-go", f'''<span class="eyebrow b">Capstone · 100 minutes</span>
 <h2 class="term-h b">Build it<span class="hl">.</span></h2>
 <div class="maptest-row b">
-<div class="mini-timer" data-min="110" style="margin-top:0;flex:1;min-width:280px">
-<div class="mt-time">110:00</div>
+<div class="mini-timer" data-min="100" style="margin-top:0;flex:1;min-width:280px">
+<div class="mt-time">100:00</div>
 <div class="mt-bar"><div class="mt-fill"></div></div>
 <div class="mt-actions">
-<button class="btn primary mt-start">Start 110:00</button>
+<button class="btn primary mt-start">Start 100:00</button>
 <button class="btn mt-plus">+2 min</button>
 <button class="btn mt-reset">Reset</button>
 </div>
 </div>
 </div>
-<p class="done-line b"><b>Pace:</b> by 13:45 your numbers are done · by 14:35 the brief and the deck · by 14:50 the reply is sent. <b>Finished early?</b> Do the Stretch and Boss in your field.</p>
+<p class="done-line b"><b>Pace:</b> by 13:55 your numbers are done · by 14:35 the brief and the deck · by 14:50 the reply is sent. <b>Finished early?</b> Do the Stretch and Boss in your field.</p>
 {labcta("E2.8", "Open the capstone →")}'''))
-add(brk("s-brk-4", 10, "3:00 PM", "The MAP test"))
+add(slide("s-present", """<span class="eyebrow b">14:50 · Present Your Workflow · 2 Minutes Each</span>
+<h2 class="term-h b">Show your partner <span class="hl">the whole journey.</span></h2>
+<div class="maptest-row b">
+<div class="mini-timer" data-min="2" style="margin-top:0;flex:1;min-width:280px">
+<div class="mt-time">2:00</div>
+<div class="mt-bar"><div class="mt-fill"></div></div>
+<div class="mt-actions">
+<button class="btn primary mt-start">Start 2:00</button>
+<button class="btn mt-reset">Reset</button>
+</div>
+</div>
+</div>
+<ol class="steps-n">
+<li class="b"><span><b>The request</b> — your field, the reader, the real deadline.</span></li>
+<li class="b"><span><b>One number and one chart</b> — the finding that matters most.</span></li>
+<li class="b"><span><b>What I corrected</b> — the one thing Copilot got wrong.</span></li>
+</ol>
+<p class="done-line b">Swap at 2:00. Then the MAP test.</p>"""))
+
 
 # ============================== MAP · SURVEY · CERTIFICATES · CLOSE ==============================
 add(src("s-map-post",

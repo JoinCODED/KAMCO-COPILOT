@@ -96,24 +96,24 @@ def capstone_task(cap):
           "goal": "Save the workbook to OneDrive, open it in Excel, delete the title rows above each header and press <b>Ctrl+T</b>. Then clean it with Copilot — check the row count before and after every step. Suggested prompts, in order: " + " ".join(f"<br>• <i>{p}</i>" for p in sp["clean"]),
           "prompt": sp["clean"][0],
           "findings": [{"label": "Rows before → after cleaning", "hint": ""}, {"label": "Every problem you found and fixed", "hint": ""}]},
-         {"label": "3 · Analyse · Excel · 20 min",
+         {"label": "3 · Analyse · Excel · 18 min",
           "goal": "Answer every question in the email with numbers you can trace. Ask Copilot to <b>show the formula</b>, and test one row by hand. Suggested prompts: " + " ".join(f"<br>• <i>{p}</i>" for p in sp["analyse"]),
           "prompt": sp["analyse"][0],
           "findings": [{"label": l, "hint": h} for l, h in sp["findings"]]},
-         {"label": "4 · Chart it · Excel · 10 min",
+         {"label": "4 · Chart it · Excel · 8 min",
           "goal": sp["chart"] + " Check the chart against your table — axis, labels, units.",
           "prompt": sp["chart"],
           "findings": [{"label": "Your chart title(s) — the message", "hint": ""}]},
-         {"label": "5 · Executive brief · Word · 20 min",
+         {"label": "5 · Executive brief · Word · 18 min",
           "goal": f"A <b>one-page</b> executive brief for {sp['brief_to']}. Sections: {sp['brief_sections']}. Draft it from your own checked numbers — paste them in — then ground it in the house view with <kbd>/</kbd> for the number format. Paste your chart from Excel.",
           "prompt": "Using the numbers below, draft a one-page executive brief for [reader]. Start with a two-line bottom line. Then: a key numbers table, the findings, a recommendation, and next steps. Under 350 words. Plain English, no jargon. Show KWD without decimals and percentages to one decimal place, as in /house-view-q4-2026. [paste your numbers]",
           "findings": [{"label": "Your bottom line — two lines", "hint": ""}]},
-         {"label": "6 · PowerPoint · 20 min",
+         {"label": "6 · PowerPoint · 18 min",
           "goal": f"A <b>6-slide deck</b> for {sp['deck_for']}. In PowerPoint, select <b>Create a presentation from a file</b> and point it at your brief. Slides: {sp['deck_slides']}. Every title is the message. Paste your chart(s) from Excel.",
           "prompt": "Create a 6-slide presentation from /[your executive brief]. Make every slide title the message, not the topic. Keep every number exactly as in the brief. Add speaker notes. [Client-facing? Add the standard disclaimer from /house-view-q4-2026 on the last slide.]",
           "findings": [{"label": "One number you checked on a slide against Excel", "hint": ""}]},
-         {"label": "7 · Check and reply · Outlook · 15 min",
-          "goal": f"Run the four checks before you send — <b>accuracy</b> (every number in the brief and the deck matches Excel), <b>confidentiality</b>, <b>tone</b>, <b>completeness</b>. {sp['decline']} Then reply with <b>both files attached</b>, run <b>Coaching by Copilot</b>, and end with one line: <b>“What I corrected: …”</b> — what Copilot got wrong and you fixed.",
+         {"label": "7 · Check and reply · Outlook · 13 min",
+          "goal": f"Run the four checks before you send — <b>accuracy</b> (every number in the brief and the deck matches Excel), <b>confidentiality</b>, <b>tone</b>, <b>completeness</b>. {sp['decline']} Then reply with <b>both files attached</b>, matching the tone of the request. Run <b>Coaching by Copilot</b>. End with one line: <b>“What I corrected: …”</b> — what Copilot got wrong and you fixed — and paste <b>your three best prompts</b> underneath.",
           "prompt": "Draft my reply. Say the executive brief and the deck are attached, give the bottom line in one sentence, and politely decline [the request] with a one-line reason. Under 120 words. Professional and warm.",
           "findings": [{"label": "What I corrected", "hint": "the line that ends your reply"}]},
         ]
@@ -126,13 +126,14 @@ def capstone_task(cap):
             promptSteps=steps,
             stretch=sp["stretch"], boss=sp["boss"])
     return dict(
-        id="E2.8", app="Capstone", title="Capstone — your field, start to finish", minutes="13:00 – 14:50 · 110 min", block="Capstone · graded",
+        id="E2.8", app="Capstone", title="Capstone — your field, start to finish", minutes="13:10 – 14:50 · 100 min", block="Capstone · graded",
         scenario="", roles=roles,
         steps=["<b>Pick your field</b> with the buttons above: Wealth Management, Asset Management, Operations or Investment Research.",
                "Work <b>alone</b>, in order, through the seven steps below. Help from Copilot is the point — help from neighbours is not.",
                "Each step has a goal. Write your own CTFT prompt first; tap <b>Reveal a suggested prompt</b> only if you are stuck.",
-               "By <b>2:50 pm</b>, reply to the evaluation mailbox (the address is on the board) with the subject <b>Capstone · [your field] · [your name]</b> and <b>both files attached</b>: the executive brief (Word) and the deck (PowerPoint)."],
-        expect="Scored out of 100: <b>15</b> the request — deadline, files, the declined ask · <b>25</b> accurate numbers · <b>10</b> charts that say the message · <b>20</b> executive brief · <b>15</b> PowerPoint deck · <b>15</b> review and judgement — your “What I corrected” line and on-time reply.")
+               "By <b>2:50 pm</b>, reply to the evaluation mailbox (the address is on the board) with the subject <b>Capstone · [your field] · [your name]</b> and <b>both files attached</b>: the executive brief (Word) and the deck (PowerPoint).",
+               "At <b>2:50 pm</b>, present your workflow to a partner — <b>2 minutes</b>: the request, one number and one chart, and what you corrected."],
+        expect="Scored out of 100 — pass or does not pass: <b>30</b> workflow completeness (all seven steps, reply sent by 2:50 pm) · <b>25</b> data analysis accuracy (no major errors) · <b>20</b> deliverable quality (brief, deck and charts answer the request) · <b>15</b> AI review &amp; judgement (accuracy, confidentiality, tone, completeness — your “What I corrected” line) · <b>10</b> prompt quality (your three best prompts).")
 
 
 def patch_roles(html):

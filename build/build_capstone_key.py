@@ -12,15 +12,14 @@ table{width:100%;border-collapse:collapse}td{border-top:1px solid var(--line);pa
 nav a{color:var(--blue);margin-right:14px}pre{white-space:pre-wrap;background:#06183a;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:13px;color:var(--dim)}
 .rub td:first-child{width:12%;color:var(--amber);font-weight:700}"""
 out = [f"<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Capstone answer key — KAMCO Copilot</title><style>{css}</style></head><body><main>",
-       "<h1>Capstone · reference answers</h1><p class='sub'>Facilitator only — do not share. Lab task E2.8, 13:00 – 14:50. Trainees pick a field; each reply should carry an executive brief (Word) and a 6-slide deck (PowerPoint) by 2:50 pm, subject “Capstone · [field] · [name]”.</p>",
+       "<h1>Capstone · reference answers</h1><p class='sub'>Facilitator only — do not share. Lab task E2.8, 13:10 – 14:50. Pair presentations 14:50 – 15:00. Trainees pick a field; each reply should carry an executive brief (Word) and a 6-slide deck (PowerPoint) by 2:50 pm, subject “Capstone · [field] · [name]”.</p>",
        "<nav>" + "".join(f"<a href='#{k}'>{v}</a>" for k, v in FIELDS.items()) + "</nav>",
-       "<div class='card rub'><div class='k'>Rubric · /100</div><table>" + "".join(f"<tr><td>{w}</td><td><b>{n}</b> — {d}</td></tr>" for w, n, d in [
-           (15, "The request", "final deadline (today 2:50 pm), both files in the right format and for the right reader, the declined ask handled politely"),
-           (25, "Accurate numbers", "data cleaned (traps below), answers match the reference within rounding"),
-           (10, "Charts", "right chart type, correct axes, title says the message"),
-           (20, "Executive brief", "one page, bottom line first, key numbers table, recommendation; house view number format; disclaimer only if client-facing"),
-           (15, "PowerPoint", "six slides, message titles, numbers match the brief, chart included"),
-           (15, "Review & judgement", "on time, both files attached, a real “What I corrected” line")]) + "</table></div>"]
+       "<div class='card rub'><div class='k'>Rubric · /100 · from the Program 2 outline · Pass / Does not pass</div><table>" + "".join(f"<tr><td>{w}</td><td><b>{n}</b> — {d}</td></tr>" for w, n, d in [
+           (30, "Workflow completeness", "read the email, analysed the data, produced the brief and the deck, sent the reply by 2:50 pm. Pass: all steps attempted and submitted"),
+           (25, "Data analysis accuracy", "Copilot output reviewed and corrected; numbers match the reference within rounding (traps below). Pass: no major data errors"),
+           (20, "Deliverable quality", "brief (one page, bottom line first), deck (six slides, message titles) and charts are clear, professional and answer the request. Pass: presentation-ready"),
+           (15, "AI review & judgement", "accuracy, confidentiality (the declined ask), tone, completeness; a real “What I corrected” line. Pass: at least one correction or verification noted"),
+           (10, "Prompt quality", "the three prompts pasted at the end of the reply are specific, with context, task, format and tone. Pass: not generic")])+ "</table></div>"]
 for k, name in FIELDS.items():
     key = cap["key"][k]; sp = SPEC[k]
     out.append(f"<h2 id='{k}'>{name}</h2>")
