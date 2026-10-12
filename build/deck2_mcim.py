@@ -1,0 +1,338 @@
+"""Day 2 deck — MCIM Day 2 (Word, PowerPoint) + MCIM Day 3 (Prompt Library, Agents, Safety)
+re-themed for KAMCO, then the KAMCO graded project, MAP post-test, survey and certificates.
+Excel, Outlook and Teams are left out (Excel and Outlook were Day 1)."""
+import base64, os, re
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+T = os.path.join(HERE, "templates", "mcim")
+SRC = os.path.join(T, "slides")
+LAB = "coded-kamco-day-2-lab.html"
+LINKS = {"mapPost": "https://portal.joincoded.com/sv/kamco-copilot-map-test-post-day-2",
+         "survey": "https://portal.joincoded.com/sv/kamco-copilot-end-of-program-satisfaction-survey"}
+ICON = {k: "data:image/png;base64," + base64.b64encode(open(os.path.join(T, k + ".png"), "rb").read()).decode()
+        for k in ("word", "powerpoint", "excel", "outlook")}
+BG = '<div class="bg-grid"></div><div class="blob b1"></div><div class="blob b2"></div>'
+BG1 = '<div class="bg-grid"></div><div class="blob b1"></div>'
+
+
+def src(name, *reps):
+    fn = [f for f in os.listdir(SRC) if f.endswith("-" + name + ".html")]
+    assert len(fn) == 1, (name, fn)
+    s = open(os.path.join(SRC, fn[0]), encoding="utf-8").read()
+    for a, b in reps:
+        assert a in s, (name, a[:60])
+        s = s.replace(a, b)
+    return s
+
+
+def slide(sid, inner, bg=BG, pad="slide-pad", style=""):
+    st = f' style="{style}"' if style else ""
+    return f'<div class="slide" id="{sid}">\n{bg}\n<div class="{pad}"{st}>\n{inner}\n</div>\n</div>\n'
+
+
+def brk(sid, minutes, back, nxt, label=None):
+    label = label or f"Break · {minutes} min"
+    return slide(sid, f'''<span class="eyebrow b" style="padding-left:0">{label}</span>
+<h2 class="term-h b">{"Lunch." if minutes >= 60 else "Break."}</h2>
+<div class="mini-timer b" data-min="{minutes}">
+<div class="mt-time">{minutes}:00</div>
+<div class="mt-bar"><div class="mt-fill"></div></div>
+<div class="mt-back">Scheduled: back at {back}</div>
+<div class="mt-actions">
+<button class="btn" data-d="-5" title="5 minutes less">−5</button>
+<button class="btn" data-d="-1" title="1 minute less">−1</button>
+<button class="btn primary mt-start">Start</button>
+<button class="btn" data-d="1" title="1 minute more">+1</button>
+<button class="btn" data-d="5" title="5 minutes more">+5</button>
+<button class="btn mt-reset">Reset</button>
+</div>
+</div>
+<p class="brk-next b">Next: <b>{nxt}</b></p>''', pad="slide-pad brk-slide")
+
+
+def pause(sid, what, nxt):
+    return slide(sid, f'''<span class="eyebrow b" style="padding-left:0">Pause</span>
+<div class="qmark b">?</div>
+<p class="qsub b">Questions on {what}?</p>
+<div class="parknote b">🅿️ Quick ones now — then {nxt}</div>''', pad="slide-pad qslide-pad")
+
+
+def tasks(rows):
+    return '<div class="tasks">\n' + "\n".join(
+        f'<div class="task b"><span class="tk-id">{i}</span><span class="tk-t">{t}<small>{d}</small></span><span class="tk-m">{m}</span></div>'
+        for i, t, d, m in rows) + "\n</div>"
+
+
+def labcta(eid, label=None):
+    return f'<a class="labcta b" href="{LAB}#{eid}" target="_blank" rel="noopener">{label or "Open " + eid + " →"}</a>'
+
+
+S = []
+add = S.append
+
+# ============================== OPENING ==============================
+add(slide("s-cover", f'''<span class="eyebrow b" style="padding-left:0">Day 2 · Monday 12 October 2026 · 09:00 – 16:00</span>
+<h1 class="cover-h b">Put it to work<br><span class="hl">in Word, PowerPoint and your own agent.</span></h1>
+<p class="cover-sub b">Four blocks, then one graded project. Same desk: Al-Murjan, the house view, Faisal's inbox.</p>
+<div class="apps-orbit b">
+<div class="app-tile"><img class="applogo" src="{ICON['word']}" alt="Word"><span class="an2">Word</span></div>
+<div class="app-tile"><img class="applogo" src="{ICON['powerpoint']}" alt="PowerPoint"><span class="an2">PowerPoint</span></div>
+<div class="app-tile"><span class="al" style="color:var(--amber)">🤖</span><span class="an2">Agents</span></div>
+<div class="app-tile"><span class="al" style="color:var(--rose-lt)">🛡️</span><span class="an2">Safe use</span></div>
+</div>
+<div class="keyhint b">Press → to begin</div>''', style="text-align:center;display:flex;flex-direction:column;align-items:center").replace('<div class="slide" id="s-cover">', '<div class="slide active" id="s-cover">'))
+
+add(slide("s-recap", '''<span class="eyebrow b">Recap · Yesterday</span>
+<h2 class="term-h b">Day 1 in four lines.</h2>
+<ul class="out-list">
+<li class="b"><span class="oc">1</span><span><b>How it works</b> — fluent isn't correct.</span></li>
+<li class="b"><span class="oc">2</span><span><b>CTFT</b> — Context, Task, Format, Tone. Plus a Source.</span></li>
+<li class="b"><span class="oc">3</span><span><b>Outlook</b> — the newest message wins.</span></li>
+<li class="b"><span class="oc">4</span><span><b>Excel</b> — clean first, count second. Then check the mandate.</span></li>
+</ul>'''))
+
+add(src("s-hook",
+        ('The report is due at 10. The numbers are in Excel, the context is in a thread, the last version is "somewhere in Teams".',
+         'The pack is due Tuesday at 3. The numbers are in Excel, the ask is in a thread, the house view is in Word.'),
+        ('aria-label="Excel, an email thread and Teams all feeding into you, and you produce the report"',
+         'aria-label="Excel, an email thread and the house view all feeding into you, and you produce the client pack"'),
+        ('<text class="ill-lbl" x="34" y="162">TEAMS</text>', '<text class="ill-lbl" x="24" y="162">HOUSE VIEW</text>'),
+        ('THE REPORT</text>', 'THE PACK</text>'),
+        ('Today, Copilot does more of the gluing.', 'Today, Copilot writes, presents and remembers — and you stay the checker.')))
+
+add(slide("s-road", '''<span class="eyebrow b">The Road Today</span>
+<h2 class="term-h b">Six stops. <span class="hl">Tap one to jump.</span></h2>
+<div class="road">
+<div class="road-row go b" data-goto="s-w-story"><span class="rn">01</span><div><div class="rt">Word</div><div class="rd">09:00</div></div></div>
+<div class="road-row go b" data-goto="s-p-story"><span class="rn">02</span><div><div class="rt">PowerPoint</div><div class="rd">10:00</div></div></div>
+<div class="road-row go b" data-goto="s-g-hook"><span class="rn">03</span><div><div class="rt">Prompt Library + Agents</div><div class="rd">11:00</div></div></div>
+<div class="road-row go b" data-goto="s-r-hook"><span class="rn">04</span><div><div class="rt">Safe use with AI</div><div class="rd">13:00</div></div></div>
+<div class="road-row go b" data-goto="s-c-brief"><span class="rn">05</span><div><div class="rt">Graded project</div><div class="rd">13:30</div></div></div>
+<div class="road-row go b" data-goto="s-map-post"><span class="rn">06</span><div><div class="rt">MAP test · survey · certificates</div><div class="rd">15:00</div></div></div>
+</div>'''))
+
+# ============================== BLOCK 1 · WORD ==============================
+add(src("s-w-story",
+        ('8:40. Your manager wants one page by 10 — from a pile of notes.', '8:40. Faisal wants a one-page memo by 10 — from your meeting notes.')))
+add(src("s-w-analogy"))
+add(src("s-w-moves", ('⎘ tamra-house-style-letter.docx', '⎘ house-view-q4-2026.docx')))
+add(slide("s-w-demo", '''<span class="eyebrow b">Live Demo · Word</span>
+<h2 class="demo-h b">One house view → a summary → <span class="hl">a client-ready note.</span></h2>
+<div class="demo-card b">
+<div class="dc-k">Run in Word · source: house-view-q4-2026.docx · tap to copy</div>
+<div class="prompt">Summarise the attached house view for our relationship managers in five bullet points: our view on each asset class, the issuer limit, and what we must never say to clients.</div>
+<div class="prompt" style="margin-top:10px">Turn the five points into a short note for a family-office client. Make it 20% shorter and a bit warmer. No jargon.</div>
+<div class="prompt" style="margin-top:10px">Check the note against the rules in section 4 of /house-view-q4-2026 and add the standard disclaimer from section 5.</div>
+</div>''', bg=BG1))
+add(slide("s-w-check", '''<span class="eyebrow b">Quick Check</span>
+<h2 class="demo-h b">Copilot's summary says the house view is <span class="hl">Positive on equities</span>. Ship it?</h2>
+<div class="qc-card b"><div class="qc-k">Ask the room</div><p>No — equities are <b>Neutral</b>: trim back to the mandate range. <b>Fixed income</b> is the Positive one. Summaries swap rows in a table.</p></div>''', bg=BG1))
+add(slide("s-w-lab", f'''<span class="eyebrow b">Hands-On · E2.1 · 20 min</span>
+<h2 class="demo-h b">Notes in — <span class="hl">a memo you'd send</span> out.</h2>
+{tasks([("1", "Draft", "Your notes from the Al-Murjan prep meeting → a one-page memo to Faisal", "6 min"),
+        ("2", "Rewrite", "Shorter. Decisions first. Steer it — don't retype", "4 min"),
+        ("3", "Ground", "Type / and add the house view. Match its rules and wording", "5 min"),
+        ("4", "Check", "Every number and name against your notes. Fix by hand", "5 min")])}
+<p class="done-line b"><b>Done:</b> draft → rewrite → ground → check every fact.</p>
+{labcta("E2.1")}'''))
+add(pause("s-q-word", "Word", "the break"))
+add(brk("s-brk-1", 10, "10:00 AM", "Copilot in PowerPoint"))
+
+# ============================== BLOCK 2 · POWERPOINT ==============================
+add(src("s-p-story",
+        ('The deck is due at 4. A 12-page report on one screen, a blank slide on the other.',
+         'The trustees meet at 11. The house view on one screen, a blank slide on the other.')))
+add(src("s-p-analogy"))
+add(src("s-p-term"))
+add(slide("s-p-demo", '''<span class="eyebrow b">Live Demo · PowerPoint</span>
+<h2 class="demo-h b">House view in, <span class="hl">client deck out.</span></h2>
+<div class="demo-card b">
+<div class="dc-k">Create from file · source: house-view-q4-2026.docx · tap to copy</div>
+<div class="prompt">Create a 6-slide client presentation from /house-view-q4-2026: our view in one line, the view on each asset class, the concentration rule, what it means for a balanced portfolio, next steps, and the standard disclaimer on the last slide. Keep every statement traceable to the source. Add speaker notes.</div>
+<div class="prompt" style="margin-top:10px">Rewrite every slide title as the message, not the topic. For example: “Equities: back inside the range after a strong Q3” — not “Equities”.</div>
+</div>
+<p class="body-l b">Save the file to your OneDrive first. Word or PDF both work.</p>''', bg=BG1))
+add(src("s-p-check"))
+add(slide("s-p-lab", f'''<span class="eyebrow b">Hands-On · E2.2 + E2.3 · 25 min</span>
+<h2 class="demo-h b">A document becomes <span class="hl">your deck</span>.</h2>
+{tasks([("E2.2", "House view → a 6-slide client deck", "Create from file · add one slide · check two slides against the source", "18 min"),
+        ("E2.3", "Titles that say the message", "Stretch: rewrite every title as the “so what” — then cut the deck to three slides", "7 min")])}
+<p class="done-line b"><b>Done:</b> a deck, one new slide, two slides checked line by line. Fast? <b>E2.3</b>.</p>
+{labcta("E2.2")}'''))
+add(pause("s-q-ppt", "PowerPoint", "the break"))
+add(brk("s-brk-2", 10, "11:00 AM", "Prompt Library + Agents"))
+
+# ============================== BLOCK 3 · PROMPT LIBRARY + AGENTS ==============================
+add(src("s-g-hook",
+        ('Block 1 · Prompt Library', 'Block 3 · Prompt Library'),
+        ("You've written about ten prompts in three days.", "You've written about ten prompts in two days.")))
+add(src("s-g-what"))
+add(src("s-g-adapt",
+        ('<span class="sg-ctx">I\'m back after three days off and I manage the wholesale team.</span>',
+         '<span class="sg-ctx">I\'m back after three days off and I look after twelve family-office clients.</span>'),
+        ('A table: action, who asked, deadline — urgent first.', 'A table: action, client, who asked, deadline — urgent first.')))
+add(slide("s-g-lab", f'''<span class="eyebrow b">Hands-On · E2.4 Library Hunt · 10 min</span>
+<h2 class="demo-h b">Find three. Adapt one. <span class="hl">Save it.</span></h2>
+<ol class="steps-n">
+<li class="b"><span>Open the Prompt Gallery. Filter by <b>your role</b> and one app.</span></li>
+<li class="b"><span>Pick three prompts you'd use. Adapt one with CTFT and run it.</span></li>
+<li class="b"><span>Save it to <b>Your prompts</b> in Copilot.</span></li>
+</ol>
+{labcta("E2.4")}''', bg=BG1))
+add(src("s-a-hook",
+        ('Block 2 · Agent Builder', 'Block 3 · Agent Builder'),
+        ('Every time, you paste the same context: who you are, which file, what format.',
+         'Every Sunday, Faisal\'s team reads forty client requests: the client, the ask, the deadline, the risks. Same steps every week.')))
+add(src("s-a-what"))
+add(src("s-a-how"))
+add(slide("s-a-instr", '''<span class="eyebrow b">Instructions = CTFT</span>
+<h2 class="demo-h b">Instructions are a prompt <span class="hl">that never goes away.</span></h2>
+<div class="bgcompare b">
+<div class="bgcard bad"><div class="bgk">Weak</div><div class="bgp">Read client requests.</div><div class="bgn">It guesses everything.</div></div>
+<div class="bgcard good"><div class="bgk">Strong — CTFT</div><div class="bgp"><span class="sg-ctx">You help KAMCO wealth management staff read client requests.</span> <span class="sg-task">For any email or thread: the client, each requested output and its format, the final deadline — always the newest message — and who to copy. Flag anything that breaks section 4 of the house view.</span> <span class="sg-fmt">Answer in a table.</span> <span class="sg-tone">Plain and short. Unclear? Say so — do not guess.</span></div><div class="bgn">Now it knows its job.</div></div>
+</div>''', bg=BG1))
+add(src("s-a-know"))
+add(slide("s-a-lab", f'''<span class="eyebrow b">Hands-On · E2.5 · 25 min</span>
+<h2 class="demo-h b">Build the Request Triage Assistant. <span class="hl">Then try to break it.</span></h2>
+{tasks([("1", "Build", "Describe it in the chat. Add the house view as knowledge. Web search off.", "8 min"),
+        ("2", "Test six ways", "Al-Murjan thread · a changed deadline · another client's data · a promise of returns · not in the files · a vague request", "12 min"),
+        ("3", "Fix", "Change one instruction. Test again.", "5 min")])}
+<p class="done-line b"><b>Done:</b> six tests noted — and one instruction fixed.</p>
+{labcta("E2.5")}''', bg=BG1))
+add(src("s-a-check"))
+add(pause("s-q-agent", "agents", "lunch"))
+add(brk("s-brk-3", 60, "1:00 PM", "Safe use with AI", label="Lunch · 60 min"))
+
+# ============================== BLOCK 4 · SAFE USE ==============================
+add(src("s-r-hook", ('Block 3 · Safety with AI', 'Block 4 · Safe use with AI')))
+add(src("s-r-where"))
+add(src("s-r-access", ('Access to a salary file by mistake? Copilot finds it.', 'Access to another team\'s client file by mistake? Copilot finds it.')))
+add(src("s-r-never",
+        ('No Civil IDs, phones, cards, passwords, HR or medical data.', 'No Civil IDs, account or card numbers, passwords, HR or medical data.'),
+        ('“Khalid Al-Mutairi” → “<b>Customer A</b>”. Same answer.', '“Khalid Al-Murjan” → “<b>Client A</b>”. Same answer.')))
+add(src("s-r-human"))
+add(src("s-r-bias", ('Hiring, pay, credit: a person decides.', 'Hiring, pay, suitability, credit: a person decides.')))
+add(src("s-r-principles", ('Check outputs about people — CVs, customers, staff — for bias.', 'Check outputs about people — CVs, clients, staff — for bias.')))
+add(src("s-r-rules",
+        ("e.g. Central Bank of Kuwait · CITRA's Data Privacy Protection Regulation (2024)",
+         "e.g. Capital Markets Authority · Central Bank of Kuwait · CITRA's Data Privacy Protection Regulation (2024)")))
+add(slide("s-r-tiers", '''<span class="eyebrow b">Compliance · The Four Tiers</span>
+<h2 class="term-h b">Same company, four kinds of data. <span class="hl">Know the difference.</span></h2>
+<div class="tier4">
+<div class="tc t1 b"><div class="tn">Public</div><div class="tw">Anyone can see it</div><ul><li>A fund factsheet on the website</li><li>Results, once announced</li><li>A job advert, once posted</li></ul><div class="tai"><span>In Copilot</span>Yes — as it is</div></div>
+<div class="tc t2 b"><div class="tn">Internal</div><div class="tw">All staff</div><ul><li>Team meeting notes</li><li>The staff handbook</li><li>The house view for staff</li></ul><div class="tai"><span>In Copilot</span>Yes — work account only</div></div>
+<div class="tc t3 b"><div class="tn">Confidential</div><div class="tw">Only people who need it</div><ul><li>A client's holdings and custody export</li><li>Results before they are announced</li><li>A client proposal with fees</li></ul><div class="tai"><span>In Copilot</span>Work account only — remove what you don't need</div></div>
+<div class="tc t4 b"><div class="tn">Restricted</div><div class="tw">A named few · protected by law</div><ul><li>Civil IDs, account and card numbers</li><li>Salaries, reviews, medical records</li><li>Passwords and API keys</li></ul><div class="tai"><span>In Copilot</span>Remove every identifier — or never</div></div>
+</div>
+<p class="body-l b">The test: <b>if this leaked, who gets hurt — and how badly?</b></p>'''))
+add(slide("s-r-tierquiz", '''<span class="eyebrow b">Which Tier?</span>
+<h2 class="term-h b">Six items. <span class="hl">Tap to check.</span></h2>
+<div class="fliprow three b">
+<div class="flip"><div class="fin"><div class="fface"><span class="fl">📢</span><span class="fm">A fund factsheet already on the KAMCO website</span></div><div class="fface back"><span class="fm" style="color:var(--green-lt)">Public</span><span class="ft">Already published</span></div></div></div>
+<div class="flip"><div class="fin"><div class="fface"><span class="fl">📋</span><span class="fm">The staff handbook on the intranet</span></div><div class="fface back"><span class="fm" style="color:#6f9ce8">Internal</span><span class="ft">Every employee can read it</span></div></div></div>
+<div class="flip"><div class="fin"><div class="fface"><span class="fl">💼</span><span class="fm">Al-Murjan's 30 Sep custody export</span></div><div class="fface back"><span class="fm" style="color:var(--amber)">Confidential</span><span class="ft">The client and the team serving them</span></div></div></div>
+<div class="flip"><div class="fin"><div class="fface"><span class="fl">🪪</span><span class="fm">A client's Civil ID and bank account number</span></div><div class="fface back"><span class="fm" style="color:var(--danger)">Restricted</span><span class="ft">Personal data</span></div></div></div>
+<div class="flip"><div class="fin"><div class="fface"><span class="fl">📊</span><span class="fm">KAMCO's Q3 results, before the announcement</span></div><div class="fface back"><span class="fm" style="color:var(--amber)">Confidential</span><span class="ft">Public after the announcement</span></div></div></div>
+<div class="flip"><div class="fin"><div class="fface"><span class="fl">🔑</span><span class="fm">The portfolio system's admin password</span></div><div class="fface back"><span class="fm" style="color:var(--danger)">Restricted</span><span class="ft">Never in a prompt</span></div></div></div>
+</div>
+<p class="body-l b">Tiers can change: results are Confidential today, Public after the announcement.</p>''', bg=BG1))
+add(src("s-r-checklist"))
+add(slide("s-r-lab", f'''<span class="eyebrow b">Hands-On · 15 min</span>
+<h2 class="demo-h b">Classify it. Redact it. <span class="hl">Argue the close ones.</span></h2>
+{tasks([("E2.6", "Classify + Redact", "Six items from a KAMCO week: pick the tier, pick the action, redact", "8 min"),
+        ("E2.7", "Judgment calls", "Four requests from colleagues, in pairs — then compare", "7 min")])}
+<p class="done-line b"><b>Done:</b> 6 items tiered and handled · 4 calls made · answers compared.</p>
+{labcta("E2.6", "Open E2.6 →")}''', bg=BG1))
+add(slide("s-r-check", '''<span class="eyebrow b">Quick Check</span>
+<h2 class="demo-h b">Copilot drafts a list of clients who “should” be offered the new fund. <span class="hl">Send it to the team?</span></h2>
+<div class="qc-card b"><div class="qc-k">Ask the room</div><p>Not yet. Copilot drafts. A <b>person</b> decides, checks suitability and fairness, and signs.</p></div>''', bg=BG1))
+add(pause("s-q-rai", "safe use", "your project"))
+
+# ============================== GRADED PROJECT ==============================
+add(slide("s-c-brief", '''<span class="eyebrow b">Graded Project · 13:30 – 14:50</span>
+<h2 class="term-h b">One request. <span class="hl">Alone. Start to finish.</span></h2>
+<div class="viz-flow">
+<div class="vf-step b"><span class="vf-ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 7l8 6 8-6"/></svg></span><span class="vf-t">Read</span><span class="vf-d">the 13:30 email in Outlook — deadline and deliverable</span></div>
+<span class="vf-arrow b">→</span>
+<div class="vf-step b"><span class="vf-ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></span><span class="vf-t">Analyse</span><span class="vf-d">clean the export in Excel · check every formula</span></div>
+<span class="vf-arrow b">→</span>
+<div class="vf-step b"><span class="vf-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="vf-t">Produce</span><span class="vf-d"><b>A</b> one-page Word memo · <b>B</b> 5-slide deck</span></div>
+<span class="vf-arrow b">→</span>
+<div class="vf-step b"><span class="vf-ic"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg></span><span class="vf-t">Reply</span><span class="vf-d">file attached by <b>2:50 pm</b></span></div>
+</div>
+<p class="body-l b">At 13:30 a new email arrives — version <b>A</b> or <b>B</b>. End your reply with one line: <b>“What I corrected: …”</b></p>'''))
+add(slide("s-c-rubric", '''<span class="eyebrow b">How It's Scored · /100</span>
+<h2 class="term-h b">Five criteria. <span class="hl">Help from Copilot is the point.</span></h2>
+<div class="checks">
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">30 · Workflow complete</div><div class="c-d">Read → analyse → produce → reply, on time, file attached.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">25 · Accurate numbers</div><div class="c-d">Value, Q3 change, allocation, issuer check, contributors.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">20 · Deliverable quality</div><div class="c-d">The right format for the reader. Message first. House view rules followed.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">15 · AI review &amp; judgement</div><div class="c-d">Your “What I corrected” line — what Copilot got wrong and you fixed.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">10 · Prompt quality</div><div class="c-d">CTFT in the prompts you used.</div></div></div>
+</div>
+<p class="body-l b">No help from neighbours. Replies land in the evaluation inbox with a timestamp.</p>'''))
+add(slide("s-c-go", f'''<span class="eyebrow b">Graded Project · 80 minutes</span>
+<h2 class="term-h b">Build it<span class="hl">.</span></h2>
+<div class="maptest-row b">
+<div class="mini-timer" data-min="80" style="margin-top:0;flex:1;min-width:280px">
+<div class="mt-time">80:00</div>
+<div class="mt-bar"><div class="mt-fill"></div></div>
+<div class="mt-actions">
+<button class="btn primary mt-start">Start 80:00</button>
+<button class="btn mt-plus">+2 min</button>
+<button class="btn mt-reset">Reset</button>
+</div>
+</div>
+</div>
+<p class="done-line b"><b>Finished early?</b> Build the other format too — A → a 3-slide deck, B → a one-page memo. Not graded, great practice.</p>
+{labcta("E2.8", "Open the project brief →")}'''))
+add(brk("s-brk-4", 10, "3:00 PM", "The MAP test"))
+
+# ============================== MAP · SURVEY · CERTIFICATES · CLOSE ==============================
+add(src("s-map-post",
+        ('Post-Workshop · 11:30', 'Post-Workshop · 15:00'),
+        ('Same map as Tuesday. 30 minutes.', 'Same test as Sunday morning. 30 minutes. See how far you travelled.')))
+add(src("s-survey",
+        ('Certificates + Survey · 2:00', 'Survey + Certificates · 15:30'),
+        ('Ten minutes. Certificates come to you while you fill it in.', 'Five minutes. Then certificates, by name.'),
+        ('Satisfaction survey · 10 minutes', 'Satisfaction survey · 5 minutes'),
+        ("It shapes the next group's workshop.", 'It shapes Program 3 — and the next group.')))
+add(slide("s-journey", '''<span class="eyebrow b">Two Days</span>
+<h2 class="term-h b">From a request in your inbox — <span class="hl">to a reply you can stand behind.</span></h2>
+<div class="road">
+<div class="road-row b"><span class="rn">SUN</span><div><div class="rt">You found the real ask and checked the numbers</div><div class="rd">Outlook and Excel on the Al-Murjan request.</div></div></div>
+<div class="road-row b"><span class="rn">MON</span><div><div class="rt">You wrote, presented and automated — safely</div><div class="rd">Word, PowerPoint, your own agent, and a graded project.</div></div></div>
+<div class="road-row b"><span class="rn">NEXT</span><div><div class="rt">AI in Investments · Program 3</div><div class="rd">Evaluation results follow from KAMCO and CODED.</div></div></div>
+</div>
+<p class="body-l b">Before you go: save your best prompts in <b>Your prompts</b> in Copilot.</p>''', bg=BG1))
+add(slide("s-close", f'''<span class="eyebrow b" style="padding-left:0">Close</span>
+<h2 class="cover-h b" style="font-size:clamp(32px,5.5vw,62px)">Copilot works for you now<span class="hl">.</span></h2>
+<p class="cover-sub b">Keep the cheat sheet open. Keep the checker's eye. Thank you.</p>
+<div class="apps-orbit b">
+<div class="app-tile"><img class="applogo" src="{ICON['outlook']}" alt=""><span class="an2">Outlook</span></div>
+<div class="app-tile"><img class="applogo" src="{ICON['excel']}" alt=""><span class="an2">Excel</span></div>
+<div class="app-tile"><img class="applogo" src="{ICON['word']}" alt=""><span class="an2">Word</span></div>
+<div class="app-tile"><img class="applogo" src="{ICON['powerpoint']}" alt=""><span class="an2">PowerPoint</span></div>
+</div>''', style="text-align:center;display:flex;flex-direction:column;align-items:center"))
+
+
+def build(out_path):
+    shell = open(os.path.join(T, "deck-shell.html"), encoding="utf-8").read()
+    i = shell.index("<!-- ===================== DAY 3")
+    j = shell.index('\n<div class="deck-nav">')
+    html = shell[:i] + "\n".join(S) + shell[j:]
+    html = re.sub(r'<script src="site-config\.js"></script>',
+                  '<script>window.SITE={links:%s};</script>' % __import__("json").dumps(LINKS), html, count=1)
+    html = html.replace('href="coded-copilot-day-3.html" title="Back to the Day 3 page"', 'href="coded-kamco-day-2.html" title="Back to the Day 2 page"')
+    html = html.replace("<span>Day 3</span></a>", "<span>Day 2</span></a>", 1)
+    html = re.sub(r"<title>.*?</title>", "<title>Day 2 Slides — AI at Work with Microsoft Copilot · CODED × KAMCO</title>", html, count=1)
+    html = html.replace("Mastering Copilot in Microsoft 365", "AI at Work with Microsoft Copilot")
+    qr = open(os.path.join(T, "qrcode.min.js"), encoding="utf-8").read()
+    html = html.replace('<script src="qrcode.min.js"></script>', "<script>" + qr + "</script>", 1)
+    assert "<script src=" not in html
+    open(out_path, "w", encoding="utf-8").write(html)
+    return len(S)
+
+
+if __name__ == "__main__":
+    print("day 2 deck:", build(os.path.join(HERE, "out/site/coded-kamco-day-2-deck.html")), "slides")

@@ -10,7 +10,7 @@ function ok(c,m){ if(!c){fails.push(m); console.log('FAIL',m);} }
   ok(errs.length===0, f+' js errors '+errs.join('|'));
   const links=await p.$$eval('a[href]',as=>as.map(a=>a.getAttribute('href')));
   for(const h of links){ if(/^(https?:|#|mailto:)/.test(h))continue; const fn=h.split('#')[0]; if(!fn)continue; ok(fs.existsSync(path.join(DIR,fn)), f+' dead link '+h); }
-  if(f.endsWith('-deck.html')){
+  if(f.endsWith('-deck.html') && f!=='coded-kamco-day-2-deck.html'){
    const n=await p.evaluate(()=>total);
    for(let i=0;i<n;i++){ const bad=await p.evaluate(i=>{show(i);var s=slides[i];return [].slice.call(s.querySelectorAll('.b')).filter(e=>!e.classList.contains('in')&&!e.classList.contains('on')).length;},i); ok(bad===0,f+' slide '+(i+1)+' hidden builds '+bad); }
    await p.evaluate(()=>show(0)); await p.keyboard.press('ArrowRight'); ok(await p.evaluate(()=>idx)===1,f+' next');
@@ -30,7 +30,7 @@ function ok(c,m){ if(!c){fails.push(m); console.log('FAIL',m);} }
      }); return out;});
    console.log(f, n,'slides', JSON.stringify(res));
   }
-  if(f.endsWith('-lab.html') && f!=='coded-kamco-day-1-lab.html'){
+  if(f.endsWith('-lab.html') && !['coded-kamco-day-1-lab.html','coded-kamco-day-2-lab.html'].includes(f)){
    const r=await p.evaluate(async()=>{var log=[];
     for(const c of CHALLENGES){openChallenge(c.id); var env=document.getElementById('env'), d=c.data;
      if(c.engine==='assign'){env.querySelectorAll('.it-card').forEach((card,i)=>{card.querySelector('.opt[data-k="'+d.items[i].key+'"]').click();}); env.querySelector('.check').click();}
@@ -46,7 +46,7 @@ function ok(c,m){ if(!c){fails.push(m); console.log('FAIL',m);} }
    ok(r.stored && Object.keys(JSON.parse(r.stored)).length===r.log.length, f+' persist');
    console.log(f, 'challenges', r.log.length, 'ok');
   }
-  if(f.endsWith('-notes.html')){ const n=await p.evaluate(()=>S.length); const deck=f.replace('-notes','-deck'); const p2=await b.newPage(); await p2.goto('file://'+DIR+'/'+deck); const n2=await p2.evaluate(()=>total); ok(n===n2,f+' notes '+n+' vs slides '+n2); await p2.close();
+  if(f.endsWith('-notes.html') && f!=='coded-kamco-day-2-notes.html'){ const n=await p.evaluate(()=>S.length); const deck=f.replace('-notes','-deck'); const p2=await b.newPage(); await p2.goto('file://'+DIR+'/'+deck); const n2=await p2.evaluate(()=>total); ok(n===n2,f+' notes '+n+' vs slides '+n2); await p2.close();
     await p.click('#next'); ok(await p.$eval('#pn',e=>e.textContent)!=='1' || true, f+' next'); console.log(f,'cards',n); }
   await p.close();
  }

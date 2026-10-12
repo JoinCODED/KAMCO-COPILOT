@@ -135,14 +135,14 @@ TASKS = [
 ]
 
 
-def build(out_path, back="coded-kamco-day-1.html"):
+def build(out_path, back="coded-kamco-day-1.html", tasks=None, day=1, chip="Day 1 · From Inbox to Insight", key="kamco_copilot_day1_tasks", site=None):
     s = open("templates/mcim-lab.html", encoding="utf-8").read()
     i = s.index("window.LAB = {"); j = s.index("\n};", i) + 3
-    data = "window.LAB = " + json.dumps({"day": "Day 1", "key": "kamco_copilot_day1_tasks", "tasks": TASKS}, ensure_ascii=False, indent=1) + ";"
+    data = "window.LAB = " + json.dumps({"day": "Day %d" % day, "key": key, "tasks": tasks or TASKS}, ensure_ascii=False, indent=1) + ";"
     s = s[:i] + data + s[j:]
     rep = [
-        ('<script src="site-config.js"></script>', '<script>window.SITE={};</script>'),
-        ('<span class="day-chip">Day 1 · Meet the Engine</span>', '<span class="day-chip">Day 1 · From Inbox to Insight</span>'),
+        ('<script src="site-config.js"></script>', '<script>window.SITE=%s;</script>' % json.dumps(site or {})),
+        ('<span class="day-chip">Day 1 · Meet the Engine</span>', '<span class="day-chip">%s</span>' % chip),
         ('<a class="back" href="coded-copilot-day-1.html">', '<a class="back" href="%s">' % back),
         ('<a href="before-you-start.html">Setup help</a>', '<a href="case-files.html">Case files</a>'),
         ('Load the example for my track', 'Load the example'),
@@ -161,7 +161,7 @@ def build(out_path, back="coded-kamco-day-1.html"):
     old = "'<div class=\"ta-role\"><span>Your track for the three days:</span>' + Object.keys(ROLES).map(function(k){ return '<button type=\"button\" class=\"ta-r' + (role() === k ? ' on' : '') + '\" data-r=\"' + k + '\">' + ROLES[k] + '</button>'; }).join('') + '</div>' +"
     assert old in s
     s = s.replace(old, "")
-    s = re.sub(r"<title>.*?</title>", "<title>Day 1 Lab — AI at Work with Microsoft Copilot · CODED × KAMCO</title>", s, count=1)
+    s = re.sub(r"<title>.*?</title>", "<title>Day %d Lab — AI at Work with Microsoft Copilot · CODED × KAMCO</title>" % day, s, count=1)
     s = s.replace("Mastering Copilot in Microsoft 365", "AI at Work with Microsoft Copilot")
     open(out_path, "w", encoding="utf-8").write(s)
 

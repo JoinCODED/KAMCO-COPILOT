@@ -7,7 +7,9 @@ python3 gen_files.py >/dev/null && python3 gen_docs.py >/dev/null
 python3 build_decks.py
 python3 build_labs.py
 python3 tasklab_day1.py
+python3 tasklab_day2.py
 python3 build_pages.py >/dev/null
+python3 deck2_mcim.py
 python3 build_facil.py >/dev/null
 python3 build_index.py
 RECALC="${RECALC:-/mnt/skills/public/xlsx/scripts/recalc.py}"
