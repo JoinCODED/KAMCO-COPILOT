@@ -12,7 +12,7 @@ table{width:100%;border-collapse:collapse}td{border-top:1px solid var(--line);pa
 nav a{color:var(--blue);margin-right:14px}pre{white-space:pre-wrap;background:#06183a;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:13px;color:var(--dim)}
 .rub td:first-child{width:12%;color:var(--amber);font-weight:700}"""
 out = [f"<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Capstone answer key — KAMCO Copilot</title><style>{css}</style></head><body><main>",
-       "<h1>Capstone · reference answers</h1><p class='sub'>Facilitator only — do not share. Lab task E2.10. Trainees pick a field; each reply should carry an executive brief (Word) and a 6-slide deck (PowerPoint) by 2:50 pm, subject “Capstone · [field] · [name]”.</p>",
+       "<h1>Capstone · reference answers</h1><p class='sub'>Facilitator only — do not share. Lab task E2.8, 13:00 – 14:50. Trainees pick a field; each reply should carry an executive brief (Word) and a 6-slide deck (PowerPoint) by 2:50 pm, subject “Capstone · [field] · [name]”.</p>",
        "<nav>" + "".join(f"<a href='#{k}'>{v}</a>" for k, v in FIELDS.items()) + "</nav>",
        "<div class='card rub'><div class='k'>Rubric · /100</div><table>" + "".join(f"<tr><td>{w}</td><td><b>{n}</b> — {d}</td></tr>" for w, n, d in [
            (15, "The request", "final deadline (today 2:50 pm), both files in the right format and for the right reader, the declined ask handled politely"),

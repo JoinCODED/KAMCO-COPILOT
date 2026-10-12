@@ -73,12 +73,12 @@ add = S.append
 # ============================== OPENING ==============================
 add(slide("s-cover", f'''<span class="eyebrow b" style="padding-left:0">Day 2 · Monday 12 October 2026 · 09:00 – 16:00</span>
 <h1 class="cover-h b">Put it to work<br><span class="hl">in Word, PowerPoint and your own agent.</span></h1>
-<p class="cover-sub b">Four blocks, then one graded project. Same desk: Al-Murjan, the house view, Faisal's inbox.</p>
+<p class="cover-sub b">Three blocks, then your capstone. Same desk: Al-Murjan, the house view, Faisal's inbox.</p>
 <div class="apps-orbit b">
 <div class="app-tile"><img class="applogo" src="{ICON['word']}" alt="Word"><span class="an2">Word</span></div>
 <div class="app-tile"><img class="applogo" src="{ICON['powerpoint']}" alt="PowerPoint"><span class="an2">PowerPoint</span></div>
 <div class="app-tile"><span class="al" style="color:var(--amber)">🤖</span><span class="an2">Agents</span></div>
-<div class="app-tile"><span class="al" style="color:var(--rose-lt)">🛡️</span><span class="an2">Safe use</span></div>
+<div class="app-tile"><span class="al" style="color:var(--rose-lt)">🎯</span><span class="an2">Capstone</span></div>
 </div>
 <div class="keyhint b">Press → to begin</div>''', style="text-align:center;display:flex;flex-direction:column;align-items:center").replace('<div class="slide" id="s-cover">', '<div class="slide active" id="s-cover">'))
 
@@ -101,14 +101,13 @@ add(src("s-hook",
         ('Today, Copilot does more of the gluing.', 'Today, Copilot writes, presents and remembers — and you stay the checker.')))
 
 add(slide("s-road", '''<span class="eyebrow b">The Road Today</span>
-<h2 class="term-h b">Six stops. <span class="hl">Tap one to jump.</span></h2>
+<h2 class="term-h b">Five stops. <span class="hl">Tap one to jump.</span></h2>
 <div class="road">
 <div class="road-row go b" data-goto="s-w-story"><span class="rn">01</span><div><div class="rt">Word</div><div class="rd">09:00</div></div></div>
 <div class="road-row go b" data-goto="s-p-story"><span class="rn">02</span><div><div class="rt">PowerPoint</div><div class="rd">10:00</div></div></div>
 <div class="road-row go b" data-goto="s-g-hook"><span class="rn">03</span><div><div class="rt">Prompt libraries + Agents</div><div class="rd">11:00</div></div></div>
-<div class="road-row go b" data-goto="s-r-hook"><span class="rn">04</span><div><div class="rt">Safe use with AI</div><div class="rd">13:00</div></div></div>
-<div class="road-row go b" data-goto="s-c-brief"><span class="rn">05</span><div><div class="rt">Capstone · graded</div><div class="rd">13:30</div></div></div>
-<div class="road-row go b" data-goto="s-map-post"><span class="rn">06</span><div><div class="rt">MAP test · survey · certificates</div><div class="rd">15:00</div></div></div>
+<div class="road-row go b" data-goto="s-c-brief"><span class="rn">04</span><div><div class="rt">Capstone · graded</div><div class="rd">13:00</div></div></div>
+<div class="road-row go b" data-goto="s-map-post"><span class="rn">05</span><div><div class="rt">MAP test · survey · certificates</div><div class="rd">15:00</div></div></div>
 </div>'''))
 
 # ============================== BLOCK 1 · WORD ==============================
@@ -221,64 +220,28 @@ add(slide("s-a-lab", f'''<span class="eyebrow b">Hands-On · E2.7 · 20 min</spa
 {labcta("E2.7")}''', bg=BG1))
 add(src("s-a-check"))
 add(pause("s-q-agent", "agents", "lunch"))
-add(brk("s-brk-3", 60, "1:00 PM", "Safe use with AI", label="Lunch · 60 min"))
-
-# ============================== BLOCK 4 · SAFE USE ==============================
-add(src("s-r-hook", ('Block 3 · Safety with AI', 'Block 4 · Safe use with AI')))
-add(src("s-r-where"))
-add(src("s-r-access", ('Access to a salary file by mistake? Copilot finds it.', 'Access to another team\'s client file by mistake? Copilot finds it.')))
-add(src("s-r-never",
-        ('No Civil IDs, phones, cards, passwords, HR or medical data.', 'No Civil IDs, account or card numbers, passwords, HR or medical data.'),
-        ('“Khalid Al-Mutairi” → “<b>Customer A</b>”. Same answer.', '“Khalid Al-Murjan” → “<b>Client A</b>”. Same answer.')))
-add(src("s-r-human"))
-add(src("s-r-bias", ('Hiring, pay, credit: a person decides.', 'Hiring, pay, suitability, credit: a person decides.')))
-add(src("s-r-principles", ('Check outputs about people — CVs, customers, staff — for bias.', 'Check outputs about people — CVs, clients, staff — for bias.')))
-add(src("s-r-rules",
-        ("e.g. Central Bank of Kuwait · CITRA's Data Privacy Protection Regulation (2024)",
-         "e.g. Capital Markets Authority · Central Bank of Kuwait · CITRA's Data Privacy Protection Regulation (2024)")))
-add(slide("s-r-tiers", '''<span class="eyebrow b">Compliance · The Four Tiers</span>
-<h2 class="term-h b">Same company, four kinds of data. <span class="hl">Know the difference.</span></h2>
-<div class="tier4">
-<div class="tc t1 b"><div class="tn">Public</div><div class="tw">Anyone can see it</div><ul><li>A fund factsheet on the website</li><li>Results, once announced</li><li>A job advert, once posted</li></ul><div class="tai"><span>In Copilot</span>Yes — as it is</div></div>
-<div class="tc t2 b"><div class="tn">Internal</div><div class="tw">All staff</div><ul><li>Team meeting notes</li><li>The staff handbook</li><li>The house view for staff</li></ul><div class="tai"><span>In Copilot</span>Yes — work account only</div></div>
-<div class="tc t3 b"><div class="tn">Confidential</div><div class="tw">Only people who need it</div><ul><li>A client's holdings and custody export</li><li>Results before they are announced</li><li>A client proposal with fees</li></ul><div class="tai"><span>In Copilot</span>Work account only — remove what you don't need</div></div>
-<div class="tc t4 b"><div class="tn">Restricted</div><div class="tw">A named few · protected by law</div><ul><li>Civil IDs, account and card numbers</li><li>Salaries, reviews, medical records</li><li>Passwords and API keys</li></ul><div class="tai"><span>In Copilot</span>Remove every identifier — or never</div></div>
-</div>
-<p class="body-l b">The test: <b>if this leaked, who gets hurt — and how badly?</b></p>'''))
-add(slide("s-r-tierquiz", '''<span class="eyebrow b">Which Tier?</span>
-<h2 class="term-h b">Six items. <span class="hl">Tap to check.</span></h2>
-<div class="fliprow three b">
-<div class="flip"><div class="fin"><div class="fface"><span class="fl">📢</span><span class="fm">A fund factsheet already on the KAMCO website</span></div><div class="fface back"><span class="fm" style="color:var(--green-lt)">Public</span><span class="ft">Already published</span></div></div></div>
-<div class="flip"><div class="fin"><div class="fface"><span class="fl">📋</span><span class="fm">The staff handbook on the intranet</span></div><div class="fface back"><span class="fm" style="color:#6f9ce8">Internal</span><span class="ft">Every employee can read it</span></div></div></div>
-<div class="flip"><div class="fin"><div class="fface"><span class="fl">💼</span><span class="fm">Al-Murjan's 30 Sep custody export</span></div><div class="fface back"><span class="fm" style="color:var(--amber)">Confidential</span><span class="ft">The client and the team serving them</span></div></div></div>
-<div class="flip"><div class="fin"><div class="fface"><span class="fl">🪪</span><span class="fm">A client's Civil ID and bank account number</span></div><div class="fface back"><span class="fm" style="color:var(--danger)">Restricted</span><span class="ft">Personal data</span></div></div></div>
-<div class="flip"><div class="fin"><div class="fface"><span class="fl">📊</span><span class="fm">KAMCO's Q3 results, before the announcement</span></div><div class="fface back"><span class="fm" style="color:var(--amber)">Confidential</span><span class="ft">Public after the announcement</span></div></div></div>
-<div class="flip"><div class="fin"><div class="fface"><span class="fl">🔑</span><span class="fm">The portfolio system's admin password</span></div><div class="fface back"><span class="fm" style="color:var(--danger)">Restricted</span><span class="ft">Never in a prompt</span></div></div></div>
-</div>
-<p class="body-l b">Tiers can change: results are Confidential today, Public after the announcement.</p>''', bg=BG1))
-add(src("s-r-checklist"))
-add(slide("s-r-lab", f'''<span class="eyebrow b">Hands-On · 15 min</span>
-<h2 class="demo-h b">Classify it. Redact it. <span class="hl">Argue the close ones.</span></h2>
-{tasks([("E2.8", "Classify + Redact", "Six items from a KAMCO week: pick the tier, pick the action, redact", "8 min"),
-        ("E2.9", "Judgment calls", "Four requests from colleagues, in pairs — then compare", "7 min")])}
-<p class="done-line b"><b>Done:</b> 6 items tiered and handled · 4 calls made · answers compared.</p>
-{labcta("E2.8", "Open E2.8 →")}''', bg=BG1))
-add(slide("s-r-check", '''<span class="eyebrow b">Quick Check</span>
-<h2 class="demo-h b">Copilot drafts a list of clients who “should” be offered the new fund. <span class="hl">Send it to the team?</span></h2>
-<div class="qc-card b"><div class="qc-k">Ask the room</div><p>Not yet. Copilot drafts. A <b>person</b> decides, checks suitability and fairness, and signs.</p></div>''', bg=BG1))
-add(pause("s-q-rai", "safe use", "your capstone"))
+add(brk("s-brk-3", 60, "1:00 PM", "Your capstone", label="Lunch · 60 min"))
 
 # ============================== GRADED PROJECT ==============================
-add(slide("s-c-brief", """<span class="eyebrow b">Capstone · Graded · 13:30 – 14:50</span>
+add(slide("s-r-checklist", """<span class="eyebrow b">Checking The Work · Before You Hit Send</span>
+<h2 class="term-h b">Four checks, every time<span class="hl">.</span></h2>
+<div class="checks">
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">Accuracy</div><div class="c-d">Every number traced back to Excel. Every claim to its source.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">Confidentiality</div><div class="c-d">No other client's data. Compliance copied if it goes to a client.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">Tone</div><div class="c-d">Right for the reader. No promises of returns. Coaching by Copilot.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">Completeness</div><div class="c-d">Every ask in the newest email answered. Both files attached.</div></div></div>
+</div>
+<p class="body-l b">You sign it. <b>You own it.</b></p>"""))
+add(slide("s-c-brief", """<span class="eyebrow b">Capstone · Graded · 13:00 – 14:50</span>
 <h2 class="term-h b">Your field. One request. <span class="hl">Start to finish — alone.</span></h2>
 <div class="road">
-<div class="road-row b"><span class="rn">01</span><div><div class="rt">Summarise the request · Outlook</div><div class="rd">Final deadline, two files, who they're for — and the ask you must decline. 8 min</div></div></div>
-<div class="road-row b"><span class="rn">02</span><div><div class="rt">Clean the data · Excel</div><div class="rd">Duplicates, text numbers, messy labels. Row count before and after. 12 min</div></div></div>
-<div class="road-row b"><span class="rn">03</span><div><div class="rt">Analyse · Excel</div><div class="rd">Answer every question in the email — show the formula. 15 min</div></div></div>
-<div class="road-row b"><span class="rn">04</span><div><div class="rt">Chart it · Excel</div><div class="rd">Titles that say the message. 8 min</div></div></div>
-<div class="road-row b"><span class="rn">05</span><div><div class="rt">Executive brief · Word</div><div class="rd">One page, bottom line first, grounded in the house view. 15 min</div></div></div>
-<div class="road-row b"><span class="rn">06</span><div><div class="rt">The deck · PowerPoint</div><div class="rd">Six slides created from your brief. 12 min</div></div></div>
-<div class="road-row b"><span class="rn">07</span><div><div class="rt">Review and reply · Outlook</div><div class="rd">Both files attached by 2:50 pm. End with “What I corrected: …” 10 min</div></div></div>
+<div class="road-row b"><span class="rn">01</span><div><div class="rt">Summarise the request · Outlook</div><div class="rd">Final deadline, two files, who they're for — and the ask you must decline. 10 min</div></div></div>
+<div class="road-row b"><span class="rn">02</span><div><div class="rt">Clean the data · Excel</div><div class="rd">Duplicates, text numbers, messy labels. Row count before and after. 15 min</div></div></div>
+<div class="road-row b"><span class="rn">03</span><div><div class="rt">Analyse · Excel</div><div class="rd">Answer every question in the email — show the formula. 20 min</div></div></div>
+<div class="road-row b"><span class="rn">04</span><div><div class="rt">Chart it · Excel</div><div class="rd">Titles that say the message. 10 min</div></div></div>
+<div class="road-row b"><span class="rn">05</span><div><div class="rt">Executive brief · Word</div><div class="rd">One page, bottom line first, grounded in the house view. 20 min</div></div></div>
+<div class="road-row b"><span class="rn">06</span><div><div class="rt">The deck · PowerPoint</div><div class="rd">Six slides created from your brief. 20 min</div></div></div>
+<div class="road-row b"><span class="rn">07</span><div><div class="rt">Check and reply · Outlook</div><div class="rd">Accuracy, confidentiality, tone, completeness. Both files by 2:50 pm. End with “What I corrected: …” 15 min</div></div></div>
 </div>"""))
 add(slide("s-c-fields", """<span class="eyebrow b">Capstone · Pick Your Field</span>
 <h2 class="term-h b">Four desks. <span class="hl">Pick the one closest to your job.</span></h2>
@@ -300,21 +263,21 @@ add(slide("s-c-rubric", """<span class="eyebrow b">How It's Scored · /100</span
 <div class="check-row b"><div class="cbox"></div><div><div class="c-t">15 · Review &amp; judgement</div><div class="c-d">On time, both files attached, and your “What I corrected” line.</div></div></div>
 </div>
 <p class="body-l b">Work alone. Replies land in the evaluation mailbox with a timestamp.</p>"""))
-add(slide("s-c-go", f'''<span class="eyebrow b">Capstone · 80 minutes</span>
+add(slide("s-c-go", f'''<span class="eyebrow b">Capstone · 110 minutes</span>
 <h2 class="term-h b">Build it<span class="hl">.</span></h2>
 <div class="maptest-row b">
-<div class="mini-timer" data-min="80" style="margin-top:0;flex:1;min-width:280px">
-<div class="mt-time">80:00</div>
+<div class="mini-timer" data-min="110" style="margin-top:0;flex:1;min-width:280px">
+<div class="mt-time">110:00</div>
 <div class="mt-bar"><div class="mt-fill"></div></div>
 <div class="mt-actions">
-<button class="btn primary mt-start">Start 80:00</button>
+<button class="btn primary mt-start">Start 110:00</button>
 <button class="btn mt-plus">+2 min</button>
 <button class="btn mt-reset">Reset</button>
 </div>
 </div>
 </div>
-<p class="done-line b"><b>Pace:</b> by 14:00 your numbers are done · by 14:30 the brief and the deck · by 14:50 the reply is sent. <b>Finished early?</b> Do the Stretch and Boss in your field.</p>
-{labcta("E2.10", "Open the capstone →")}'''))
+<p class="done-line b"><b>Pace:</b> by 13:45 your numbers are done · by 14:35 the brief and the deck · by 14:50 the reply is sent. <b>Finished early?</b> Do the Stretch and Boss in your field.</p>
+{labcta("E2.8", "Open the capstone →")}'''))
 add(brk("s-brk-4", 10, "3:00 PM", "The MAP test"))
 
 # ============================== MAP · SURVEY · CERTIFICATES · CLOSE ==============================
@@ -330,7 +293,7 @@ add(slide("s-journey", '''<span class="eyebrow b">Two Days</span>
 <h2 class="term-h b">From a request in your inbox — <span class="hl">to a reply you can stand behind.</span></h2>
 <div class="road">
 <div class="road-row b"><span class="rn">SUN</span><div><div class="rt">You found the real ask and checked the numbers</div><div class="rd">Outlook and Excel on the Al-Murjan request.</div></div></div>
-<div class="road-row b"><span class="rn">MON</span><div><div class="rt">You wrote, presented and automated — safely</div><div class="rd">Word, PowerPoint, your own agent, and a graded project.</div></div></div>
+<div class="road-row b"><span class="rn">MON</span><div><div class="rt">You wrote, presented and automated — safely</div><div class="rd">Word, PowerPoint, prompt libraries, agents — and your capstone.</div></div></div>
 <div class="road-row b"><span class="rn">NEXT</span><div><div class="rt">AI in Investments · Program 3</div><div class="rd">Evaluation results follow from KAMCO and CODED.</div></div></div>
 </div>
 <p class="body-l b">Before you go: save your best prompts in <b>Your prompts</b> in Copilot.</p>''', bg=BG1))

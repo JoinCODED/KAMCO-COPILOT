@@ -47,18 +47,17 @@ DAYS = {
     chips=["What is AI?", "LLMs", "Copilot Chat", "Work vs Web", "CTFT prompts", "Outlook Summarise", "Excel cleaning", "PivotTables", "Mandate check", "Issuer limit"],
     lab="Nine tasks, in the order of the day: first contact, your time audit, safe or not, from zero to hero, build your own prompt, tame the thread, and three Excel tasks on the Al-Murjan export. Each has a Stretch and a Boss challenge for early finishers."),
  2: dict(title="From Insight to Output", cat="Day 2 · Produce → Automate → Prove it", date="Mon 12 Oct 2026",
-    lede="Write in Word, present in PowerPoint, reuse prompts, build your own agent and use AI safely — then complete one full request alone.",
-    brief="Today Copilot works inside Word and PowerPoint: notes become a memo, the house view becomes a client deck. You then find and adapt ready-made prompts in the Prompt Gallery, build a Request Triage Assistant agent and test it, and practise safe use — data tiers, redaction and judgment calls. After lunch you complete one full request alone — the graded project — then take the end MAP test, fill in the survey and receive your certificate.",
+    lede="Write in Word, present in PowerPoint, reuse prompts and build your own agent — then complete one full request alone, in your own field.",
+    brief="Today Copilot works inside Word and PowerPoint: notes become a memo, the house view becomes a client deck. You then find and adapt ready-made prompts in the Prompt Gallery, build a Request Triage Assistant agent and test it, After lunch you complete one full request alone in your own field — the graded capstone — then take the end MAP test, fill in the survey and receive your certificate.",
     ros=[("Block 1 — Word", "09:00", "Draft, rewrite, ground in the house view, check. Lab E2.1."), ("brk", "09:50", "Break"),
          ("Block 2 — PowerPoint", "10:00", "Create a deck from a file, add a slide, check it. Labs E2.2–E2.3."), ("brk", "10:50", "Break"),
          ("Block 3 — Prompt libraries + Agents", "11:00", "The Prompt Gallery and your own library in Word; a built-in agent, then build your own. Labs E2.4–E2.7."), ("brk", "12:00", "Lunch"),
-         ("Block 4 — Safe use with AI", "13:00", "Data tiers, redaction, human in the loop. Labs E2.8–E2.9."),
-         ("Capstone — graded", "13:30", "Pick your field — Wealth Management, Asset Management, Operations or Investment Research. Email → clean → analyse → chart → executive brief → deck → reply by 2:50 pm. Lab E2.10."), ("brk", "14:50", "Break"),
+         ("Capstone — graded", "13:00", "Pick your field — Wealth Management, Asset Management, Operations or Investment Research. Email → clean → analyse → chart → executive brief → deck → reply by 2:50 pm. Lab E2.8."), ("brk", "14:50", "Break"),
          ("MAP test — see your progress", "15:00", "30 minutes, alone. <a href='https://portal.joincoded.com/sv/kamco-copilot-map-test-post-day-2' target='_blank' rel='noopener'>Open the MAP test ↗</a>"),
          ("Certificates & close", "15:30", "<a href='https://portal.joincoded.com/sv/kamco-copilot-end-of-program-satisfaction-survey' target='_blank' rel='noopener'>Satisfaction survey ↗</a>, then certificates by name and the link to Program 3.")],
-    leave=["Turn notes into a memo in Word — and ground it in a file.", "Create a client deck from a document in PowerPoint, and check it.", "Find and adapt Gallery prompts — and keep your own library in Word.", "Use a built-in agent, then build, test and fix your own.", "Classify data into four tiers and redact before you paste."],
-    chips=["Copilot in Word", "Copilot in PowerPoint", "Prompt Gallery", "Agent Builder", "Data tiers", "Redaction", "Human in the loop", "Graded project"],
-    lab="Eleven tasks: notes to memo, house view to deck, message titles, the Prompt Gallery, your own prompt library in Word, a built-in agent, build your own agent, classify and redact, judgment calls, the graded capstone in your own field, and the MAP test and survey. Each has a Stretch or Boss challenge for early finishers."),
+    leave=["Turn notes into a memo in Word — and ground it in a file.", "Create a client deck from a document in PowerPoint, and check it.", "Find and adapt Gallery prompts — and keep your own library in Word.", "Use a built-in agent, then build, test and fix your own.", "Check AI work for accuracy, confidentiality, tone and completeness before you send it."],
+    chips=["Copilot in Word", "Copilot in PowerPoint", "Prompt Gallery", "Prompt library", "Built-in agents", "Agent Builder", "Four checks", "Capstone"],
+    lab="Nine tasks: notes to memo, house view to deck, message titles, the Prompt Gallery, your own prompt library in Word, a built-in agent, build your own agent, the graded capstone in your own field, and the MAP test and survey. Each has a Stretch or Boss challenge for early finishers."),
 }
 
 
@@ -125,10 +124,10 @@ def landing():
 <a href="#programme" class="cta">Explore the programme <span class="arr">→</span></a></div><div class="scrollhint">the two days ↓</div></header>
 <section class="programme" id="programme"><div class="wrap"><div class="eyebrow">The programme</div>
 <h2 class="sec-title">Two days, one workflow.</h2>
-<p class="sec-lead">Request → Check → Produce → Reply. Day one takes a client request from a messy email thread to a clean, checked analysis. Day two puts Copilot to work in Word and PowerPoint, adds the Prompt Gallery, your own agent and safe-use habits — then you do a full request alone, for the graded project.</p>
+<p class="sec-lead">Request → Check → Produce → Reply. Day one takes a client request from a messy email thread to a clean, checked analysis. Day two puts Copilot to work in Word and PowerPoint, adds prompt libraries and agents — then you do a full request alone, in your own field, for the graded capstone.</p>
 <div class="cards">
 {card(1, "Request → Check", i1, "09:00 – 16:00", "From Inbox to Insight", "Outlook and Excel", "Find the real ask in a long thread, then clean and analyse a custody export against the client's mandate.", ["Use Copilot safely with client data", "Prompt with Context, Task, Format and Tone", "Clean the data and check the mandate in Excel"])}
-{card(2, "Produce → Automate", i2, "09:00 – 16:00", "From Insight to Output", "Word, PowerPoint, agents and safe use", "Write and present with Copilot, build your own agent, use AI safely — and complete one full request alone.", ["Notes to memo in Word, house view to deck in PowerPoint", "Prompt Gallery and your own agent", "Data tiers, redaction — and the graded project"])}
+{card(2, "Produce → Automate", i2, "09:00 – 16:00", "From Insight to Output", "Word, PowerPoint, prompt libraries and agents", "Write and present with Copilot, build your own agent — and complete one full request alone, in your own field.", ["Notes to memo in Word, house view to deck in PowerPoint", "Prompt libraries, built-in agents and your own agent", "A graded capstone in your field"])}
 </div></div></section>
 <footer class="site-foot"><div class="wrap"><div class="foot-top"><div class="foot-brand"><div class="f-lockup"><img class="coded-logo" src="{LOGO}" alt="CODED"><span class="x">×</span><span class="ptxt">KAMCO Invest</span></div>
 <p>AI at Work with Microsoft Copilot — a hands-on program run by CODED for KAMCO Invest, Kuwait. All client names and figures in the exercises are fictional.</p></div>
