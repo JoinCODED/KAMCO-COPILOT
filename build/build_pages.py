@@ -53,12 +53,12 @@ DAYS = {
          ("Block 2 — PowerPoint", "10:00", "Create a deck from a file, add a slide, check it. Labs E2.2–E2.3."), ("brk", "10:50", "Break"),
          ("Block 3 — Prompt libraries + Agents", "11:00", "The Prompt Gallery and your own library in Word; a built-in agent, then build your own. Labs E2.4–E2.7."), ("brk", "12:00", "Lunch"),
          ("Block 4 — Safe use with AI", "13:00", "Data tiers, redaction, human in the loop. Labs E2.8–E2.9."),
-         ("Project — graded", "13:30", "A new request, alone: email → analysis → memo or deck → reply by 2:50 pm."), ("brk", "14:50", "Break"),
+         ("Capstone — graded", "13:30", "Pick your field — Wealth Management, Asset Management, Operations or Investment Research. Email → clean → analyse → chart → executive brief → deck → reply by 2:50 pm. Lab E2.10."), ("brk", "14:50", "Break"),
          ("MAP test — see your progress", "15:00", "30 minutes, alone. <a href='https://portal.joincoded.com/sv/kamco-copilot-map-test-post-day-2' target='_blank' rel='noopener'>Open the MAP test ↗</a>"),
          ("Certificates & close", "15:30", "<a href='https://portal.joincoded.com/sv/kamco-copilot-end-of-program-satisfaction-survey' target='_blank' rel='noopener'>Satisfaction survey ↗</a>, then certificates by name and the link to Program 3.")],
     leave=["Turn notes into a memo in Word — and ground it in a file.", "Create a client deck from a document in PowerPoint, and check it.", "Find and adapt Gallery prompts — and keep your own library in Word.", "Use a built-in agent, then build, test and fix your own.", "Classify data into four tiers and redact before you paste."],
     chips=["Copilot in Word", "Copilot in PowerPoint", "Prompt Gallery", "Agent Builder", "Data tiers", "Redaction", "Human in the loop", "Graded project"],
-    lab="Eleven tasks: notes to memo, house view to deck, message titles, the Prompt Gallery, your own prompt library in Word, a built-in agent, build your own agent, classify and redact, judgment calls, the graded project brief, and the MAP test and survey. Each has a Stretch or Boss challenge for early finishers."),
+    lab="Eleven tasks: notes to memo, house view to deck, message titles, the Prompt Gallery, your own prompt library in Word, a built-in agent, build your own agent, classify and redact, judgment calls, the graded capstone in your own field, and the MAP test and survey. Each has a Stretch or Boss challenge for early finishers."),
 }
 
 
@@ -218,6 +218,6 @@ if __name__ == "__main__":
     open(os.path.join(OUTP, "case-files.html"), "w").write(case_files())
     open(os.path.join(OUTP, "before-you-start.html"), "w").write(before_you_start())
     open(os.path.join(OUTP, "cheat-sheet.html"), "w").write(cheat())
-    for f in [A["murjan"]["file"], "01-amfo-q3-review-request.eml", "house-view-q4-2026.docx", "my-prompt-library.docx"]:
+    for f in [A["murjan"]["file"], "01-amfo-q3-review-request.eml", "house-view-q4-2026.docx", "my-prompt-library.docx", "abh-q3-custody-export.xlsx", "kgof-q3-fund-pack.xlsx", "ops-q3-settlement-blotter.xlsx", "wafra-logistics-research-pack.xlsx"] + ["capstone-%s-request.eml" % k for k in ("wm", "am", "ops", "rs")]:
         shutil.copy("out/files/" + f, OUTP)
     print(sorted(os.listdir(OUTP)))

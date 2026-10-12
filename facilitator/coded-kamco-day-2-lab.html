@@ -496,7 +496,7 @@ html:has(.deck-nav),html:has(.deck-nav) body{background:#00081c}
   };
 
   /* ---- role (the participant's track, remembered across all three days) ---- */
-  var ROLES = { executive: 'Executive', sales: 'Sales', marketing: 'Marketing', technical: 'Technical' };
+  var ROLES = {"wm": "Wealth Management", "am": "Asset Management", "ops": "Operations", "rs": "Investment Research"};
   window.ROLES = ROLES;
   window.ROLE = {
     get: function(){ var r = store.get('coded_copilot_role', ''); return ROLES[r] ? r : ''; },
@@ -976,29 +976,560 @@ window.LAB = {
   },
   {
    "id": "E2.10",
-   "app": "Graded project",
-   "title": "One request — alone",
-   "minutes": "13:30 – 14:50",
-   "block": "Graded project",
-   "scenario": "At <b>13:30</b> a new email arrives in your inbox — version <b>A</b> or <b>B</b>. Treat it like a real request from a KAMCO manager. <b>Help from Copilot is the point. Help from neighbours is not.</b>",
-   "steps": [
-    "<b>Read</b> the email with Copilot in Outlook. Write down the deadline and the deliverable.",
-    "<b>Clean and analyse</b> the attached custody export in Excel. Check every formula — same moves as Day 1.",
-    "<b>Produce</b> the deliverable: <b>A = one-page Word memo</b> · <b>B = 5-slide PowerPoint deck</b>. Follow the house view rules (number format, disclaimer on client documents only).",
-    "<b>Reply</b> to the email with your file attached by <b>2:50 pm</b>. End with one line: <b>“What I corrected: …”</b>"
-   ],
-   "findings": [
-    {
-     "label": "Deadline and deliverable",
-     "hint": "from the email"
+   "app": "Capstone",
+   "title": "Capstone — your field, start to finish",
+   "minutes": "13:30 – 14:50 · 80 min",
+   "block": "Capstone · graded",
+   "scenario": "",
+   "roles": {
+    "wm": {
+     "scenario": "You are a <b>portfolio analyst in Wealth Management</b>. The Investment Committee wants a Q3 review of <b>Al-Bayan Holding</b> — and the deadline just moved. You will brief the Committee internally <b>and</b> give the relationship manager a client deck. <b>Pick your field above.</b> Everything you need is on this page: the email thread, the workbook and the house view.",
+     "briefs": [
+      {
+       "label": "Email thread · RE: Al-Bayan Holding - Q3 review for the Investment Committee",
+       "text": "From: Huda Al-Enezi (Investment Committee Secretary)\nSent: Mon 12 Oct 2026, 13:25\nTo: You\n\nHi,\n\nUpdate: the Committee has moved Al-Bayan to the top of tomorrow's agenda, so I need everything from you today by 2:50 pm - not Wednesday.\n\nPlease send TWO files:\n1) A one-page executive brief in Word for the Committee (internal - no client disclaimer).\n2) A 6-slide PowerPoint deck that Yousef can use with the client on Thursday (client-facing - add the standard disclaimer from the house view).\n\nInclude at least one chart of allocation against the mandate ranges.\n\nThanks,\nHuda\n\n----------------------------------------\n\nFrom: Fahad Al-Bayan (CFO, Al-Bayan Holding)\nSent: Sun 11 Oct 2026, 18:10\nTo: Yousef Al-Kandari\n\nDear Yousef,\n\nAhead of our review: the family is worried about property. How much of the portfolio is now in real estate, and is any single name too big?\n\nAlso, could you share how the Al-Murjan family portfolio did this quarter? We would like to compare.\n\nRegards,\nFahad\n\n----------------------------------------\n\nFrom: Huda Al-Enezi (Investment Committee Secretary)\nSent: Thu 8 Oct 2026, 09:40\nTo: You\n\nHi,\n\nPlease prepare the Q3 review of Al-Bayan Holding for the Investment Committee on Wednesday 14 Oct. Use the 30 Sep custody export attached.\n\nCover: value at 30 Sep and Q3 change (KWD and %), allocation against the mandate, the 10% single-issuer check, top 3 and bottom 3 contributors, and your recommendation.\n\nThanks,\nHuda"
+      }
+     ],
+     "files": [
+      {
+       "label": "abh-q3-custody-export.xlsx · Al-Bayan Holding custody export, 30 Sep — Holdings_Export, Price_List, FX_Rates, Mandate",
+       "href": "abh-q3-custody-export.xlsx",
+       "note": "<b>Your data.</b> Save it to your <b>OneDrive</b> first — Copilot in Excel needs AutoSave on."
+      },
+      {
+       "label": "capstone-wm-request.eml · the same thread as an email, with the workbook attached",
+       "href": "capstone-wm-request.eml",
+       "note": "Optional: open it in Outlook desktop to use Summary by Copilot on a real email."
+      },
+      {
+       "label": "house-view-q4-2026.docx · number format, client rules and the standard disclaimer",
+       "href": "house-view-q4-2026.docx",
+       "note": "<b>Grounding file</b> for the brief and the deck: section 4 (rules for client communication) and section 5 (disclaimer)."
+      }
+     ],
+     "promptSteps": [
+      {
+       "label": "1 · Summarise the request · Outlook · 8 min",
+       "goal": "Get the real ask from the thread: the <b>final</b> deadline, the two files and their format, who each one is for, the rules you must follow — and the request you must decline. The newest message wins.",
+       "prompt": "Summarise this thread. List the final deadline, each file I must send with its format and audience, the rules I must follow, and any request I should decline and why. Use the newest message when instructions change.",
+       "findings": [
+        {
+         "label": "Final deadline",
+         "hint": ""
+        },
+        {
+         "label": "File 1 and file 2 — format and audience",
+         "hint": ""
+        },
+        {
+         "label": "The request you will decline — and why",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "2 · Clean the data · Excel · 12 min",
+       "goal": "Save the workbook to OneDrive, open it in Excel, delete the title rows above each header and press <b>Ctrl+T</b>. Then clean it with Copilot — check the row count before and after every step. Suggested prompts, in order: <br>• <i>Highlight duplicate rows in this table based on Holding ID. Then remove them and tell me how many rows are left.</i> <br>• <i>Convert the Quantity column to numbers. Add a column Asset Class (clean) that maps every label to Equity, Fixed Income, Real Estate or Cash.</i> <br>• <i>Add a column Price 30 Sep (filled): use Price 30-Sep-2026, and if it is blank look up the Ticker in the Price_List sheet. Then add Market Value KWD = Quantity × Price 30 Sep (filled) × the rate to KWD from FX_Rates.</i>",
+       "prompt": "Highlight duplicate rows in this table based on Holding ID. Then remove them and tell me how many rows are left.",
+       "findings": [
+        {
+         "label": "Rows before → after cleaning",
+         "hint": ""
+        },
+        {
+         "label": "Every problem you found and fixed",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "3 · Analyse · Excel · 15 min",
+       "goal": "Answer every question in the email with numbers you can trace. Ask Copilot to <b>show the formula</b>, and test one row by hand. Suggested prompts: <br>• <i>Give me the total Market Value KWD at 30 Sep and at 30 Jun (use Price 30-Jun-2026 the same way), and the Q3 change in KWD and %.</i> <br>• <i>Create a PivotTable of Market Value KWD by Asset Class (clean) as a % of the total. Add the Min and Max from the Mandate sheet and a column that says BREACH if the weight is outside the range.</i> <br>• <i>Sum Market Value KWD by Issuer, excluding cash, as a % of the total portfolio. Highlight any issuer above 10%. Then show the top 3 and bottom 3 holdings by Q3 change in KWD.</i>",
+       "prompt": "Give me the total Market Value KWD at 30 Sep and at 30 Jun (use Price 30-Jun-2026 the same way), and the Q3 change in KWD and %.",
+       "findings": [
+        {
+         "label": "Total value 30 Sep (KWD)",
+         "hint": ""
+        },
+        {
+         "label": "Q3 change (KWD and %)",
+         "hint": ""
+        },
+        {
+         "label": "Asset class outside its mandate range",
+         "hint": ""
+        },
+        {
+         "label": "Issuer above 10%",
+         "hint": ""
+        },
+        {
+         "label": "Top and bottom contributor",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "4 · Chart it · Excel · 8 min",
+       "goal": "Create a clustered bar chart of each asset class weight next to its mandate Min and Max. Title it with the message, for example “Real estate is above its mandate range”. Check the chart against your table — axis, labels, units.",
+       "prompt": "Create a clustered bar chart of each asset class weight next to its mandate Min and Max. Title it with the message, for example “Real estate is above its mandate range”.",
+       "findings": [
+        {
+         "label": "Your chart title(s) — the message",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "5 · Executive brief · Word · 15 min",
+       "goal": "A <b>one-page</b> executive brief for Huda Al-Enezi for the Investment Committee (internal — no client disclaimer). Sections: Bottom line (2 lines) · Key numbers table (value, Q3 change, allocation vs mandate, issuer check) · What drove the quarter (top and bottom 3) · Recommendation · Next steps. Draft it from your own checked numbers — paste them in — then ground it in the house view with <kbd>/</kbd> for the number format. Paste your chart from Excel.",
+       "prompt": "Using the numbers below, draft a one-page executive brief for [reader]. Start with a two-line bottom line. Then: a key numbers table, the findings, a recommendation, and next steps. Under 350 words. Plain English, no jargon. Show KWD without decimals and percentages to one decimal place, as in /house-view-q4-2026. [paste your numbers]",
+       "findings": [
+        {
+         "label": "Your bottom line — two lines",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "6 · PowerPoint · 12 min",
+       "goal": "A <b>6-slide deck</b> for Yousef Al-Kandari to use with the client (client-facing — add the standard disclaimer, never another client's data). In PowerPoint, select <b>Create a presentation from a file</b> and point it at your brief. Slides: 1 The message in one line · 2 Value and Q3 change · 3 Allocation vs mandate (your chart) · 4 Concentration: the issuer check · 5 What drove the quarter · 6 Recommendation and next steps — then the disclaimer. Every title is the message. Paste your chart(s) from Excel.",
+       "prompt": "Create a 6-slide presentation from /[your executive brief]. Make every slide title the message, not the topic. Keep every number exactly as in the brief. Add speaker notes. [Client-facing? Add the standard disclaimer from /house-view-q4-2026 on the last slide.]",
+       "findings": [
+        {
+         "label": "One number you checked on a slide against Excel",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "7 · Review and reply · Outlook · 10 min",
+       "goal": "Check before you send: every number in the brief and the deck matches Excel; the rules are followed. Fahad asked for the Al-Murjan family's results. Your reply must say you cannot share another client's data. Then reply with <b>both files attached</b>, run <b>Coaching by Copilot</b>, and end with one line: <b>“What I corrected: …”</b> — what Copilot got wrong and you fixed.",
+       "prompt": "Draft my reply. Say the executive brief and the deck are attached, give the bottom line in one sentence, and politely decline [the request] with a one-line reason. Under 120 words. Professional and warm.",
+       "findings": [
+        {
+         "label": "What I corrected",
+         "hint": "the line that ends your reply"
+        }
+       ]
+      }
+     ],
+     "stretch": "Ask Copilot in Excel: <i>“How much of the largest real estate holding would we need to sell to bring real estate back to 15%?”</i> Check its maths by hand and add one line to the brief.",
+     "boss": "Write a three-line WhatsApp-length version of the recommendation that Yousef could say out loud to the client. No numbers that are not in your deck."
     },
-    {
-     "label": "What I corrected",
-     "hint": "what Copilot got wrong and you fixed"
+    "am": {
+     "scenario": "You are an <b>analyst in Asset Management</b>. The CIO needs the Q3 review of the <b>Gulf Opportunities Fund</b> for the fund board — and the call has moved to tomorrow morning. <b>Pick your field above.</b> Everything you need is on this page: the email thread, the workbook and the house view.",
+     "briefs": [
+      {
+       "label": "Email thread · RE: Gulf Opportunities Fund - Q3 board pack",
+       "text": "From: Dalal Al-Sabah (Chief Investment Officer)\nSent: Mon 12 Oct 2026, 13:20\nTo: You\n\nHi,\n\nThe fund board call has been brought forward to tomorrow at 9:00, so I need your files today by 2:50 pm.\n\nTwo files please:\n1) A one-page executive brief in Word for me (internal).\n2) A 6-slide PowerPoint for the board, with a chart of cumulative fund vs benchmark return since January.\n\nLead with whether we are inside the fund rules. Use one decimal place for every return.\n\nThanks,\nDalal\n\n----------------------------------------\n\nFrom: Bader Al-Mutawa (Distribution)\nSent: Sun 11 Oct 2026, 16:05\nTo: Dalal Al-Sabah\n\nDalal,\n\nTwo big institutional clients are asking about the fund. Can the board deck include a line saying we expect to beat the benchmark again in Q4? It would really help sales.\n\nBader\n\n----------------------------------------\n\nFrom: Dalal Al-Sabah (Chief Investment Officer)\nSent: Wed 7 Oct 2026, 11:15\nTo: You\n\nHi,\n\nPlease prepare the Q3 review of the Gulf Opportunities Fund for the board on Thursday 15 Oct, using the attached fund pack.\n\nCover: fund vs benchmark - year to date and Q3; best and worst month against the benchmark; sector and single-stock weights against the fund rules; top 3 and bottom 3 contributors in Q3; and net flows.\n\nThanks,\nDalal"
+      }
+     ],
+     "files": [
+      {
+       "label": "kgof-q3-fund-pack.xlsx · Fund pack — Monthly_Returns, Holdings_30Sep, Flows, Policy",
+       "href": "kgof-q3-fund-pack.xlsx",
+       "note": "<b>Your data.</b> Save it to your <b>OneDrive</b> first — Copilot in Excel needs AutoSave on."
+      },
+      {
+       "label": "capstone-am-request.eml · the same thread as an email, with the workbook attached",
+       "href": "capstone-am-request.eml",
+       "note": "Optional: open it in Outlook desktop to use Summary by Copilot on a real email."
+      },
+      {
+       "label": "house-view-q4-2026.docx · number format, client rules and the standard disclaimer",
+       "href": "house-view-q4-2026.docx",
+       "note": "<b>Grounding file</b> for the brief and the deck: section 4 (rules for client communication) and section 5 (disclaimer)."
+      }
+     ],
+     "promptSteps": [
+      {
+       "label": "1 · Summarise the request · Outlook · 8 min",
+       "goal": "Get the real ask from the thread: the <b>final</b> deadline, the two files and their format, who each one is for, the rules you must follow — and the request you must decline. The newest message wins.",
+       "prompt": "Summarise this thread. List the final deadline, each file I must send with its format and audience, the rules I must follow, and any request I should decline and why. Use the newest message when instructions change.",
+       "findings": [
+        {
+         "label": "Final deadline",
+         "hint": ""
+        },
+        {
+         "label": "File 1 and file 2 — format and audience",
+         "hint": ""
+        },
+        {
+         "label": "The request you will decline — and why",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "2 · Clean the data · Excel · 12 min",
+       "goal": "Save the workbook to OneDrive, open it in Excel, delete the title rows above each header and press <b>Ctrl+T</b>. Then clean it with Copilot — check the row count before and after every step. Suggested prompts, in order: <br>• <i>In Monthly_Returns, make every return a number — one of them is stored as text. Tell me which one you fixed.</i> <br>• <i>In Holdings_30Sep, find any holding that appears twice and remove the duplicate. Check the weights at 30 Sep add up to about 100%.</i> <br>• <i>In Flows, trim spaces and make the Channel labels consistent (Institutional or Retail), and convert any number stored as text. Add a column Net flow = Subscriptions − Redemptions.</i>",
+       "prompt": "In Monthly_Returns, make every return a number — one of them is stored as text. Tell me which one you fixed.",
+       "findings": [
+        {
+         "label": "Rows before → after cleaning",
+         "hint": ""
+        },
+        {
+         "label": "Every problem you found and fixed",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "3 · Analyse · Excel · 15 min",
+       "goal": "Answer every question in the email with numbers you can trace. Ask Copilot to <b>show the formula</b>, and test one row by hand. Suggested prompts: <br>• <i>Add columns for cumulative fund return and cumulative benchmark return since January, compounding the monthly returns: (1 + return) multiplied month by month, minus 1. Give me the year-to-date and Q3 (Jul–Sep) figures for both, and the difference.</i> <br>• <i>Add a column Excess = Fund − Benchmark for each month. Which month was best and which was worst against the benchmark?</i> <br>• <i>Sum Weight 30-Sep % by Sector and compare with the Policy sheet: any sector above 35%, any single stock above 10%, and is cash inside 2–10%? Then add Contribution = Weight 30-Jun % × Q3 return % ÷ 100 and show the top 3 and bottom 3.</i> <br>• <i>Sum Net flow by month and give me year-to-date and Q3 totals.</i>",
+       "prompt": "Add columns for cumulative fund return and cumulative benchmark return since January, compounding the monthly returns: (1 + return) multiplied month by month, minus 1. Give me the year-to-date and Q3 (Jul–Sep) figures for both, and the difference.",
+       "findings": [
+        {
+         "label": "YTD return: fund vs benchmark",
+         "hint": "one decimal place"
+        },
+        {
+         "label": "Q3 return: fund vs benchmark",
+         "hint": ""
+        },
+        {
+         "label": "Fund rule breaches",
+         "hint": "sector · single stock"
+        },
+        {
+         "label": "Top and bottom contributor in Q3",
+         "hint": ""
+        },
+        {
+         "label": "Net flows YTD and Q3 (KWD '000)",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "4 · Chart it · Excel · 8 min",
+       "goal": "Create a line chart of cumulative fund return and cumulative benchmark return from January to September. Add a column chart of net flow by month. Give each chart a title that says the message. Check the chart against your table — axis, labels, units.",
+       "prompt": "Create a line chart of cumulative fund return and cumulative benchmark return from January to September. Add a column chart of net flow by month. Give each chart a title that says the message.",
+       "findings": [
+        {
+         "label": "Your chart title(s) — the message",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "5 · Executive brief · Word · 15 min",
+       "goal": "A <b>one-page</b> executive brief for Dalal Al-Sabah, Chief Investment Officer (internal). Sections: Bottom line · Performance table (YTD and Q3, fund vs benchmark) · Rule check (sector, single stock, cash) · Contributors · Flows · Actions. Draft it from your own checked numbers — paste them in — then ground it in the house view with <kbd>/</kbd> for the number format. Paste your chart from Excel.",
+       "prompt": "Using the numbers below, draft a one-page executive brief for [reader]. Start with a two-line bottom line. Then: a key numbers table, the findings, a recommendation, and next steps. Under 350 words. Plain English, no jargon. Show KWD without decimals and percentages to one decimal place, as in /house-view-q4-2026. [paste your numbers]",
+       "findings": [
+        {
+         "label": "Your bottom line — two lines",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "6 · PowerPoint · 12 min",
+       "goal": "A <b>6-slide deck</b> for the fund board (lead with whether the fund is inside its rules; every return to one decimal place). In PowerPoint, select <b>Create a presentation from a file</b> and point it at your brief. Slides: 1 The message in one line · 2 Performance vs benchmark (your line chart) · 3 Inside the rules? · 4 What drove Q3 · 5 Flows (your column chart) · 6 Actions for the board. Every title is the message. Paste your chart(s) from Excel.",
+       "prompt": "Create a 6-slide presentation from /[your executive brief]. Make every slide title the message, not the topic. Keep every number exactly as in the brief. Add speaker notes. [Client-facing? Add the standard disclaimer from /house-view-q4-2026 on the last slide.]",
+       "findings": [
+        {
+         "label": "One number you checked on a slide against Excel",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "7 · Review and reply · Outlook · 10 min",
+       "goal": "Check before you send: every number in the brief and the deck matches Excel; the rules are followed. Bader asked for a line saying the fund will beat the benchmark in Q4. Your reply must decline it — the fund rules never allow promising future returns. Then reply with <b>both files attached</b>, run <b>Coaching by Copilot</b>, and end with one line: <b>“What I corrected: …”</b> — what Copilot got wrong and you fixed.",
+       "prompt": "Draft my reply. Say the executive brief and the deck are attached, give the bottom line in one sentence, and politely decline [the request] with a one-line reason. Under 120 words. Professional and warm.",
+       "findings": [
+        {
+         "label": "What I corrected",
+         "hint": "the line that ends your reply"
+        }
+       ]
+      }
+     ],
+     "stretch": "Ask Copilot: <i>“What would the fund's sector weights be if we cut Banks to 34% and moved the difference to cash?”</i> Is cash still inside 10%?",
+     "boss": "Ask Copilot to explain, in two sentences a board member would understand, why the fund beat the benchmark in Q3. Check that every reason is supported by your contributors table."
+    },
+    "ops": {
+     "scenario": "You are an <b>Operations analyst</b>. The COO needs the Q3 settlement review for the Operations Committee — tomorrow at 8:30. The blotter export is messy and some trades are still open. <b>Pick your field above.</b> Everything you need is on this page: the email thread, the workbook and the house view.",
+     "briefs": [
+      {
+       "label": "Email thread · RE: Q3 settlement review - Operations Committee",
+       "text": "From: Mishari Al-Ghanim (Chief Operating Officer)\nSent: Mon 12 Oct 2026, 13:15\nTo: You\n\nHi,\n\nThe Operations Committee is now tomorrow at 8:30, so please send your files today by 2:50 pm.\n\nTwo files:\n1) A one-page executive brief in Word for me.\n2) A 6-slide PowerPoint for the Committee, with a chart of late and failed trades by counterparty and the on-time rate by month.\n\nLead with whether we met the 98% target, and list every trade I need to escalate.\n\nThanks,\nMishari\n\n----------------------------------------\n\nFrom: Noura Al-Rashidi (Compliance)\nSent: Sun 11 Oct 2026, 10:30\nTo: Mishari Al-Ghanim\n\nMishari,\n\nReminder for anything that goes to the Committee: no client names - trade IDs and counterparties only. Also, Riyadh Capital Markets asked for a copy of our internal counterparty scores; please do not share them outside KAMCO.\n\nNoura\n\n----------------------------------------\n\nFrom: Mishari Al-Ghanim (Chief Operating Officer)\nSent: Tue 6 Oct 2026, 14:00\nTo: You\n\nHi,\n\nPlease review Q3 settlement performance for the Operations Committee on Wednesday 14 Oct. The blotter export is attached.\n\nCover: the on-time settlement rate against our 98% target, late and failed trades by counterparty, the average delay, the value of trades that settled late, and the open fails we must escalate.\n\nThanks,\nMishari"
+      }
+     ],
+     "files": [
+      {
+       "label": "ops-q3-settlement-blotter.xlsx · Settlement blotter — Trades_Q3, Policy",
+       "href": "ops-q3-settlement-blotter.xlsx",
+       "note": "<b>Your data.</b> Save it to your <b>OneDrive</b> first — Copilot in Excel needs AutoSave on."
+      },
+      {
+       "label": "capstone-ops-request.eml · the same thread as an email, with the workbook attached",
+       "href": "capstone-ops-request.eml",
+       "note": "Optional: open it in Outlook desktop to use Summary by Copilot on a real email."
+      },
+      {
+       "label": "house-view-q4-2026.docx · number format, client rules and the standard disclaimer",
+       "href": "house-view-q4-2026.docx",
+       "note": "<b>Grounding file</b> for the brief and the deck: section 4 (rules for client communication) and section 5 (disclaimer)."
+      }
+     ],
+     "promptSteps": [
+      {
+       "label": "1 · Summarise the request · Outlook · 8 min",
+       "goal": "Get the real ask from the thread: the <b>final</b> deadline, the two files and their format, who each one is for, the rules you must follow — and the request you must decline. The newest message wins.",
+       "prompt": "Summarise this thread. List the final deadline, each file I must send with its format and audience, the rules I must follow, and any request I should decline and why. Use the newest message when instructions change.",
+       "findings": [
+        {
+         "label": "Final deadline",
+         "hint": ""
+        },
+        {
+         "label": "File 1 and file 2 — format and audience",
+         "hint": ""
+        },
+        {
+         "label": "The request you will decline — and why",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "2 · Clean the data · Excel · 12 min",
+       "goal": "Save the workbook to OneDrive, open it in Excel, delete the title rows above each header and press <b>Ctrl+T</b>. Then clean it with Copilot — check the row count before and after every step. Suggested prompts, in order: <br>• <i>Highlight duplicate rows based on Trade ID. Remove them and tell me how many trades are left.</i> <br>• <i>Add a column Counterparty (clean) that maps every spelling to one name — for example GULF BROKERAGE CO and Gulf Brokerage both become Gulf Brokerage Co.</i> <br>• <i>Make every value in Actual settle a real date — some are stored as text. Leave the open fails blank.</i>",
+       "prompt": "Highlight duplicate rows based on Trade ID. Remove them and tell me how many trades are left.",
+       "findings": [
+        {
+         "label": "Rows before → after cleaning",
+         "hint": ""
+        },
+        {
+         "label": "Every problem you found and fixed",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "3 · Analyse · Excel · 15 min",
+       "goal": "Answer every question in the email with numbers you can trace. Ask Copilot to <b>show the formula</b>, and test one row by hand. Suggested prompts: <br>• <i>Add a column Days late = Actual settle − Expected settle (calendar days). For trades with no Actual settle, add Days open = 30 Sep 2026 − Expected settle.</i> <br>• <i>Count trades by Status. What % settled on time? Compare with the 98% target in the Policy sheet.</i> <br>• <i>Create a PivotTable of late and failed trades by Counterparty (clean), with their total Value KWD. Which counterparties have 3 or more?</i> <br>• <i>List every open fail with Days open above 5 — Trade ID, counterparty, days open and value. Then show the on-time rate by month (Jul, Aug, Sep).</i>",
+       "prompt": "Add a column Days late = Actual settle − Expected settle (calendar days). For trades with no Actual settle, add Days open = 30 Sep 2026 − Expected settle.",
+       "findings": [
+        {
+         "label": "Unique trades and on-time %",
+         "hint": ""
+        },
+        {
+         "label": "Late trades: count, value and average days late",
+         "hint": ""
+        },
+        {
+         "label": "Trades to escalate",
+         "hint": "Trade IDs"
+        },
+        {
+         "label": "Counterparties for review",
+         "hint": "3 or more"
+        },
+        {
+         "label": "Best and worst month",
+         "hint": "on-time %"
+        }
+       ]
+      },
+      {
+       "label": "4 · Chart it · Excel · 8 min",
+       "goal": "Create a bar chart of late and failed trades by counterparty, and a line chart of the on-time rate by month with the 98% target as a second line. Give each chart a title that says the message. Check the chart against your table — axis, labels, units.",
+       "prompt": "Create a bar chart of late and failed trades by counterparty, and a line chart of the on-time rate by month with the 98% target as a second line. Give each chart a title that says the message.",
+       "findings": [
+        {
+         "label": "Your chart title(s) — the message",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "5 · Executive brief · Word · 15 min",
+       "goal": "A <b>one-page</b> executive brief for Mishari Al-Ghanim, Chief Operating Officer. Sections: Bottom line: did we meet 98%? · Key numbers table · Escalations (open fails > 5 days) · Counterparty review · Root causes to check · Actions before Q4. Draft it from your own checked numbers — paste them in — then ground it in the house view with <kbd>/</kbd> for the number format. Paste your chart from Excel.",
+       "prompt": "Using the numbers below, draft a one-page executive brief for [reader]. Start with a two-line bottom line. Then: a key numbers table, the findings, a recommendation, and next steps. Under 350 words. Plain English, no jargon. Show KWD without decimals and percentages to one decimal place, as in /house-view-q4-2026. [paste your numbers]",
+       "findings": [
+        {
+         "label": "Your bottom line — two lines",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "6 · PowerPoint · 12 min",
+       "goal": "A <b>6-slide deck</b> for the Operations Committee (trade IDs and counterparties only — no client names). In PowerPoint, select <b>Create a presentation from a file</b> and point it at your brief. Slides: 1 The message in one line · 2 On-time rate vs target (your line chart) · 3 Where the fails come from (your bar chart) · 4 Escalate today · 5 Counterparty review · 6 Actions before Q4. Every title is the message. Paste your chart(s) from Excel.",
+       "prompt": "Create a 6-slide presentation from /[your executive brief]. Make every slide title the message, not the topic. Keep every number exactly as in the brief. Add speaker notes. [Client-facing? Add the standard disclaimer from /house-view-q4-2026 on the last slide.]",
+       "findings": [
+        {
+         "label": "One number you checked on a slide against Excel",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "7 · Review and reply · Outlook · 10 min",
+       "goal": "Check before you send: every number in the brief and the deck matches Excel; the rules are followed. Riyadh Capital Markets asked for KAMCO's internal counterparty scores. Your reply must confirm you will not share them outside KAMCO. Then reply with <b>both files attached</b>, run <b>Coaching by Copilot</b>, and end with one line: <b>“What I corrected: …”</b> — what Copilot got wrong and you fixed.",
+       "prompt": "Draft my reply. Say the executive brief and the deck are attached, give the bottom line in one sentence, and politely decline [the request] with a one-line reason. Under 120 words. Professional and warm.",
+       "findings": [
+        {
+         "label": "What I corrected",
+         "hint": "the line that ends your reply"
+        }
+       ]
+      }
+     ],
+     "stretch": "Ask Copilot: <i>“If the three open fails had settled on time, what would the on-time rate be?”</i> Check it by hand.",
+     "boss": "Draft a short, firm email to the counterparty with the most late trades asking for a root-cause note by Thursday. No internal scores, no client names."
+    },
+    "rs": {
+     "scenario": "You are an <b>Investment Research analyst</b>. The Head of Research wants your initiation view on <b>Wafra Logistics Co.</b> for the Investment Committee — tomorrow morning, not Thursday. <b>Pick your field above.</b> Everything you need is on this page: the email thread, the workbook and the house view.",
+     "briefs": [
+      {
+       "label": "Email thread · RE: Wafra Logistics - initiation note for the Investment Committee",
+       "text": "From: Ahmad Al-Hamad (Head of Research)\nSent: Mon 12 Oct 2026, 13:10\nTo: You\n\nHi,\n\nChange of plan: the Investment Committee will discuss Wafra tomorrow morning, so I need your files today by 2:50 pm.\n\nTwo files:\n1) A one-page executive brief in Word with your view - Attractive, Neutral or Unattractive - and the valuation in one table.\n2) A 6-slide PowerPoint for the Committee, with a chart of revenue and EBITDA margin by year, and a share price chart.\n\nFollow the valuation guidelines in the Policy sheet exactly.\n\nThanks,\nAhmad\n\n----------------------------------------\n\nFrom: Sara Al-Otaibi (Corporate Finance)\nSent: Sun 11 Oct 2026, 15:45\nTo: Ahmad Al-Hamad\n\nAhmad,\n\nI hear Research is looking at Wafra. A client of ours is about to buy a large stake - can your analyst send me the valuation before the Committee sees it, so I can pass it on?\n\nSara\n\n----------------------------------------\n\nFrom: Ahmad Al-Hamad (Head of Research)\nSent: Mon 5 Oct 2026, 10:20\nTo: You\n\nHi,\n\nPlease prepare an initiation view on Wafra Logistics Co. for the Investment Committee on Thursday 15 Oct. The research pack is attached.\n\nCover: revenue growth and EBITDA margin from FY2023 to FY2025 plus H1 2026, leverage, a peer-multiple valuation, upside to the current price, and your view.\n\nThanks,\nAhmad"
+      }
+     ],
+     "files": [
+      {
+       "label": "wafra-logistics-research-pack.xlsx · Research pack — Financials, Peers, Share_Price, Policy",
+       "href": "wafra-logistics-research-pack.xlsx",
+       "note": "<b>Your data.</b> Save it to your <b>OneDrive</b> first — Copilot in Excel needs AutoSave on."
+      },
+      {
+       "label": "capstone-rs-request.eml · the same thread as an email, with the workbook attached",
+       "href": "capstone-rs-request.eml",
+       "note": "Optional: open it in Outlook desktop to use Summary by Copilot on a real email."
+      },
+      {
+       "label": "house-view-q4-2026.docx · number format, client rules and the standard disclaimer",
+       "href": "house-view-q4-2026.docx",
+       "note": "<b>Grounding file</b> for the brief and the deck: section 4 (rules for client communication) and section 5 (disclaimer)."
+      }
+     ],
+     "promptSteps": [
+      {
+       "label": "1 · Summarise the request · Outlook · 8 min",
+       "goal": "Get the real ask from the thread: the <b>final</b> deadline, the two files and their format, who each one is for, the rules you must follow — and the request you must decline. The newest message wins.",
+       "prompt": "Summarise this thread. List the final deadline, each file I must send with its format and audience, the rules I must follow, and any request I should decline and why. Use the newest message when instructions change.",
+       "findings": [
+        {
+         "label": "Final deadline",
+         "hint": ""
+        },
+        {
+         "label": "File 1 and file 2 — format and audience",
+         "hint": ""
+        },
+        {
+         "label": "The request you will decline — and why",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "2 · Clean the data · Excel · 12 min",
+       "goal": "Save the workbook to OneDrive, open it in Excel, delete the title rows above each header and press <b>Ctrl+T</b>. Then clean it with Copilot — check the row count before and after every step. Suggested prompts, in order: <br>• <i>In Financials, make every number a real number — one is stored as text with a comma. Tell me which one.</i> <br>• <i>In Peers, remove any peer listed twice and mark any peer without an EV/EBITDA number as excluded. How many peers are left with a number?</i> <br>• <i>Turn the Share_Price month labels into real dates so we can chart them.</i>",
+       "prompt": "In Financials, make every number a real number — one is stored as text with a comma. Tell me which one.",
+       "findings": [
+        {
+         "label": "Rows before → after cleaning",
+         "hint": ""
+        },
+        {
+         "label": "Every problem you found and fixed",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "3 · Analyse · Excel · 15 min",
+       "goal": "Answer every question in the email with numbers you can trace. Ask Copilot to <b>show the formula</b>, and test one row by hand. Suggested prompts: <br>• <i>Add EBITDA margin = EBITDA ÷ Revenue for each column, and revenue growth year on year. Give me the revenue CAGR from FY2023 to FY2025. Remind me that H1 2026 is six months only.</i> <br>• <i>Calculate net debt = Total debt − Cash for FY2025, and net debt ÷ EBITDA.</i> <br>• <i>Following the Policy sheet exactly: peer median EV/EBITDA (each peer once, excluding n/a) × FY2025 EBITDA = EV; EV − net debt = equity value; ÷ shares = value per share; ÷ the 30 Sep price − 1 = upside. Show each step and which view it gives: Attractive, Neutral or Unattractive.</i>",
+       "prompt": "Add EBITDA margin = EBITDA ÷ Revenue for each column, and revenue growth year on year. Give me the revenue CAGR from FY2023 to FY2025. Remind me that H1 2026 is six months only.",
+       "findings": [
+        {
+         "label": "Revenue CAGR FY2023–FY2025",
+         "hint": ""
+        },
+        {
+         "label": "EBITDA margin FY2025",
+         "hint": ""
+        },
+        {
+         "label": "Net debt / EBITDA FY2025",
+         "hint": ""
+        },
+        {
+         "label": "Peer median EV/EBITDA",
+         "hint": "x"
+        },
+        {
+         "label": "Value per share vs price — upside — view",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "4 · Chart it · Excel · 8 min",
+       "goal": "Create a combo chart: revenue as columns and EBITDA margin as a line, FY2023 to FY2025. Then a line chart of the month-end share price. Give each chart a title that says the message. Check the chart against your table — axis, labels, units.",
+       "prompt": "Create a combo chart: revenue as columns and EBITDA margin as a line, FY2023 to FY2025. Then a line chart of the month-end share price. Give each chart a title that says the message.",
+       "findings": [
+        {
+         "label": "Your chart title(s) — the message",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "5 · Executive brief · Word · 15 min",
+       "goal": "A <b>one-page</b> executive brief for Ahmad Al-Hamad, Head of Research (internal — Investment Committee use only). Sections: Bottom line: the view in one line · Business in numbers (growth, margins, leverage) · Valuation table (every step) · What the market already prices in · What would change the view. Draft it from your own checked numbers — paste them in — then ground it in the house view with <kbd>/</kbd> for the number format. Paste your chart from Excel.",
+       "prompt": "Using the numbers below, draft a one-page executive brief for [reader]. Start with a two-line bottom line. Then: a key numbers table, the findings, a recommendation, and next steps. Under 350 words. Plain English, no jargon. Show KWD without decimals and percentages to one decimal place, as in /house-view-q4-2026. [paste your numbers]",
+       "findings": [
+        {
+         "label": "Your bottom line — two lines",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "6 · PowerPoint · 12 min",
+       "goal": "A <b>6-slide deck</b> for the Investment Committee (no price targets or promises; the valuation table on one slide). In PowerPoint, select <b>Create a presentation from a file</b> and point it at your brief. Slides: 1 The view in one line · 2 Growth and margins (your combo chart) · 3 Balance sheet and leverage · 4 Valuation vs peers · 5 The share price (your line chart) · 6 Risks and what would change the view. Every title is the message. Paste your chart(s) from Excel.",
+       "prompt": "Create a 6-slide presentation from /[your executive brief]. Make every slide title the message, not the topic. Keep every number exactly as in the brief. Add speaker notes. [Client-facing? Add the standard disclaimer from /house-view-q4-2026 on the last slide.]",
+       "findings": [
+        {
+         "label": "One number you checked on a slide against Excel",
+         "hint": ""
+        }
+       ]
+      },
+      {
+       "label": "7 · Review and reply · Outlook · 10 min",
+       "goal": "Check before you send: every number in the brief and the deck matches Excel; the rules are followed. Sara in Corporate Finance asked for the valuation before the Committee, to pass to a client. Your reply must say research cannot be shared before the Committee — and never with a client. Then reply with <b>both files attached</b>, run <b>Coaching by Copilot</b>, and end with one line: <b>“What I corrected: …”</b> — what Copilot got wrong and you fixed.",
+       "prompt": "Draft my reply. Say the executive brief and the deck are attached, give the bottom line in one sentence, and politely decline [the request] with a one-line reason. Under 120 words. Professional and warm.",
+       "findings": [
+        {
+         "label": "What I corrected",
+         "hint": "the line that ends your reply"
+        }
+       ]
+      }
+     ],
+     "stretch": "Ask Copilot: <i>“At what EV/EBITDA multiple would the value per share equal today's price?”</i> Check it by hand — it tells the Committee what the market is already assuming.",
+     "boss": "Ask Copilot for the strongest argument <b>against</b> your view. Add one line to your brief that answers it."
     }
+   },
+   "steps": [
+    "<b>Pick your field</b> with the buttons above: Wealth Management, Asset Management, Operations or Investment Research.",
+    "Work <b>alone</b>, in order, through the seven steps below. Help from Copilot is the point — help from neighbours is not.",
+    "Each step has a goal. Write your own CTFT prompt first; tap <b>Reveal a suggested prompt</b> only if you are stuck.",
+    "By <b>2:50 pm</b>, reply to the evaluation mailbox (the address is on the board) with the subject <b>Capstone · [your field] · [your name]</b> and <b>both files attached</b>: the executive brief (Word) and the deck (PowerPoint)."
    ],
-   "expect": "Scored out of 100: <b>30</b> workflow complete (on time, file attached) · <b>25</b> accurate numbers · <b>20</b> deliverable quality · <b>15</b> AI review &amp; judgement (your “What I corrected” line) · <b>10</b> prompt quality.",
-   "stretch": "Finished early? Build the other format too — A → a 3-slide deck, B → a one-page memo. Not graded, great practice."
+   "expect": "Scored out of 100: <b>15</b> the request — deadline, files, the declined ask · <b>25</b> accurate numbers · <b>10</b> charts that say the message · <b>20</b> executive brief · <b>15</b> PowerPoint deck · <b>15</b> review and judgement — your “What I corrected” line and on-time reply."
   },
   {
    "id": "E2.11",
@@ -1163,8 +1694,8 @@ window.LAB = {
   function render(){
     var t = variantOf(T[cur]); var s = st(cur);
     $('crumb').textContent = t.id + ' · ' + t.app;
-    var roleTabs = t._roles ? '<div class="role-tabs"><span class="rt-k">Scenario for:</span>' + t._roles.map(function(k){ return '<button type="button" class="role-tab' + (k === t._role ? ' on' : '') + '" data-role="' + k + '">' + ROLES[k] + '</button>'; }).join('') +
-      '<span class="rt-note">' + (role() ? 'Showing your track. Tap another to switch.' : 'Pick your track — the lab remembers it.') + '</span></div>' : '';
+    var roleTabs = t._roles ? '<div class="role-tabs"><span class="rt-k">Your field:</span>' + t._roles.map(function(k){ return '<button type="button" class="role-tab' + (k === t._role ? ' on' : '') + '" data-role="' + k + '">' + ROLES[k] + '</button>'; }).join('') +
+      '<span class="rt-note">' + (role() ? 'Showing your field. Tap another to switch.' : 'Pick your field — the lab remembers it.') + '</span></div>' : '';
     var h = '';
     h += '<div class="task-tag"><span class="app">' + esc(t.app) + '</span> ' + esc(t.id) + (t.minutes ? ' · ' + esc(t.minutes) : '') + (t.optional ? ' · stretch' : '') + '</div>';
     h += '<h1 class="task-h">' + esc(t.title) + '</h1>' + roleTabs;

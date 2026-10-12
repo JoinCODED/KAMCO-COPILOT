@@ -107,7 +107,7 @@ add(slide("s-road", '''<span class="eyebrow b">The Road Today</span>
 <div class="road-row go b" data-goto="s-p-story"><span class="rn">02</span><div><div class="rt">PowerPoint</div><div class="rd">10:00</div></div></div>
 <div class="road-row go b" data-goto="s-g-hook"><span class="rn">03</span><div><div class="rt">Prompt libraries + Agents</div><div class="rd">11:00</div></div></div>
 <div class="road-row go b" data-goto="s-r-hook"><span class="rn">04</span><div><div class="rt">Safe use with AI</div><div class="rd">13:00</div></div></div>
-<div class="road-row go b" data-goto="s-c-brief"><span class="rn">05</span><div><div class="rt">Graded project</div><div class="rd">13:30</div></div></div>
+<div class="road-row go b" data-goto="s-c-brief"><span class="rn">05</span><div><div class="rt">Capstone · graded</div><div class="rd">13:30</div></div></div>
 <div class="road-row go b" data-goto="s-map-post"><span class="rn">06</span><div><div class="rt">MAP test · survey · certificates</div><div class="rd">15:00</div></div></div>
 </div>'''))
 
@@ -266,32 +266,41 @@ add(slide("s-r-lab", f'''<span class="eyebrow b">Hands-On · 15 min</span>
 add(slide("s-r-check", '''<span class="eyebrow b">Quick Check</span>
 <h2 class="demo-h b">Copilot drafts a list of clients who “should” be offered the new fund. <span class="hl">Send it to the team?</span></h2>
 <div class="qc-card b"><div class="qc-k">Ask the room</div><p>Not yet. Copilot drafts. A <b>person</b> decides, checks suitability and fairness, and signs.</p></div>''', bg=BG1))
-add(pause("s-q-rai", "safe use", "your project"))
+add(pause("s-q-rai", "safe use", "your capstone"))
 
 # ============================== GRADED PROJECT ==============================
-add(slide("s-c-brief", '''<span class="eyebrow b">Graded Project · 13:30 – 14:50</span>
-<h2 class="term-h b">One request. <span class="hl">Alone. Start to finish.</span></h2>
-<div class="viz-flow">
-<div class="vf-step b"><span class="vf-ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 7l8 6 8-6"/></svg></span><span class="vf-t">Read</span><span class="vf-d">the 13:30 email in Outlook — deadline and deliverable</span></div>
-<span class="vf-arrow b">→</span>
-<div class="vf-step b"><span class="vf-ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></span><span class="vf-t">Analyse</span><span class="vf-d">clean the export in Excel · check every formula</span></div>
-<span class="vf-arrow b">→</span>
-<div class="vf-step b"><span class="vf-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="vf-t">Produce</span><span class="vf-d"><b>A</b> one-page Word memo · <b>B</b> 5-slide deck</span></div>
-<span class="vf-arrow b">→</span>
-<div class="vf-step b"><span class="vf-ic"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg></span><span class="vf-t">Reply</span><span class="vf-d">file attached by <b>2:50 pm</b></span></div>
+add(slide("s-c-brief", """<span class="eyebrow b">Capstone · Graded · 13:30 – 14:50</span>
+<h2 class="term-h b">Your field. One request. <span class="hl">Start to finish — alone.</span></h2>
+<div class="road">
+<div class="road-row b"><span class="rn">01</span><div><div class="rt">Summarise the request · Outlook</div><div class="rd">Final deadline, two files, who they're for — and the ask you must decline. 8 min</div></div></div>
+<div class="road-row b"><span class="rn">02</span><div><div class="rt">Clean the data · Excel</div><div class="rd">Duplicates, text numbers, messy labels. Row count before and after. 12 min</div></div></div>
+<div class="road-row b"><span class="rn">03</span><div><div class="rt">Analyse · Excel</div><div class="rd">Answer every question in the email — show the formula. 15 min</div></div></div>
+<div class="road-row b"><span class="rn">04</span><div><div class="rt">Chart it · Excel</div><div class="rd">Titles that say the message. 8 min</div></div></div>
+<div class="road-row b"><span class="rn">05</span><div><div class="rt">Executive brief · Word</div><div class="rd">One page, bottom line first, grounded in the house view. 15 min</div></div></div>
+<div class="road-row b"><span class="rn">06</span><div><div class="rt">The deck · PowerPoint</div><div class="rd">Six slides created from your brief. 12 min</div></div></div>
+<div class="road-row b"><span class="rn">07</span><div><div class="rt">Review and reply · Outlook</div><div class="rd">Both files attached by 2:50 pm. End with “What I corrected: …” 10 min</div></div></div>
+</div>"""))
+add(slide("s-c-fields", """<span class="eyebrow b">Capstone · Pick Your Field</span>
+<h2 class="term-h b">Four desks. <span class="hl">Pick the one closest to your job.</span></h2>
+<div class="tier4">
+<div class="tc t1 b"><div class="tn">Wealth Management</div><div class="tw">Al-Bayan Holding · Q3 review</div><ul><li>Custody export, mandate, issuer limit</li><li>Brief for the Investment Committee</li><li>Client deck — with the disclaimer</li></ul></div>
+<div class="tc t2 b"><div class="tn">Asset Management</div><div class="tw">Gulf Opportunities Fund · Q3</div><ul><li>Monthly returns, holdings, flows</li><li>Fund vs benchmark, fund rules</li><li>Brief for the CIO, deck for the board</li></ul></div>
+<div class="tc t3 b"><div class="tn">Operations</div><div class="tw">Q3 settlement review</div><ul><li>107 trades, fails, counterparties</li><li>On-time rate vs the 98% target</li><li>Brief for the COO, deck for the Committee</li></ul></div>
+<div class="tc t4 b"><div class="tn">Investment Research</div><div class="tw">Wafra Logistics · initiation</div><ul><li>Financials, peers, share price</li><li>Peer-multiple valuation and a view</li><li>Brief and deck for the Committee</li></ul></div>
 </div>
-<p class="body-l b">At 13:30 a new email arrives — version <b>A</b> or <b>B</b>. End your reply with one line: <b>“What I corrected: …”</b></p>'''))
-add(slide("s-c-rubric", '''<span class="eyebrow b">How It's Scored · /100</span>
-<h2 class="term-h b">Five criteria. <span class="hl">Help from Copilot is the point.</span></h2>
+<p class="body-l b">Everything is in the lab: the email thread, the workbook, the house view. <b>Lab → E2.10 → pick your field.</b></p>""", bg=BG1))
+add(slide("s-c-rubric", """<span class="eyebrow b">How It's Scored · /100</span>
+<h2 class="term-h b">Six criteria. <span class="hl">Help from Copilot is the point.</span></h2>
 <div class="checks">
-<div class="check-row b"><div class="cbox"></div><div><div class="c-t">30 · Workflow complete</div><div class="c-d">Read → analyse → produce → reply, on time, file attached.</div></div></div>
-<div class="check-row b"><div class="cbox"></div><div><div class="c-t">25 · Accurate numbers</div><div class="c-d">Value, Q3 change, allocation, issuer check, contributors.</div></div></div>
-<div class="check-row b"><div class="cbox"></div><div><div class="c-t">20 · Deliverable quality</div><div class="c-d">The right format for the reader. Message first. House view rules followed.</div></div></div>
-<div class="check-row b"><div class="cbox"></div><div><div class="c-t">15 · AI review &amp; judgement</div><div class="c-d">Your “What I corrected” line — what Copilot got wrong and you fixed.</div></div></div>
-<div class="check-row b"><div class="cbox"></div><div><div class="c-t">10 · Prompt quality</div><div class="c-d">CTFT in the prompts you used.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">15 · The request</div><div class="c-d">Final deadline, both files in the right format, the declined ask handled.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">25 · Accurate numbers</div><div class="c-d">Clean data, every answer traceable to a formula.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">10 · Charts</div><div class="c-d">The right chart, correct axes, a title that says the message.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">20 · Executive brief</div><div class="c-d">One page, bottom line first, house view rules followed.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">15 · PowerPoint</div><div class="c-d">Six slides, message titles, numbers that match the brief.</div></div></div>
+<div class="check-row b"><div class="cbox"></div><div><div class="c-t">15 · Review &amp; judgement</div><div class="c-d">On time, both files attached, and your “What I corrected” line.</div></div></div>
 </div>
-<p class="body-l b">No help from neighbours. Replies land in the evaluation inbox with a timestamp.</p>'''))
-add(slide("s-c-go", f'''<span class="eyebrow b">Graded Project · 80 minutes</span>
+<p class="body-l b">Work alone. Replies land in the evaluation mailbox with a timestamp.</p>"""))
+add(slide("s-c-go", f'''<span class="eyebrow b">Capstone · 80 minutes</span>
 <h2 class="term-h b">Build it<span class="hl">.</span></h2>
 <div class="maptest-row b">
 <div class="mini-timer" data-min="80" style="margin-top:0;flex:1;min-width:280px">
@@ -304,8 +313,8 @@ add(slide("s-c-go", f'''<span class="eyebrow b">Graded Project · 80 minutes</sp
 </div>
 </div>
 </div>
-<p class="done-line b"><b>Finished early?</b> Build the other format too — A → a 3-slide deck, B → a one-page memo. Not graded, great practice.</p>
-{labcta("E2.10", "Open the project brief →")}'''))
+<p class="done-line b"><b>Pace:</b> by 14:00 your numbers are done · by 14:30 the brief and the deck · by 14:50 the reply is sent. <b>Finished early?</b> Do the Stretch and Boss in your field.</p>
+{labcta("E2.10", "Open the capstone →")}'''))
 add(brk("s-brk-4", 10, "3:00 PM", "The MAP test"))
 
 # ============================== MAP · SURVEY · CERTIFICATES · CLOSE ==============================

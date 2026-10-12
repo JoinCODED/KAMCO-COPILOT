@@ -161,15 +161,7 @@ TASKS = [
       reveal="<ol><li><b>Confidential.</b> Possible in your work account <b>if</b> your role covers those clients — but only the columns the task needs (no names or account numbers). <i>“I'll run it on the export with client codes, not names.”</i></li><li><b>Never.</b> No enterprise data protection. <i>“Client data stays in our work account — I'll finish it here tomorrow.”</i></li><li><b>Bias.</b> Age is not a suitability test. A person decides, on the documented suitability criteria. <i>“Let's use the suitability checklist, not age.”</i></li><li><b>Human in the loop.</b> Check numbers, names, the disclaimer and copy Compliance before it goes. <i>“It reads well — now I check it.”</i></li></ol>",
       expect="Four calls, each with a reason you could defend to Compliance.",
       boss="Take the request your pair disagreed on. Write the one rule that would have made the call obvious."),
- dict(id="E2.10", app="Graded project", title="One request — alone", minutes="13:30 – 14:50", block="Graded project",
-      scenario="At <b>13:30</b> a new email arrives in your inbox — version <b>A</b> or <b>B</b>. Treat it like a real request from a KAMCO manager. <b>Help from Copilot is the point. Help from neighbours is not.</b>",
-      steps=["<b>Read</b> the email with Copilot in Outlook. Write down the deadline and the deliverable.",
-             "<b>Clean and analyse</b> the attached custody export in Excel. Check every formula — same moves as Day 1.",
-             "<b>Produce</b> the deliverable: <b>A = one-page Word memo</b> · <b>B = 5-slide PowerPoint deck</b>. Follow the house view rules (number format, disclaimer on client documents only).",
-             "<b>Reply</b> to the email with your file attached by <b>2:50 pm</b>. End with one line: <b>“What I corrected: …”</b>"],
-      findings=[{"label": "Deadline and deliverable", "hint": "from the email"}, {"label": "What I corrected", "hint": "what Copilot got wrong and you fixed"}],
-      expect="Scored out of 100: <b>30</b> workflow complete (on time, file attached) · <b>25</b> accurate numbers · <b>20</b> deliverable quality · <b>15</b> AI review &amp; judgement (your “What I corrected” line) · <b>10</b> prompt quality.",
-      stretch="Finished early? Build the other format too — A → a 3-slide deck, B → a one-page memo. Not graded, great practice."),
+ "__CAPSTONE__",
  dict(id="E2.11", app="Wrap up", title="MAP test, survey — and take it home", minutes="15:00 · 15:30", block="Close",
       scenario="Two short things close the program. At 15:00 you retake the MAP test — the same test as Sunday morning, so you can see how far you travelled. At 15:30, tell us how it landed while it's fresh. Then certificates.",
       launches=[{"link": "mapPost", "label": "1 · MAP test — post (15:00)", "note": "The same test as Sunday. 30 minutes. Answer honestly."},
@@ -183,6 +175,13 @@ SITE = {"links": {"mapPost": "https://portal.joincoded.com/sv/kamco-copilot-map-
                   "survey": "https://portal.joincoded.com/sv/kamco-copilot-end-of-program-satisfaction-survey"}}
 
 if __name__ == "__main__":
+    import json
+    from capstone_lab import capstone_task, patch_roles
+    cap = json.load(open("out/capstone.json"))
+    TASKS = [capstone_task(cap) if t == "__CAPSTONE__" else t for t in TASKS]
     build("out/site/coded-kamco-day-2-lab.html", back="coded-kamco-day-2.html", tasks=TASKS, day=2,
           chip="Day 2 · From Insight to Output", key="kamco_copilot_day2_tasks", site=SITE)
+    fn = "out/site/coded-kamco-day-2-lab.html"
+    html = patch_roles(open(fn, encoding="utf-8").read())
+    open(fn, "w", encoding="utf-8").write(html)
     print("task lab day 2:", len(TASKS), "tasks")
