@@ -287,7 +287,7 @@ add(slide("s-c-brief", """<span class="eyebrow b">Capstone · Graded · 13:10 �
 <div class="road-row b"><span class="rn">04</span><div><div class="rt">Chart it · Excel</div><div class="rd">Titles that say the message. 8 min</div></div></div>
 <div class="road-row b"><span class="rn">05</span><div><div class="rt">Executive brief · Word</div><div class="rd">One page, bottom line first, grounded in the house view. 18 min</div></div></div>
 <div class="road-row b"><span class="rn">06</span><div><div class="rt">The deck · PowerPoint</div><div class="rd">Six slides created from your brief. 18 min</div></div></div>
-<div class="road-row b"><span class="rn">07</span><div><div class="rt">Check and reply · Outlook</div><div class="rd">Accuracy, confidentiality, tone, completeness. Both files by 2:50 pm. End with “What I corrected: …” 13 min</div></div></div>
+<div class="road-row b"><span class="rn">07</span><div><div class="rt">Check and reply · Outlook</div><div class="rd">Four checks. Email your reply with both files to aya@joincoded.com by 2:50 pm. End with “What I corrected: …” 13 min</div></div></div>
 </div>"""))
 add(slide("s-c-fields", f"""<span class="eyebrow b">Capstone · Pick Your Field</span>
 <h2 class="term-h b">Seven desks. <span class="hl">Pick the one closest to your job.</span></h2>
@@ -308,7 +308,7 @@ add(slide("s-c-rubric", """<span class="eyebrow b">How It's Scored · /100 · Pa
 <div class="check-row b"><div class="cbox"></div><div><div class="c-t">15 · AI review &amp; judgement</div><div class="c-d">Accuracy, confidentiality, tone, completeness — your “What I corrected” line.</div></div></div>
 <div class="check-row b"><div class="cbox"></div><div><div class="c-t">10 · Prompt quality</div><div class="c-d">Paste your three best prompts at the end of your reply — specific, with context, task, format and tone.</div></div></div>
 </div>
-<p class="body-l b">Work alone. Replies land in the evaluation mailbox with a timestamp.</p>"""))
+<p class="body-l b">Work alone. Submit by <b>2:50 pm</b>: email your final reply with <b>both files attached</b> to <b>aya@joincoded.com</b>.</p>"""))
 add(slide("s-c-go", f'''<span class="eyebrow b">Capstone · 100 minutes</span>
 <h2 class="term-h b">Build it<span class="hl">.</span></h2>
 <div class="maptest-row b">
@@ -322,7 +322,7 @@ add(slide("s-c-go", f'''<span class="eyebrow b">Capstone · 100 minutes</span>
 </div>
 </div>
 </div>
-<p class="done-line b"><b>Pace:</b> by 13:55 your numbers are done · by 14:35 the brief and the deck · by 14:50 the reply is sent. <b>Finished early?</b> Do the Stretch and Boss in your field.</p>
+<p class="done-line b"><b>Submit to aya@joincoded.com.</b> <b>Pace:</b> by 13:55 your numbers are done · by 14:35 the brief and the deck · by 14:50 the reply is sent. <b>Finished early?</b> Do the Stretch and Boss in your field.</p>
 {labcta("E2.9", "Open the capstone →")}'''))
 add(slide("s-present", """<span class="eyebrow b">14:50 · Present Your Workflow · 2 Minutes Each</span>
 <h2 class="term-h b">Show your partner <span class="hl">the whole journey.</span></h2>

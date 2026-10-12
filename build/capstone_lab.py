@@ -170,7 +170,7 @@ def capstone_task(cap):
           "prompt": "Create a 6-slide presentation from /[your executive brief]. Make every slide title the message, not the topic. Keep every number exactly as in the brief. Add speaker notes. [Client-facing? Add the standard disclaimer from /house-view-q4-2026 on the last slide.]",
           "findings": [{"label": "One number you checked on a slide against Excel", "hint": ""}]},
          {"label": "7 · Check and reply · Outlook · 13 min",
-          "goal": f"Run the four checks before you send — <b>accuracy</b> (every number in the brief and the deck matches Excel), <b>confidentiality</b>, <b>tone</b>, <b>completeness</b>. {sp['decline']} Then reply with <b>both files attached</b>, matching the tone of the request. Run <b>Coaching by Copilot</b>. End with one line: <b>“What I corrected: …”</b> — what Copilot got wrong and you fixed — and paste <b>your three best prompts</b> underneath.",
+          "goal": f"Run the four checks before you send — <b>accuracy</b> (every number in the brief and the deck matches Excel), <b>confidentiality</b>, <b>tone</b>, <b>completeness</b>. {sp['decline']} Then send your reply to <b>aya@joincoded.com</b> with <b>both files attached</b>, matching the tone of the request. Run <b>Coaching by Copilot</b>. End with one line: <b>“What I corrected: …”</b> — what Copilot got wrong and you fixed — and paste <b>your three best prompts</b> underneath.",
           "prompt": "Draft my reply. Say the executive brief and the deck are attached, give the bottom line in one sentence, and politely decline [the request] with a one-line reason. Under 120 words. Professional and warm.",
           "findings": [{"label": "What I corrected", "hint": "the line that ends your reply"}]},
         ]
@@ -188,7 +188,7 @@ def capstone_task(cap):
         steps=["<b>Pick your field</b> with the buttons above — seven desks, from Wealth Management to Human Resources.",
                "Work <b>alone</b>, in order, through the seven steps below. Help from Copilot is the point — help from neighbours is not.",
                "Each step has a goal. Write your own CTFT prompt first; tap <b>Reveal a suggested prompt</b> only if you are stuck.",
-               "By <b>2:50 pm</b>, reply to the evaluation mailbox (the address is on the board) with the subject <b>Capstone · [your field] · [your name]</b> and <b>both files attached</b>: the executive brief (Word) and the deck (PowerPoint).",
+               "By <b>2:50 pm</b>, email your final reply to <b>aya@joincoded.com</b> with the subject <b>Capstone · [your field] · [your name]</b> and <b>both files attached</b>: the executive brief (Word) and the deck (PowerPoint).",
                "At <b>2:50 pm</b>, present your workflow to a partner — <b>2 minutes</b>: the request, one number and one chart, and what you corrected."],
         expect="Scored out of 100 — pass or does not pass: <b>30</b> workflow completeness (all seven steps, reply sent by 2:50 pm) · <b>25</b> data analysis accuracy (no major errors) · <b>20</b> deliverable quality (brief, deck and charts answer the request) · <b>15</b> AI review &amp; judgement (accuracy, confidentiality, tone, completeness — your “What I corrected” line) · <b>10</b> prompt quality (your three best prompts).")
 
